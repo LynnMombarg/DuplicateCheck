@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { MessageDTO } from "./dto/message.dto";
+import { json } from "express";
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getHello(): MessageDTO {
+    return new MessageDTO("Hello World!");
   }
 }
