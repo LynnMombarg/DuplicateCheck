@@ -3,9 +3,9 @@ import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 
-let user =  ref('Salesforce user')
-let showWelcome = true
-let message = ref('Press the "Change message button" to change the message')
+const user =  ref('Salesforce user')
+let showWelcome = ref(true)
+const message = ref('Press the "Change message button" to change the message')
 
 function toggleWelcomeComponent(){
   this.showWelcome = false
@@ -25,6 +25,8 @@ function changeMessage(){
   <button @click="toggleWelcomeComponent"> Toggle welcome component </button>
   <button @click="this.showWelcome=false"> false  </button>
   <button @click="changeMessage"> Change message </button>
+  <p> {{message}} </p>
+
 
   <div v-if="showWelcome"> <TheWelcome /> </div>
   <div v-else> Hidden </div>
