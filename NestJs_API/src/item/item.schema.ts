@@ -6,10 +6,10 @@ export type ItemDocument = HydratedDocument<Item>;
 @Schema()
 export class Item {
   @Prop()
-  modelId: string;
+  modelId: number;
 
   @Prop()
-  orgId: number;
+  orgId: string;
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);

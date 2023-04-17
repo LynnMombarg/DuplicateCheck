@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from '@nestjs/mongoose';
 import { Item } from './item.schema';
 import mongoose from 'mongoose';
+import { ItemDto } from './item.dto';
 
 @Injectable()
 export class ItemService {
@@ -9,7 +10,12 @@ export class ItemService {
     @InjectModel(Item.name) private itemModel: mongoose.Model<Item>,
   ) {}
 
-  async findAll(): Promise<Item[]> {
+  async create(itemDto: ItemDto): Promise<Item> {
+    const createdItem = new this.itemModel(itemDto);
+    return createdItem.save();
+  }
+
+  async read(): Promise<Item[]> {
     return this.itemModel.find().exec();
   }
 }
