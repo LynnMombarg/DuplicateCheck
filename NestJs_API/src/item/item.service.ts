@@ -10,21 +10,28 @@ export class ItemService {
     @InjectModel(Item.name) private itemModel: mongoose.Model<Item>,
   ) {}
 
-  async create(itemDto: ItemDto): Promise<Item> {
-    const createdItem = new this.itemModel(itemDto);
-    return createdItem.save();
+  async create(item: ItemDto): Promise<void> {
+    const createdItem = new this.itemModel(item);
+    createdItem.save();
   }
 
   async read(): Promise<Item[]> {
     return this.itemModel.find().exec();
   }
 
-  async update(itemDto: ItemDto): Promise<Item> {
-    console.log(itemDto);
-    return this.itemModel.findOneAndUpdate(
-      { modelId: itemDto.modelId },
-      { modelId: 2 },
+  async update(item: ItemDto): Promise<void> {
+    console.log(item);
+    this.itemModel.findOneAndUpdate(
+      { modelId: item.modelId },
+      { modelId: 3 },
       { new: true },
     );
+  }
+
+  async delete(item: ItemDto): Promise<void> {
+    console.log(item);
+    this.itemModel.findOneAndDelete({
+      modelId: item.modelId,
+    });
   }
 }
