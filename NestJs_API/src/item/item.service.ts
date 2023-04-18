@@ -12,7 +12,7 @@ export class ItemService {
 
   async create(item: ItemDto): Promise<void> {
     const createdItem = new this.itemModel(item);
-    createdItem.save();
+    await createdItem.save();
   }
 
   async read(): Promise<Item[]> {
@@ -29,8 +29,9 @@ export class ItemService {
 
   async delete(item: ItemDto): Promise<void> {
     console.log(item);
-    this.itemModel.findOneAndDelete({
+    await this.itemModel.deleteOne({
       modelId: item.modelId,
+      orgId: item.orgId,
     });
   }
 }
