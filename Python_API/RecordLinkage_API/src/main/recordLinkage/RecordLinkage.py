@@ -8,6 +8,10 @@ class RecordLinkage:
         self.df_a, self.df_b = datasets.load_febrl4() #Testdata (should be replaced by given data)
         self.indexer = recordlinkage.Index()
         self.compare = recordlinkage.Compare()
+        self.logreg = recordlinkage.LogisticRegressionClassifier()
+
+    def trainModel(df_a, df_b, golden_matches_index):
+        self.logreg.fit(features1, golden_matches_index1)
 
     def setIndices(self, indices):
         for index in indices:

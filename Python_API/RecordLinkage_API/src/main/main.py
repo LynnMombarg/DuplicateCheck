@@ -1,6 +1,7 @@
 import recordlinkage.datasets
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI
+from recordLinkage import RecordLinkage
 
 from src.main.recordLinkage.RecordLinkage import RecordLinkage
 
