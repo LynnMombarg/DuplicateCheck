@@ -1,17 +1,15 @@
 <script setup>
 import { ref } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 
+let showwelcomecomponment = true
 const user =  ref('Salesforce user')
-let showWelcome = ref(true)
 const message = ref('Press the "Change message button" to change the message')
 
+
 function toggleWelcomeComponent(){
-  this.showWelcome = false
-}
-function changeMessage(){
-  message.value = 'The button was pressed'
+    showwelcomecomponment = !showwelcomecomponment
+    message.value = 'The button was pressed'
 }
 </script>
 
@@ -23,12 +21,10 @@ function changeMessage(){
   <h1> The component for doing a test API call: </h1>
 
   <button @click="toggleWelcomeComponent"> Toggle welcome component </button>
-  <button @click="this.showWelcome=false"> false  </button>
-  <button @click="changeMessage"> Change message </button>
   <p> {{message}} </p>
 
 
-  <div v-if="showWelcome"> <TheWelcome /> </div>
+  <div v-if="showwelcomecomponment"> <TheWelcome /> </div>
   <div v-else> Hidden </div>
 
 </template>
