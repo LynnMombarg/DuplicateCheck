@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.userDto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.userDtoContainer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NestJs_API/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NestJs_API/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NestJs_API/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/src/app.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NestJs_API/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/src/app.module.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OMuTXma9PGryhyCQpIbdKzpvr7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/rowar/OneDrive/Documenten/GitHub/duplicate-record-rest-api/NestJs_API/package.json",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="npm.start">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="duplicate-record-rest-api" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="duplicate-record-rest-api" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/NestJs_API/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.Unnamed" />
+      <item itemvalue="npm.start" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="" />
+      <created>1681382782404</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681382782404</updated>
+      <workItem from="1681382784097" duration="1779000" />
+      <workItem from="1681807236753" duration="2504000" />
+      <workItem from="1681815015259" duration="1018000" />
+      <workItem from="1681816064664" duration="6318000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
