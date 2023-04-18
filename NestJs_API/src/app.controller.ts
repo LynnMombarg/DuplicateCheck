@@ -7,12 +7,11 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   // @Get()
-  // getHello(): MessageDTO {
+  // getHello(): Promise<MessageDTO> {
   //   return this.appService.getHello();
   // }
 
   @Get()
-
   getDashboard(@Query('accessToken') token: string): string {
     return token;
   }
