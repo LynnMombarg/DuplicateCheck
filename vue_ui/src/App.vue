@@ -2,15 +2,14 @@
 import { ref } from 'vue'
 import TheWelcome from './components/TheWelcome.vue'
 
-let showwelcomecomponment = true
-const user =  ref('Salesforce user')
-const message = ref('Press the "Change message button" to change the message')
 
+let showwelcomecomponment = ref(true)
+const user =  ref('Salesforce user')
 
 function toggleWelcomeComponent(){
-    showwelcomecomponment = !showwelcomecomponment
-    message.value = 'The button was pressed'
+    showwelcomecomponment.value = !showwelcomecomponment.value
 }
+
 </script>
 
 <template>
@@ -21,13 +20,12 @@ function toggleWelcomeComponent(){
   <h1> The component for doing a test API call: </h1>
 
   <button @click="toggleWelcomeComponent"> Toggle welcome component </button>
-  <p> {{message}} </p>
-
 
   <div v-if="showwelcomecomponment"> <TheWelcome /> </div>
-  <div v-else> Hidden </div>
+  <div v-else> Componment Hidden </div>
 
 </template>
+
 
 <!--<template>-->
 <!--  <header>-->
