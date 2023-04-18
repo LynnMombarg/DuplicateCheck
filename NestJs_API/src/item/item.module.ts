@@ -6,9 +6,6 @@ import { ItemController } from './item.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://pascal:ditIsEenLeukProject23@mar.jbpp1g5.mongodb.net/DuplicateCheck',
-    ),
     MongooseModule.forFeature([{ name: Item.name, schema: ItemSchema }]),
   ],
   controllers: [ItemController],
