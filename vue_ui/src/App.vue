@@ -1,19 +1,18 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import TheWelcome from "./components/TheWelcome.vue";
+import SignIn from "@/components/SignIn.vue";
+import SignInHeader from "@/components/SignInHeader.vue";
+import SignInFooter from "@/components/SignInFooter.vue";
 </script>
 
 <template>
-  <header>
-    <img alt="Plauti logo" class="logo" src="./assets/logo_Plauti.png" width="100" />
-
-    <div class="wrapper">
-      <HelloWorld msg="Hello World Page" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <SignInHeader />
+      <SignIn />
+      <SignInFooter />
+    </div>
   </main>
 </template>
 
@@ -43,5 +42,27 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
+}
+</style>
+
+<style>
+#app {
+  font-family: "Ubuntu", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+:root {
+  --v-onboarding-overlay-z: 30;
+  --v-onboarding-step-z: 40;
 }
 </style>
