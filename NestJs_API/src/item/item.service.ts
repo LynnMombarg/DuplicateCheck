@@ -21,10 +21,9 @@ export class ItemService {
 
   async update(item: ItemDto): Promise<void> {
     console.log(item);
-    this.itemModel.findOneAndUpdate(
-      { modelId: item.modelId },
-      { modelId: 3 },
-      { new: true },
+    await this.itemModel.updateOne(
+      { modelId: item.modelId, orgId: item.orgId },
+      { modelId: 4 },
     );
   }
 
