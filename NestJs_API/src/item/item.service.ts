@@ -20,7 +20,6 @@ export class ItemService {
   }
 
   async update(item: ItemDto): Promise<void> {
-    console.log(item);
     await this.itemModel.updateOne(
       { modelId: item.modelId, orgId: item.orgId },
       { modelId: 4 },
@@ -28,7 +27,6 @@ export class ItemService {
   }
 
   async delete(item: ItemDto): Promise<void> {
-    console.log(item);
     await this.itemModel.deleteOne({
       modelId: item.modelId,
       orgId: item.orgId,
