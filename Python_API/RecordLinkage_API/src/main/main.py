@@ -7,4 +7,4 @@ class main:
 
     @app.get('/get-candidates')
     async def duplicateCandidates():
-        return JSONResponse('{ "duplicates": { "Name": "Jan" }, { "Name": "Piet" } }')
+        return JSONResponse('{ "record1": { "Name": "Jan" }, "record2": { "Name": "Piet" } }')
