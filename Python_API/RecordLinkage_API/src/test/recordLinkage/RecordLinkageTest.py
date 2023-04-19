@@ -1,3 +1,10 @@
+'''
+Authors: Lynn, Roward 
+Jira-task: 30 - RecordLinkage installeren in Python
+Sprint: 1
+Last modified: 19-04-2023
+Status: doing
+'''
 import requests
 import json
 

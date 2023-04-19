@@ -1,6 +1,5 @@
-import pydoc
 from fastapi.responses import JSONResponse
-from fastapi import FastAPI, status, Request
+from fastapi import FastAPI, status
 from recordLinkage.RecordLinkage import RecordLinkageModel
 
 app = FastAPI()
