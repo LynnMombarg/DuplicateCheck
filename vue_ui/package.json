@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup": "npm install -D tailwindcss && npx tailwindcss init && npx tailwindcss -o ./dist/output.css --watch"
   },
   "dependencies": {
     "vue": "^3.2.47"
