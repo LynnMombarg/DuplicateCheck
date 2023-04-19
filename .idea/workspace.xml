@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.userDto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.userDtoContainer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NestJs_API/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NestJs_API/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NestJs_API/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/src/app.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NestJs_API/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NestJs_API/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NestJs_API/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NestJs_API/src/app.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,25 +28,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/rowar/OneDrive/Documenten/GitHub/duplicate-record-rest-api/NestJs_API/package.json",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -77,19 +50,6 @@
   }
 }</component>
   <component name="RunManager" selected="npm.start">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="duplicate-record-rest-api" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="duplicate-record-rest-api" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -102,6 +62,9 @@
     </configuration>
     <list>
       <item itemvalue="Node.js.Unnamed" />
+      <item itemvalue="npm.NestJs" />
+      <item itemvalue="npm.Vue" />
+      <item itemvalue="npm.Vue setup" />
       <item itemvalue="npm.start" />
     </list>
   </component>
@@ -121,6 +84,7 @@
       <workItem from="1681823903703" duration="562000" />
       <workItem from="1681824492686" duration="176000" />
       <workItem from="1681824683677" duration="1275000" />
+      <workItem from="1681907030817" duration="405000" />
     </task>
     <servers />
   </component>
