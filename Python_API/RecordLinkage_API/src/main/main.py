@@ -20,5 +20,3 @@ class main:
   async def duplicateCandidates(json_dataframe : dict):
       model.trainModel(json_dataframe)
       return model.nrOfTrainings
-
-
