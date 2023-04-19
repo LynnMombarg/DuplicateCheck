@@ -1,30 +1,39 @@
-import pandas
+'''
+
+'''
+import pandas as pd
 import recordlinkage
-from recordlinkage import datasets
 
-class RecordLinkage:
-
+class RecordLinkageModel:
+    # Setup variables for the model
     def __init__(self):
-        self.df_a, self.df_b = datasets.load_febrl4() #Testdata (should be replaced by given data)
+        self.nrOfTrainings = 0
         self.indexer = recordlinkage.Index()
+        self.indexer.full()
         self.compare = recordlinkage.Compare()
         self.logreg = recordlinkage.LogisticRegressionClassifier()
+    
+    # Train the model with the recordsets
+    # Extracts dataframes and the golden matches index from the JSON input
+    def trainModel(self, json_df):
+        df_a, df_b, golden_matches_index = self.getDataFrameStructure(json_df)
+        self.setCompareColumn(df_a)
+        self.nrOfTrainings = self.nrOfTrainings + 1
+        self.logreg.fit(self.getFeatures(df_a, df_b), golden_matches_index)
 
-    def trainModel(df_a, df_b, golden_matches_index):
-        self.logreg.fit(features1, golden_matches_index1)
+    # Returns all pairs possible between recordset 1 and recordset 2
+    def getPairs(self, df_a, df_b):
+        return self.indexer.index(df_a, df_b)
+    
+    # Get JSON as input and returns it as panda dataframes
+    def getDataFrameStructure(self, jsonStructure):
+        return pd.json_normalize(jsonStructure, record_path = ['recordset1']), pd.json_normalize(jsonStructure, record_path = ['recordset2']), pd.MultiIndex.from_frame(pd.json_normalize(jsonStructure, record_path = ['golden_matches_index']))
 
-    def setIndices(self, indices):
-        for index in indices:
-            self.indexer.block(index)
+    # Set up compares between columns
+    def setCompareColumn(self, dataframe):
+        for column in dataframe:
+            self.compare.string(column, column, method="jarowinkler", threshold=0.85, label=column)
 
-    def getCandidateLinks(self):
-        return self.indexer.index(self.df_a, self.df_b)
-
-    def setCompareColumn(self, column_df_a: str, column_df_b: str):
-        self.compare.exact(column_df_a, column_df_b, label=column_df_a)
-
-    def getFeatures(self):
-        return self.compare.compute(self.getCandidateLinks(), self.df_a, self.df_b)
-
-    def getMatchingRecords(self, amountOfMatchingColumns: int):
-        return self.getFeatures()[self.getFeatures().sum(axis=1) > amountOfMatchingColumns]
+    # Returns features after the columns are compared
+    def getFeatures(self, df_a, df_b):
+        return self.compare.compute(self.getPairs(df_a, df_b), df_a, df_b)
