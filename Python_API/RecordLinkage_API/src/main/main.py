@@ -10,8 +10,8 @@ class main:
 
   # Easily made endpoint to test simple get requests
   @app.get('/get-candidates')
-  async def duplicateCandidates():
-      return JSONResponse('{ "duplicates": { "Name": "Jan" }, { "Name": "Piet" } }')
+  async def duplicateCandidates(self):
+      return JSONResponse('{ "record1": { "Name": "Jan" }, "record2": { "Name": "Piet" } }')
 
   # Post request to send json datasets to train the model
   # Expected form of json:
