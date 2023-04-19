@@ -8,7 +8,7 @@
         class="flex-initial w-64 text-left leading-9 text-lg font-semibold text-slate-500"
       >
         <div class="animated">
-          Duplicate Check
+          Duplicate Check Machine Learning
           <span
             class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-blue-100 text-blue-800"
             style="margin-top: -2px"
