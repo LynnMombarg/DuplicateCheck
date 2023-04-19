@@ -1,6 +1,6 @@
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI, status
-from recordLinkage.RecordLinkage import RecordLinkageModel
+from main.recordLinkage.RecordLinkage import RecordLinkageModel
 
 class main:
   global app
