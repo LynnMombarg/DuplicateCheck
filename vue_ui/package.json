@@ -5,13 +5,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup": "npm install -D tailwindcss && npx tailwindcss init && npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "dependencies": {
     "vue": "^3.2.47"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "tailwindcss": "^3.3.1",
     "vite": "^4.1.4"
   }
 }
