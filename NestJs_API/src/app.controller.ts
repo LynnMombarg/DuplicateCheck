@@ -1,13 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { PythonService } from './python/python.service';
+import { MessageDTO } from './dto/message.dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  // @Get()
+  // getHello(): Promise<MessageDTO> {
+  //   return this.appService.getHello();
+  // }
+
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getDashboard(@Query('accessToken') token: string): string {
+    return token;
   }
 }
