@@ -1,6 +1,6 @@
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI, status
-from main.recordLinkage.RecordLinkage import RecordLinkageModel
+from recordLinkage.RecordLinkage import RecordLinkageModel
 
 class main:
   global app
@@ -10,7 +10,7 @@ class main:
 
   # Easily made endpoint to test simple get requests
   @app.get('/get-candidates')
-  async def duplicateCandidates(self):
+  async def duplicateCandidates():
       return JSONResponse('{ "record1": { "Name": "Jan" }, "record2": { "Name": "Piet" } }')
 
   # Post request to send json datasets to train the model
