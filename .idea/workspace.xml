@@ -13,11 +13,6 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.module.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/main/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/main/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/App.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +40,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/BXCUOA-58-docker-instellen",
+    "git-widget-placeholder": "feature/BXCUOA-59-jenkins-instellen",
     "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
