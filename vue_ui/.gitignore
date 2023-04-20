@@ -9,7 +9,6 @@ lerna-debug.log*
 
 node_modules
 .DS_Store
-dist
 dist-ssr
 coverage
 *.local
@@ -21,6 +20,7 @@ coverage
 .vscode/*
 !.vscode/extensions.json
 .idea
+.idea/workspace.xml
 *.suo
 *.ntvs*
 *.njsproj
