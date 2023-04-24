@@ -5,19 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/NestJs_API/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/dto/message.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/dto/message.schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue_ui/src/components/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/dist/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/dist/output.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/App.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,30 +36,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/BXCUOA-59-jenkins-instellen",
-    "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/BXCUOA-59-jenkins-instellen&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;C:/Program Files/nodejs/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="npm.start">
+}</component>
+  <component name="RunManager" selected="npm.Vue">
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -94,6 +97,8 @@
       <workItem from="1681907030817" duration="405000" />
       <workItem from="1681908640592" duration="8000" />
       <workItem from="1681991742866" duration="1097000" />
+      <workItem from="1682327943767" duration="602000" />
+      <workItem from="1682333253318" duration="3673000" />
     </task>
     <servers />
   </component>

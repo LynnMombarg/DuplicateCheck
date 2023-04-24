@@ -2,6 +2,7 @@
 import SignIn from "@/components/SignIn.vue";
 import SignInHeader from "@/components/SignInHeader.vue";
 import SignInFooter from "@/components/SignInFooter.vue";
+import Dashboard from "@/components/Dashboard.vue";
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import SignInFooter from "@/components/SignInFooter.vue";
       <SignInHeader />
       <SignIn />
       <SignInFooter />
+      <Dashboard />
     </div>
   </main>
 </template>
