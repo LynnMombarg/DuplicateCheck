@@ -5,6 +5,7 @@ import { ItemModule } from './item/item.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Message, MessageSchema } from './dto/message.schema';
 import { LoginModule } from './login/login.module';
+import { ModelModule } from './model/model.module';
 
 @Module({
   // 'mongodb+srv://pascal:ditIsEenLeukProject23@mar.jbpp1g5.mongodb.net/DuplicateCheck',
@@ -15,6 +16,7 @@ import { LoginModule } from './login/login.module';
     MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
     ItemModule,
     LoginModule,
+    ModelModule
   ],
   controllers: [AppController],
   providers: [AppService],
