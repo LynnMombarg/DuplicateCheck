@@ -5,22 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vue_ui/src/components/Dashboard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue_ui/src/components/ModelOptionsDropdown.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/dist/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/dist/output.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/Dashboard.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Vue Single File Component" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,7 +52,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="npm.Vue">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -98,7 +91,7 @@
       <workItem from="1681908640592" duration="8000" />
       <workItem from="1681991742866" duration="1097000" />
       <workItem from="1682327943767" duration="602000" />
-      <workItem from="1682333253318" duration="3673000" />
+      <workItem from="1682333253915" duration="570000" />
     </task>
     <servers />
   </component>
