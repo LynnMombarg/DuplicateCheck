@@ -7,10 +7,12 @@ Status: doing
 '''
 import pandas as pd
 import recordlinkage
+import os
 
 class RecordLinkageModel:
     # Setup variables for the model
-    def __init__(self):
+    def __init__(self, filename):
+        self.filename = filename
         self.nrOfTrainings = 0
         self.indexer = recordlinkage.Index()
         self.indexer.full()
@@ -41,3 +43,6 @@ class RecordLinkageModel:
     # Returns features after the columns are compared
     def getFeatures(self, df_a, df_b):
         return self.compare.compute(self.getPairs(df_a, df_b), df_a, df_b)
+    
+    def deleteModel(self):
+        os.remove(self.filename) 
