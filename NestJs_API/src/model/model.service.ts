@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { ModelDto } from './model.dto';
+import { ModelDto } from './dto/model.dto';
 import { ModelDao } from './model.dao';
-import { CreateModelDto } from './create-model.dto';
+import { CreateModelDto } from './dto/create-model.dto';
 import { AuthDao } from '../login/auth.dao';
 import { PythonDao } from '../python/python.dao';
 import { v4 as uuid } from 'uuid';

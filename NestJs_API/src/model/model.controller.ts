@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ModelService } from './model.service';
-import { CreateModelDto } from './create-model.dto';
+import { CreateModelDto } from './dto/create-model.dto';
 
 @Controller('model')
 export class ModelController {
