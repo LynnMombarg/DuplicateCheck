@@ -12,9 +12,6 @@ import DeleteModelButton from "./components/DeleteModelButton.vue";
       <SignIn />
       <SignInFooter />
     </div>
-    <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <DeleteModelButton />
-    </div>
   </main>
 </template>
 
