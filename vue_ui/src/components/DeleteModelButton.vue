@@ -12,13 +12,13 @@ export default {
 	name: "DeleteModelButton",
 	methods: {
 		deleteModel() {
-			fetch('http://localhost:8001/model', {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: "id1"
+			const modelId = 'id1';
+			fetch("http://localhost:8001/model?modelId=" + modelId, {
+				method: 'DELETE'
 			})
+			.then(response => {
+				console.log(response);
+			});
 		}
 	}
 };
