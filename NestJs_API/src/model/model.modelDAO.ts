@@ -12,11 +12,12 @@ export class ModelDAO {
   ) {}
 
   async getAllModels(): Promise<ModelDTO[]>{
-	return this.modelModel.find().exec();
+	  return this.modelModel.find().exec();
   }
-  async deleteModel(model: ModelDTO): Promise<ModelDTO[]> {
+
+  async deleteModel(modelId: string): Promise<ModelDTO[]> {
     await this.modelModel.deleteOne({
-      modelId: model.modelId
+      modelId: modelId
     });
 	return this.getAllModels();
   }

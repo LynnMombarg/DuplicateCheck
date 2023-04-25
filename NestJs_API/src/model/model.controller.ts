@@ -17,8 +17,8 @@ export class ModelController {
   }
 
   @Delete()
-  deleteModel(@Body() model: ModelDTO): Promise<ModelDTO[]> {
-    return this.modelService.deleteModel(model);
+  deleteModel(@Body() modelId: string): Promise<ModelDTO[]> {
+    return this.modelService.deleteModel(modelId);
   }
 
 }

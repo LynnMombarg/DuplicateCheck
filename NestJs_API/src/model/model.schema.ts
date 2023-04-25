@@ -6,7 +6,7 @@ export type ModelDocument = HydratedDocument<Model>;
 @Schema()
 export class Model {
   @Prop()
-  modelId: number;
+  modelId: string;
 
   @Prop()
   fileName: string;

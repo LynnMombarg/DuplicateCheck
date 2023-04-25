@@ -1,5 +1,5 @@
 export class ModelDTO {
-	modelId: number;
+	modelId: string;
 	fileName: string;
 	tableName: string;
   }

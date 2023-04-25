@@ -10,8 +10,7 @@ export class ModelService {
     return this.modelDAO.getAllModels();
   }
 
-  async deleteModel(modelDTO: ModelDTO): Promise<ModelDTO[]>{
-    this.modelDAO.deleteModel(modelDTO);
-    return this.modelDAO.getAllModels();
+  async deleteModel(modelId: string): Promise<ModelDTO[]>{
+    return this.modelDAO.deleteModel(modelId);
   }
 }
