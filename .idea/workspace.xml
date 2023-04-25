@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vue_ui/src/components/GetModels.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +58,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Jest.app.e2e-spec.ts">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\NestJs_API\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Vue">
     <configuration name="AppController (e2e)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -145,7 +149,7 @@
       <workItem from="1681908640592" duration="8000" />
       <workItem from="1681991742866" duration="1097000" />
       <workItem from="1682327943767" duration="602000" />
-      <workItem from="1682333253318" duration="10686000" />
+      <workItem from="1682333253318" duration="15329000" />
     </task>
     <servers />
   </component>
