@@ -1,20 +1,12 @@
-<script setup>
-import SignIn from "@/components/SignIn.vue";
-import SignInHeader from "@/components/SignInHeader.vue";
-import SignInFooter from "@/components/SignInFooter.vue";
-import CreateModelButton from "@/components/CreateModelButton.vue";
-</script>
-
 <template>
     <main>
-        <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <SignInHeader/>
-            <SignIn/>
-            <SignInFooter/>
-            <CreateModelButton/>
-        </div>
+        <router-view> </router-view>
     </main>
 </template>
+
+<script>
+
+</script>
 
 <style>
 header {
@@ -43,7 +35,6 @@ header {
         flex-wrap: wrap;
     }
 }
-
 #app {
     font-family: "Ubuntu", sans-serif;
     -webkit-font-smoothing: antialiased;
