@@ -5,13 +5,11 @@ import { ModelDAO } from './ModelDAO';
 export class ModelService {
   constructor(private readonly ModelDAO: ModelDAO) {}
 
-  getAllModels(): void {
-    console.log('getAllModels()');
-    this.ModelDAO.getAllModels();
+  getAllModels(): Model {
+    return this.ModelDAO.getAllModels();
   }
 
-  getModel() {
-    console.log('getModel()');
-    this.ModelDAO.getModel();
+  getModel(): Model {
+    return this.ModelDAO.getModel();
   }
 }
