@@ -25,12 +25,10 @@
       </div>
     </li>
   </ul>
-
 </template>
 
 <script setup>
 import ModelOptionsDropdown from "@/components/ModelOptionsDropdown.vue";
-
 const models = [
   {
     name: 'model1',
@@ -46,8 +44,6 @@ const models = [
   }
 ]
 </script>
-
-
 
 <style>
 .dropdown:focus-within .dropdown-menu {
