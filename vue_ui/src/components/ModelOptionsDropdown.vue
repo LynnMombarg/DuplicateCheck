@@ -26,5 +26,9 @@ export default {
 </script>
 
 <style scoped>
-
+.dropdown:focus-within .dropdown-menu {
+  opacity:1;
+  transform: translate(0) scale(1);
+  visibility: visible;
+}
 </style>

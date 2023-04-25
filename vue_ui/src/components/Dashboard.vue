@@ -2,12 +2,12 @@
 
 
   <ul role="list" class="divide-y divide-gray-100">
-    <li v-for="model in models" :key="model.Information" class="flex py-5">
-      <div class="bg-white shadow w-full">
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-between">
+    <li v-for="model in models" :key="model.Information" class="flex py-2" >
+      <div class="bg-white shadow w-full ">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-between ">
           <div class="flex gap-x-4">
             <div class="min-w-0 flex-auto">
-              <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page"> {{model.name}}</a>
+              <a href="#" class="bg-violet-400 text-white rounded-md px-3 py-1 text-sm font-medium" aria-current="page"> {{model.name}}</a>
             </div>
             <div class="min-w-0 flex-auto">
               <p class="text-sm  leading-6 text-gray-900">  {{model.Information}}</p>
@@ -41,15 +41,20 @@ const models = [
     Information: 'informatie over model2',
     details: 'extra informatie over model2',
     createdOn: '2023-01-23',
-  }
+  },
+  {
+    name: 'model3',
+    Information: 'informatie over model3',
+    details: 'extra informatie over model3',
+    createdOn: '2023-01-23',
+}
+
 ]
 </script>
 
 <style>
-.dropdown:focus-within .dropdown-menu {
-  opacity:1;
-  transform: translate(0) scale(1);
-  visibility: visible;
+.bg-violet-400 {
+  background-color: #8B5CF6;
 }
 </style>
 
