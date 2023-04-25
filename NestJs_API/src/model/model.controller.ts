@@ -3,10 +3,6 @@ import {
   Get,
   Delete,
   Body,
-  HttpStatus,
-  Query,
-  Redirect,
-  Res,
 } from '@nestjs/common';
 import { ModelService } from './model.service';
 import { ModelDTO } from './model.modelDTO';
@@ -21,7 +17,7 @@ export class ModelController {
   }
 
   @Delete()
-  delete(@Body() model: ModelDTO): Promise<ModelDTO[]> {
+  deleteModel(@Body() model: ModelDTO): Promise<ModelDTO[]> {
     return this.modelService.deleteModel(model);
   }
 

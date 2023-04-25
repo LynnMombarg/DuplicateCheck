@@ -1,32 +1,42 @@
-// ...
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
 import { ModelController } from 'src/model/model.controller';
-import { ModelService } from 'src/model/model.service';
+import { ModelDAO } from 'src/model/model.modelDAO';
+import { ModelDTO } from 'src/model/model.modelDTO';
+import * as request from 'supertest';
+import { INestApplication } from '@nestjs/common';
 
 const moduleMocker = new ModuleMocker(global);
 
 describe('ModelController', () => {
   let controller: ModelController;
-  let service: ModelService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const moduleRef = await Test.createTestingModule({
       controllers: [ModelController],
-      providers: [ModelService],
-    }).compile();
+    })
+    .useMocker((token) => {
+      const results = [new ModelDTO()];
+      if (token === ModelDAO) {
+        return { deleteModel: jest.fn().mockResolvedValue(results) };
+      }
+      if (typeof token === 'function') {
+        const mockMetadata = moduleMocker.getMetadata(token) as MockFunctionMetadata<any, any>;
+        const Mock = moduleMocker.generateFromMetadata(mockMetadata);
+        return new Mock();
+      }
+    })
+    .compile();
+    
+    controller = moduleRef.get(ModelController);
   });
-
-  describe('remove', () => {
-    it('should delete an existing model', async () => {
-      const expectedResult = { id: 2, fileName: "2.pkl", tableName: "Contacts" };
-
-      jest.spyOn(service, 'deleteModel').mockResolvedValue(expectedResult);
-
-      const result = await controller.delete(modelId);
-
-      expect(service.deleteModel).toHaveBeenCalledWith(modelId);
-      expect(result).toBe(expectedResult);
-    });
+  
+  it(`/GET cats`, () => {
+    return request(app.getHttpServer())
+      .get('/cats')
+      .expect(200)
+      .expect({
+        data: catsService.findAll(),
+      });
   });
 });
