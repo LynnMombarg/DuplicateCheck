@@ -2,11 +2,13 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Post,
   Query,
   Redirect,
   Res,
 } from '@nestjs/common';
-import { LoginService } from './login.service';
+import { AuthService } from './auth.service';
+import { Headers } from '@nestjs/common';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const jsforce = require('jsforce');
@@ -18,15 +20,15 @@ const oauth2 = new jsforce.OAuth2({
     '3MVG9t0sl2P.pBypwV3MuOdoedKkrAz3QadRz9KQA9QqULV2_RvPCymX_8b1bIQibJwp_oiD9Qo9lotYoZMbu',
   clientSecret:
     'CBA2D84D666983F2B1A3AF324CC894155F6A22FD561B1D33BFE663FEC7EE5347',
-  redirectUri: 'http://localhost:8001/auth/callback',
+  redirectUri: process.env.BASE_URL + '/auth/callback',
 });
 
 /**
  * Login Controller
  */
 @Controller('auth')
-export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+export class AuthController {
+  constructor(private readonly loginService: AuthService) {}
 
   /**
    * Login
@@ -34,7 +36,7 @@ export class LoginController {
    */
   @Redirect(
     oauth2.getAuthorizationUrl({
-      scope: 'full refresh_token',
+      scope: 'api id refresh_token',
       response_type: 'code',
     }),
   )
@@ -51,15 +53,13 @@ export class LoginController {
    */
   @Get('/callback')
   callback(@Query('code') code: string, @Res() res): void {
+    const loginService = this.loginService;
     conn = new jsforce.Connection({ oauth2: oauth2 });
-    let userID;
-    let accessToken;
-    let refreshToken;
     conn.authorize(code, function (err, userInfo) {
       if (err) {
         return res.status(HttpStatus.UNAUTHORIZED).json({
           statusCode: HttpStatus.UNAUTHORIZED,
-          message: 'Unauthorized',
+          message: 'unauthorized',
         });
       }
       console.log('conn.accessToken: ' + conn.accessToken);
@@ -67,14 +67,19 @@ export class LoginController {
       console.log('conn.instanceUrl: ' + conn.instanceUrl);
       console.log('User ID: ' + userInfo.id);
       console.log('Org ID: ' + userInfo.organizationId);
-      userID = userInfo.id;
-      accessToken = conn.accessToken;
-      refreshToken = conn.refreshToken;
-      return res.redirect(
-        'http://localhost:8001/?accessToken=' + conn.accessToken,
-      );
+      loginService.login(userInfo.id, conn.accessToken, conn.refreshToken);
+      const script =
+        "<script>window.opener.postMessage({ message: 'success', token: '" +
+        conn.accessToken +
+        "' }, 'http://localhost:8002')</script>";
+      return res.status(HttpStatus.OK).send(script);
     });
-    this.loginService.storeToken(userID, accessToken, refreshToken);
+  }
+
+  @Post('logout')
+  logout(@Headers('Authorization') accessToken: string): void {
+    console.log('logout');
+    this.loginService.logout(accessToken);
   }
 
   @Get('test')

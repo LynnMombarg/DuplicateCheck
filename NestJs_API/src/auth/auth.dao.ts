@@ -10,15 +10,29 @@ export class AuthDAO {
   ) {}
 
   storeToken(userID: string, accessToken: string, refresh_token: string): void {
-    this.authModel.updateOne(
-      { userId: userID },
-      {
-        userId: userID,
-        accessToken: accessToken,
-        refresh_token: refresh_token,
-      },
-      { upsert: true },
-    );
+    console.log('Storing token');
+    this.authModel
+      .findOne({ userId: userID })
+      .exec()
+      .then((doc) => {
+        if (doc) {
+          doc.accessToken = accessToken;
+          doc.refreshToken = refresh_token;
+          doc.save();
+          return;
+        } else {
+          const auth = new this.authModel({
+            userId: userID,
+            accessToken: accessToken,
+            refreshToken: refresh_token,
+          });
+          auth.save();
+        }
+      });
+  }
+
+  removeToken(accessToken: string): void {
+    this.authModel.deleteOne({ accessToken: accessToken }).exec();
   }
 
   async getAccessToken(userID: string): Promise<string> {
