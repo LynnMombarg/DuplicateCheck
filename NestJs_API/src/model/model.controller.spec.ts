@@ -4,6 +4,9 @@ import { ModelService } from './model.service';
 import { CreateModelDto } from './dto/create-model.dto';
 import { PythonModule } from '../python/python.module';
 import { LoginModule } from '../login/login.module';
+import { PythonDao } from '../python/python.dao';
+import { AuthDao } from '../login/auth.dao';
+import { ModelDao } from './model.dao';
 
 describe('ModelController', () => {
   let controller: ModelController;
@@ -11,9 +14,8 @@ describe('ModelController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [PythonModule, LoginModule],
       controllers: [ModelController],
-      providers: [ModelService],
+      providers: [ModelService, PythonDao, AuthDao],
     }).compile();
 
     controller = module.get<ModelController>(ModelController);

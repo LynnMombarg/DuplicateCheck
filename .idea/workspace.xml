@@ -24,9 +24,6 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.service.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +147,9 @@
       <workItem from="1681991742866" duration="1097000" />
       <workItem from="1682342713400" duration="5066000" />
       <workItem from="1682406009376" duration="365000" />
-      <workItem from="1682406392808" duration="9701000" />
+      <workItem from="1682406392808" duration="10322000" />
+      <workItem from="1682422307837" duration="107000" />
+      <workItem from="1682422436146" duration="1337000" />
     </task>
     <servers />
   </component>
