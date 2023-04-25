@@ -1,13 +1,19 @@
 import { Controller, Get } from '@nestjs/common';
 import { models } from 'mongoose';
-import { ModelDAO } from './ModelDAO';
+import { ModelService } from './ModelService';
+import {PythonService} from "../python/python.service";
 
-@Controller('models')
-export class MOdelController {
-  ModelDAO: ModelDAO = new ModelDAO();
+@Controller('model')
+export class ModelController {
+  constructor(private readonly ModelService: ModelService) {}
 
-  @Get('/all')
-  login(): void {
-    return ModelDAO.getAllModels();
+  @Get('/getAllModels')
+  all(): void {
+    return this.ModelService.getAllModels();
+  }
+
+  @Get('/getModel')
+  model(): void {
+    return this.ModelService.getModel();
   }
 }
