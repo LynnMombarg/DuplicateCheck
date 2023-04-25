@@ -1,7 +1,7 @@
 <template>
 
-  <a href="#" class="bg-violet-400 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-  
+  <a href="#" class="bg-violet-400 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page"> Overview  </a>
+
   <ul role="list" class="divide-y divide-gray-100">
     <li v-for="model in models" :key="model.Information" class="flex py-2" >
       <div class="bg-white shadow w-full ">
