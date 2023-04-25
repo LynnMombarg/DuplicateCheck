@@ -2,7 +2,7 @@ import {
   Controller,
   Get,
   Delete,
-  Body,
+  Query,
 } from '@nestjs/common';
 import { ModelService } from './model.service';
 import { ModelDTO } from './model.modelDTO';
@@ -17,7 +17,7 @@ export class ModelController {
   }
 
   @Delete()
-  deleteModel(@Body() modelId: string): Promise<ModelDTO[]> {
+  deleteModel(@Query('modelId') modelId): Promise<ModelDTO[]> {
     return this.modelService.deleteModel(modelId);
   }
 
