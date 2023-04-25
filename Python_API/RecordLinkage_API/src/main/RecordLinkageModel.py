@@ -9,11 +9,10 @@ import pandas as pd
 import recordlinkage
 
 class RecordLinkageModel:
-    modelId = 0
     
     # Setup variables for the model
     def __init__(self, filename):
-        self.modelId = self.modelId + 1
+        #Filename is an unique UUID string (identifier)
         self.filename = filename
         self.nrOfTrainings = 0
         self.indexer = recordlinkage.Index()
@@ -24,7 +23,7 @@ class RecordLinkageModel:
     # Train the model with the recordsets
     # Extracts dataframes and the golden matches index from the JSON input
     def trainModel(self, json_df):
-        df_a, df_b, golden_matches_index = self.getDataFrameStructure(self.filename)
+        df_a, df_b, golden_matches_index = self.getDataFrameStructure(json_df)
         self.setCompareColumn(df_a)
         self.nrOfTrainings = self.nrOfTrainings + 1
         self.logreg.fit(self.getFeatures(df_a, df_b), golden_matches_index)
@@ -46,8 +45,8 @@ class RecordLinkageModel:
     def getFeatures(self, df_a, df_b):
         return self.compare.compute(self.getPairs(df_a, df_b), df_a, df_b)
     
-    def getModelId(self):
-        return self.modelId
+    def getFilename(self):
+        return self.filename
     
     def getNrOfTrainings(self):
         return self.nrOfTrainings

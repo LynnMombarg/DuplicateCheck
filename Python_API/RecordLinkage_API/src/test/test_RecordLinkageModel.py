@@ -21,3 +21,5 @@ r = requests.post(url = URL, json = jsonObject)
 # Print response code and text
 print(r)
 print(r.text)
+
+'{"recordset1": [{"name": "Piet", "lastname": "Janssen", "age": "18", "country": "NL"}, {"name": "Jan", "lastname": "Pietersen", "age": "19", "country": "BE"}], "recordset2": [{"name": "Henk", "lastname": "van Dijk", "age": "20", "country": "DE"}, {"name": "Piet", "lastname": "Jansen", "age": "18", "country": "NL"}] }'
