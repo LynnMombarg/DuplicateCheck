@@ -11,9 +11,8 @@ import recordlinkage
 class RecordLinkageModel:
     
     # Setup variables for the model
-    def __init__(self, filename):
+    def __init__(self):
         #Filename is an unique UUID string (identifier)
-        self.filename = filename
         self.nrOfTrainings = 0
         self.indexer = recordlinkage.Index()
         self.indexer.full()
@@ -44,9 +43,3 @@ class RecordLinkageModel:
     # Returns features after the columns are compared
     def getFeatures(self, df_a, df_b):
         return self.compare.compute(self.getPairs(df_a, df_b), df_a, df_b)
-    
-    def getFilename(self):
-        return self.filename
-    
-    def getNrOfTrainings(self):
-        return self.nrOfTrainings

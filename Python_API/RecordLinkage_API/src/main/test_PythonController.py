@@ -12,7 +12,7 @@ import json
 import requests
 from PythonController import PythonController
 
-# Methods will most likely change so tests need to adapted in the future
+# Methods will most likely change so tests need to be adapted in the future
 # PythonController cannot be imported because it's in a sibling folder
 class test_PythonController(TestCase):
     

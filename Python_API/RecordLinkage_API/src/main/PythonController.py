@@ -15,11 +15,6 @@ class PythonController:
   app = FastAPI()
   service = PythonService()
 
-  # Test endpoint
-  @app.get('/get-candidates')
-  async def duplicateCandidates():
-      return JSONResponse('{ "record1": { "Name": "Jan" }, "record2": { "Name": "Piet" } }')
-
   # Post request to send json datasets to train the model
   # Expected form of json:
   # {"recordset1": [{"columns":}, {"columns":}], "recordset2": [{"columns":}, {"columns":}], "golden_matches_index": [{"index1": , "index2": }]}
@@ -40,3 +35,5 @@ class PythonController:
           return 'Model created!'
       except:
           return 'Model could not be created'
+              
+  service.createModel('yeah.pkl')
