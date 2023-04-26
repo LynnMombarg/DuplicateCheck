@@ -1,3 +1,8 @@
+<!--Authors: Marloes
+Jira-task: 106 - Front-end maken
+Sprint: 2
+Last modified: 26-04-2023-->
+
 <template>
     <button @click="startCreateModel">
         Create model
