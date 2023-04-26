@@ -35,3 +35,11 @@ class PythonController:
           return 'Model created!'
       except:
           return 'Model could not be created'
+      
+  @app.delete('/delete-model')
+  async def deleteModel(filename):
+     try:
+        service.deleteModel(filename)
+        return 'Model deleted!'
+     except:
+        return 'Model could not be deeted'

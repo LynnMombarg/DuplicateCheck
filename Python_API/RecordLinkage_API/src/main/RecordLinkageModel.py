@@ -44,6 +44,3 @@ class RecordLinkageModel:
     # Returns features after the columns are compared
     def getFeatures(self, df_a, df_b):
         return self.compare.compute(self.getPairs(df_a, df_b), df_a, df_b)
-    
-    def deleteModel(self):
-        os.remove(self.filename) 

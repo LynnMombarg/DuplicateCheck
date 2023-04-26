@@ -10,6 +10,7 @@ from unittest import TestCase
 from unittest.mock import patch
 import json
 import requests
+from PythonService import PythonService
 from PythonController import PythonController
 
 # Methods will most likely change so tests need to be adapted in the future
@@ -31,5 +32,11 @@ class test_PythonController(TestCase):
         response = requests.post('http://localhost:8000/create-model', data=json.dumps(data), headers={'Content-type': 'application/json'})
         mock_post.assert_called_with('http://localhost:8000/create-model', data=json.dumps(data), headers={'Content-type': 'application/json'})
         
+    @patch('requests.delete')
+    def test_deleteModel(self, mock_delete):
+        # Arrange
+        # Act
+            
+        # Assert
 
 unittest.main()

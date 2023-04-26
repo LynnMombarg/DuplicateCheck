@@ -7,6 +7,7 @@ Last modified: 25-04-2023
 
 from RecordLinkageModel import RecordLinkageModel
 import pickle
+import os
 
 class PythonService:
     
@@ -27,4 +28,7 @@ class PythonService:
     def trainModel(self, filename, json_dataframe):
         model = self.loadModel(filename)
         model.trainModel(json_dataframe)
+    
+    def deleteModel(self, filename):
+        os.remove('Python_API/RecordLinkage_API/src/main/pickles/' + filename + '.pkl') 
         
