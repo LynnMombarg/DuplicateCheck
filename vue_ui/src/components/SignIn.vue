@@ -20,5 +20,3 @@ export default {
   components: { SignInButton },
 };
 </script>
-
-<style scoped></style>

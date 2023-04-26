@@ -2,6 +2,7 @@
 <!--Jira-task: Dashboard realiseren 104 -->
 <!--Sprint: 2 -->
 <!--Last modified: 26-4-2023-->
+<!--Description: This component is used to display the dropdown menu for the model options. -->
 
 <template>
 

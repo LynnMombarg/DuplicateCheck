@@ -22,11 +22,31 @@ let models = [
     modeldescription: 'extra informatie over model2',
   },
 ]
+
+// code to get models from backend
+// let models = [];
+//
+// async function getData() {
+//   const response = await fetch('http://localhost:8001/model/models', {
+//     method: 'GET',
+//     headers: {
+//       'Authorization': "test",
+//       'Content-Type': 'application/json'
+//     },
+//   });
+//
+//   models = await response.json();
+//   console.log(models);
+// }
+
+
+
 </script>
 
 <script>
 import Banner from "@/components/OverviewBannerComponent.vue";
 import OverviewModelComponent from "@/components/OverviewModelComponent.vue";
+
 
 
 export default {
