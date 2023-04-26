@@ -3,8 +3,6 @@
 <!--Sprint: 2 -->
 <!--Last modified: 26-4-2023-->
 
-
-
 <template>
   <ul role="list" class="divide-y divide-gray-100 ">
     <li v-for="model in models" :key="model.information" class="flex py-2 ">
@@ -34,7 +32,7 @@ defineProps(['models'])
 </script>
 
 <script>
-import ModelOptionsDropdown from "@/components/ModelOptionsDropdown.vue";
+import ModelOptionsDropdown from "@/components/OverviewDropdownComponent.vue";
 
 export default {
   name: 'ModelOverview',

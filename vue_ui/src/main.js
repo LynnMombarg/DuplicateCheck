@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 import '../dist/output.css';
 import SignIn from "@/components/SignIn.vue";
-import Dashboard from "@/components/Dashboard.vue";
+import Dashboard from "@/components/OverviewPage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
