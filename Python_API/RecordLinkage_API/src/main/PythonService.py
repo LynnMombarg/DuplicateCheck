@@ -16,6 +16,14 @@ class PythonService:
         self.models.append(RecordLinkageModel(filename))
         
     def trainModel(self, filename, json_dataframe):
+        modelFound = False
         for model in self.models:
             if(model.getFilename() == filename):
+                modelFound = True
                 model.trainModel(json_dataframe)
+                break
+        if(modelFound == False):
+            raise FileNotFoundError ('No model with given filename')
+                
+    def getModels(self):
+        return self.models
