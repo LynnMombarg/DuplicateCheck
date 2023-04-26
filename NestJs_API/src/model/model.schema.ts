@@ -15,6 +15,9 @@ export class Model {
   tableName: string;
 
   @Prop()
+  modelDescription: string;
+
+  @Prop()
   userId: string;
 }
 

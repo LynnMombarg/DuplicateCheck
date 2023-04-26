@@ -23,6 +23,7 @@ export class ModelService {
         createModel.modelName,
         fileName,
         createModel.tableName,
+        createModel.modelDescription,
         userId,
       );
       this.modelDao.createModel(model);

@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import axios from 'axios';
 
 @Injectable()
 export class PythonDao {
-  createModel(fileName: string) {
-    console.log('File ' + fileName + ' was created.');
+  async createModel(fileName: string) {
+    await axios.post('http://http://localhost:8000//create-model', {
+      fileName: fileName,
+    });
   }
 }
