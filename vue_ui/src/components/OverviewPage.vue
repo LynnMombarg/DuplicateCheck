@@ -8,8 +8,7 @@
   <model-overview :models="models"/>
 </template>
 
-//<script setup>
-
+<script setup>
 // hardcoded models for testing
 let models = [
   {
@@ -23,36 +22,22 @@ let models = [
     modeldescription: 'extra informatie over model2',
   },
 ]
-// models from backend
-//
-// let models = [];
-//
-// async function getData() {
-//
-//   const response = await fetch('http://localhost:8001/model/models', {
-//     method: 'GET',
-//     headers: {
-//       'Authorization': "test",
-//       'Content-Type': 'application/json'
-//     },
-//   });
-//
-//   const data = await response.json();
-//   models = data;
-//
-//   console.log(models);
-// }
 </script>
 
 <script>
-import Banner from "@/components/Banner.vue";
-import ModelOverview from "@/components/ModelOverview.vue";
+import Banner from "@/components/OverviewBannerComponent.vue";
+import ModelOverview from "@/components/OverviewModelComponent.vue";
+import GetModelService from "@/components/GetModelService.vue";
+
+import { getModels } from "@/components/GetModelService.vue";
+// let models = getModels();
 
 export default {
-  name: "Dashboard",
+  name: "OverviewPage",
   components: {
     Banner,
     ModelOverview,
+    GetModelService,
   }
 };
 </script>
