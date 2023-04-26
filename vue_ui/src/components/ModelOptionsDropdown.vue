@@ -9,15 +9,33 @@
       <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
         <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
           <div class="py-1">
-            <a tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Train </a>
-            <a tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Execute </a>
-            <a tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Delete </a>
+            <a @click="trainModel"  tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Train </a>
+            <a @click="executeModel"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Execute </a>
+            <a @click='confirmDelete' class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Delete </a>
           </div>
         </div>
       </div>
     </div>
 
 </template>
+
+<script setup>
+
+function confirmDelete() {
+  if (window.confirm("Are you sure you want to delete this model?")) {
+    window.location.href = "/Delete";
+  }
+}
+
+function trainModel() {
+  window.location.href = "/Train";
+}
+
+function executeModel() {
+  window.location.href = "/Execute";
+}
+
+</script>
 
 <script>
 export default {

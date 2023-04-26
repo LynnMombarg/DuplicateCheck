@@ -6,14 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/DuplicateCheckBanner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/DuplicateCheckBanner.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/ModelOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/ModelOverview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/ModelOptionsDropdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/ModelOptionsDropdown.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
