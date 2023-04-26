@@ -3,24 +3,40 @@
   <model-overview :models="models"/>
 </template>
 
-<script setup>
-const models = [
+//<script setup>
+
+// hardcoded models for testing
+let models = [
   {
-    name: 'model1',
-    table: 'table1',
-    description: 'informatie over model1',
+    modelname: 'model1',
+    modeltable: 'table1',
+    modeldescription: 'extra informatie over model2',
   },
   {
-    name: 'model2',
-    table: 'table',
-    description: 'extra informatie over model2',
+    modelname: 'model1',
+    modeltable: 'table1',
+    modeldescription: 'extra informatie over model2',
   },
-  {
-    name: 'model3',
-    table: 'table',
-    description: 'extra informatie over model3',
-}
 ]
+// models from backend
+//
+// let models = [];
+//
+// async function getData() {
+//
+//   const response = await fetch('http://localhost:8001/model/models', {
+//     method: 'GET',
+//     headers: {
+//       'Authorization': "test",
+//       'Content-Type': 'application/json'
+//     },
+//   });
+//
+//   const data = await response.json();
+//   models = data;
+//
+//   console.log(models);
+// }
 </script>
 
 <script>

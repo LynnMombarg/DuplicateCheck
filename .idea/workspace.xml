@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/vue_ui/src/assets/logo_duplicatecheck.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/ModelOptionsDropdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/ModelOptionsDropdown.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/Banner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/Banner.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/ModelOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/ModelOverview.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +46,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "feature/BXCUOA-59-jenkins-instellen",
-    "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck",
+    "last_opened_file_path": "C:/Users/SBert/OneDrive/Documenten/GitHub/duplicatecheck/vue_ui/src/assets",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -57,6 +61,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\vue_ui\src\assets" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.start">
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />

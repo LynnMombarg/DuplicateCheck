@@ -1,10 +1,3 @@
-<script setup>
-import SignIn from "@/components/SignIn.vue";
-import SignInHeader from "@/components/SignInHeader.vue";
-import SignInFooter from "@/components/SignInFooter.vue";
-import Dashboard from "@/components/Dashboard.vue";
-</script>
-
 <template>
   <main>
     <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
