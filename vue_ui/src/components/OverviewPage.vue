@@ -5,7 +5,7 @@
 
 <template>
   <Banner/>
-  <model-overview :models="models"/>
+  <OverviewModelComponent :models="models"/>
 </template>
 
 <script setup>
@@ -26,18 +26,14 @@ let models = [
 
 <script>
 import Banner from "@/components/OverviewBannerComponent.vue";
-import ModelOverview from "@/components/OverviewModelComponent.vue";
-import GetModelService from "@/components/GetModelService.vue";
+import OverviewModelComponent from "@/components/OverviewModelComponent.vue";
 
-import { getModels } from "@/components/GetModelService.vue";
-// let models = getModels();
 
 export default {
   name: "OverviewPage",
   components: {
     Banner,
-    ModelOverview,
-    GetModelService,
+    OverviewModelComponent,
   }
 };
 </script>

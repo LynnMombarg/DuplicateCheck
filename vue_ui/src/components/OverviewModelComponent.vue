@@ -16,7 +16,7 @@
           </div>
           <p class="text-xs leading-5 text-gray-500"> {{model.modeltable}}</p>
           <div class="hidden sm:flex sm:flex-col sm:items-end">
-            <model-options-dropdown/>
+<OverviewDropdownComponent> </OverviewDropdownComponent>
           </div>
         </div>
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-middle">
@@ -32,11 +32,11 @@ defineProps(['models'])
 </script>
 
 <script>
-import ModelOptionsDropdown from "@/components/OverviewDropdownComponent.vue";
+import OverviewDropdownComponent from "@/components/OverviewDropdownComponent.vue";
 
 export default {
-  name: 'ModelOverview',
-  components: {ModelOptionsDropdown}
+  name: 'OverviewModelComponent',
+  components: {OverviewDropdownComponent},
 }
 </script>
 
