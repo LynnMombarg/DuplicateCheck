@@ -53,13 +53,14 @@
     "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Users\\SBert\\OneDrive\\Documenten\\GitHub\\duplicatecheck\\NestJs_API\\node_modules\\typescript\\lib",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "C:\\Users\\rowar\\OneDrive\\Documenten\\GitHub\\duplicate-record-rest-api\\NestJs_API\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rowar\OneDrive\Documenten\GitHub\duplicate-record-rest-api\NestJs_API\src" />
       <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\NestJs_API\src" />
     </key>
   </component>
@@ -150,6 +151,8 @@
       <workItem from="1681991742866" duration="1097000" />
       <workItem from="1682327943767" duration="602000" />
       <workItem from="1682333253318" duration="15329000" />
+      <workItem from="1682495555800" duration="51000" />
+      <workItem from="1682495620163" duration="26000" />
     </task>
     <servers />
   </component>
