@@ -1,3 +1,8 @@
+// Authors: Marloes
+// Jira-task: 107 - Models toevoegen aan database
+// Sprint: 2
+// Last modified: 26-04-2023
+
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 

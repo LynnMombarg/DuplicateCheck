@@ -1,3 +1,8 @@
+// Authors: Marloes
+// Jira-task: 107 - Models toevoegen aan database
+// Sprint: 2
+// Last modified: 26-04-2023
+
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ModelDto } from './dto/model.dto';
 import { ModelDao } from './model.dao';

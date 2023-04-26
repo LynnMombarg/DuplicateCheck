@@ -1,37 +1,43 @@
+// Authors: Marloes
+// Jira-task: 107 - Models toevoegen aan database
+// Sprint: 2
+// Last modified: 26-04-2023
+
 import { ModelController } from './model.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ModelService } from './model.service';
+import { Test } from '@nestjs/testing';
 import { CreateModelDto } from './dto/create-model.dto';
-import { PythonModule } from '../python/python.module';
-import { LoginModule } from '../login/login.module';
-import { PythonDao } from '../python/python.dao';
-import { AuthDao } from '../login/auth.dao';
-import { ModelDao } from './model.dao';
+import { ModelModule } from './model.module';
 
 describe('ModelController', () => {
-  let controller: ModelController;
-  let service: ModelService;
+  let modelController: ModelController;
+  let modelService: ModelService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [ModelController],
-      providers: [ModelService, PythonDao, AuthDao],
+    const module = await Test.createTestingModule({
+      imports: [ModelModule],
     }).compile();
 
-    controller = module.get<ModelController>(ModelController);
-    service = module.get<ModelService>(ModelService);
+    modelController = module.get<ModelController>(ModelController);
+    modelService = module.get<ModelService>(ModelService);
   });
 
   describe('createModel', () => {
-    const model = new CreateModelDto('modelName', 'tableName', 'token');
+    it('Should call createModel on ModelService', () => {
+      const model = new CreateModelDto(
+        'modelName',
+        'tableName',
+        'modelDescription',
+        'token',
+      );
 
-    it('should call createModel on the service', () => {
-      let wasCalled = false;
-      jest.spyOn(service, 'createModel').mockImplementation(() => {
-        wasCalled = true;
+      jest.spyOn(modelService, 'createModel').mockImplementation(() => {
+        return true;
       });
-      controller.createModel(model);
-      expect(wasCalled).toBe(true);
+
+      const actual = modelService.createModel(model);
+
+      expect(actual).toBe(true);
     });
   });
 });

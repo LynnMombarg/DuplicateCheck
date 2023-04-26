@@ -1,3 +1,8 @@
+// Authors: Marloes
+// Jira-task: 107 - Models toevoegen aan database
+// Sprint: 2
+// Last modified: 26-04-2023
+
 import { ModelDto } from './dto/model.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from './model.schema';
