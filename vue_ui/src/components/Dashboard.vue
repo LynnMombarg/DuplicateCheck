@@ -1,3 +1,8 @@
+<!--Author(s): Silke Bertisen-->
+<!--Jira-task: Dashboard realiseren 104 -->
+<!--Sprint: 2 -->
+<!--Last modified: 26-4-2023-->
+
 <template>
   <Banner/>
   <model-overview :models="models"/>

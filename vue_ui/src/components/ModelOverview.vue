@@ -1,3 +1,10 @@
+<!--Author(s): Silke Bertisen-->
+<!--Jira-task: Dashboard realiseren 104 -->
+<!--Sprint: 2 -->
+<!--Last modified: 26-4-2023-->
+
+
+
 <template>
   <ul role="list" class="divide-y divide-gray-100 ">
     <li v-for="model in models" :key="model.information" class="flex py-2 ">
