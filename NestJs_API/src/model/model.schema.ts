@@ -16,6 +16,9 @@ export class Model {
 
   @Prop()
   userId: string;
+
+  @Prop()
+  modelDescription: string
 }
 
 export const ModelSchema = SchemaFactory.createForClass(Model);

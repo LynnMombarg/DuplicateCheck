@@ -4,7 +4,7 @@ import { ModelController } from './model.controller';
 import { ModelService } from './model.service';
 import { Model } from 'mongoose';
 import { ModelSchema } from './model.schema';
-import { ModelDAO } from './model.modelDAO';
+import { ModelDAO } from './model.DAO';
 
 @Module({
   imports: [

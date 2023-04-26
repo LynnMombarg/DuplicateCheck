@@ -1,24 +1,15 @@
-import {
-  Controller,
-  Get,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Get, Headers, Controller, Res, HttpStatus } from '@nestjs/common';
 import { ModelService } from './model.service';
-import { ModelDTO } from './model.modelDTO';
+import { DisplayDTO } from './display-model.DTO';
 
 @Controller('model')
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Get('/models')
-  getAllModels(): Promise<ModelDTO[]>{
-    return this.modelService.getAllModels();
+  getAllModels(
+    @Headers('Authorization') accesToken: string
+  ): Promise<DisplayDTO[]> {
+    return this.modelService.getAllModels(accesToken);
   }
-
-  @Delete()
-  deleteModel(@Query('modelId') modelId): Promise<ModelDTO[]> {
-    return this.modelService.deleteModel(modelId);
-  }
-
 }

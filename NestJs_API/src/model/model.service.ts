@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { ModelDTO } from './model.modelDTO';
-import { ModelDAO } from './model.modelDAO';
+import { ModelDAO } from './model.DAO';
+import { DisplayDTO } from './display-model.DTO';
 
 @Injectable()
 export class ModelService {
   constructor(private readonly modelDAO: ModelDAO) {}
 
-  async getAllModels(): Promise<ModelDTO[]>{
-    return this.modelDAO.getAllModels();
+  async getAllModels(accessToken: string): Promise<DisplayDTO[]> {
+    const userId = 'test';
+    return this.modelDAO.getAllModels(userId);
   }
 }

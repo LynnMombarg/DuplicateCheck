@@ -1,15 +1,29 @@
-<template>
+<template></template>
 
-</template>
+<script setup>
+import { ref } from 'vue';
+let models;
 
-<script>
-export default {
-  name: "GetModels"
+async function getData() {
+  const response = await fetch('http://localhost:8001/model/models', {
+    method: 'GET',
+    headers: {
+      'Authorization': "test",
+      'Content-Type': 'application/json'
+    },
+  });
+  const data = await response.json();
+  models = data;
 }
+
+await getData();
+console.log(models[0]["modelName"]);
 
 
 </script>
 
-<style scoped>
+<script>
 
-</style>
+</script>
+
+<style scoped></style>
