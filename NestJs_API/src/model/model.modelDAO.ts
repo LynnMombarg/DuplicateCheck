@@ -2,7 +2,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from './model.schema';
 import mongoose from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { ModelDTO } from './model.modelDTO';
+import { ModelDTO } from './display-model.DTO';
 import { ItemDto } from 'src/item/item.dto';
 
 @Injectable()
@@ -11,14 +11,13 @@ export class ModelDAO {
     @InjectModel(Model.name) private modelModel: mongoose.Model<Model>,
   ) {}
 
-  async getAllModels(): Promise<ModelDTO[]>{
-	  return this.modelModel.find().exec();
+  async getAllModels(): Promise<ModelDTO[]> {
+    return this.modelModel.find().exec();
   }
 
-  async deleteModel(modelId: string): Promise<ModelDTO[]> {
+  async deleteModel(modelId: string): Promise<void> {
     await this.modelModel.deleteOne({
-      modelId: modelId
+      modelId: modelId,
     });
-	return this.getAllModels();
   }
 }

@@ -6,13 +6,19 @@ export type ModelDocument = HydratedDocument<Model>;
 @Schema()
 export class Model {
   @Prop()
-  modelId: string;
+  modelName: string;
 
   @Prop()
   fileName: string;
 
   @Prop()
   tableName: string;
+
+  @Prop()
+  userId: string;
+
+  @Prop()
+  modelDescription: string;
 }
 
 export const ModelSchema = SchemaFactory.createForClass(Model);
