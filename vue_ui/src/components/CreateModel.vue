@@ -5,15 +5,18 @@
 
     <div v-if="inputVisible">
         <p v-if="warningVisible">Please fill in all fields.</p>
-        <input v-model="modelName" placeholder="Model name"/>
+        <label for="model">Model name*: </label>
+        <input v-model="modelName" placeholder="Model name" id="model"/> <br>
 
-
+        <label for="table">Table name*: </label>
         <select v-model="tableName" name="table" id="table">
             <option value="accounts">Accounts</option>
             <option value="contacts">Contacts</option>
             <option value="leads">Leads</option>
-        </select>
+        </select> <br>
 
+        <label for="description">Description: </label>
+        <textarea v-model="description" id="description" name="description"></textarea> <br>
 
         <button @click="createModel">
             Submit model
@@ -28,6 +31,7 @@ export default {
         return {
             modelName: '',
             tableName: '',
+            description: '',
             inputVisible: false,
             warningVisible: false,
         }
@@ -49,6 +53,7 @@ export default {
                 body: JSON.stringify({
                     modelName: this.modelName,
                     tableName: this.tableName,
+                    description: this.description,
                     token: 'ee8612ad-8ad3-489b-9982-33c15a6cc0a4',
                 })
             };
@@ -65,6 +70,7 @@ export default {
         resetValues() {
             this.modelName = '';
             this.tableName = '';
+            this.description = '';
             this.warningVisible = false;
         },
     }

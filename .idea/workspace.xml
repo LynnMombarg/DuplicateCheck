@@ -15,7 +15,6 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/CreateModelButton.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
       <workItem from="1681907030817" duration="405000" />
       <workItem from="1681908640592" duration="8000" />
       <workItem from="1681991742866" duration="1097000" />
-      <workItem from="1682493013765" duration="4162000" />
+      <workItem from="1682493013765" duration="4933000" />
     </task>
     <servers />
   </component>
