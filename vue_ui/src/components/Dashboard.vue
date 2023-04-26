@@ -2,8 +2,8 @@
   <Banner/>
   <model-overview :models="models"/>
 </template>
-<script setup>
 
+<script setup>
 const models = [
   {
     name: 'model1',
@@ -32,12 +32,6 @@ export default {
   components: {
     Banner,
     ModelOverview,
-  },
-  props: {
-    models: {
-      type: Array,
-      required: true
-    }
   }
 };
 </script>
