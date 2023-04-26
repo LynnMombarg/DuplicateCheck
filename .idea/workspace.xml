@@ -13,17 +13,9 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.module.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue_ui/src/components/SignInBody.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/SignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/SignIn.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/SignInButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/SignInButton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/SignInFooter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/SignInFooter.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/SignInHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/SignInHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/CreateModelButton.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +44,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "feature/BXCUOA-106-front-end-maken",
-    "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck",
+    "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck/vue_ui/src/components",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -67,6 +59,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\vue_ui\src\components" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.Vue">
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />
@@ -105,6 +102,7 @@
       <workItem from="1681907030817" duration="405000" />
       <workItem from="1681908640592" duration="8000" />
       <workItem from="1681991742866" duration="1097000" />
+      <workItem from="1682493013765" duration="4162000" />
     </task>
     <servers />
   </component>
