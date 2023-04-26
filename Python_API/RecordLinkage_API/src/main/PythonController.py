@@ -35,5 +35,3 @@ class PythonController:
           return 'Model created!'
       except:
           return 'Model could not be created'
-              
-  service.createModel('yeah.pkl')
