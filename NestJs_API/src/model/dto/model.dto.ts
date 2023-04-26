@@ -3,7 +3,7 @@
 // Sprint: 2
 // Last modified: 26-04-2023
 
-export class ModelDto {
+export class ModelDTO {
   modelName: string;
   fileName: string;
   tableName: string;

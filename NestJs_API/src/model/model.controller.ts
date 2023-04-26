@@ -5,14 +5,14 @@
 
 import { Body, Controller, Post } from '@nestjs/common';
 import { ModelService } from './model.service';
-import { CreateModelDto } from './dto/create-model.dto';
+import { CreateModelDTO } from './dto/create-model.dto';
 
 @Controller('model')
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Post('create')
-  createModel(@Body() model: CreateModelDto) {
+  createModel(@Body() model: CreateModelDTO) {
     this.modelService.createModel(model);
   }
 }

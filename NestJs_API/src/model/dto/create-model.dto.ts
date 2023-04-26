@@ -3,7 +3,7 @@
 // Sprint: 2
 // Last modified: 26-04-2023
 
-export class CreateModelDto {
+export class CreateModelDTO {
   modelName: string;
   tableName: string;
   modelDescription: string;

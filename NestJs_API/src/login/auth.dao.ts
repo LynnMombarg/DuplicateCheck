@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AuthDao {
+export class AuthDAO {
   getUserId(token: string): string {
     return 'test123';
   }
