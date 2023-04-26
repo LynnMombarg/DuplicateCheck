@@ -1,7 +1,7 @@
-<!--Authors: Marloes
-Jira-task: 106 - Front-end maken
-Sprint: 2
-Last modified: 26-04-2023-->
+// Authors: Marloes
+// Jira-task: 106 - Front-end maken
+// Sprint: 2
+// Last modified: 26-04-2023
 
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
