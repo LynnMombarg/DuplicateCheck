@@ -9,7 +9,8 @@
     "setup": "npm install -D tailwindcss && npx tailwindcss init && npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "dependencies": {
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",

@@ -8,10 +8,7 @@ import Dashboard from "@/components/Dashboard.vue";
 <template>
   <main>
     <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <SignInHeader />
-      <SignIn />
-      <SignInFooter />
-      <Dashboard />
+      <router-view></router-view>
     </div>
   </main>
 </template>
