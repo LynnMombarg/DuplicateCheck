@@ -9,8 +9,6 @@ import { ModelDAO } from '../model.dao';
 import { AuthDAO } from '../../login/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
-import { ModelDTO } from '../dto/model.dto';
-import { UnauthorizedException } from '@nestjs/common';
 
 describe('ModelService', () => {
   let modelService: ModelService;

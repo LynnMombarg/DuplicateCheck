@@ -24,7 +24,6 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +35,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/vue_ui/package.json" />
   </component>
   <component name="ProjectId" id="2OMuTXma9PGryhyCQpIbdKzpvr7" />
   <component name="ProjectLevelVcsManager">

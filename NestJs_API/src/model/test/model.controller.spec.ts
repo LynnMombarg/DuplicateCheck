@@ -1,7 +1,7 @@
 // Authors: Marloes
 // Jira-task: 107 - Models toevoegen aan database
 // Sprint: 2
-// Last modified: 26-04-2023
+// Last modified: 08-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
