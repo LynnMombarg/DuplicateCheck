@@ -21,12 +21,12 @@ export class ModelService {
     return this.modelDAO.getAllModels();
   }
 
-  deleteModel(token: string, modelId: string): void {
+  async deleteModel(token: string, modelId: string): Promise<void> {
     if (this.authDAO.getUserId(token) == null) {
       throw new UnauthorizedException();
     } else {
       this.modelDAO.deleteModel(modelId);
-      this.pythonDAO.deleteModel(modelId);
+      this.pythonDao.deleteModel(modelId);
     }
   }
 }

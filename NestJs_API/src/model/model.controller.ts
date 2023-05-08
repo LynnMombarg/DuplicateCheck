@@ -17,11 +17,11 @@ export class ModelController {
   }
 
   @Delete()
-  deleteModel(
+  async deleteModel(
     @Headers('Authorization') accessToken,
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
-    this.modelService.deleteModel(accessToken, modelId);
+    await this.modelService.deleteModel(accessToken, modelId);
     return this.modelService.getAllModels();
   }
 }
