@@ -1,27 +1,28 @@
 // Authors: Marloes
 // Jira-task: 107 - Models toevoegen aan database
 // Sprint: 2
-// Last modified: 26-04-2023
+// Last modified: 08-05-2023
 
 import { ModelService } from '../model.service';
 import { Test } from '@nestjs/testing';
-import { ModelController } from '../model.controller';
 import { ModelDAO } from '../model.dao';
 import { AuthDAO } from '../../login/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
+import { ModelDTO } from '../dto/model.dto';
+import { UnauthorizedException } from '@nestjs/common';
 
 describe('ModelService', () => {
   let modelService: ModelService;
   const mockedModelDAO = {
     createModel: jest.fn(),
-    getUUID: jest.fn(() => {
-      return '123';
-    }),
   };
   const mockedAuthDAO = {
-    getUserId: jest.fn(() => {
-      return '1';
+    getUserId: jest.fn((token) => {
+      if (token === 'token') {
+        return token + '123';
+      }
+      return null;
     }),
   };
   const mockedPythonDAO = {
@@ -44,16 +45,56 @@ describe('ModelService', () => {
   });
 
   describe('createModel', () => {
-    it('should be called', () => {
+    const model = new CreateModelDTO(
+      'modelName',
+      'tableName',
+      'modelDescription',
+      'token',
+    );
+
+    it('should call createModel on ModelDAO', () => {
+      // Arrange
+
+      // Act
+      modelService.createModel(model);
+
+      // Assert
+      expect(mockedModelDAO.createModel).toHaveBeenCalled();
+    });
+
+    it('should call getUserId on AuthDAO', () => {
+      // Arrange
+
+      // Act
+      modelService.createModel(model);
+
+      // Assert
+      expect(mockedAuthDAO.getUserId).toHaveBeenCalledWith(model.token);
+    });
+
+    it('should call createModel on PythonDAO', () => {
+      // Arrange
+
+      // Act
+      modelService.createModel(model);
+
+      // Assert
+      expect(mockedPythonDAO.createModel).toHaveBeenCalled;
+    });
+
+    it('should throw an unauthorized UnauthorizedException when the user is unknown', () => {
+      // Arrange
       const model = new CreateModelDTO(
         'modelName',
         'tableName',
         'modelDescription',
-        'token',
+        'tokn',
       );
 
-      modelService.createModel(model);
-      expect(mockedModelDAO.createModel).toHaveBeenCalled();
+      // Assert
+      expect(() => {
+        modelService.createModel(model); // Act
+      }).toThrow(new UnauthorizedException());
     });
   });
 });

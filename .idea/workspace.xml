@@ -24,7 +24,9 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/b/4b5dddcd6206646e6dd6907731f4aa660ac0e0cb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/b/4b5dddcd6206646e6dd6907731f4aa660ac0e0cb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -79,56 +81,7 @@
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\NestJs_API\src\model\tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.ModelService">
-    <configuration name="ModelController (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/NestJs_API" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" />
-      <test-names>
-        <test-name value="ModelController" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="ModelController (2)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/NestJs_API" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/test/model/model.controller.spec.ts" />
-      <test-names>
-        <test-name value="ModelController" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="ModelController (3)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/NestJs_API" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" />
-      <test-names>
-        <test-name value="ModelController" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="ModelController.createModel" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/NestJs_API" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" />
-      <test-names>
-        <test-name value="ModelController" />
-        <test-name value="createModel" />
-      </test-names>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Jest.Tests in test/">
     <configuration name="ModelService" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
@@ -139,6 +92,56 @@
       <test-names>
         <test-name value="ModelService" />
       </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="ModelService.createModel" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" />
+      <test-names>
+        <test-name value="ModelService" />
+        <test-name value="createModel" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="ModelService.createModel.should call createModel on PythonDAO" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" />
+      <test-names>
+        <test-name value="ModelService" />
+        <test-name value="createModel" />
+        <test-name value="should call createModel on PythonDAO" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="ModelService.createModel.should throw an unauthorized UnauthorizedException when the user is unknown" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" />
+      <test-names>
+        <test-name value="ModelService" />
+        <test-name value="createModel" />
+        <test-name value="should throw an unauthorized UnauthorizedException when the user is unknown" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in test/" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="DIRECTORY" />
+      <test-directory value="$PROJECT_DIR$/NestJs_API/src/model/test" />
       <method v="2" />
     </configuration>
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
@@ -152,11 +155,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Jest.ModelController (1)" />
-      <item itemvalue="Jest.ModelController (2)" />
-      <item itemvalue="Jest.ModelController (3)" />
+      <item itemvalue="Jest.ModelService.createModel" />
+      <item itemvalue="Jest.ModelService.createModel.should call createModel on PythonDAO" />
+      <item itemvalue="Jest.ModelService.createModel.should throw an unauthorized UnauthorizedException when the user is unknown" />
+      <item itemvalue="Jest.Tests in test/" />
       <item itemvalue="Jest.ModelService" />
-      <item itemvalue="Jest.ModelController.createModel" />
       <item itemvalue="Node.js.Unnamed" />
       <item itemvalue="npm.NestJs" />
       <item itemvalue="npm.Vue" />
@@ -165,11 +168,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.Tests in test/" />
+        <item itemvalue="Jest.ModelService.createModel.should throw an unauthorized UnauthorizedException when the user is unknown" />
+        <item itemvalue="Jest.ModelService.createModel.should call createModel on PythonDAO" />
+        <item itemvalue="Jest.ModelService.createModel" />
         <item itemvalue="Jest.ModelService" />
-        <item itemvalue="Jest.ModelController.createModel" />
-        <item itemvalue="Jest.ModelController (3)" />
-        <item itemvalue="Jest.ModelController (2)" />
-        <item itemvalue="Jest.ModelController (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -197,7 +200,12 @@
       <workItem from="1682406392808" duration="10322000" />
       <workItem from="1682422307837" duration="107000" />
       <workItem from="1682422436146" duration="1337000" />
-      <workItem from="1682515742804" duration="4794000" />
+      <workItem from="1682515742804" duration="4838000" />
+      <workItem from="1683524227018" duration="110000" />
+      <workItem from="1683524347286" duration="788000" />
+      <workItem from="1683525163843" duration="31000" />
+      <workItem from="1683525211300" duration="2275000" />
+      <workItem from="1683529192696" duration="3760000" />
     </task>
     <servers />
   </component>
@@ -210,5 +218,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683533205085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

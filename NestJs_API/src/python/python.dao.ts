@@ -8,9 +8,9 @@ import axios from 'axios';
 
 @Injectable()
 export class PythonDAO {
-  async createModel(fileName: string) {
+  async createModel(modelId: string) {
     await axios.post('http://http://localhost:8000//create-model', {
-      fileName: fileName,
+      modelId: modelId,
     });
   }
 }

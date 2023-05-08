@@ -23,22 +23,18 @@ export class ModelService {
     const userId: string = this.authDao.getUserId(createModel.token);
 
     if (userId != null) {
-      const fileName: string = this.getUUID() + '.pkl';
+      const modelId: string = uuid();
       const model = new ModelDTO(
         createModel.modelName,
-        fileName,
+        modelId,
         createModel.tableName,
         createModel.modelDescription,
         userId,
       );
       this.modelDao.createModel(model);
-      this.pythonDao.createModel(fileName);
+      this.pythonDao.createModel(modelId);
     } else {
       throw new UnauthorizedException();
     }
-  }
-
-  private getUUID(): string {
-    return uuid();
   }
 }
