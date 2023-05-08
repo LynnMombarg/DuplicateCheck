@@ -2,7 +2,6 @@
 import SignIn from "@/components/SignIn.vue";
 import SignInHeader from "@/components/SignInHeader.vue";
 import SignInFooter from "@/components/SignInFooter.vue";
-import DeleteModelButton from "./components/DeleteModelButton.vue";
 </script>
 
 <template>

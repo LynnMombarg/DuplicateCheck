@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/NestJs_API/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/login/auth.dao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/create-model.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/model.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.dao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/main/PythonService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/main/PythonService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/test/test_PythonController.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/test/test_RecordLinkageModel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Python_API/RecordLinkage_API/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +28,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/NestJs_API" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -39,7 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/BXCUOA-59-jenkins-instellen",
+    "git-widget-placeholder": "feature/BXCUOA-107-models-toevoegen-aan-database",
     "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -55,7 +67,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Users\\lymo\\Documents\\GitHub\\duplicatecheck\\NestJs_API\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -86,11 +98,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Jest.ModelController" />
-      <item itemvalue="Jest.ModelController (1)" />
-      <item itemvalue="Jest.ModelController (2)" />
-      <item itemvalue="Jest.ModelService" />
-      <item itemvalue="Jest.model.controller.spec.ts" />
       <item itemvalue="Node.js.Unnamed" />
       <item itemvalue="npm.NestJs" />
       <item itemvalue="npm.Vue" />
@@ -124,6 +131,8 @@
       <workItem from="1681908640592" duration="8000" />
       <workItem from="1681991742866" duration="1097000" />
       <workItem from="1682507913182" duration="127000" />
+      <workItem from="1683545217928" duration="284000" />
+      <workItem from="1683545550577" duration="358000" />
     </task>
     <servers />
   </component>
