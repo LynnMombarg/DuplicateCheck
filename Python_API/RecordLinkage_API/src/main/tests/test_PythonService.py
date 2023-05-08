@@ -5,17 +5,23 @@ Sprint: 2
 Last modified: 26-04-2023
 '''
 
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import unittest
 from unittest import TestCase
 import json
 from PythonService import PythonService
-from RecordLinkageModel import RecordLinkageModel
 from unittest.mock import patch
+
+
 class test_PythonService(TestCase):
     
     def setUp(self) -> None:
         self.sut = PythonService()
-    
+        self.service = PythonService()
+        self.service.createModel('test')
     
     def test_createModel(self):
         try:
@@ -40,6 +46,10 @@ class test_PythonService(TestCase):
             self.sut.trainModel('test', jsonObject)
         except:
             self.fail()
+        
+        
+    def tearDown(self):
+        os.remove('Python_API/RecordLinkage_API/src/main/pickles/test.pkl')
         
             
 unittest.main()

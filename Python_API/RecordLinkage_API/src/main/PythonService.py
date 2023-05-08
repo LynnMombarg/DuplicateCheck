@@ -5,6 +5,10 @@ Sprint: 2
 Last modified: 25-04-2023
 '''
 
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from RecordLinkageModel import RecordLinkageModel
 import pickle
 
@@ -27,4 +31,7 @@ class PythonService:
     def trainModel(self, filename, json_dataframe):
         model = self.loadModel(filename)
         model.trainModel(json_dataframe)
+        
+    def deleteModel(self, filename):
+        os.remove('Python_API/RecordLinkage_API/src/main/pickles/' + filename + '.pkl')
         
