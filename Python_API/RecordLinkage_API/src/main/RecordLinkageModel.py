@@ -9,8 +9,10 @@ import pandas as pd
 import recordlinkage
 
 class RecordLinkageModel:
+    
     # Setup variables for the model
     def __init__(self):
+        #Filename is an unique UUID string (identifier)
         self.nrOfTrainings = 0
         self.indexer = recordlinkage.Index()
         self.indexer.full()
