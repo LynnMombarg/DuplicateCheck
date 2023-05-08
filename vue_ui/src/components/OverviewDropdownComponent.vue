@@ -17,7 +17,7 @@
           <div class="py-1">
             <a @click="trainModel"  tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Train </a>
             <a @click="executeModel"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Execute </a>
-            <a @click='confirmDelete' class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Delete </a>
+            <a @click='confirmDelete(model.modelid)' class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" > Delete </a>
           </div>
         </div>
       </div>
@@ -26,19 +26,41 @@
 </template>
 
 <script setup>
+defineProps(['model'])
+async function deleteModel(modelId) {
+  const accessToken = 'test';
+  const url = `http://localhost:8001/model/models?modelId=${modelId}`;
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': accessToken,
+      'Content-Type': 'application/json'
+    },
+  });
 
-function confirmDelete() {
+
+}
+
+
+function confirmDelete(modelId) {
   if (window.confirm("Are you sure you want to delete this model?")) {
-    window.location.href = "/Delete";
+    console.log("Delete model pressed");
+    console.log("id of model:"+modelId);
+    // code delete model from backend
+    deleteModel(modelId);
+    // code to refresh page
+    window.location.href = "/Overview";
   }
 }
 
 function trainModel() {
-  window.location.href = "/Train";
+ // window.location.href = "/Trainmodel";
+  console.log("train model pressed");
 }
 
 function executeModel() {
-  window.location.href = "/Execute";
+ // window.location.href = "/Execute";
+  console.log("execute model pressed");
 }
 
 </script>

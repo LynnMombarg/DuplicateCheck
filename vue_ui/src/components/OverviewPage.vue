@@ -12,11 +12,13 @@
 // hardcoded models for testing
 let models = [
   {
+    modelid: 1,
     modelname: 'model1',
     modeltable: 'table1',
     modeldescription: 'extra informatie over model2',
   },
   {
+    modelid: 4,
     modelname: 'model1',
     modeltable: 'table1',
     modeldescription: 'extra informatie over model2',
@@ -46,9 +48,6 @@ let models = [
 <script>
 import Banner from "@/components/OverviewBannerComponent.vue";
 import OverviewModelComponent from "@/components/OverviewModelComponent.vue";
-
-
-
 export default {
   name: "OverviewPage",
   components: {

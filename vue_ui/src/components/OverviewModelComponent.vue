@@ -4,7 +4,7 @@
 <!--Last modified: 26-4-2023-->
 
 <template>
-  <ul role="list" class="divide-y divide-gray-100 ">
+  <ul role="list" class="divide-y divide-gray-100">
     <li v-for="model in models" :key="model.information" class="flex py-2 ">
       <div class="bg-white shadow w-full ">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-between ">
@@ -16,7 +16,7 @@
           </div>
           <p class="text-xs leading-5 text-gray-500"> {{model.modeltable}}</p>
           <div class="hidden sm:flex sm:flex-col sm:items-end">
-<OverviewDropdownComponent> </OverviewDropdownComponent>
+<OverviewDropdownComponent :model=model> </OverviewDropdownComponent>
           </div>
         </div>
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-middle">
@@ -36,13 +36,7 @@ import OverviewDropdownComponent from "@/components/OverviewDropdownComponent.vu
 
 export default {
   name: 'OverviewModelComponent',
-  components: {OverviewDropdownComponent},
+  components: OverviewDropdownComponent,
 }
 </script>
 
-<style>
-.background {
-  background-color:
-      #f3f3f3;
-}
-</style>
