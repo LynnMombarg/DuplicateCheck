@@ -1,5 +1,5 @@
-// Authors: Marloes
-// Jira-task: 107 - Models toevoegen aan database
+// Authors: Marloes, Roward
+// Jira-task: 107, 110
 // Sprint: 2
 // Last modified: 08-05-2023
 
@@ -12,6 +12,8 @@ describe('ModelController', () => {
   let modelController: ModelController;
   let mockedModelService = {
     createModel: jest.fn(),
+    deleteModel: jest.fn(),
+    getAllModels: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -44,6 +46,33 @@ describe('ModelController', () => {
         model,
         'token',
       );
+    });
+  });
+  describe('deleteModel', () => {
+    it('should call deleteModel on ModelService', () => {
+      // Arrange
+      const token = "secretToken";
+      const modelId = "123";
+      const spy = jest.spyOn(mockedModelService, 'deleteModel');
+
+      // Act
+      modelController.deleteModel(token, modelId);
+
+      // Assert
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should call getAllModels on ModelService', () => {
+      // Arrange
+      const token = "secretToken";
+      const modelId = "123";
+      const spy = jest.spyOn(mockedModelService, 'getAllModels');
+
+      // Act
+      modelController.deleteModel(token, modelId);
+
+      // Assert
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

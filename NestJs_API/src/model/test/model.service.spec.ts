@@ -1,5 +1,5 @@
-// Authors: Marloes
-// Jira-task: 107 - Models toevoegen aan database
+// Authors: Marloes, Roward
+// Jira-task: 107, 110
 // Sprint: 2
 // Last modified: 08-05-2023
 
@@ -9,11 +9,14 @@ import { ModelDAO } from '../model.dao';
 import { AuthDAO } from '../../login/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
+import { UnauthorizedException } from '@nestjs/common';
 
 describe('ModelService', () => {
   let modelService: ModelService;
   const mockedModelDAO = {
     createModel: jest.fn(),
+    deleteModel: jest.fn(),
+    getAllModels: jest.fn(),
   };
   const mockedAuthDAO = {
     getUserId: jest.fn((token) => {
@@ -25,6 +28,7 @@ describe('ModelService', () => {
   };
   const mockedPythonDAO = {
     createModel: jest.fn(),
+    deleteModel: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -58,7 +62,6 @@ describe('ModelService', () => {
       // Assert
       expect(mockedModelDAO.createModel).toHaveBeenCalled();
     });
-
     it('should call getUserId on AuthDAO', () => {
       // Arrange
       const token = 'token';
@@ -78,6 +81,54 @@ describe('ModelService', () => {
 
       // Assert
       expect(mockedPythonDAO.createModel).toHaveBeenCalled;
+    });
+  });
+  describe('deleteModel', () => {
+    it('should call deleteModel on ModelDAO', () => {
+      // Arrange
+      const modelId = "123";
+      const token = "secretToken";
+
+      // Act
+      modelService.deleteModel(token, modelId);
+
+      // Assert
+      expect(mockedModelDAO.deleteModel).toHaveBeenCalled();
+    });
+
+    it('should call getUserId on AuthDAO', () => {
+      // Arrange
+      const modelId = "123";
+      const token = "secretToken";
+
+      // Act
+      modelService.deleteModel(token, modelId);
+
+      // Assert
+      expect(mockedAuthDAO.getUserId).toHaveBeenCalled();
+    });
+
+    it('should call deleteModel on PythonDAO', () => {
+      // Arrange
+      const modelId = "123";
+      const token = "secretToken";
+
+      // Act
+      modelService.deleteModel(token, modelId);
+
+      // Assert
+      expect(mockedPythonDAO.deleteModel).toHaveBeenCalled();
+    });
+
+    it('should throw an UnauthorizedException', () => {
+      // Arrange
+      const modelId = "123";
+      const token = "falseSecretToken";
+
+      // Assert
+      expect(() => {
+        modelService.deleteModel(token, modelId); // Act
+      }).toThrow(new UnauthorizedException());
     });
   });
 });

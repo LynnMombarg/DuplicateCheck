@@ -47,6 +47,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/rowar/OneDrive/Documenten/GitHub/duplicate-record-rest-api/NestJs_API/node_modules/jest",
     "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier",
@@ -86,10 +87,10 @@
     </configuration>
     <list>
       <item itemvalue="Jest.ModelController" />
-      <item itemvalue="Jest.ModelService.createModel" />
-      <item itemvalue="Jest.ModelService.createModel.should call createModel on PythonDAO" />
-      <item itemvalue="Jest.ModelService.createModel.should throw an unauthorized UnauthorizedException when the user is unknown" />
-      <item itemvalue="Jest.Tests in test/" />
+      <item itemvalue="Jest.ModelController (1)" />
+      <item itemvalue="Jest.ModelController (2)" />
+      <item itemvalue="Jest.ModelService" />
+      <item itemvalue="Jest.model.controller.spec.ts" />
       <item itemvalue="Node.js.Unnamed" />
       <item itemvalue="npm.NestJs" />
       <item itemvalue="npm.Vue" />

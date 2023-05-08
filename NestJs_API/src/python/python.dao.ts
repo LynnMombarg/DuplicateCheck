@@ -1,4 +1,4 @@
-// Authors: Marloes
+// Authors: Marloes, Roward
 // Jira-task: 107 - Models toevoegen aan database
 // Sprint: 2
 // Last modified: 08-05-2023
@@ -18,5 +18,9 @@ export class PythonDAO {
           console.log(error.toJSON());
         }
       });
+  }
+
+  async deleteModel(fileName: string) {
+    await axios.delete('http://localhost:8000/delete-model/' + fileName);
   }
 }
