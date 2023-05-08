@@ -1,32 +1,49 @@
-// Authors: Roward
-// Jira-task: 110 - Models verwijderen uit database
+// Authors: Marloes
+// Jira-task: 107, 110
 // Sprint: 2
 // Last modified: 08-05-2023
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { ModelDTO } from './display-model.DTO';
-import { ModelDAO } from './model.modelDAO';
+import { ModelDTO } from './dto/model.dto';
+import { ModelDAO } from './model.dao';
+import { CreateModelDTO } from './dto/create-model.dto';
 import { AuthDAO } from '../login/auth.dao';
 import { PythonDAO } from '../python/python.dao';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class ModelService {
   constructor(
-    private readonly modelDAO: ModelDAO,
-    private readonly authDAO: AuthDAO,
-    private readonly pythonDAO: PythonDAO
+    private readonly modelDao: ModelDAO,
+    private readonly authDao: AuthDAO,
+    private readonly pythonDao: PythonDAO,
   ) {}
 
+  public createModel(createModel: CreateModelDTO, token: string): void {
+    const userId: string = this.authDao.getUserId(token);
+    const modelId: string = uuid();
+    const model = new ModelDTO(
+      createModel.modelName,
+      modelId,
+      createModel.tableName,
+      createModel.modelDescription,
+      userId,
+    );
+
+    this.modelDao.createModel(model);
+    this.pythonDao.createModel(modelId);
+  }
+
   async getAllModels(): Promise<ModelDTO[]> {
-    return this.modelDAO.getAllModels();
+    return this.modelDao.getAllModels();
   }
 
   deleteModel(token: string, modelId: string): void {
-    if (this.authDAO.getUserId(token) == null) {
+    if (this.authDao.getUserId(token) == null) {
       throw new UnauthorizedException();
     } else {
-      this.modelDAO.deleteModel(modelId);
-      this.pythonDAO.deleteModel(modelId);
+      this.modelDao.deleteModel(modelId);
+      this.pythonDao.deleteModel(modelId);
     }
   }
 }

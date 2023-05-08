@@ -1,29 +1,53 @@
-// Authors: Roward
-// Jira-task: 110 - Models verwijderen uit database
+// Authors: Marloes, Roward
+// Jira-task: 107, 110
 // Sprint: 2
 // Last modified: 08-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
 import { ModelService } from '../model.service';
-import { createMock, DeepMocked } from '@golevelup/ts-jest';
+import { CreateModelDTO } from '../dto/create-model.dto';
 
 describe('ModelController', () => {
   let modelController: ModelController;
-  let mockedModelService: DeepMocked<ModelService>;
+  let mockedModelService = {
+    createModel: jest.fn(),
+    deleteModel: jest.fn(),
+    getAllModels: jest.fn(),
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [ModelController],
       providers: [ModelService],
     })
-      .useMocker(createMock)
+      .overrideProvider(ModelService)
+      .useValue(mockedModelService)
       .compile();
 
     modelController = moduleRef.get<ModelController>(ModelController);
     mockedModelService = moduleRef.get(ModelService);
   });
 
+  describe('createModel', () => {
+    it('should call createModel on ModelService', () => {
+      // Arrange
+      const model = new CreateModelDTO(
+        'modelName',
+        'tableName',
+        'modelDescription',
+      );
+
+      // Act
+      modelController.createModel(model, 'token');
+
+      // Assert
+      expect(mockedModelService.createModel).toHaveBeenCalledWith(
+        model,
+        'token',
+      );
+    });
+  });
   describe('deleteModel', () => {
     it('should call deleteModel on ModelService', () => {
       // Arrange

@@ -6,18 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/NestJs_API/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/dto/message.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/dto/message.schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/item/item.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/login/auth.dao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/create-model.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/model.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.dao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/CreateModel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Python_API/RecordLinkage_API/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +33,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/vue_ui/package.json" />
+  </component>
   <component name="ProjectId" id="2OMuTXma9PGryhyCQpIbdKzpvr7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -38,27 +44,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/BXCUOA-106-front-end-maken&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck/vue_ui/src/components&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;C:/Program Files/nodejs/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "feature/BXCUOA-107-models-toevoegen-aan-database",
+    "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/rowar/OneDrive/Documenten/GitHub/duplicate-record-rest-api/NestJs_API/node_modules/jest",
+    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
 }</component>
   <component name="RecentsManager">
@@ -93,11 +103,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Jest.ModelController" />
-      <item itemvalue="Jest.ModelController (1)" />
-      <item itemvalue="Jest.ModelController (2)" />
-      <item itemvalue="Jest.ModelService" />
-      <item itemvalue="Jest.model.controller.spec.ts" />
       <item itemvalue="Node.js.Unnamed" />
       <item itemvalue="npm.NestJs" />
       <item itemvalue="npm.Vue" />
@@ -130,7 +135,9 @@
       <workItem from="1681907030817" duration="405000" />
       <workItem from="1681908640592" duration="8000" />
       <workItem from="1681991742866" duration="1097000" />
-      <workItem from="1682493013765" duration="4933000" />
+      <workItem from="1682507913182" duration="127000" />
+      <workItem from="1683545217928" duration="284000" />
+      <workItem from="1683545550577" duration="358000" />
     </task>
     <servers />
   </component>
