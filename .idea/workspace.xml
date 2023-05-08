@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/OverviewBannerComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/OverviewBannerComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/src/components/OverviewDropdownComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/OverviewDropdownComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/src/components/OverviewModelComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/OverviewModelComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/src/components/OverviewPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/OverviewPage.vue" afterDir="false" />

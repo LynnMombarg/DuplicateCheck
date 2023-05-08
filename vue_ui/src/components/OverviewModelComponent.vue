@@ -11,10 +11,10 @@
           <div class="flex gap-x-4 ">
             <div class="min-w-0 flex-auto">
               <a @click="viewdetails" href="#" class="bg-violet-400 text-white rounded-md px-3 py-1 text-sm font-medium" aria-current="page">
-                {{model.modelname}}</a>
+                {{model.modelName}}</a>
             </div>
           </div>
-          <p class="text-xs leading-5 text-gray-500"> {{model.modeltable}}</p>
+          <p class="text-xs leading-5 text-gray-500"> {{model.tableName}}</p>
           <div class="hidden sm:flex sm:flex-col sm:items-end">
 <OverviewDropdownComponent :model=model> </OverviewDropdownComponent>
           </div>

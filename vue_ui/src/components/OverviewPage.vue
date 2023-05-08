@@ -12,15 +12,15 @@
 // hardcoded models for testing
 let models = [
   {
-    modelid: 1,
-    modelname: 'model1',
-    modeltable: 'table1',
-    modeldescription: 'extra informatie over model2',
+    modelId: 1,
+    modelName: 'model1',
+    tableName: 'table1',
+    modeldescription: 'extra informatie over model1',
   },
   {
-    modelid: 4,
-    modelname: 'model1',
-    modeltable: 'table1',
+    modelId: 4,
+    modelName: 'model2',
+    tableName: 'table2',
     modeldescription: 'extra informatie over model2',
   },
 ]
