@@ -17,4 +17,14 @@ export class ModelDAO {
     const createdModel = new this.model(model);
     createdModel.save();
   }
+
+  async getAllModels(): Promise<ModelDTO[]> {
+    return this.model.find().exec();
+  }
+
+  async deleteModel(modelId: string): Promise<void> {
+    await this.model.deleteOne({
+      modelId: modelId,
+    });
+  }
 }

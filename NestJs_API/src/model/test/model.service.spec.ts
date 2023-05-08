@@ -87,7 +87,7 @@ describe('ModelService', () => {
     it('should call deleteModel on ModelDAO', () => {
       // Arrange
       const modelId = "123";
-      const token = "secretToken";
+      const token = "token";
 
       // Act
       modelService.deleteModel(token, modelId);
@@ -99,7 +99,7 @@ describe('ModelService', () => {
     it('should call getUserId on AuthDAO', () => {
       // Arrange
       const modelId = "123";
-      const token = "secretToken";
+      const token = "token";
 
       // Act
       modelService.deleteModel(token, modelId);
@@ -111,7 +111,7 @@ describe('ModelService', () => {
     it('should call deleteModel on PythonDAO', () => {
       // Arrange
       const modelId = "123";
-      const token = "secretToken";
+      const token = "token";
 
       // Act
       modelService.deleteModel(token, modelId);

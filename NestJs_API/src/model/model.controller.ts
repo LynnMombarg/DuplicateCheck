@@ -6,7 +6,7 @@
 import { Body, Controller, Post, Req, Get, Delete, Headers, Query } from '@nestjs/common';
 import { ModelService } from './model.service';
 import { CreateModelDTO } from './dto/create-model.dto';
-import { ModelDTO } from './display-model.DTO';
+import { ModelDTO } from './dto/model.dto';
 
 @Controller('model')
 export class ModelController {
