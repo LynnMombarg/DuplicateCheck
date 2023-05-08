@@ -26,7 +26,7 @@ export class ModelService {
       throw new UnauthorizedException();
     } else {
       this.modelDAO.deleteModel(modelId);
-      this.pythonDao.deleteModel(modelId);
+      this.pythonDAO.deleteModel(modelId);
     }
   }
 }
