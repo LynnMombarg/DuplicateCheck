@@ -1,7 +1,7 @@
 <!--Authors: Marloes-->
 <!--Jira-task: 106 - Front-end maken-->
 <!--Sprint: 2-->
-<!--Last modified: 26-04-2023-->
+<!--Last modified: 08-05-2023-->
 
 <template>
     <button @click="startCreateModel">
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import {handleRequest} from "@/components/CreateModel";
+
 export default {
     name: "CreateModel",
     data() {
@@ -43,30 +45,12 @@ export default {
     },
     methods: {
         async createModel() {
-            console.log(this.modelName + ' ' + this.tableName);
             if (this.modelName !== '' && this.tableName !== '') {
-                await this.handleRequest();
+                await handleRequest(this.modelName, this.tableName, this.description);
+                this.inputVisible = false;
             } else {
                 this.warningVisible = true;
             }
-        },
-        async handleRequest() {
-            console.log('reached');
-            const requestOptions = {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    modelName: this.modelName,
-                    tableName: this.tableName,
-                    description: this.description,
-                    token: 'ee8612ad-8ad3-489b-9982-33c15a6cc0a4',
-                })
-            };
-            fetch("https://7c94f741-4a17-41d2-92bd-59226ad5be55.mock.pstmn.io/create", requestOptions)
-                .then(response => response.json())
-                .then(data => (this.postId = data.id));
-
-            this.inputVisible = false;
         },
         startCreateModel() {
             this.inputVisible = !this.inputVisible;
