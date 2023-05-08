@@ -14,7 +14,7 @@ export class Model {
   modelName: string;
 
   @Prop()
-  fileName: string;
+  modelId: string;
 
   @Prop()
   tableName: string;

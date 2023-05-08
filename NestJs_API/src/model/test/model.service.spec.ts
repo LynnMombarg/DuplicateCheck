@@ -49,14 +49,13 @@ describe('ModelService', () => {
       'modelName',
       'tableName',
       'modelDescription',
-      'token',
     );
 
     it('should call createModel on ModelDAO', () => {
       // Arrange
 
       // Act
-      modelService.createModel(model);
+      modelService.createModel(model, 'token');
 
       // Assert
       expect(mockedModelDAO.createModel).toHaveBeenCalled();
@@ -64,37 +63,23 @@ describe('ModelService', () => {
 
     it('should call getUserId on AuthDAO', () => {
       // Arrange
+      const token = 'token';
 
       // Act
-      modelService.createModel(model);
+      modelService.createModel(model, token);
 
       // Assert
-      expect(mockedAuthDAO.getUserId).toHaveBeenCalledWith(model.token);
+      expect(mockedAuthDAO.getUserId).toHaveBeenCalledWith(token);
     });
 
     it('should call createModel on PythonDAO', () => {
       // Arrange
 
       // Act
-      modelService.createModel(model);
+      modelService.createModel(model, 'token');
 
       // Assert
       expect(mockedPythonDAO.createModel).toHaveBeenCalled;
-    });
-
-    it('should throw an unauthorized UnauthorizedException when the user is unknown', () => {
-      // Arrange
-      const model = new CreateModelDTO(
-        'modelName',
-        'tableName',
-        'modelDescription',
-        'tokn',
-      );
-
-      // Assert
-      expect(() => {
-        modelService.createModel(model); // Act
-      }).toThrow(new UnauthorizedException());
     });
   });
 });

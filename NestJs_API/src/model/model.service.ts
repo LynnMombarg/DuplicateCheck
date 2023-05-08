@@ -3,7 +3,7 @@
 // Sprint: 2
 // Last modified: 26-04-2023
 
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ModelDTO } from './dto/model.dto';
 import { ModelDAO } from './model.dao';
 import { CreateModelDTO } from './dto/create-model.dto';
@@ -19,22 +19,18 @@ export class ModelService {
     private readonly pythonDao: PythonDAO,
   ) {}
 
-  public createModel(createModel: CreateModelDTO): void {
-    const userId: string = this.authDao.getUserId(createModel.token);
+  public createModel(createModel: CreateModelDTO, token: string): void {
+    const userId: string = this.authDao.getUserId(token);
+    const modelId: string = uuid();
+    const model = new ModelDTO(
+      createModel.modelName,
+      modelId,
+      createModel.tableName,
+      createModel.modelDescription,
+      userId,
+    );
 
-    if (userId != null) {
-      const modelId: string = uuid();
-      const model = new ModelDTO(
-        createModel.modelName,
-        modelId,
-        createModel.tableName,
-        createModel.modelDescription,
-        userId,
-      );
-      this.modelDao.createModel(model);
-      this.pythonDao.createModel(modelId);
-    } else {
-      throw new UnauthorizedException();
-    }
+    this.modelDao.createModel(model);
+    this.pythonDao.createModel(modelId);
   }
 }

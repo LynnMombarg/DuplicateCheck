@@ -7,17 +7,10 @@ export class CreateModelDTO {
   modelName: string;
   tableName: string;
   modelDescription: string;
-  token: string;
 
-  constructor(
-    modelName: string,
-    tableName: string,
-    modelDescription: string,
-    token: string,
-  ) {
+  constructor(modelName: string, tableName: string, modelDescription: string) {
     this.modelName = modelName;
     this.tableName = tableName;
     this.modelDescription = modelDescription;
-    this.token = token;
   }
 }

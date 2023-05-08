@@ -9,8 +9,14 @@ import axios from 'axios';
 @Injectable()
 export class PythonDAO {
   async createModel(modelId: string) {
-    await axios.post('http://http://localhost:8000//create-model', {
-      modelId: modelId,
-    });
+    await axios
+      .post('http://http://localhost:8000/create-model', {
+        modelId: modelId,
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.toJSON());
+        }
+      });
   }
 }

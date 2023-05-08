@@ -7,18 +7,20 @@ import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
 import { ModelService } from '../model.service';
 import { CreateModelDTO } from '../dto/create-model.dto';
-import { createMock, DeepMocked } from '@golevelup/ts-jest';
 
 describe('ModelController', () => {
   let modelController: ModelController;
-  let mockedModelService: DeepMocked<ModelService>;
+  let mockedModelService = {
+    createModel: jest.fn(),
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [ModelController],
       providers: [ModelService],
     })
-      .useMocker(createMock)
+      .overrideProvider(ModelService)
+      .useValue(mockedModelService)
       .compile();
 
     modelController = moduleRef.get<ModelController>(ModelController);
@@ -32,15 +34,16 @@ describe('ModelController', () => {
         'modelName',
         'tableName',
         'modelDescription',
-        'token',
       );
-      const spy = jest.spyOn(mockedModelService, 'createModel');
 
       // Act
-      modelController.createModel(model);
+      modelController.createModel(model, 'token');
 
       // Assert
-      expect(spy).toHaveBeenCalled();
+      expect(mockedModelService.createModel).toHaveBeenCalledWith(
+        model,
+        'token',
+      );
     });
   });
 });
