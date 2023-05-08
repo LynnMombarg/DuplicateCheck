@@ -1,39 +1,95 @@
-import { Test } from '@nestjs/testing';
+// Authors: Roward
+// Jira-task: 110 - Models verwijderen uit database
+// Sprint: 2
+// Last modified: 08-05-2023
+
 import { ModelService } from '../model.service';
-import { ModelDAO } from '../model.modelDAO';
-import { ModelController } from '../model.controller';
-import { createMock, DeepMocked } from '@golevelup/ts-jest';
-import { ModelDTO } from '../display-model.DTO';
+import { Test } from '@nestjs/testing';
+import { ModelDAO } from '../model.modelDAO'; 
+import { AuthDAO } from '../../login/auth.dao'; 
+import { PythonDAO } from '../../python/python.dao';
+import { UnauthorizedException } from '@nestjs/common';
 
 describe('ModelService', () => {
   let modelService: ModelService;
-  let mockedModelDAO: DeepMocked<ModelDAO>;
+  const mockedModelDAO = {
+    deleteModel: jest.fn(),
+    getAllModels: jest.fn()
+  };
+  const mockedAuthDAO = {
+    getUserId: jest.fn((token) => {
+      if(token == "secretToken"){
+        return "1";
+      }else{
+        return null;
+      }
+    }),
+  };
+  const mockedPythonDAO = {
+    deleteModel: jest.fn(),
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      controllers: [ModelController],
-      providers: [
-        ModelService,
-        { provide: ModelDAO, useValue: mockedModelDAO },
-      ],
+      providers: [ModelService, ModelDAO, AuthDAO, PythonDAO],
     })
-      .useMocker(createMock)
+      .overrideProvider(ModelDAO)
+      .useValue(mockedModelDAO)
+      .overrideProvider(AuthDAO)
+      .useValue(mockedAuthDAO)
+      .overrideProvider(PythonDAO)
+      .useValue(mockedPythonDAO)
       .compile();
 
     modelService = moduleRef.get<ModelService>(ModelService);
-    mockedModelDAO = moduleRef.get(ModelDAO);
   });
 
   describe('deleteModel', () => {
-    it('should call deleteModel on ModelService', () => {
+    it('should call deleteModel on ModelDAO', () => {
       // Arrange
-      const token = 'testToken';
-      const modelId = 'testModelId';
-      const spy = jest.spyOn(mockedModelDAO, 'deleteModel');
+      const modelId = "123";
+      const token = "secretToken";
+
       // Act
       modelService.deleteModel(token, modelId);
+
       // Assert
-      expect(spy).toHaveBeenCalled();
+      expect(mockedModelDAO.deleteModel).toHaveBeenCalled();
+    });
+
+    it('should call getUserId on AuthDAO', () => {
+      // Arrange
+      const modelId = "123";
+      const token = "secretToken";
+
+      // Act
+      modelService.deleteModel(token, modelId);
+
+      // Assert
+      expect(mockedAuthDAO.getUserId).toHaveBeenCalled();
+    });
+
+    it('should call deleteModel on PythonDAO', () => {
+      // Arrange
+      const modelId = "123";
+      const token = "secretToken";
+
+      // Act
+      modelService.deleteModel(token, modelId);
+
+      // Assert
+      expect(mockedPythonDAO.deleteModel).toHaveBeenCalled();
+    });
+
+    it('should throw an UnauthorizedException', () => {
+      // Arrange
+      const modelId = "123";
+      const token = "falseSecretToken";
+
+      // Assert
+      expect(() => {
+        modelService.deleteModel(token, modelId); // Act
+      }).toThrow(new UnauthorizedException());
     });
   });
 });
