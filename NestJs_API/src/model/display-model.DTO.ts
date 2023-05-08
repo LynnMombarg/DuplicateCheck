@@ -1,6 +1,6 @@
 export class DisplayDTO {
   modelName: string;
-  fileName: string;
+  modelId: string;
   tableName: string;
   modelDescription: string;
 }

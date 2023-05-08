@@ -2,7 +2,7 @@
 import SignIn from "@/components/SignIn.vue";
 import SignInHeader from "@/components/SignInHeader.vue";
 import SignInFooter from "@/components/SignInFooter.vue";
-import GetModels from "@/components/GetModels.vue";
+import GetModels from "./pages/overview/services/GetModels.vue";
 </script>
 
 <template>
@@ -11,7 +11,6 @@ import GetModels from "@/components/GetModels.vue";
       <SignInHeader />
       <SignIn />
       <SignInFooter />
-      <GetModels />
     </div>
   </main>
 </template>
