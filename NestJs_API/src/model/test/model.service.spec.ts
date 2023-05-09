@@ -18,7 +18,7 @@ describe('ModelService', () => {
   };
   const mockedAuthDAO = {
     getUserId: jest.fn((token) => {
-      if(token == "secretToken"){
+      if(token === "secretToken"){
         return "1";
       }else{
         return null;
@@ -81,15 +81,15 @@ describe('ModelService', () => {
       expect(mockedPythonDAO.deleteModel).toHaveBeenCalled();
     });
 
-    it('should throw an UnauthorizedException', () => {
+    it('should throw an UnauthorizedException', async () => {
       // Arrange
       const modelId = "123";
       const token = "falseSecretToken";
 
       // Assert
-      expect(() => {
+      await expect(() => {
         modelService.deleteModel(token, modelId); // Act
-      }).toThrow(new UnauthorizedException());
+      }).rejects.toThrow(new UnauthorizedException());
     });
   });
 });
