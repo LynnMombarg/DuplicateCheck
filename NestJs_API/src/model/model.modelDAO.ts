@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ModelDTO } from './display-model.DTO';
 
-
 // Authors: Roward
 // Jira-task: 110 - Models verwijderen uit database
 // Sprint: 2
@@ -16,7 +15,7 @@ export class ModelDAO {
   ) {}
 
   async getAllModels(userId: string): Promise<ModelDTO[]> {
-    return this.modelModel.find({userId: userId}).exec();
+    return this.modelModel.find({ userId: userId }).exec();
   }
 
   async deleteModel(modelId: string, userId: string): Promise<void> {
@@ -24,7 +23,7 @@ export class ModelDAO {
       modelId: modelId,
       userId: userId,
     });
-    
+
     if (result.deletedCount === 0) {
       throw new NotFoundException();
     }

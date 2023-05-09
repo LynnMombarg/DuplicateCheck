@@ -12,7 +12,7 @@ export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Get('/models')
-  getAllModels(@Headers('Authorization') accessToken,): Promise<ModelDTO[]> {
+  getAllModels(@Headers('Authorization') accessToken): Promise<ModelDTO[]> {
     return this.modelService.getAllModels(accessToken);
   }
 

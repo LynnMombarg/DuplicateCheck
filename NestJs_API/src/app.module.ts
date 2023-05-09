@@ -16,7 +16,7 @@ import { ModelModule } from './model/model.module';
     MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
     ItemModule,
     LoginModule,
-    ModelModule
+    ModelModule,
   ],
   controllers: [AppController],
   providers: [AppService],

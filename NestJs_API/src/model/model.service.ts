@@ -14,7 +14,7 @@ export class ModelService {
   constructor(
     private readonly modelDAO: ModelDAO,
     private readonly authDAO: AuthDAO,
-    private readonly pythonDAO: PythonDAO
+    private readonly pythonDAO: PythonDAO,
   ) {}
 
   async getAllModels(token: string): Promise<ModelDTO[]> {

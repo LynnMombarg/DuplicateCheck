@@ -10,7 +10,7 @@ import { createMock, DeepMocked } from '@golevelup/ts-jest';
 
 describe('ModelController', () => {
   let modelController: ModelController;
-  let mockedModelService = {
+  const mockedModelService = {
     deleteModel: jest.fn(),
     getAllModels: jest.fn(),
   };
@@ -20,7 +20,8 @@ describe('ModelController', () => {
       controllers: [ModelController],
       providers: [ModelService],
     })
-      .overrideProvider(ModelService).useValue(mockedModelService)
+      .overrideProvider(ModelService)
+      .useValue(mockedModelService)
       .compile();
 
     modelController = moduleRef.get<ModelController>(ModelController);
@@ -29,8 +30,8 @@ describe('ModelController', () => {
   describe('deleteModel', () => {
     it('should call deleteModel on ModelService', () => {
       // Arrange
-      const token = "secretToken";
-      const modelId = "123";
+      const token = 'secretToken';
+      const modelId = '123';
 
       // Act
       modelController.deleteModel(token, modelId);
@@ -41,8 +42,8 @@ describe('ModelController', () => {
 
     it('should call getAllModels on ModelService', () => {
       // Arrange
-      const token = "secretToken";
-      const modelId = "123";
+      const token = 'secretToken';
+      const modelId = '123';
 
       // Act
       modelController.deleteModel(token, modelId);
