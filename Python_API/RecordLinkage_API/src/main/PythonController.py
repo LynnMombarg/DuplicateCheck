@@ -1,8 +1,8 @@
 '''
 Authors: Lynn, Roward 
-Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in python
+Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in python, 111 - Model pickle file verwijderen Python
 Sprint: 1, 2
-Last modified: 25-04-2023
+Last modified: 9-5-2023
 '''
 
 from fastapi.responses import JSONResponse

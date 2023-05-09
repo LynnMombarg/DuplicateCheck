@@ -1,8 +1,8 @@
 '''
 Authors: Lynn, Roward 
-Jira-task: 4 - Model aanmaken in python
+Jira-task: 4 - Model aanmaken in python, 111 - Model pickle file verwijderen Python
 Sprint: 2
-Last modified: 25-04-2023
+Last modified: 9-5-2023
 '''
 
 import os
