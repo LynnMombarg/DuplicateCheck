@@ -1,8 +1,8 @@
 '''
 Authors: Lynn 
-Jira-task: 4 - Model aanmaken in python, 111 - Model pickle file verwijderen Python
+Jira-task: 4 - Model aanmaken in python
 Sprint: 2
-Last modified: 9-5-2023
+Last modified: 26-04-2023
 '''
 
 import os
@@ -40,7 +40,6 @@ class test_PythonService(TestCase):
 
     def test_trainExistingModel(self):
         try:
-            self.sut.createModel('test')
             jsonString = '{"recordset1": [{"name": "Piet", "lastname": "Janssen", "age": "18", "country": "NL"}, {"name": "Jan", "lastname": "Pietersen", "age": "19", "country": "BE"}], "recordset2": [{"name": "Henk", "lastname": "van Dijk", "age": "20", "country": "DE"}, {"name": "Piet", "lastname": "Jansen", "age": "18", "country": "NL"}], "golden_matches_index": [{"index1": 0, "index2": 1}]}'
             jsonObject = json.loads(jsonString)
             self.sut.trainModel('test', jsonObject)
@@ -49,7 +48,7 @@ class test_PythonService(TestCase):
         
         
     def tearDown(self):
-        os.remove('Python_API/RecordLinkage_API/src/main/pickles/test.pkl')
+        os.remove('Python_API/RecordLinkage_API/src/pickles/test.pkl')
         
             
 unittest.main()

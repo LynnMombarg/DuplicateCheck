@@ -1,8 +1,8 @@
 '''
 Authors: Lynn, Roward 
-Jira-task: 4 - Model aanmaken in python, 111 - Model pickle file verwijderen Python
+Jira-task: 4 - Model aanmaken in python
 Sprint: 2
-Last modified: 9-5-2023
+Last modified: 25-04-2023
 '''
 import os
 import sys
@@ -45,7 +45,7 @@ class test_PythonController(TestCase):
         
     
     def tearDown(self):
-        os.remove('Python_API/RecordLinkage_API/src/main/pickles/test.pkl')
+        os.remove('Python_API/RecordLinkage_API/src/pickles/test.pkl')
         
 
 unittest.main()

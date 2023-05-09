@@ -1,8 +1,8 @@
 '''
 Authors: Lynn, Roward 
-Jira-task: 4 - Model aanmaken in python, 111 - Model pickle file verwijderen Python
+Jira-task: 4 - Model aanmaken in python
 Sprint: 2
-Last modified: 9-5-2023
+Last modified: 25-04-2023
 '''
 
 import os
@@ -14,24 +14,24 @@ import pickle
 
 class PythonService:
     
-    def createModel(self, filename):
+    def createModel(self, modelId):
         model = RecordLinkageModel()
-        filehandler = open('Python_API/RecordLinkage_API/src/main/pickles/' + filename + '.pkl', 'wb')
+        filehandler = open('Python_API/RecordLinkage_API/src/pickles/' + modelId + '.pkl', 'wb')
         pickle.dump(model, filehandler)
         
-    def loadModel(self, filename):
+    def loadModel(self, modelId):
         model: RecordLinkageModel
-        with open('Python_API/RecordLinkage_API/src/main/pickles/' + filename + '.pkl', 'rb') as file:
+        with open('Python_API/RecordLinkage_API/src/pickles/' + modelId + '.pkl', 'rb') as file:
             model = pickle.load(file)
             if not model:
                 raise FileNotFoundError('Model not found')
             else :
                 return model
         
-    def trainModel(self, filename, json_dataframe):
-        model = self.loadModel(filename)
+    def trainModel(self, modelId, json_dataframe):
+        model = self.loadModel(modelId)
         model.trainModel(json_dataframe)
         
-    def deleteModel(self, filename):
-        os.remove('Python_API/RecordLinkage_API/src/main/pickles/' + filename + '.pkl')
+    def deleteModel(self, modelId):
+        os.remove('Python_API/RecordLinkage_API/src/pickles/' + modelId + '.pkl')
         
