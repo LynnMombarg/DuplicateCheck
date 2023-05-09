@@ -13,7 +13,7 @@ from unittest import TestCase
 from unittest.mock import patch
 import json
 import requests
-from PythonService import PythonService
+from main.PythonService import PythonService
 
 # Methods will most likely change so tests need to be adapted in the future
 # PythonController cannot be imported because it's in a sibling folder
@@ -40,8 +40,8 @@ class test_PythonController(TestCase):
     
     @patch('requests.post')
     def test_deleteModel(self, mock_post):
-        response = requests.post('http://localhost:8000/delete-model/test', headers={'Content-type': 'application/json'})
-        mock_post.assert_called_with('http://localhost:8000/delete-model/test', headers={'Content-type': 'application/json'})
+        response = requests.post('http://localhost:8000/delete-model', headers={'Content-type': 'application/json'})
+        mock_post.assert_called_with('http://localhost:8000/delete-model', headers={'Content-type': 'application/json'})
         
     
     def tearDown(self):

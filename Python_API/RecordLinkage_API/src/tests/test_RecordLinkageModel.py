@@ -15,7 +15,7 @@ import json
 import unittest
 from unittest import TestCase
 import json
-from RecordLinkageModel import RecordLinkageModel
+from main.RecordLinkageModel import RecordLinkageModel
 
 # # URL to send request to
 # URL = "http://localhost:8000/train-model"
