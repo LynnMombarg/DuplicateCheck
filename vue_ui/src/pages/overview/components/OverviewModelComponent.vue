@@ -27,16 +27,15 @@
   </ul>
 </template>
 
-<script setup>
-defineProps(['models'])
-</script>
-
 <script>
-import OverviewDropdownComponent from "@/components/OverviewDropdownComponent.vue";
+import OverviewDropdownComponent from "@/pages/overview/components/OverviewDropdownComponent.vue";
 
 export default {
-  name: 'OverviewModelComponent',
+  name: "OverviewModelComponent",
   components: OverviewDropdownComponent,
-}
+};
+</script>
+<script setup>
+defineProps(['models']);
 </script>
 

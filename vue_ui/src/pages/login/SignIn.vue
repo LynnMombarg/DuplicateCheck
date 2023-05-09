@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import SignInHeader from "@/components/SignInHeader.vue";
-import SignInBody from "@/components/SignInBody.vue";
-import SignInFooter from "@/components/SignInFooter.vue";
-import SignInButton from "@/components/SignInButton.vue";
+import SignInHeader from "@/pages/login/components/SignInHeader.vue";
+import SignInBody from "@/pages/login/components/SignInBody.vue";
+import SignInFooter from "@/pages/login/components/SignInFooter.vue";
+import SignInButton from "@/pages/login/components/SignInButton.vue";
 
 export default {
     name: "SignIn",

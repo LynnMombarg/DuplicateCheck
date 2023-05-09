@@ -5,13 +5,13 @@
 
 <template>
     <button @click="startCreateModel">
-        Create model
+        + Add model
     </button>
 
     <div v-if="inputVisible">
         <p v-if="warningVisible">Please fill in all fields.</p>
         <label for="model">Model name*: </label>
-        <input v-model="modelName" placeholder="Model name" id="model"/> <br>
+        <input v-model="modelName" placeholder="Model name" id="model" /> <br>
 
         <label for="table">Table name*: </label>
         <select v-model="tableName" name="table" id="table">
@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import {handleRequest} from "@/components/CreateModel";
+import { handleRequest } from "@/pages/overview/services/CreateModel";
 
 export default {
-    name: "CreateModel",
+    name: "CreateModelButton",
     data() {
         return {
             modelName: '',

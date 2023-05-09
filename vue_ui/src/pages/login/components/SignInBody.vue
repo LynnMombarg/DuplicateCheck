@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SignInButton from "@/components/SignInButton.vue";
+import SignInButton from "@/pages/login/components/SignInButton.vue";
 
 export default {
   name: "SignInBody",
