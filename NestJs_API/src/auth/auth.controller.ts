@@ -8,7 +8,6 @@
 import {
   Controller,
   Get,
-  Headers,
   HttpStatus,
   Post,
   Query,
@@ -20,19 +19,18 @@ import {
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import * as process from 'process';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const jsforce = require('jsforce');
 const oauth2 = new jsforce.OAuth2({
   loginUrl: 'https://login.salesforce.com',
-  clientId:
-    '3MVG9t0sl2P.pBypwV3MuOdoedKkrAz3QadRz9KQA9QqULV2_RvPCymX_8b1bIQibJwp_oiD9Qo9lotYoZMbu',
-  clientSecret:
-    'CBA2D84D666983F2B1A3AF324CC894155F6A22FD561B1D33BFE663FEC7EE5347',
+  clientId: process.env.SF_CLIENT_ID,
+  clientSecret: process.env.SF_CLIENT_SECRET,
   redirectUri: process.env.BASE_URL + '/auth/callback',
 });
-
-let conn;
 
 /**
  * Login Controller
@@ -57,6 +55,7 @@ export class AuthController {
   @Get('/login')
   login(): void {
     console.log('login');
+    console.log(process.env);
   }
 
   /**
@@ -109,7 +108,7 @@ export class AuthController {
     const authDTO = await this.authService.getTokensByUserId(req.user.userId);
     const conn = new jsforce.Connection({
       oauth2: oauth2,
-      instanceUrl: 'https://plauti50-dev-ed.develop.my.salesforce.com',
+      instanceUrl: process.env.SF_INSTANCE_URL,
       accessToken: authDTO.getAccessToken(),
       refreshToken: authDTO.getRefreshToken(),
     });
@@ -138,7 +137,7 @@ export class AuthController {
     const authDTO = await this.authService.getTokensByUserId(req.user.userId);
     const conn = new jsforce.Connection({
       oauth2: oauth2,
-      instanceUrl: 'https://plauti50-dev-ed.develop.my.salesforce.com',
+      instanceUrl: process.env.SF_INSTANCE_URL,
       accessToken: authDTO.getAccessToken(),
       refreshToken: authDTO.getRefreshToken(),
     });
