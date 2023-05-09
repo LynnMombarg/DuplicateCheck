@@ -6,6 +6,10 @@
   </main>
 </template>
 
+<script>
+
+</script>
+
 <style>
 header {
     line-height: 1.5;
@@ -34,22 +38,22 @@ header {
     }
 }
 #app {
-  font-family: "Ubuntu", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100%;
+    font-family: "Ubuntu", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
 }
 
 html {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 :root {
-  --v-onboarding-overlay-z: 30;
-  --v-onboarding-step-z: 40;
+    --v-onboarding-overlay-z: 30;
+    --v-onboarding-step-z: 40;
 }
 </style>

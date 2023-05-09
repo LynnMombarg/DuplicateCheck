@@ -1,22 +1,19 @@
 <template>
-  <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-md relative">
-    <div class="bg-white py-4 px-4 shadow sm:rounded-lg">
-      <h2 class="text-left text-xl font-extrabold text-slate-800">
-        Sign in to your account
-      </h2>
-      <p class="mt-1 block text-left text-sm text-slate-500">
-        Sign in securely using your Salesforce Production account
-      </p>
-      <SignInButton />
+    <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <SignInHeader/>
+        <SignInBody/>
+        <SignInFooter/>
     </div>
-  </div>
 </template>
 
 <script>
+import SignInHeader from "@/components/SignInHeader.vue";
+import SignInBody from "@/components/SignInBody.vue";
+import SignInFooter from "@/components/SignInFooter.vue";
 import SignInButton from "@/components/SignInButton.vue";
 
 export default {
-  name: "SignIn",
-  components: { SignInButton },
+    name: "SignIn",
+    components: {SignInFooter, SignInBody, SignInHeader, SignInButton},
 };
 </script>
