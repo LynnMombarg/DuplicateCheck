@@ -7,7 +7,6 @@
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/src/components/OverviewDropdownComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/OverviewDropdownComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/components/OverviewModelComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/OverviewModelComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/src/components/OverviewPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/components/OverviewPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,6 +103,7 @@
       <workItem from="1681991742866" duration="1097000" />
       <workItem from="1682327943767" duration="602000" />
       <workItem from="1682333253915" duration="570000" />
+      <workItem from="1683544928891" duration="2146000" />
     </task>
     <servers />
   </component>

@@ -27,18 +27,17 @@
 
 <script setup>
 defineProps(['model'])
-async function deleteModel(modelId) {
-  const accessToken = 'test';
-  const url = `http://localhost:8001/model/models?modelId=${modelId}`;
-  const response = await fetch(url, {
-    method: 'DELETE',
-    headers: {
-      'Authorization': accessToken,
-      'Content-Type': 'application/json'
-    },
-  });
-
-
+{
+// async function deleteModel(modelId) {
+//   const accessToken = 'test';
+//   // const url = `http://localhost:8001/model/models?modelId=${modelId}`;
+//   // const response = await fetch(url, {
+//   //   method: 'DELETE',
+//   //   headers: {
+//   //     'Authorization': accessToken,
+//   //     'Content-Type': 'application/json'
+//   //   },
+//   // });
 }
 
 
