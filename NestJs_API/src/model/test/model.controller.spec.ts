@@ -10,18 +10,20 @@ import { createMock, DeepMocked } from '@golevelup/ts-jest';
 
 describe('ModelController', () => {
   let modelController: ModelController;
-  let mockedModelService: DeepMocked<ModelService>;
+  let mockedModelService = {
+    deleteModel: jest.fn(),
+    getAllModels: jest.fn(),
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [ModelController],
       providers: [ModelService],
     })
-      .useMocker(createMock)
+      .overrideProvider(ModelService).useValue(mockedModelService)
       .compile();
 
     modelController = moduleRef.get<ModelController>(ModelController);
-    mockedModelService = moduleRef.get(ModelService);
   });
 
   describe('deleteModel', () => {
@@ -29,26 +31,24 @@ describe('ModelController', () => {
       // Arrange
       const token = "secretToken";
       const modelId = "123";
-      const spy = jest.spyOn(mockedModelService, 'deleteModel');
 
       // Act
       modelController.deleteModel(token, modelId);
 
       // Assert
-      expect(spy).toHaveBeenCalled();
+      expect(mockedModelService.deleteModel).toHaveBeenCalled();
     });
 
     it('should call getAllModels on ModelService', () => {
       // Arrange
       const token = "secretToken";
       const modelId = "123";
-      const spy = jest.spyOn(mockedModelService, 'getAllModels');
 
       // Act
       modelController.deleteModel(token, modelId);
 
       // Assert
-      expect(spy).toHaveBeenCalled();
+      expect(mockedModelService.getAllModels).toHaveBeenCalled();
     });
   });
 });

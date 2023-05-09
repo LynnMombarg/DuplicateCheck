@@ -17,16 +17,18 @@ export class ModelService {
     private readonly pythonDAO: PythonDAO
   ) {}
 
-  async getAllModels(): Promise<ModelDTO[]> {
-    return this.modelDAO.getAllModels();
+  async getAllModels(token: string): Promise<ModelDTO[]> {
+    let userId = this.authDAO.getUserId(token);
+    return this.modelDAO.getAllModels(userId);
   }
 
   async deleteModel(token: string, modelId: string): Promise<void> {
-    if (this.authDAO.getUserId(token) == null) {
+    let userId = this.authDAO.getUserId(token);
+    if (userId == null) {
       throw new UnauthorizedException();
     } else {
-      this.modelDAO.deleteModel(modelId);
-      this.pythonDAO.deleteModel(modelId);
+      this.modelDAO.deleteModel(modelId, userId);
+      // this.pythonDAO.deleteModel(modelId);
     }
   }
 }

@@ -12,8 +12,8 @@ export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Get('/models')
-  getAllModels(): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels();
+  getAllModels(@Headers('Authorization') accessToken,): Promise<ModelDTO[]> {
+    return this.modelService.getAllModels(accessToken);
   }
 
   @Delete()
@@ -22,6 +22,6 @@ export class ModelController {
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
     await this.modelService.deleteModel(accessToken, modelId);
-    return this.modelService.getAllModels();
+    return await this.modelService.getAllModels(accessToken);
   }
 }
