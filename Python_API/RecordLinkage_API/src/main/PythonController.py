@@ -4,13 +4,10 @@ Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in pytho
 Sprint: 1, 2
 Last modified: 25-04-2023
 '''
-# Mapindeling
-# json correct verwerken
-# pickle verwijderen
 
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI, status
-from PythonService import PythonService
+from .PythonService import PythonService
 
 app = FastAPI()
 service = PythonService()
@@ -39,10 +36,10 @@ async def createModel(json: dict):
         
       
 # Delete model based on filename
-@app.post('/delete-model/{filename}')
-async def deleteModel(filename: str):
+@app.post('/delete-model')
+async def deleteModel(json: dict):
     try:
-      service.deleteModel(filename)
+      service.deleteModel(json['filename'])
       return 'Model deleted!'
     except:
       return 'Model could not be deleted'
