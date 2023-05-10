@@ -7,7 +7,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ModelDTO } from './dto/model.dto';
 import { ModelData } from './model.data';
 import { CreateModelDTO } from './dto/create-model.dto';
-import { AuthDAO } from '../auth/auth.dao';
+import { AuthDAO } from 'src/auth/auth.dao';
 import { PythonDAO } from '../python/python.dao';
 import { v4 as uuid } from 'uuid';
 
@@ -15,12 +15,11 @@ import { v4 as uuid } from 'uuid';
 export class ModelService {
   constructor(
     private readonly modelDAO: ModelData,
-    private readonly authDAO: AuthDAO,
     private readonly pythonDAO: PythonDAO,
+    private readonly authDAO: AuthDAO,
   ) {}
 
-  async getAllModels(token: string): Promise<ModelDTO[]> {
-    const userId = this.authDAO.getUserId(token);
+  async getAllModels(userId: string): Promise<ModelDTO[]> {
     return this.modelDAO.getAllModels(userId);
   }
 
@@ -39,13 +38,8 @@ export class ModelService {
     await this.pythonDAO.createModel(modelId);
   }
 
-  async deleteModel(token: string, modelId: string): Promise<void> {
-    const userId = this.authDAO.getUserId(token);
-    if (userId === null) {
-      throw new UnauthorizedException();
-    } else {
-      await this.modelDAO.deleteModel(modelId, userId);
-      await this.pythonDAO.deleteModel(modelId);
-    }
+  async deleteModel(userId: string, modelId: string): Promise<void> {
+    await this.modelDAO.deleteModel(modelId, userId);
+    await this.pythonDAO.deleteModel(modelId);
   }
 }

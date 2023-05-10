@@ -9,8 +9,8 @@ import { ModelController } from './model.controller';
 import { ModelService } from './model.service';
 import { ModelData } from './model.data';
 import { Model, ModelSchema } from './model.schema';
-import { AuthModule } from '../auth/auth.module';
 import { PythonModule } from '../python/python.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
