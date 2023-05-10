@@ -82,22 +82,6 @@ export default {
   }
 };
 
-
-
-// async function deleteModel(modelId) {
-//   const accessToken = 'test';
-//   // const url = `http://localhost:8001/model/models?modelId=${modelId}`;
-//   // const response = await fetch(url, {
-//   //   method: 'DELETE',
-//   //   headers: {
-//   //     'Authorization': accessToken,
-//   //     'Content-Type': 'application/json'
-//   //   },
-//   // });
-
-
-
-
 </script>
 <script setup>
 

@@ -4,8 +4,8 @@
 <!--Last modified: 26-4-2023-->
 
 <template>
-  <OverviewBannerComponent/>
-  <OverviewModelComponent/>
+  <OverviewBannerComponent />
+  <OverviewModelComponent />
 </template>
 
 <script>
@@ -21,6 +21,13 @@ export default {
   }
 };
 </script>
+
+<style>
+body {
+  background-image: url("../../assets/lightning_blue_background.png");
+  background-size: cover;
+}
+</style>
 
 
 

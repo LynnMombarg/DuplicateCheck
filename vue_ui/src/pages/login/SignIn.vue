@@ -1,8 +1,8 @@
 <template>
     <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <SignInHeader/>
-        <SignInBody/>
-        <SignInFooter/>
+        <SignInHeader />
+        <SignInBody />
+        <SignInFooter />
     </div>
 </template>
 
@@ -14,6 +14,9 @@ import SignInButton from "@/pages/login/components/SignInButton.vue";
 
 export default {
     name: "SignIn",
-    components: {SignInFooter, SignInBody, SignInHeader, SignInButton},
+    components: { SignInFooter, SignInBody, SignInHeader, SignInButton },
 };
 </script>
+
+<style></style>
+

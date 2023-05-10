@@ -9,16 +9,14 @@ import { ModelController } from './model.controller';
 import { ModelService } from './model.service';
 import { ModelDAO } from './model.dao';
 import { Model, ModelSchema } from './model.schema';
-import { LoginModule } from '../login/login.module';
+import { AuthModule } from '../auth/auth.module';
 import { PythonModule } from '../python/python.module';
-import { PythonDAO } from 'src/python/python.dao';
-import { AuthDAO } from 'src/login/auth.dao';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Model.name, schema: ModelSchema }]),
     PythonModule,
-    LoginModule,
+    AuthModule,
   ],
   controllers: [ModelController],
   providers: [ModelService, ModelDAO],

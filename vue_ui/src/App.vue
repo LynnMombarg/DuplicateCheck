@@ -1,9 +1,9 @@
 <template>
-  <main>
-    <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <router-view></router-view>
-    </div>
-  </main>
+    <main>
+        <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <router-view></router-view>
+        </div>
+    </main>
 </template>
 
 <script>
@@ -37,6 +37,7 @@ header {
         flex-wrap: wrap;
     }
 }
+
 #app {
     font-family: "Ubuntu", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -50,8 +51,6 @@ html {
 
 body {
     min-height: 100%;
-    background-image: url("assets/lightning_blue_background.png");
-    background-size: cover;
 }
 
 :root {

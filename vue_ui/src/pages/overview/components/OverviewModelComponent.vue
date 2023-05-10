@@ -32,32 +32,8 @@
         </div>
         <div>
           <OverviewDropdownComponent :modelId="model.modelId"/>
-          <!-- <button @click="viewdetails" class="rounded-md bg-white px-3 py-2 text-xl">
-            <p class="text-sky-600"> Options </p>
-          </button>
-          <div class="hidden sm:flex sm:flex-col sm:items-end">
-            <OverviewDropdownComponent :model=model> </OverviewDropdownComponent>
-          </div> -->
         </div>
       </div>
-      <!-- <div class="bg-white shadow w-full ">
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-between ">
-          <div class="flex gap-x-4 ">
-            <div class="min-w-0 flex-auto">
-              <a @click="viewdetails" href="#" class="bg-violet-400 text-white rounded-md px-3 py-1 text-sm font-medium"
-                aria-current="page">
-                {{ model.modelName }}</a>
-            </div>
-          </div>
-          <p class="text-xs leading-5 text-gray-500"> {{ model.tableName }}</p>
-          <div class="hidden sm:flex sm:flex-col sm:items-end">
-            <OverviewDropdownComponent :model=model> </OverviewDropdownComponent>
-          </div>
-        </div>
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-middle">
-          <p class="text-sm leading-6 text-gray-900">{{ model.modeldescription }}</p>
-        </div>
-      </div> -->
     </li>
   </ul>
 </template>
