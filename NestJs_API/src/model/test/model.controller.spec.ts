@@ -10,7 +10,8 @@ import { CreateModelDTO } from '../dto/create-model.dto';
 
 describe('ModelController', () => {
   let modelController: ModelController;
-  let mockedModelService = {
+
+  const mockedModelService = {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
     getAllModels: jest.fn(),
@@ -26,7 +27,6 @@ describe('ModelController', () => {
       .compile();
 
     modelController = moduleRef.get<ModelController>(ModelController);
-    mockedModelService = moduleRef.get(ModelService);
   });
 
   describe('createModel', () => {
@@ -48,31 +48,41 @@ describe('ModelController', () => {
       );
     });
   });
+  describe('getAllModels', () => {
+    it('should call getAllModels on ModelService', () => {
+      // Arrange
+      const token = '123';
+
+      // Act
+      modelController.getAllModels(token);
+
+      // Assert
+      expect(mockedModelService.getAllModels).toHaveBeenCalledWith(token);
+    });
+  });
   describe('deleteModel', () => {
     it('should call deleteModel on ModelService', () => {
       // Arrange
-      const token = "secretToken";
-      const modelId = "123";
-      const spy = jest.spyOn(mockedModelService, 'deleteModel');
+      const token = 'secretToken';
+      const modelId = '123';
 
       // Act
       modelController.deleteModel(token, modelId);
 
       // Assert
-      expect(spy).toHaveBeenCalled();
+      expect(mockedModelService.deleteModel).toHaveBeenCalled();
     });
 
     it('should call getAllModels on ModelService', () => {
       // Arrange
-      const token = "secretToken";
-      const modelId = "123";
-      const spy = jest.spyOn(mockedModelService, 'getAllModels');
+      const token = 'secretToken';
+      const modelId = '123';
 
       // Act
       modelController.deleteModel(token, modelId);
 
       // Assert
-      expect(spy).toHaveBeenCalled();
+      expect(mockedModelService.getAllModels).toHaveBeenCalled();
     });
   });
 });
