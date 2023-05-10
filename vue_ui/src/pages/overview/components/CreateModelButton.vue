@@ -4,7 +4,7 @@
 <!--Last modified: 08-05-2023-->
 
 <template>
-    <button @click="startCreateModel">
+    <button @click="startCreateModel" class="rounded-md bg-white px-3 py-2 text-xl">
         + Add model
     </button>
 

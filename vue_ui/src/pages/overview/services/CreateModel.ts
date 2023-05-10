@@ -14,6 +14,6 @@ export async function handleRequest(modelName: string, tableName: string, descri
             token: "ee8612ad-8ad3-489b-9982-33c15a6cc0a4"
         })
     };
-    fetch("http://localhost:8001/create", request)
+    fetch("http://localhost:8001/model/create", request)
         .then(response => response.json());
 }

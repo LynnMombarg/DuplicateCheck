@@ -11,6 +11,8 @@ import { ModelDAO } from './model.DAO';
 import { Model, ModelSchema } from './model.schema';
 import { LoginModule } from '../login/login.module';
 import { PythonModule } from '../python/python.module';
+import { PythonDAO } from 'src/python/python.dao';
+import { AuthDAO } from 'src/login/auth.dao';
 
 @Module({
   imports: [

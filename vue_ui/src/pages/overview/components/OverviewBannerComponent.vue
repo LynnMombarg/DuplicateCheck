@@ -4,7 +4,7 @@
 <!--Last modified: 26-4-2023-->
 
 <template>
-  <div class="flex justify-between bg-gray rounded-md px-3 py-3 text-3xl font-medium">
+  <div class="flex justify-between bg-gray rounded-md px-3 py-5 text-3xl font-medium">
     <div class="flex items-center w-50">
       <div class="margin-logo">
         <img src="../../../assets/logo_duplicatecheck.png">
@@ -14,14 +14,13 @@
       </div>
     </div>
     <div>
-      <div class="rounded-md bg-white px-3 py-2 text-xl">
-        <p class="text-sky-600"> <CreateModelButton/> </p>
-      </div>
+      <CreateModelButton/>
     </div>
   </div>
 </template>
 
 <script>
+
 import CreateModelButton from "@/pages/overview/components/CreateModelButton.vue";
 
 export default {
@@ -29,16 +28,6 @@ export default {
   components: {
     CreateModelButton,
   },    
-  methods:
-  {
-    createModel() {
-      window.open(
-        "http://localhost:3000/model/create",
-        "Create Model",
-        "width=500,height=500"
-      );
-    }
-  }
 };
 </script>
 

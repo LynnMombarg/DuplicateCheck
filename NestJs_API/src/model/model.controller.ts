@@ -16,7 +16,7 @@ export class ModelController {
   getAllModels(
     @Headers('Authorization') accesToken: string
   ): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels(accesToken);
+    return this.modelService.getAllModels();
   }
   @Post('create')
   createModel(@Body() model: CreateModelDTO, @Req() request) {

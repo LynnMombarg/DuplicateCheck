@@ -50,6 +50,8 @@ html {
 
 body {
     min-height: 100%;
+    background-image: url("assets/lightning_blue_background.png");
+    background-size: cover;
 }
 
 :root {

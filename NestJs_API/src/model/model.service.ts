@@ -5,7 +5,7 @@
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ModelDTO } from './dto/model.dto';
-import { ModelDAO } from './model.dao';
+import { ModelDAO } from './model.DAO';
 import { CreateModelDTO } from './dto/create-model.dto';
 import { AuthDAO } from '../login/auth.dao';
 import { PythonDAO } from '../python/python.dao';
@@ -43,7 +43,7 @@ export class ModelService {
       throw new UnauthorizedException();
     } else {
       this.modelDao.deleteModel(modelId);
-      this.pythonDao.deleteModel(modelId);
+      // this.pythonDao.deleteModel(modelId);
     }
   }
 }
