@@ -2,18 +2,18 @@
 import SignIn from "@/components/SignIn.vue";
 import SignInHeader from "@/components/SignInHeader.vue";
 import SignInFooter from "@/components/SignInFooter.vue";
-import DeleteModelButton from "./components/DeleteModelButton.vue";
+import GetModels from "./pages/overview/services/GetModels.vue";
 </script>
 
 <template>
-  <main>
-    <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <SignInHeader />
-      <SignIn />
-      <SignInFooter />
-    </div>
-  </main>
+    <main>
+        <router-view> </router-view>
+    </main>
 </template>
+
+<script>
+
+</script>
 
 <style>
 header {
@@ -43,22 +43,22 @@ header {
     }
 }
 #app {
-  font-family: "Ubuntu", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100%;
+    font-family: "Ubuntu", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
 }
 
 html {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 :root {
-  --v-onboarding-overlay-z: 30;
-  --v-onboarding-step-z: 40;
+    --v-onboarding-overlay-z: 30;
+    --v-onboarding-step-z: 40;
 }
 </style>

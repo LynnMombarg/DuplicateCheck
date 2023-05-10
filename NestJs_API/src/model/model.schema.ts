@@ -1,10 +1,10 @@
-// Authors: Roward
-// Jira-task: 110 - Models verwijderen uit database
+// Authors: Marloes
+// Jira-task: 107, 110
 // Sprint: 2
 // Last modified: 08-05-2023
 
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type ModelDocument = HydratedDocument<Model>;
 
@@ -20,10 +20,10 @@ export class Model {
   tableName: string;
 
   @Prop()
-  userId: string;
+  modelDescription: string;
 
   @Prop()
-  modelDescription: string;
+  userId: string;
 }
 
 export const ModelSchema = SchemaFactory.createForClass(Model);

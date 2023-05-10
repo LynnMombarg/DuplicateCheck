@@ -26,5 +26,3 @@ export default {
   name: "SignInHeader",
 };
 </script>
-
-<style scoped></style>

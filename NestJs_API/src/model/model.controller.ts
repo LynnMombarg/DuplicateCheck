@@ -1,27 +1,42 @@
-// Authors: Roward
-// Jira-task: 110 - Models verwijderen uit database
+// Authors: Marloes, Roward
+// Jira-task: 107, 110
 // Sprint: 2
 // Last modified: 08-05-2023
 
-import { Controller, Get, Delete, Query, Headers } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Req,
+  Get,
+  Delete,
+  Headers,
+  Query,
+} from '@nestjs/common';
 import { ModelService } from './model.service';
-import { ModelDTO } from './display-model.DTO';
+import { CreateModelDTO } from './dto/create-model.dto';
+import { ModelDTO } from './dto/model.dto';
 
 @Controller('model')
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
+  @Post('/create')
+  createModel(@Body() model: CreateModelDTO, @Req() request) {
+    this.modelService.createModel(model, /*request.user.userid*/ 'token');
+  }
+
   @Get('/models')
-  getAllModels(): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels();
+  getAllModels(@Headers('Authorization') accessToken): Promise<ModelDTO[]> {
+    return this.modelService.getAllModels(accessToken);
   }
 
   @Delete()
-  deleteModel(
+  async deleteModel(
     @Headers('Authorization') accessToken,
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
-    this.modelService.deleteModel(accessToken, modelId);
-    return this.modelService.getAllModels();
+    await this.modelService.deleteModel(accessToken, modelId);
+    return await this.modelService.getAllModels(accessToken);
   }
 }
