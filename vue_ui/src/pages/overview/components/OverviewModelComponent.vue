@@ -90,13 +90,6 @@ export default {
 };
 </script>
 
-<script setup>
-defineProps({
-    models: {
-      type: Array,
-    },
-  });
-</script>
 
 <style>
 .bgContacts {

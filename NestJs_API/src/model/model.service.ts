@@ -36,7 +36,7 @@ export class ModelService {
     );
 
     await this.modelDAO.createModel(model);
-    // await this.pythonDAO.createModel(modelId);
+    await this.pythonDAO.createModel(modelId);
   }
 
   async deleteModel(token: string, modelId: string): Promise<void> {
@@ -45,7 +45,7 @@ export class ModelService {
       throw new UnauthorizedException();
     } else {
       await this.modelDAO.deleteModel(modelId, userId);
-      // await this.pythonDAO.deleteModel(modelId);
+      await this.pythonDAO.deleteModel(modelId);
     }
   }
 }

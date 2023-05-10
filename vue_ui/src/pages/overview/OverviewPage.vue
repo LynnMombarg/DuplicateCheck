@@ -5,34 +5,20 @@
 
 <template>
   <OverviewBannerComponent />
-  <OverviewModelComponent :models="models"/>
+  <OverviewModelComponent />
 </template>
 
 <script>
 
 import OverviewBannerComponent from "@/pages/overview/components/OverviewBannerComponent.vue";
 import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
-import { getData } from "./services/GetModels";
 
 export default {
   name: 'OverviewPage',
   components: {
     OverviewBannerComponent,
     OverviewModelComponent,
-  },
-  data() {
-    return{
-      models: [],
-    }
-  },
-  mounted() {
-    this.getModels();
-  },
-  methods: {
-    async getModels(){
-      this.models = await getData();
-    },
-  },
+  }
 };
 </script>
 

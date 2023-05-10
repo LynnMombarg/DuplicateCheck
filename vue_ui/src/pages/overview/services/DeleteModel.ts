@@ -5,7 +5,7 @@
 
 export async function deleteModel(modelId: string) {
 	const response = await fetch(
-    "http://localhost:3000/model?modelId=" + modelId,
+    "http://localhost:8001/model?modelId=" + modelId,
     {
       method: "DELETE",
       headers: {
