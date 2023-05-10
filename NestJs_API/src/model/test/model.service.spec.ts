@@ -53,7 +53,7 @@ describe('ModelService', () => {
       'modelDescription',
     );
 
-    it('should call createModel on ModelDAO', () => {
+    it('should call createModel on ModelDao', () => {
       // Arrange
 
       // Act
@@ -84,7 +84,7 @@ describe('ModelService', () => {
     });
   });
   describe('deleteModel', () => {
-    it('should call deleteModel on ModelDAO', () => {
+    it('should call deleteModel on ModelDao', () => {
       // Arrange
       const modelId = '123';
       const token = 'secretToken';

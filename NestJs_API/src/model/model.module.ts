@@ -7,7 +7,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelController } from './model.controller';
 import { ModelService } from './model.service';
-import { ModelDAO } from './model.DAO';
+import { ModelDAO } from './model.dao';
 import { Model, ModelSchema } from './model.schema';
 import { LoginModule } from '../login/login.module';
 import { PythonModule } from '../python/python.module';
