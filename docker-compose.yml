@@ -6,7 +6,10 @@ services:
       context: ./vue_ui
       dockerfile: Dockerfile
     ports:
-      - "8002:80"
+      - "8002:5173"
+    volumes:
+      - './vue_ui:/app'
+      - '/app/node_modules'
 
   nestjs-backend:
     build:
@@ -14,10 +17,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8001:3000"
+    volumes:
+      - './NestJs_API:/app'
+      - '/app/node_modules'
     depends_on:
       - mongodb
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/DuplicateCheck
+      - BASE_URL=http://localhost:8001
     networks:
       - node-network
 
@@ -27,6 +34,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    volumes:
+      - './Python_API/RecordLinkage_API/src/main:/app'
+      - '/app/node_modules'
 
   mongodb:
     image: mongo:latest
