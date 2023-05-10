@@ -2,6 +2,7 @@
 import SignIn from "@/components/SignIn.vue";
 import SignInHeader from "@/components/SignInHeader.vue";
 import SignInFooter from "@/components/SignInFooter.vue";
+import GetModels from "./pages/overview/services/GetModels.vue";
 </script>
 
 <template>

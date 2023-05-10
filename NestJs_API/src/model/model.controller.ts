@@ -12,14 +12,15 @@ import { ModelDTO } from './dto/model.dto';
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
+  @Get('/models')
+  getAllModels(
+    @Headers('Authorization') accesToken: string
+  ): Promise<ModelDTO[]> {
+    return this.modelService.getAllModels(accesToken);
+  }
   @Post('create')
   createModel(@Body() model: CreateModelDTO, @Req() request) {
     this.modelService.createModel(model, /*request.user.userid*/ 'token');
-  }
-
-  @Get('/models')
-  getAllModels(): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels();
   }
 
   @Delete()
