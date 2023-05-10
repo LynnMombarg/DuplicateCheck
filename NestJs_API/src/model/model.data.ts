@@ -10,12 +10,12 @@ import mongoose from 'mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
-export class ModelDAO {
+export class ModelData {
   constructor(@InjectModel(Model.name) private model: mongoose.Model<Model>) {}
 
-  createModel(model: ModelDTO) {
+  async createModel(model: ModelDTO): Promise<void> {
     const createdModel = new this.model(model);
-    createdModel.save();
+    await createdModel.save();
   }
 
   async getAllModels(userId: string): Promise<ModelDTO[]> {

@@ -1,13 +1,8 @@
-<script setup>
-import SignIn from "@/components/SignIn.vue";
-import SignInHeader from "@/components/SignInHeader.vue";
-import SignInFooter from "@/components/SignInFooter.vue";
-import GetModels from "./pages/overview/services/GetModels.vue";
-</script>
-
 <template>
     <main>
-        <router-view> </router-view>
+        <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <router-view></router-view>
+        </div>
     </main>
 </template>
 
@@ -42,6 +37,7 @@ header {
         flex-wrap: wrap;
     }
 }
+
 #app {
     font-family: "Ubuntu", sans-serif;
     -webkit-font-smoothing: antialiased;

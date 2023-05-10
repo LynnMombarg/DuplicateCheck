@@ -1,6 +1,6 @@
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="flex overflow-hidden">
+    <div class="flex overflow-hidden py-2 px-2 bg-white shadow sm:rounded-lg">
       <div class="flex-none w-10 pr-1">
         <img alt="Plauti Logo" src="/src/assets/plauti.svg" /><!--v-if-->
       </div>

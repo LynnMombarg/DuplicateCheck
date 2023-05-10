@@ -7,7 +7,7 @@ import { ModelService } from '../model.service';
 import { Test } from '@nestjs/testing';
 import { AuthDAO } from '../../login/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
-import { ModelDAO } from '../model.dao';
+import { ModelData } from '../model.data';
 import { CreateModelDTO } from '../dto/create-model.dto';
 
 describe('ModelService', () => {
@@ -33,9 +33,9 @@ describe('ModelService', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [ModelService, ModelDAO, AuthDAO, PythonDAO],
+      providers: [ModelService, ModelData, AuthDAO, PythonDAO],
     })
-      .overrideProvider(ModelDAO)
+      .overrideProvider(ModelData)
       .useValue(mockedModelDAO)
       .overrideProvider(AuthDAO)
       .useValue(mockedAuthDAO)

@@ -4,14 +4,14 @@
 <!--Last modified: 08-05-2023-->
 
 <template>
-    <button @click="startCreateModel">
-        Create model
+    <button @click="startCreateModel" class="rounded-md bg-white px-3 py-2 text-xl">
+        + Add model
     </button>
 
     <div v-if="inputVisible">
         <p v-if="warningVisible">Please fill in all fields.</p>
         <label for="model">Model name*: </label>
-        <input v-model="modelName" placeholder="Model name" id="model"/> <br>
+        <input v-model="modelName" placeholder="Model name" id="model" /> <br>
 
         <label for="table">Table name*: </label>
         <select v-model="tableName" name="table" id="table">
@@ -21,7 +21,7 @@
         </select> <br>
 
         <label for="description">Description: </label>
-        <textarea v-model="description" id="description" name="description"></textarea> <br>
+        <textarea v-model="description" id="description" name="description" placeholder="Model description"></textarea> <br>
 
         <button @click="createModel">
             Submit model
@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import {handleRequest} from "@/components/CreateModel";
+import { handleRequest } from "@/pages/overview/services/CreateModel";
 
 export default {
-    name: "CreateModel",
+    name: "CreateModelButton",
     data() {
         return {
             modelName: '',
@@ -48,6 +48,7 @@ export default {
             if (this.modelName !== '' && this.tableName !== '') {
                 await handleRequest(this.modelName, this.tableName, this.description);
                 this.inputVisible = false;
+                this.$parent.getData();
             } else {
                 this.warningVisible = true;
             }
