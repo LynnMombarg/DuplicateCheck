@@ -10,7 +10,7 @@ import axios from 'axios';
 export class PythonDAO {
   async createModel(modelId: string) {
     await axios
-      .post('http://http://localhost:8000/create-model', {
+      .post('http://localhost:8000/create-model', {
         modelId: modelId,
       })
       .catch(function (error) {
