@@ -7,10 +7,10 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelController } from './model.controller';
 import { ModelService } from './model.service';
-import { ModelDAO } from './model.dao';
+import { ModelData } from './model.data';
 import { Model, ModelSchema } from './model.schema';
-import { AuthModule } from '../auth/auth.module';
 import { PythonModule } from '../python/python.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +19,6 @@ import { PythonModule } from '../python/python.module';
     AuthModule,
   ],
   controllers: [ModelController],
-  providers: [ModelService, ModelDAO],
+  providers: [ModelService, ModelData],
 })
 export class ModelModule {}

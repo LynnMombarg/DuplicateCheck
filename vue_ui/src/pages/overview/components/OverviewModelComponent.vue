@@ -1,20 +1,36 @@
-<!--Author(s): Silke Bertisen-->
+<!--Author(s): Silke Bertisen, Roward Dorrestijn-->
 <!--Jira-task: Dashboard realiseren 104 -->
 <!--Sprint: 2 -->
-<!--Last modified: 26-4-2023-->
+<!--Last modified: 10-05-2023-->
 
 <template>
   <ul role="list" class="divide-y divide-gray-100">
     <li v-for="model in models" :key="model.information">
       <div class="flex justify-between bg-gray rounded-md px-3 py-5 text-xl font-medium model">
         <div class="flex items-center w-50">
-          <div class="flex items-center w-50 px-3 bg-green rounded-md">
+          <div class="flex items-center w-50 px-2 rounded-md"
+            :class="{ bgContacts: isContacts(model.tableName), bgLeads: isLeads(model.tableName), bgAccounts: isAccounts(model.tableName) }">
             <div class="w-10">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              <svg v-if="isContacts(model.tableName)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+              </svg>
+
+              <svg v-if="isLeads(model.tableName)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              </svg>
+
+              <svg v-if="isAccounts(model.tableName)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
+
+
+
             </div>
             <div class="">
               {{ model.tableName }}
@@ -31,7 +47,7 @@
           </p>
         </div>
         <div>
-          <OverviewDropdownComponent :modelId="model.modelId"/>
+          <OverviewDropdownComponent :modelId="model.modelId" />
         </div>
       </div>
     </li>
@@ -45,30 +61,49 @@ import { deleteModel } from "../services/DeleteModel";
 
 export default {
   name: "OverviewModelComponent",
-  components: {OverviewDropdownComponent},
+  components: { OverviewDropdownComponent },
   data() {
-    return { models: [] }
+    return {
+      models: [],
+    }
   },
   mounted() {
-    this.getModels();  
+    this.getModels();
   },
   methods: {
-    async getModels(){
+    async getModels() {
       this.models = await getData();
     },
-    async deleteModel(modelId){
+    async deleteModel(modelId) {
       this.models = await deleteModel(modelId);
-    }
+    },
+    isContacts(tableName) {
+      return tableName === 'contacts';
+    },
+    isLeads(tableName) {
+      return tableName === 'leads';
+    },
+    isAccounts(tableName) {
+      return tableName === 'accounts';
+    },
   }
 };
 </script>
 
+
 <style>
-.bg-green {
+.bgContacts {
   background-color: rgb(132 204 22);
 }
 
-.model{
-  margin-top: 2rem;
+.bgLeads {
+  background-color: rgb(240, 171, 12);
 }
-</style>
+
+.bgAccounts {
+  background-color: rgb(11, 145, 212);
+}
+
+.model {
+  margin-top: 2rem;
+}</style>

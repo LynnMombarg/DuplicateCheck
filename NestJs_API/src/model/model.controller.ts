@@ -12,12 +12,15 @@ import {
   Delete,
   Headers,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ModelService } from './model.service';
 import { CreateModelDTO } from './dto/create-model.dto';
 import { ModelDTO } from './dto/model.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('model')
+@UseGuards(AuthGuard)
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 

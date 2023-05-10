@@ -21,7 +21,7 @@
         </select> <br>
 
         <label for="description">Description: </label>
-        <textarea v-model="description" id="description" name="description"></textarea> <br>
+        <textarea v-model="description" id="description" name="description" placeholder="Model description"></textarea> <br>
 
         <button @click="createModel">
             Submit model
@@ -48,6 +48,7 @@ export default {
             if (this.modelName !== '' && this.tableName !== '') {
                 await handleRequest(this.modelName, this.tableName, this.description);
                 this.inputVisible = false;
+                this.$parent.getData();
             } else {
                 this.warningVisible = true;
             }

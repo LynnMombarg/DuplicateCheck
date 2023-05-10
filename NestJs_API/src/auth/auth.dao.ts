@@ -72,4 +72,8 @@ export class AuthDAO {
         throw new UnauthorizedException();
       });
   }
+
+  getUserId(token: string): string {
+    return 'test123';
+  }
 }
