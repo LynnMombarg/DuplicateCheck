@@ -5,16 +5,16 @@
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ModelDTO } from './dto/model.dto';
-import { ModelDAO } from './model.DAO';
+import { ModelData } from './model.data';
 import { CreateModelDTO } from './dto/create-model.dto';
-import { AuthDAO } from '../login/auth.dao';
+import { AuthDAO } from '../auth/auth.dao';
 import { PythonDAO } from '../python/python.dao';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class ModelService {
   constructor(
-    private readonly modelDAO: ModelDAO,
+    private readonly modelDAO: ModelData,
     private readonly authDAO: AuthDAO,
     private readonly pythonDAO: PythonDAO,
   ) {}
@@ -24,7 +24,7 @@ export class ModelService {
     return this.modelDAO.getAllModels(userId);
   }
 
-  public createModel(createModel: CreateModelDTO, token: string): void {
+  async createModel(createModel: CreateModelDTO, token: string): Promise<void> {
     const userId: string = this.authDAO.getUserId(token);
     const modelId: string = uuid();
     const model = new ModelDTO(
@@ -35,8 +35,8 @@ export class ModelService {
       userId,
     );
 
-    this.modelDAO.createModel(model);
-    this.pythonDAO.createModel(modelId);
+    await this.modelDAO.createModel(model);
+    await this.pythonDAO.createModel(modelId);
   }
 
   async deleteModel(token: string, modelId: string): Promise<void> {

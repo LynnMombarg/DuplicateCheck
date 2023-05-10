@@ -4,15 +4,17 @@
 // Last modified: 10-05-2023 
 
 export async function deleteModel(modelId: string) {
-	const response = await fetch("http://localhost:8001/model?modelId=" + modelId, {
-	  method: "DELETE",
-	  headers: {
-		Authorization: "test",
-		"Content-Type": "application/json",
-	  },
-	});
-	const data = await response.json();
-	return data;
+	const response = await fetch(
+    "http://localhost:8001/model?modelId=" + modelId,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: "test",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+	return await response.json();
   }
   
   

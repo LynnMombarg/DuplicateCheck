@@ -22,8 +22,13 @@ export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Post('/create')
-  createModel(@Body() model: CreateModelDTO, @Req() request) {
-    this.modelService.createModel(model, /*request.user.userid*/ 'token');
+  async createModel(
+    @Body() model: CreateModelDTO,
+    @Headers('Authorization') accessToken,
+    @Req() request,
+  ): Promise<ModelDTO[]> {
+    await this.modelService.createModel(model, /*request.user.userid*/ 'token');
+    return this.modelService.getAllModels(accessToken);
   }
 
   @Get('/models')
@@ -37,6 +42,6 @@ export class ModelController {
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
     await this.modelService.deleteModel(accessToken, modelId);
-    return await this.modelService.getAllModels(accessToken);
+    return this.modelService.getAllModels(accessToken);
   }
 }

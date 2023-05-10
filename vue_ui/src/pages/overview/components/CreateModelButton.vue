@@ -21,7 +21,7 @@
         </select> <br>
 
         <label for="description">Description: </label>
-        <textarea v-model="description" id="description" name="description"></textarea> <br>
+        <textarea v-model="description" id="description" name="description" placeholder="Model description"></textarea> <br>
 
         <button @click="createModel">
             Submit model
