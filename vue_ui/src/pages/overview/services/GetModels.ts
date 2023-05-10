@@ -4,7 +4,7 @@
 // Last modified: 08-05-2023 
 
 export async function getData() {
-  const response = await fetch("http://localhost:8001/model/models", {
+  const response = await fetch("http://localhost:3000/model/models", {
     method: "GET",
     headers: {
       Authorization: "test",

@@ -4,7 +4,7 @@
 // Last modified: 08-05-2023
 
 export async function handleRequest(modelName: string, tableName: string, description: string) {
-    const response = await fetch("http://localhost:8001/model/create", {
+    const response = await fetch("http://localhost:3000/model/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

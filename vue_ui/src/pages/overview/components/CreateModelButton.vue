@@ -48,6 +48,7 @@ export default {
             if (this.modelName !== '' && this.tableName !== '') {
                 await handleRequest(this.modelName, this.tableName, this.description);
                 this.inputVisible = false;
+                this.$parent.getData();
             } else {
                 this.warningVisible = true;
             }

@@ -90,6 +90,14 @@ export default {
 };
 </script>
 
+<script setup>
+defineProps({
+    models: {
+      type: Array,
+    },
+  });
+</script>
+
 <style>
 .bgContacts {
   background-color: rgb(132 204 22);
