@@ -19,13 +19,11 @@ export class ModelService {
     private readonly pythonDAO: PythonDAO,
   ) {}
 
-  async getAllModels(token: string): Promise<ModelDTO[]> {
-    const userId = this.authDAO.getUserId(token);
+  async getAllModels(userId: string): Promise<ModelDTO[]> {
     return this.modelDAO.getAllModels(userId);
   }
 
-  public createModel(createModel: CreateModelDTO, token: string): void {
-    const userId: string = this.authDAO.getUserId(token);
+  public createModel(createModel: CreateModelDTO, userId: string): void {
     const modelId: string = uuid();
     const model = new ModelDTO(
       createModel.modelName,
@@ -39,13 +37,8 @@ export class ModelService {
     this.pythonDAO.createModel(modelId);
   }
 
-  async deleteModel(token: string, modelId: string): Promise<void> {
-    const userId = this.authDAO.getUserId(token);
-    if (userId === null) {
-      throw new UnauthorizedException();
-    } else {
-      await this.modelDAO.deleteModel(modelId, userId);
-      // await this.pythonDAO.deleteModel(modelId);
-    }
+  async deleteModel(userId: string, modelId: string): Promise<void> {
+    await this.modelDAO.deleteModel(modelId, userId);
+    await this.pythonDAO.deleteModel(modelId);
   }
 }

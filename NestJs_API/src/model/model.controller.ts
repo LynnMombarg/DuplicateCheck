@@ -22,21 +22,21 @@ export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Post('/create')
-  createModel(@Body() model: CreateModelDTO, @Req() request) {
-    this.modelService.createModel(model, /*request.user.userid*/ 'token');
+  createModel(@Body() model: CreateModelDTO, @Req() req) {
+    this.modelService.createModel(model, req.user.userId);
   }
 
   @Get('/models')
-  getAllModels(@Headers('Authorization') accessToken): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels(accessToken);
+  getAllModels(@Req() req): Promise<ModelDTO[]> {
+    return this.modelService.getAllModels(req.user.userId);
   }
 
   @Delete()
   async deleteModel(
-    @Headers('Authorization') accessToken,
+    @Req() req,
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
-    await this.modelService.deleteModel(accessToken, modelId);
-    return await this.modelService.getAllModels(accessToken);
+    await this.modelService.deleteModel(req.user.userId, modelId);
+    return await this.modelService.getAllModels(req.user.userId);
   }
 }
