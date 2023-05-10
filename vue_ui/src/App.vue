@@ -1,3 +1,9 @@
+<script setup>
+import SignIn from "@/components/SignIn.vue";
+import SignInHeader from "@/components/SignInHeader.vue";
+import SignInFooter from "@/components/SignInFooter.vue";
+</script>
+
 <template>
     <main>
         <router-view> </router-view>
