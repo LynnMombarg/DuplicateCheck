@@ -4,6 +4,7 @@ FROM node:19-alpine as build-stage
 # Set the working directory
 WORKDIR /app
 
+ENV PATH /app/node_modules/.bin:$PATH
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
@@ -11,12 +12,12 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the application code
-COPY . .
+#COPY . .
 
 # Build the application for production
-RUN npm run build
+#RUN npm run build
 
 # Create a new image for serving the built application
-FROM nginx:1.17.10-alpine
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-
+#FROM nginx:1.17.10-alpine
+#COPY --from=build-stage /app/dist /usr/share/nginx/html
+CMD [ "npm", "run", "dev", "--", "--host", "0.0.0.0" ]
