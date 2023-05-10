@@ -3,7 +3,16 @@
 // Sprint: 2
 // Last modified: 08-05-2023
 
-import { Body, Controller, Post, Req, Get, Delete, Headers, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Req,
+  Get,
+  Delete,
+  Headers,
+  Query,
+} from '@nestjs/common';
 import { ModelService } from './model.service';
 import { CreateModelDTO } from './dto/create-model.dto';
 import { ModelDTO } from './dto/model.dto';
@@ -12,7 +21,7 @@ import { ModelDTO } from './dto/model.dto';
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
-  @Post('create')
+  @Post('/create')
   createModel(@Body() model: CreateModelDTO, @Req() request) {
     this.modelService.createModel(model, /*request.user.userid*/ 'token');
   }
