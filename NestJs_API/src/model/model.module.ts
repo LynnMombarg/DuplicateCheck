@@ -7,7 +7,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelController } from './model.controller';
 import { ModelService } from './model.service';
-import { ModelData } from './model.data';
+import { ModelDAO } from './model.dao';
 import { Model, ModelSchema } from './model.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
@@ -19,6 +19,6 @@ import { AuthModule } from '../auth/auth.module';
     AuthModule,
   ],
   controllers: [ModelController],
-  providers: [ModelService, ModelData],
+  providers: [ModelService, ModelDAO],
 })
 export class ModelModule {}
