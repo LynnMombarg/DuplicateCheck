@@ -4,10 +4,10 @@
 <!--Last modified: 11-05-2023-->
 
 <template>
-  <OverviewBannerComponent />
+  <OverviewBannerComponent :token="token"/>
   <ul role="list" class="divide-y divide-gray-100">
     <li v-for="model in models" :key="model.information">
-      <OverviewModelComponent :model="model" />
+      <OverviewModelComponent :model="model" :token="token"/>
     </li>
   </ul>
 </template>
@@ -19,6 +19,7 @@ import OverviewModelComponent from "@/pages/overview/components/OverviewModelCom
 import { getModels } from "./services/GetModels";
 import { createModel } from "./services/CreateModel";
 import { deleteModel } from "./services/DeleteModel";
+import {onMounted, ref} from "vue";
 
 export default {
   name: 'OverviewPage',
@@ -36,12 +37,16 @@ export default {
   },
   methods: {
     async deleteModel(modelId) {
-      this.models = await deleteModel(modelId);
+      this.models = await deleteModel(modelId, this.token);
     },
     async createModel(modelName, tableName, description) {
-      this.models = await createModel(modelName, tableName, description);
+      this.models = await createModel(modelName, tableName, description, this.token);
     }
-  }
+  },
+    setup() {
+        const token = ref(localStorage.getItem("jwtToken") || '');
+        return {token};
+    },
 };
 </script>
 
