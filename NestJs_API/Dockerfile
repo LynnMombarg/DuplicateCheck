@@ -1,3 +1,9 @@
+# Author(s): Diederik
+# Jira-task: 58 - Docker instellen
+# Sprint: 2
+# Last modified: 11-05-2023
+
+
 # Use an official Node.js runtime as a parent image
 FROM node:19-alpine
 
