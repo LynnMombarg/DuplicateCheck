@@ -10,7 +10,6 @@ import {
   Req,
   Get,
   Delete,
-  Headers,
   Query,
   UseGuards,
 } from '@nestjs/common';

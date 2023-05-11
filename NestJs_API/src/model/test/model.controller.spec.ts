@@ -39,7 +39,7 @@ describe('ModelController', () => {
       );
 
       // Act
-      modelController.createModel(model, 'token', 'token');
+      modelController.createModel(model, 'token');
 
       // Assert
       expect(mockedModelService.createModel).toHaveBeenCalledWith(
