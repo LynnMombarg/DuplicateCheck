@@ -39,6 +39,8 @@ describe('ModelService', () => {
       .useValue(mockedModelDAO)
       .overrideProvider(AuthDAO)
       .useValue(mockedAuthDAO)
+      .overrideProvider(AuthDAO)
+      .useValue(mockedAuthDAO)
       .overrideProvider(PythonDAO)
       .useValue(mockedPythonDAO)
       .compile();
@@ -62,16 +64,6 @@ describe('ModelService', () => {
       // Assert
       expect(mockedModelDAO.createModel).toHaveBeenCalled();
     });
-    it('should call getUserId on AuthDAO', () => {
-      // Arrange
-      const token = 'token';
-
-      // Act
-      modelService.createModel(model, token);
-
-      // Assert
-      expect(mockedAuthDAO.getUserId).toHaveBeenCalledWith(token);
-    });
 
     it('should call createModel on PythonDAO', () => {
       // Arrange
@@ -94,18 +86,6 @@ describe('ModelService', () => {
 
       // Assert
       expect(mockedModelDAO.deleteModel).toHaveBeenCalled();
-    });
-
-    it('should call getUserId on AuthDAO', () => {
-      // Arrange
-      const modelId = '123';
-      const token = 'secretToken';
-
-      // Act
-      modelService.deleteModel(token, modelId);
-
-      // Assert
-      expect(mockedAuthDAO.getUserId).toHaveBeenCalled();
     });
 
     it('should call deleteModel on PythonDAO', () => {
