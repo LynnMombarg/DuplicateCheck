@@ -13,16 +13,12 @@ import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { jwtConfig } from '../config/jwt.config';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }]),
-    JwtModule.register({
-      global: true,
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '10m' },
-    }),
+    JwtModule.register(jwtConfig),
   ],
   controllers: [AuthController],
   providers: [AuthDAO, AuthGuard, AuthService],

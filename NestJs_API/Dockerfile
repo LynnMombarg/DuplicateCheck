@@ -17,4 +17,4 @@ RUN npm install
 EXPOSE 3000
 
 # Start the NestJS server
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:dev"]
