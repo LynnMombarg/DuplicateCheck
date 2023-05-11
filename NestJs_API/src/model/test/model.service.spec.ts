@@ -1,7 +1,7 @@
-// Authors: Marloes, Roward
+// Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 10-05-2023
+// Last modified: 11-05-2023
 
 import { ModelService } from '../model.service';
 import { Test } from '@nestjs/testing';
@@ -9,9 +9,12 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { ModelDAO } from '../model.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
+import {UnauthorizedException} from "@nestjs/common";
+import {ModelController} from "../model.controller";
 
 describe('ModelService', () => {
   let modelService: ModelService;
+  let modelcontroller: ModelController;
   const mockedModelDAO = {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
@@ -100,15 +103,19 @@ describe('ModelService', () => {
       expect(mockedPythonDAO.deleteModel).toHaveBeenCalled();
     });
 
-    // it('should throw an UnauthorizedException', async () => {
-    //   // Arrange
-    //   const modelId = '123';
-    //   const token = 'falseSecretToken';
-    //
-    //   // Assert
-    //   expect(() => {
-    //     modelService.deleteModel(modelId, token);
-    //   }).toThrow(new UnauthorizedException());
-    // });
+    it('should throw an UnauthorizedException', async () => {
+      // Arrange
+      const modelId = '123';
+      const token = 'falseSecretToken';
+
+      // Act
+      modelcontroller.createModel();
+      modelService.deleteModel(modelId, token);
+
+      // Assert
+      expect(() => {
+        modelService.deleteModel(modelId, token);
+      }).toThrow(new UnauthorizedException());
+    });
   });
 });
