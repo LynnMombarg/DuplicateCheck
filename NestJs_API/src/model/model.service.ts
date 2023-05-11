@@ -23,7 +23,7 @@ export class ModelService {
     return this.modelDAO.getAllModels(userId);
   }
 
-  async createModel(createModel: CreateModelDTO, userId: string): void {
+  async createModel(createModel: CreateModelDTO, userId: string): Promise<void> {
     const modelId: string = uuid();
     const model = new ModelDTO(
       createModel.modelName,
