@@ -26,6 +26,7 @@ export class ModelController {
   @Post('/create')
   createModel(@Body() model: CreateModelDTO, @Req() req) {
     this.modelService.createModel(model, req.user.userId);
+    return this.modelService.getAllModels(req.user.userId);
   }
 
   @Get('/models')

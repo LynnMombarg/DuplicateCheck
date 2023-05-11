@@ -1,5 +1,5 @@
 // Authors: Roward
-// Jira-task: 110 - Models ophalen
+// Jira-task: 110 - Models verwijderen uit database
 // Sprint: 2
 // Last modified: 10-05-2023 
 

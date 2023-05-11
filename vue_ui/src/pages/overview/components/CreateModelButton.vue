@@ -1,7 +1,7 @@
 <!--Authors: Marloes-->
 <!--Jira-task: 106 - Front-end maken-->
 <!--Sprint: 2-->
-<!--Last modified: 08-05-2023-->
+<!--Last modified: 11-05-2023-->
 
 <template>
     <button @click="startCreateModel" class="rounded-md bg-white px-3 py-2 text-xl">
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { handleRequest } from "@/pages/overview/services/CreateModel";
 
 export default {
     name: "CreateModelButton",
@@ -46,9 +45,8 @@ export default {
     methods: {
         async createModel() {
             if (this.modelName !== '' && this.tableName !== '') {
-                await handleRequest(this.modelName, this.tableName, this.description);
+                this.$parent.createModel(this.modelName, this.tableName, this.description);
                 this.inputVisible = false;
-                this.$parent.getData();
             } else {
                 this.warningVisible = true;
             }

@@ -1,7 +1,7 @@
-<!--Author(s): Silke Bertisen-->
+<!--Author(s): Silke Bertisen, Roward-->
 <!--Jira-task: Dashboard realiseren 104 -->
 <!--Sprint: 2 -->
-<!--Last modified: 26-4-2023-->
+<!--Last modified: 11-05-2023-->
 
 <template>
   <div class="flex justify-between bg-gray rounded-md px-3 py-5 text-3xl font-medium">
@@ -28,6 +28,11 @@ export default {
   components: {
     CreateModelButton,
   },    
+  methods: {
+    createModel(modelName, tableName, description){
+      this.$parent.createModel(modelName, tableName, description);
+    }
+  }
 };
 </script>
 
