@@ -9,8 +9,8 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { ModelDAO } from '../model.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
-import {NotFoundException, UnauthorizedException} from '@nestjs/common';
-import {models} from "mongoose";
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { models } from 'mongoose';
 
 describe('ModelService', () => {
   let modelService: ModelService;
@@ -123,16 +123,14 @@ describe('ModelService', () => {
     //   ).resolves.toThrowError(new NotFoundException());
     // });
 
-    //   it('should throw an UnauthorizedException', async () => {
-    //   // Arrange
-    //   const modelId = '123';
-    //   const token = 'falseSecretToken';
-    //   // Act
-    //   modelcontroller.createModel();
-    //   modelService.deleteModel(modelId, token);
-    //   // Assert
-    //   expect(() => {
-    //   modelService.deleteModel(modelId, token?);
-    // }).toThrow(new UnauthorizedException());
+    it('should throw an UnauthorizedException', async () => {
+      // Arrange
+      const modelId = '123';
+      const token = 'falseSecretToken';
+      // Assert
+      expect(() => {
+        modelService.deleteModel(modelId, token);
+      }).toThrow(new UnauthorizedException());
+    });
   });
 });
