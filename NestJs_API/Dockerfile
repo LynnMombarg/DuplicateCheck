@@ -1,6 +1,6 @@
 # Author(s): Diederik
 # Jira-task: 58 - Docker instellen
-# Sprint: 2
+# Sprint: 1
 # Last modified: 11-05-2023
 
 
