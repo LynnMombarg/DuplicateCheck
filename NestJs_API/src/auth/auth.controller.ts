@@ -2,7 +2,7 @@
  * Author(s): Diederik Lensink
  * Jira-task: 102 - NestJS oauth2 token opslaan, 103 - NestJS oauth2 token afhandelen
  * Sprint: 2
- * Last modified: 08-05-2023
+ * Last modified: 11-05-2023
  */
 
 import {
@@ -22,7 +22,9 @@ import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
+require('dotenv').config({
+  path: 'src/config/env/' + process.env.NODE_ENV + '.env',
+});
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const jsforce = require('jsforce');
 const oauth2 = new jsforce.OAuth2({
@@ -31,6 +33,7 @@ const oauth2 = new jsforce.OAuth2({
   clientSecret: process.env.SF_CLIENT_SECRET,
   redirectUri: process.env.BASE_URL + '/auth/callback',
 });
+const clientId = process.env.SF_CLIENT_ID;
 
 /**
  * Login Controller
@@ -56,6 +59,7 @@ export class AuthController {
   login(): void {
     console.log('login');
     console.log(process.env);
+    console.log(clientId);
   }
 
   /**
