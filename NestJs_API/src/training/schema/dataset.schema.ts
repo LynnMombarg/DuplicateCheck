@@ -8,7 +8,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Dataset {
-  @Prop({ type: RecordSchema, ref: Record.name })
+  @Prop({ type: [RecordSchema], ref: Record.name })
   records: Record[];
 }
 export const DatasetSchema = SchemaFactory.createForClass(Dataset);

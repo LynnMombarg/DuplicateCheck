@@ -5,9 +5,6 @@
 
 import {
   Controller,
-  HttpException,
-  HttpStatus,
-  NotFoundException,
   Post,
   Req,
   UseGuards,
@@ -16,12 +13,12 @@ import { TrainingService } from './training.service';
 import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('training')
-//@UseGuards(AuthGuard)
+@UseGuards(AuthGuard)
 export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
   @Post()
   selectJob(jobId: string, @Req() req) {
-    this.trainingService.selectJob(jobId, 'req.user.userId');
+    this.trainingService.selectJob(jobId, req.user.userId);
   }
 }

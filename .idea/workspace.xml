@@ -28,7 +28,6 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.dao.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.module.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +181,7 @@
       <workItem from="1683796370626" duration="586000" />
       <workItem from="1683797045621" duration="315000" />
       <workItem from="1683876714908" duration="5916000" />
-      <workItem from="1683882710476" duration="8135000" />
+      <workItem from="1683882710476" duration="8521000" />
     </task>
     <servers />
   </component>

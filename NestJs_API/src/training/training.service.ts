@@ -22,11 +22,7 @@ export class TrainingService {
   ) {}
 
   async selectJob(jobId, userId) {
-    const tokens = /*this.authDAO.getTokensByUserId(userId);*/ new AuthDTO(
-      'userId',
-      'accessToken',
-      'refreshToken',
-    );
+    const tokens: AuthDTO = await this.authDAO.getTokensByUserId(userId);
     const records: DatasetDTO[] = await this.salesforceDAO.getDatasets(
       tokens,
       jobId,
@@ -38,7 +34,7 @@ export class TrainingService {
         userId,
         records[0],
         records[1],
-        [true, false],
+        [],
       );
       this.trainingDAO.createTraining(training);
     } else {
