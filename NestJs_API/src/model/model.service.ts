@@ -9,12 +9,17 @@ import { ModelDAO } from './model.dao';
 import { CreateModelDTO } from './dto/create-model.dto';
 import { PythonDAO } from '../python/python.dao';
 import { v4 as uuid } from 'uuid';
+import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
+import { JobDTO } from './dto/job-model.dto';
+import { AuthDAO } from 'src/auth/auth.dao';
 
 @Injectable()
 export class ModelService {
   constructor(
     private readonly modelDAO: ModelDAO,
     private readonly pythonDAO: PythonDAO,
+    private readonly salesforceDAO: SalesforceDAO,
+    private readonly authDAO: AuthDAO,
   ) {}
 
   async getAllModels(userId: string): Promise<ModelDTO[]> {
@@ -41,5 +46,10 @@ export class ModelService {
   async deleteModel(userId: string, modelId: string): Promise<void> {
     await this.modelDAO.deleteModel(modelId, userId);
     await this.pythonDAO.deleteModel(modelId);
+  }
+
+  async getJobs(tableName: string, userId: string): Promise<JobDTO[]>{
+    const authDTO = await this.authDAO.getTokensByUserId(userId);
+    return this.salesforceDAO.getJobs(tableName, authDTO);
   }
 }

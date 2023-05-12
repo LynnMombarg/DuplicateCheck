@@ -17,6 +17,7 @@ import { ModelService } from './model.service';
 import { CreateModelDTO } from './dto/create-model.dto';
 import { ModelDTO } from './dto/model.dto';
 import { AuthGuard } from '../auth/auth.guard';
+import { JobDTO } from './dto/job-model.dto';
 
 @Controller('model')
 @UseGuards(AuthGuard)
@@ -41,5 +42,10 @@ export class ModelController {
   ): Promise<ModelDTO[]> {
     await this.modelService.deleteModel(req.user.userId, modelId);
     return await this.modelService.getAllModels(req.user.userId);
+  }
+
+  @Get('/jobs')
+  getJobs(@Req() req, @Query('tableName') tableName): Promise<JobDTO[]> {
+    return this.modelService.getJobs(tableName, req.user.userId);
   }
 }
