@@ -18,7 +18,7 @@ export class TrainingDAO {
   }
 
   checkForRecords(trainingID: string): Promise<boolean> {
-   // this.model.findOne({ trainingId: trainingID });
+    // this.model.findOne({ trainingId: trainingID });
     return null;
   }
 }

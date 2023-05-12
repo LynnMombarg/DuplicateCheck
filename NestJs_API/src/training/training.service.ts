@@ -1,7 +1,6 @@
 import { Injectable, Req } from '@nestjs/common';
 import { RecordDto } from './dto/record.dto';
-import { AuthDAO } from '../auth/auth.dao';
-import { TrainingDAO } from './TrainingDOA';
+import { TrainingDAO } from './TrainingDAO';
 
 @Injectable()
 export class TrainingService {

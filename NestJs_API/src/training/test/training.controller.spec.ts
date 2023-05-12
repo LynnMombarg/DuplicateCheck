@@ -4,7 +4,7 @@ import { TrainingController } from '../training.controller';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthGuard } from '../../auth/auth.guard';
 import { AuthService } from '../../auth/auth.service';
-import {JwtService} from "@nestjs/jwt";
+import { JwtService } from '@nestjs/jwt';
 
 describe('TrainingController', () => {
   let trainingController: TrainingController;
@@ -56,22 +56,39 @@ describe('TrainingController', () => {
     });
   });
 
-    // describe('giveAnswer', () => {
-    // it('should call giveAnswer on TrainingService', () => {
-    //   // Arrange
-    //   const answer = true;
-    //   const trainingID = '123';
-    //   const req = '123';
-    //
-    //   // Act
-    //   trainingController.giveAnswer(answer, trainingID, req);
-    //
-    //   // Assert
-    //   expect(mockedTrainingService.giveAnswer).toHaveBeenCalledWith(
-    //     answer,
-    //     trainingID,
-    //     req,
-    //   );
-    // });
-    // }
+  describe('giveAnswer', () => {
+    it('should call giveAnswer on TrainingService', () => {
+      // Arrange
+      const answer = true;
+      const trainingID = '123';
+      const req = '123';
+
+      // Act
+      trainingController.giveAnswer(answer, trainingID, req);
+
+      // Assert
+      expect(mockedTrainingService.giveAnswer).toHaveBeenCalledWith(
+        answer,
+        trainingID,
+        req,
+      );
+    });
+  });
+
+  describe('checkForRecords', () => {
+    it('should call checkForRecords on TrainingService', () => {
+      // Arrange
+      const trainingID = '123';
+      const req = '123';
+
+      // Act
+      trainingController.checkForRecords(trainingID, req);
+
+      // Assert
+      expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
+        trainingID,
+        req,
+      );
+    });
+  });
 });
