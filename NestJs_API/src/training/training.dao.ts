@@ -6,7 +6,7 @@
 import { Injectable } from '@nestjs/common';
 import { TrainingDTO } from './dto/training.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Training } from './training.schema';
+import { Training } from './schema/training.schema';
 import { Model } from 'mongoose';
 
 @Injectable()

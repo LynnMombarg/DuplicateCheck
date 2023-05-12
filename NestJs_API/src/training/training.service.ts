@@ -21,13 +21,17 @@ export class TrainingService {
   ) {}
 
   async selectJob(jobId, userId) {
-    const tokens: Promise<AuthDTO> = this.authDAO.getTokensByUserId(userId);
+    const tokens = /*this.authDAO.getTokensByUserId(userId);*/ new AuthDTO(
+      'userId',
+      'accessToken',
+      'refreshToken',
+    );
     const records: Promise<DatasetDTO[]> = this.salesforceDAO.getDatasets(
       await tokens,
       jobId,
     );
 
-    if ((await records).length < 2) {
+    if ((await records).length > 1) {
       const training: TrainingDTO = new TrainingDTO(
         uuid(),
         userId,

@@ -8,7 +8,7 @@ import { TrainingController } from './training.controller';
 import { TrainingService } from './training.service';
 import { TrainingDAO } from './training.dao';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Training, TrainingSchema } from './training.schema';
+import { Training, TrainingSchema } from './schema/training.schema';
 import { AuthModule } from '../auth/auth.module';
 import { SalesforceModule } from '../salesforce/salesforce.module';
 

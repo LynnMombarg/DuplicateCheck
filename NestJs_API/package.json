@@ -34,7 +34,7 @@
     "joi": "^17.9.2",
     "jsforce": "^1.11.0",
     "jwt-service": "^9.0.4",
-    "module": "^1.2.5",
+    "module": "^1.1.0",
     "mongoose": "^7.0.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",

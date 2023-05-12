@@ -5,7 +5,7 @@
 
 import { HydratedDocument } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { DatasetDTO } from './dto/dataset.dto';
+import { DatasetDTO } from '../dto/dataset.dto';
 
 export type TrainingDocument = HydratedDocument<Training>;
 

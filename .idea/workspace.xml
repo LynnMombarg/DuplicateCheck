@@ -11,8 +11,8 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.controller.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.dao.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/schema/model.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
@@ -21,10 +21,10 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/dataset.dto.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/record.dto.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/training.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/training.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.controller.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.dao.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -75,6 +75,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\vue_ui\src\components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\NestJs_API\src\training\schema" />
+      <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\NestJs_API\src\model\schema" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.Tests in test/ (1)">
@@ -175,7 +179,7 @@
       <workItem from="1682493013765" duration="4933000" />
       <workItem from="1683796370626" duration="586000" />
       <workItem from="1683797045621" duration="315000" />
-      <workItem from="1683876714908" duration="4591000" />
+      <workItem from="1683876714908" duration="5916000" />
     </task>
     <servers />
   </component>
