@@ -1,7 +1,7 @@
 // Authors: Marloes
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 08-05-2023
+// Last modified: 12-05-2023
 
 import { Injectable } from '@nestjs/common';
 import { ModelDTO } from './dto/model.dto';

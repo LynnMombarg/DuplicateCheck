@@ -1,7 +1,7 @@
-// Authors: Marloes, Roward
-// Jira-task: 107 - Models toevoegen aan database
-// Sprint: 2
-// Last modified: 08-05-2023
+// Authors: Roward
+// Jira-task: 115 - Jobs ophalen van Salesforce in NestJS
+// Sprint: 3
+// Last modified: 12-05-2023
 
 import { Injectable } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/auth.dto';
