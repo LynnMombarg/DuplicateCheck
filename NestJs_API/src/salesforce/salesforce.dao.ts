@@ -17,7 +17,7 @@ const oauth2 = new jsforce.OAuth2({
 
 @Injectable()
 export class SalesforceDAO {
-  async getJobs(tableName: String, tokens: AuthDTO): Promise<JobDTO[]> {
+  async getJobs(tableId: String, tokens: AuthDTO): Promise<JobDTO[]> {
     let resultSet = [];
     const conn = new jsforce.Connection({
       oauth2: oauth2,
@@ -33,7 +33,7 @@ export class SalesforceDAO {
       }.bind(this),
     );
 
-    conn.query('SELECT id, name FROM dupcheck__dcJob__c', function (err, result) {
+    conn.query('SELECT id, name,  FROM dupcheck__dcJob__c WHERE dupcheck__SourceObject__c = "' + tableId + '"', function (err, result) {
       if (err) {
         return console.error(err);
       }

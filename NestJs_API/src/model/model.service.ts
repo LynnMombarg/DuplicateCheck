@@ -50,6 +50,18 @@ export class ModelService {
 
   async getJobs(tableName: string, userId: string): Promise<JobDTO[]>{
     const authDTO = await this.authDAO.getTokensByUserId(userId);
-    return this.salesforceDAO.getJobs(tableName, authDTO);
+    var tableId = "";
+    switch(tableName){
+      case "leads":
+        tableId = "00Q";
+        break;
+      case "contacts":
+        tableId = "003";
+        break;
+      case "accounts":
+        tableId = "001";
+        break;
+    }
+    return this.salesforceDAO.getJobs(tableId, authDTO);
   }
 }
