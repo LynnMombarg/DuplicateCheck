@@ -19,7 +19,7 @@ import { ModelDTO } from './dto/model.dto';
 import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('model')
-@UseGuards(AuthGuard)
+// @UseGuards(AuthGuard)
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
@@ -31,7 +31,7 @@ export class ModelController {
 
   @Get('/models')
   getAllModels(@Req() req): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels(req.user.userId);
+    return this.modelService.getAllModels(/*req.user.userId*/ "test123");
   }
 
   @Delete()

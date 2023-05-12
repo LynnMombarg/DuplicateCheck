@@ -9,12 +9,14 @@ import App from './App.vue';
 import '../dist/output.css';
 import SignIn from "@/pages/login/SignIn.vue";
 import OverviewPage from "@/pages/overview/OverviewPage.vue";
+import TrainingPage from "@/pages/training/TrainingPage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {path: '/', name: 'SignIn', component: SignIn},
-        {path: '/overview', name: 'OverviewPage', component: OverviewPage}
+        {path: '/overview', name: 'OverviewPage', component: OverviewPage},
+        {path: '/training', name: 'TrainingPage', component: TrainingPage}
     ]
 })
 
