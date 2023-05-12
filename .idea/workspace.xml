@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/NestJs_API/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/create-model.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/model.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.dao.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +60,7 @@
   <component name="RunManager" selected="Jest.Tests in test/ (1)">
     <configuration name="ModelService.deleteModel.should throw an UnauthorizedException" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
+      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
@@ -84,15 +75,16 @@
     </configuration>
     <configuration name="Tests in test/ (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
+      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
-      <scope-kind value="DIRECTORY" />
-      <test-directory value="$PROJECT_DIR$/NestJs_API/src/model/test" />
+      <scope-kind value="ALL" />
       <method v="2" />
     </configuration>
     <configuration name="Tests in test/" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
+      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
@@ -133,7 +125,6 @@
       <item itemvalue="npm.Vue" />
       <item itemvalue="npm.Vue setup" />
       <item itemvalue="npm.start" />
-      <item itemvalue="Python tests.Python tests in C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck/Python_API/RecordLinkage_API/src/main/test_PythonController.py" />
     </list>
     <recent_temporary>
       <list>
@@ -176,9 +167,9 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/DuplicateCheck$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683637630868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___1_.info" NAME="Tests in test/ (1) Coverage Results" MODIFIED="1683797284171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683536273875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
