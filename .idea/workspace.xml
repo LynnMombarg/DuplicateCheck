@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,8 +64,22 @@
       <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\NestJs_API\src\training\dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.TrainingService.giveAnswer">
-    <configuration name="TrainingService.getRecords" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.TrainingService">
+    <configuration name="TrainingController.checkForRecords" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.controller.spec.ts" />
+      <test-names>
+        <test-name value="TrainingController" />
+        <test-name value="checkForRecords" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TrainingService" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
@@ -77,7 +89,6 @@
       <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.service.spec.ts" />
       <test-names>
         <test-name value="TrainingService" />
-        <test-name value="getRecords" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -93,16 +104,6 @@
         <test-name value="TrainingService" />
         <test-name value="giveAnswer" />
       </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="model.controller.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/NestJs_API" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" />
       <method v="2" />
     </configuration>
     <configuration name="training.controller.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -136,9 +137,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Jest.TrainingService.getRecords" />
+      <item itemvalue="Jest.TrainingController.checkForRecords" />
+      <item itemvalue="Jest.TrainingService" />
       <item itemvalue="Jest.TrainingService.giveAnswer" />
-      <item itemvalue="Jest.model.controller.spec.ts" />
       <item itemvalue="Jest.training.controller.spec.ts" />
       <item itemvalue="Jest.training.service.spec.ts" />
       <item itemvalue="Node.js.Unnamed" />
@@ -149,11 +150,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.TrainingService.giveAnswer" />
+        <item itemvalue="Jest.TrainingService" />
         <item itemvalue="Jest.training.service.spec.ts" />
         <item itemvalue="Jest.training.controller.spec.ts" />
-        <item itemvalue="Jest.model.controller.spec.ts" />
-        <item itemvalue="Jest.TrainingService.getRecords" />
+        <item itemvalue="Jest.TrainingController.checkForRecords" />
+        <item itemvalue="Jest.TrainingService.giveAnswer" />
       </list>
     </recent_temporary>
   </component>
@@ -184,18 +185,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/NestJs_API/src/training/test/training.service.spec.ts</url>
-          <line>41</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
