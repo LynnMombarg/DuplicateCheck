@@ -21,6 +21,8 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/dataset.dto.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/record.dto.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/training.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/dataset.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/record.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/training.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.controller.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.dao.ts" afterDir="false" />
@@ -180,6 +182,7 @@
       <workItem from="1683796370626" duration="586000" />
       <workItem from="1683797045621" duration="315000" />
       <workItem from="1683876714908" duration="5916000" />
+      <workItem from="1683882710476" duration="8135000" />
     </task>
     <servers />
   </component>

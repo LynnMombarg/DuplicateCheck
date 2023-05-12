@@ -6,9 +6,5 @@
 import { RecordDTO } from './record.dto';
 
 export class DatasetDTO {
-  constructor(records: RecordDTO[]) {
-    this.records = records;
-  }
-
-  records: RecordDTO[];
+  constructor(public records: RecordDTO[]) {}
 }

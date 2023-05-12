@@ -11,10 +11,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Training, TrainingSchema } from './schema/training.schema';
 import { AuthModule } from '../auth/auth.module';
 import { SalesforceModule } from '../salesforce/salesforce.module';
+import { Record, RecordSchema } from './schema/record.schema';
+import { Dataset, DatasetSchema } from './schema/dataset.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
+      { name: Record.name, schema: RecordSchema },
+      { name: Dataset.name, schema: DatasetSchema },
       { name: Training.name, schema: TrainingSchema },
     ]),
     AuthModule,

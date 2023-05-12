@@ -11,6 +11,7 @@ import { TrainingDTO } from './dto/training.dto';
 import { v4 as uuid } from 'uuid';
 import { DatasetDTO } from './dto/dataset.dto';
 import { AuthDTO } from '../auth/auth.dto';
+import { ValidationError } from 'joi';
 
 @Injectable()
 export class TrainingService {
@@ -26,18 +27,18 @@ export class TrainingService {
       'accessToken',
       'refreshToken',
     );
-    const records: Promise<DatasetDTO[]> = this.salesforceDAO.getDatasets(
-      await tokens,
+    const records: DatasetDTO[] = await this.salesforceDAO.getDatasets(
+      tokens,
       jobId,
     );
 
-    if ((await records).length > 1) {
+    if (records.length > 1) {
       const training: TrainingDTO = new TrainingDTO(
         uuid(),
         userId,
         records[0],
         records[1],
-        [],
+        [true, false],
       );
       this.trainingDAO.createTraining(training);
     } else {
