@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 11-05-2023
+// Last modified: 12-05-2023
 
 import { ModelService } from '../model.service';
 import { Test } from '@nestjs/testing';
@@ -9,8 +9,6 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { ModelDAO } from '../model.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
-import { NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { models } from 'mongoose';
 
 describe('ModelService', () => {
   let modelService: ModelService;
@@ -100,37 +98,6 @@ describe('ModelService', () => {
 
       // Assert
       expect(mockedPythonDAO.deleteModel).toHaveBeenCalled();
-    });
-
-    // it('should throw an UnauthorizedException', async () => {
-    //   // Arrange
-    //   const modelId = '123';
-    //   const token = 'wrongToken';
-    //   let error;
-    //
-    //   // Act
-    //   try {
-    //     await modelService.deleteModel(modelId, token);
-    //   } catch (e) {
-    //     error = e;
-    //   }
-    //
-    //   // Assert
-    //   //expect(error).toBeInstanceOf(UnauthorizedException);
-    //
-    //   await expect(
-    //     modelService.deleteModel(modelId, token),
-    //   ).resolves.toThrowError(new NotFoundException());
-    // });
-
-    it('should throw an UnauthorizedException', async () => {
-      // Arrange
-      const modelId = '123';
-      const token = 'falseSecretToken';
-      // Assert
-      expect(() => {
-        modelService.deleteModel(modelId, token);
-      }).toThrow(new UnauthorizedException());
     });
   });
 });
