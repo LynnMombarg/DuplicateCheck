@@ -20,6 +20,7 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
+import { jwtConfig } from '../config/jwt.config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({
@@ -86,9 +87,15 @@ export class AuthController {
         console.log('User ID: ' + userInfo.id);
         console.log('Org ID: ' + userInfo.organizationId);
         console.log('Expires at: ' + conn.accessTokenExpiresAt);
-        const jwtToken = await this.jwtService.signAsync({
-          userId: userInfo.id,
-        });
+        const jwtToken = await this.jwtService.signAsync(
+          {
+            userId: userInfo.id,
+          },
+          {
+            secret: process.env.JWT_SECRET,
+            expiresIn: process.env.JWT_EXPIRES_IN,
+          },
+        );
         this.authService.login(
           userInfo.id,
           conn.accessToken,
@@ -98,7 +105,7 @@ export class AuthController {
         const script =
           "<script>window.opener.postMessage({ message: 'success', token: '" +
           jwtToken +
-          "' }, 'http://localhost:8002')</script>";
+          "'}, 'http://localhost:8002')</script>";
         return res.status(HttpStatus.OK).send(script);
       }.bind(this),
     );

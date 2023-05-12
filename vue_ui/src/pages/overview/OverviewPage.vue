@@ -19,7 +19,6 @@ import OverviewModelComponent from "@/pages/overview/components/OverviewModelCom
 import { getModels } from "./services/GetModels";
 import { createModel } from "./services/CreateModel";
 import { deleteModel } from "./services/DeleteModel";
-import {onMounted, ref} from "vue";
 
 export default {
   name: 'OverviewPage',
@@ -27,13 +26,21 @@ export default {
     OverviewBannerComponent,
     OverviewModelComponent
   },
+  props: {
+    token: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       models: [],
+      token: null
     }
   },
   async mounted() {
-    this.models = await getModels();
+      this.token = await this.$store.state.token;
+      this.models = await getModels(this.token);
   },
   methods: {
     async deleteModel(modelId) {
@@ -43,10 +50,6 @@ export default {
       this.models = await createModel(modelName, tableName, description, this.token);
     }
   },
-    setup() {
-        const token = ref(localStorage.getItem("jwtToken") || '');
-        return {token};
-    },
 };
 </script>
 

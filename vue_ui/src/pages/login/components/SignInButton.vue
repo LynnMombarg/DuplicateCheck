@@ -26,7 +26,7 @@ export default {
         if (event.data.message === "success") {
             popupWindow.close();
             console.log(event.data.token);
-            localStorage.setItem("jwtToken", event.data.token);
+            this.$store.commit("setToken", event.data.token);
             this.$router.push({ name: "OverviewPage" });
         }
       });

@@ -14,7 +14,6 @@ export async function createModel(modelName: string, tableName: string, descript
         modelName: modelName,
         tableName: tableName,
         modelDescription: description,
-        token: "ee8612ad-8ad3-489b-9982-33c15a6cc0a4",
       }),
     });
     return await response.json();
