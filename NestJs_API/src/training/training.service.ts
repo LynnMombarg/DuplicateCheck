@@ -1,17 +1,14 @@
 import { Injectable, Req } from '@nestjs/common';
-import { RecordDTO } from './RecordDTO';
+import { RecordDto } from './dto/record.dto';
 import { AuthDAO } from '../auth/auth.dao';
-import { TrainingDOA } from './TrainingDOA';
+import { TrainingDAO } from './TrainingDOA';
 
 @Injectable()
 export class TrainingService {
-  constructor(private readonly TrainingDOA: TrainingDOA) {}
+  constructor(private readonly TrainingDOA: TrainingDAO) {}
 
-  async getRecords(trainingID: string, @Req() req): Promise<RecordDTO[]> {
-    const userId = AuthDAO.getuserID();
-    if (userId != null) {
-      return this.TrainingDOA.getNextRecords(trainingID);
-    }
+  async getRecords(trainingID: string, @Req() req): Promise<RecordDto[]> {
+    return this.TrainingDOA.getNextRecords(trainingID);
   }
 
   async giveAnswer(
@@ -19,9 +16,10 @@ export class TrainingService {
     trainingID: string,
     @Req() req,
   ): Promise<void> {
-    const userid = AuthDAO.getuserID();
-    if (userid != null && answer == true) {
-      this.TrainingDOA.saveRecord(trainingID);
-    }
+    await this.TrainingDOA.saveRecord(trainingID);
+  }
+
+  checkForRecords(trainingID: string, req): Promise<boolean> {
+    return this.TrainingDOA.checkForRecords(trainingID);
   }
 }
