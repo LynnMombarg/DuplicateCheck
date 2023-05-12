@@ -3,12 +3,12 @@
 // Sprint: 3
 // Last modified: 12-05-2023
 
-import {RecordDTO} from "../../../dist/training/RecordDTO";
+import { RecordDto } from 'src/training/dto/record.dto';
 
 export class DatasetDTO {
-    constructor(records: RecordDTO[]) {
-        this.records = records;
-    }
+  constructor(records: RecordDto[]) {
+    this.records = records;
+  }
 
-    records: RecordDTO[];
+  records: RecordDto[];
 }
