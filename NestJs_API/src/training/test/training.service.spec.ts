@@ -7,7 +7,7 @@ import { TrainingDao } from '../Training.dao';
 import { TrainingService } from '../training.service';
 
 describe('TrainingService', () => {
-  let TrainingService: TrainingService;
+  let trainingservice: TrainingService; // use lowercase for the variable name
 
   const mockedTrainingdao = {
     getNextRecords: jest.fn(),
@@ -35,7 +35,7 @@ describe('TrainingService', () => {
       .useValue(mockedTrainingdao)
       .compile();
 
-    TrainingService = moduleRef.get<TrainingService>(TrainingService);
+    trainingservice = moduleRef.get<TrainingService>(TrainingService);
   });
 
   describe('getRecords', () => {
@@ -45,7 +45,7 @@ describe('TrainingService', () => {
       const req = '123';
 
       // Act
-      TrainingService.getRecords(trainingID, req);
+      trainingservice.getRecords(trainingID, req);
 
       // Assert
       expect(mockedTrainingdao.getNextRecords).toHaveBeenCalledWith(trainingID);
@@ -60,7 +60,7 @@ describe('TrainingService', () => {
       const answer = false;
 
       // Act
-      TrainingService.giveAnswer(false, trainingID, req);
+      trainingservice.giveAnswer(false, trainingID, req);
 
       // Assert
       expect(mockedTrainingdao.saveRecord).toHaveBeenCalledWith(
