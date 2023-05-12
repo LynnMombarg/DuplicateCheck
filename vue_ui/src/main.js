@@ -15,8 +15,8 @@ import './fetch.js';
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/', name: 'SignIn', component: SignIn},
-        {path: '/overview', name: 'OverviewPage', component: OverviewPage}
+        {path: '/', name: 'SignIn', component: SignIn, meta: { title: 'Sign In - Plauti Duplicate Check ML' }},
+        {path: '/overview', name: 'OverviewPage', component: OverviewPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
     ]
 })
 
@@ -43,6 +43,10 @@ router.beforeEach((to, from, next) => {
     if (to.name !== 'SignIn' && !token) next({ name: 'SignIn' });
     else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
     else next();
+});
+
+router.afterEach((to) => {
+    document.title = to.meta.title;
 });
 
 

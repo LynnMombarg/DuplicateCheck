@@ -4,25 +4,25 @@
 <!--Last modified: 11-05-2023-->
 
 <template>
-  <OverviewBannerComponent :token="token"/>
-  <ul role="list" class="divide-y divide-gray-100">
-    <li v-for="model in models" :key="model.information">
-      <OverviewModelComponent :model="model" :token="token"/>
-    </li>
-  </ul>
+    <div class="flex pl-64 flex-col flex-1">
+        <Navbar/>
+        <OverviewBannerComponent :models="models" :token="token"/>
+    </div>
 </template>
 
 <script>
 
 import OverviewBannerComponent from "@/pages/overview/components/OverviewBannerComponent.vue";
 import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
-import { getModels } from "./services/GetModels";
-import { createModel } from "./services/CreateModel";
-import { deleteModel } from "./services/DeleteModel";
+import {getModels} from "./services/GetModels";
+import {createModel} from "./services/CreateModel";
+import {deleteModel} from "./services/DeleteModel";
+import Navbar from "@/pages/overview/components/Navbar.vue";
 
 export default {
   name: 'OverviewPage',
   components: {
+      Navbar,
     OverviewBannerComponent,
     OverviewModelComponent
   },
@@ -54,11 +54,11 @@ export default {
 </script>
 
 <style>
-body {
-  background-image: url("../../assets/lightning_blue_background.png");
-  background-repeat: repeat-x;
-  background-size: 50% 30%;
-}
+/*body {*/
+/*  background-image: url("../../assets/lightning_blue_background.png");*/
+/*  background-repeat: repeat-x;*/
+/*  background-size: 50% 30%;*/
+/*}*/
 </style>
 
 
