@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="" />
+    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +42,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck/vue_ui/src/components",
+    "last_opened_file_path": "C:/Users/SBert/OneDrive/Documenten/GitHub/duplicatecheck/NestJs_API/src/training/test",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -58,13 +60,16 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\NestJs_API\src\training\test" />
+      <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\NestJs_API\src\training" />
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\vue_ui\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\NestJs_API\src\training\dto" />
+      <recent name="C:\Users\SBert\OneDrive\Documenten\GitHub\duplicatecheck\NestJs_API\src\training\schema" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.TrainingService">
+  <component name="RunManager" selected="Jest.training.service.spec.ts">
     <configuration name="TrainingController.checkForRecords" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -150,8 +155,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.TrainingService" />
         <item itemvalue="Jest.training.service.spec.ts" />
+        <item itemvalue="Jest.TrainingService" />
         <item itemvalue="Jest.training.controller.spec.ts" />
         <item itemvalue="Jest.TrainingController.checkForRecords" />
         <item itemvalue="Jest.TrainingService.giveAnswer" />

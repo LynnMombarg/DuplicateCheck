@@ -5,11 +5,12 @@ import { Training } from './schema/training.schema';
 import { Model } from 'mongoose';
 
 @Injectable()
-export class TrainingDAO {
-  constructor(//@InjectModel(Training.name) private model: Model<Training>
+export class TrainingDao {
+  constructor(@InjectModel(Training.name) private model: Model<Training>
   ) {}
 
   async getNextRecords(trainingId: string): Promise<RecordDto[]> {
+
     return null;
   }
 

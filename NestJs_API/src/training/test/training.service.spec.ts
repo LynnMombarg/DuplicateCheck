@@ -3,13 +3,13 @@ import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthGuard } from '../../auth/auth.guard';
-import { TrainingDAO } from '../TrainingDAO';
+import { TrainingDao } from '../Training.dao';
 import { TrainingService } from '../training.service';
 
 describe('TrainingService', () => {
   let TrainingService: TrainingService;
 
-  const mockedTrainingDAO = {
+  const mockedTrainingdao = {
     getNextRecords: jest.fn(),
     saveRecord: jest.fn(),
     checkForRecords: jest.fn(),
@@ -20,7 +20,7 @@ describe('TrainingService', () => {
       providers: [
         AuthService,
         JwtService,
-        TrainingDAO,
+        TrainingDao,
         {
           provide: AuthDAO,
           useValue: jest.fn(),
@@ -31,15 +31,15 @@ describe('TrainingService', () => {
         },
       ],
     })
-      .overrideProvider(mockedTrainingDAO)
-      .useValue(mockedTrainingDAO)
+      .overrideProvider(mockedTrainingdao)
+      .useValue(mockedTrainingdao)
       .compile();
 
     TrainingService = moduleRef.get<TrainingService>(TrainingService);
   });
 
   describe('getRecords', () => {
-    it('should call getRecords on TrainingDAO', () => {
+    it('should call getRecords on TrainingDao', () => {
       // Arrange
       const trainingID = '123';
       const req = '123';
@@ -48,12 +48,12 @@ describe('TrainingService', () => {
       TrainingService.getRecords(trainingID, req);
 
       // Assert
-      expect(mockedTrainingDAO.getNextRecords).toHaveBeenCalledWith(trainingID);
+      expect(mockedTrainingdao.getNextRecords).toHaveBeenCalledWith(trainingID);
     });
   });
 
   describe('giveAnswer', () => {
-    it('should call giveAnswer on TrainingDAO', () => {
+    it('should call giveAnswer on TrainingDao', () => {
       // Arrange
       const trainingID = '123';
       const req = '123';
@@ -63,7 +63,7 @@ describe('TrainingService', () => {
       TrainingService.giveAnswer(false, trainingID, req);
 
       // Assert
-      expect(mockedTrainingDAO.saveRecord).toHaveBeenCalledWith(
+      expect(mockedTrainingdao.saveRecord).toHaveBeenCalledWith(
         trainingID,
         req,
         answer,
