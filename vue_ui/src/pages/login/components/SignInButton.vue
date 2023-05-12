@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
 export default {
   name: "SignInButton",
   methods: {
@@ -28,6 +26,8 @@ export default {
         if (event.data.message === "success") {
             popupWindow.close();
             console.log(event.data.token);
+            this.$store.commit("setToken", event.data.token);
+            this.$router.push({ name: "OverviewPage" });
         }
       });
     },

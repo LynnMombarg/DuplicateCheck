@@ -4,10 +4,10 @@
 <!--Last modified: 11-05-2023-->
 
 <template>
-  <OverviewBannerComponent />
+  <OverviewBannerComponent :token="token"/>
   <ul role="list" class="divide-y divide-gray-100">
     <li v-for="model in models" :key="model.information">
-      <OverviewModelComponent :model="model" />
+      <OverviewModelComponent :model="model" :token="token"/>
     </li>
   </ul>
 </template>
@@ -26,22 +26,30 @@ export default {
     OverviewBannerComponent,
     OverviewModelComponent
   },
+  props: {
+    token: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       models: [],
+      token: null
     }
   },
   async mounted() {
-    this.models = await getModels();
+      this.token = await this.$store.state.token;
+      this.models = await getModels(this.token);
   },
   methods: {
     async deleteModel(modelId) {
-      this.models = await deleteModel(modelId);
+      this.models = await deleteModel(modelId, this.token);
     },
     async createModel(modelName, tableName, description) {
-      this.models = await createModel(modelName, tableName, description);
+      this.models = await createModel(modelName, tableName, description, this.token);
     }
-  }
+  },
 };
 </script>
 
