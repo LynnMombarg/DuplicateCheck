@@ -27,7 +27,7 @@ export default {
   name: "OverviewBannerComponent",
   components: {
     CreateModelButton,
-  },    
+  },
   methods: {
     createModel(modelName, tableName, description){
       this.$parent.createModel(modelName, tableName, description);

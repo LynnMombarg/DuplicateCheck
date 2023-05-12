@@ -45,7 +45,7 @@
       </p>
     </div>
     <div>
-      <OverviewDropdownComponent :modelId="this.model.modelId" />
+      <OverviewDropdownComponent :modelId="this.model.modelId" :token="token" />
     </div>
   </div>
 </template>
@@ -58,11 +58,15 @@ export default {
   components: { OverviewDropdownComponent },
   props: {
     model: Array,
+    token: {
+        type: String,
+        required: true,
+    },
   },
   methods: {
     deleteModel(modelId){
-      this.$parent.deleteModel(modelId);
-    },  
+      this.$parent.deleteModel(modelId, this.token);
+    },
     isContacts(tableName) {
       return tableName === 'contacts';
     },
