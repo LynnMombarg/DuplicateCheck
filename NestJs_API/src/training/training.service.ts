@@ -11,7 +11,6 @@ import { TrainingDTO } from './dto/training.dto';
 import { v4 as uuid } from 'uuid';
 import { DatasetDTO } from './dto/dataset.dto';
 import { AuthDTO } from '../auth/auth.dto';
-import { ValidationError } from 'joi';
 
 @Injectable()
 export class TrainingService {
