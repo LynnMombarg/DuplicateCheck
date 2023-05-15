@@ -67,6 +67,15 @@ export default {
 /*  background-repeat: repeat-x;*/
 /*  background-size: 50% 30%;*/
 /*}*/
+#headlessui-portal-root {
+    position: fixed;
+    z-index: 9999;
+    inset: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
 
 

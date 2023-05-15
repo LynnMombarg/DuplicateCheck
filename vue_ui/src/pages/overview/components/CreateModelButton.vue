@@ -10,7 +10,7 @@
 
 
     <TransitionRoot as="template" :show="open" class="fixed inset-0 overflow-y-auto">
-        <Dialog as="div" class="relative z-50" @close="open = false">
+        <Dialog as="div" class="relative z-50 flex justify-center items-center" @close="open = false">
             <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                              leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
@@ -25,28 +25,33 @@
                                      leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
                         <DialogPanel
                                 class="fixed inset-0 flex items-center justify-center bg-opacity-75 bg-gray-500 z-50">
-                            <div class="px-4 py-6 bg-white sm:p-6">
+                            <div class="px-4 py-6 bg-white sm:p-6 rounded-lg">
                                 <DialogTitle class="text-lg leading-6 font-medium text-gray-900">
                                     Create a new model
                                 </DialogTitle>
                                 <p v-if="warningVisible">Please fill in all fields.</p>
-                                <label for="model">Model name*: </label>
-                                <input v-model="modelName" placeholder="Model name" id="model"/> <br>
+                                <div class="mt-2 flex flex-row">
+                                    <label for="model" style="margin-right: 2rem;">Model name: </label>
+                                    <input v-model="modelName" placeholder="Model name" id="model"/> <br>
+                                </div>
 
-                                <label for="table">Table name*: </label>
-                                <select v-model="tableName" name="table" id="table">
-                                    <option value="accounts">Accounts</option>
-                                    <option value="contacts">Contacts</option>
-                                    <option value="leads">Leads</option>
-                                </select> <br>
+                                <div class="mt-2 flex flex-row">
+                                    <label for="table" style="margin-right: 2rem;">Table name: </label>
+                                    <select v-model="tableName" name="table" id="table">
+                                        <option value="accounts">Accounts</option>
+                                        <option value="contacts">Contacts</option>
+                                        <option value="leads">Leads</option>
+                                    </select>
+                                </div>
+                                <div class="mt-2 flex flex-row">
 
-                                <label for="description">Description: </label>
-                                <textarea v-model="description" id="description" name="description"
-                                          placeholder="Model description"></textarea>
-                                <br>
+                                    <label for="description" style="margin-right: 2rem;">Description: </label>
+                                    <textarea v-model="description" id="description" name="description"
+                                              placeholder="Model description"></textarea>
+                                </div>
 
                                 <button @click="createModel" class="rounded-md bg-blue-100 px-3 py-2 text-xl">
-                                    Submit model
+                                    Submit
                                 </button>
                             </div>
                         </DialogPanel>
@@ -70,7 +75,6 @@ export default {
             modelName: '',
             tableName: '',
             description: '',
-            inputVisible: false,
             warningVisible: false,
             open: false,
         }
@@ -79,7 +83,7 @@ export default {
         async createModel() {
             if (this.modelName !== '' && this.tableName !== '') {
                 this.$parent.createModel(this.modelName, this.tableName, this.description);
-                this.inputVisible = false;
+                this.open = false;
             } else {
                 this.warningVisible = true;
             }
