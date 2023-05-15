@@ -11,12 +11,14 @@ import { ModelDAO } from './model.dao';
 import { Model, ModelSchema } from './model.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
+import { SalesforceModule } from '../salesforce/salesforce.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Model.name, schema: ModelSchema }]),
     PythonModule,
     AuthModule,
+    SalesforceModule,
   ],
   controllers: [ModelController],
   providers: [ModelService, ModelDAO],

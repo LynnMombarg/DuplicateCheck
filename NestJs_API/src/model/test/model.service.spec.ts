@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 12-05-2023
+// Last modified: 15-05-2023
 
 import { ModelService } from '../model.service';
 import { Test } from '@nestjs/testing';
@@ -9,6 +9,7 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { ModelDAO } from '../model.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('ModelService', () => {
   let modelService: ModelService;
@@ -18,22 +19,19 @@ describe('ModelService', () => {
     getAllModels: jest.fn(),
   };
   const mockedAuthDAO = {
-    getUserId: jest.fn((token) => {
-      if (token === 'secretToken') {
-        return '1';
-      } else {
-        return null;
-      }
-    }),
+    getTokensByUserId: jest.fn(),
   };
   const mockedPythonDAO = {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
   };
+  const mockedSalesforceDAO = {
+    getJobs: jest.fn(),
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [ModelService, ModelDAO, AuthDAO, PythonDAO],
+      providers: [ModelService, ModelDAO, AuthDAO, PythonDAO, SalesforceDAO],
     })
       .overrideProvider(ModelDAO)
       .useValue(mockedModelDAO)
@@ -43,6 +41,8 @@ describe('ModelService', () => {
       .useValue(mockedAuthDAO)
       .overrideProvider(PythonDAO)
       .useValue(mockedPythonDAO)
+      .overrideProvider(SalesforceDAO)
+      .useValue(mockedSalesforceDAO)
       .compile();
 
     modelService = moduleRef.get<ModelService>(ModelService);
@@ -98,6 +98,30 @@ describe('ModelService', () => {
 
       // Assert
       expect(mockedPythonDAO.deleteModel).toHaveBeenCalled();
+    });
+  });
+  describe('getJobs', () => {
+    it('should call getTokensByUserId on AuthDAO', () => {
+      // Arrange
+      const tableName = 'contacts';
+      const userId = 'test123';
+
+      // Act
+      modelService.getJobs(userId, tableName);
+
+      // Assert
+      expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
+    });
+    it('should call getJobs on SalesforceDao', () => {
+      // Arrange
+      const tableName = 'contacts';
+      const userId = 'test123';
+
+      // Act
+      modelService.getJobs(userId, tableName);
+
+      // Assert
+      expect(mockedSalesforceDAO.getJobs).toHaveBeenCalled();
     });
   });
 });

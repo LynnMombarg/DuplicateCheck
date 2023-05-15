@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 11-05-2023
+// Last modified: 15-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
@@ -19,6 +19,7 @@ describe('ModelController', () => {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
     getAllModels: jest.fn(),
+    getJobs: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -101,6 +102,19 @@ describe('ModelController', () => {
 
       // Assert
       expect(mockedModelService.getAllModels).toHaveBeenCalled();
+    });
+  });
+  describe('getJobs', () => {
+    it('should call getJobs on ModelService', () => {
+      // Arrange
+      const req = { user: { userId: 'test' } };
+      const tableName = 'contacts';
+
+      // Act
+      modelController.getJobs(req, tableName);
+
+      // Assert
+      expect(mockedModelService.getJobs).toHaveBeenCalled();
     });
   });
 });
