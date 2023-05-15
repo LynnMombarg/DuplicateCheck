@@ -16,8 +16,8 @@ import TrainingPage from "@/pages/training/TrainingPage.vue";
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/', name: 'SignIn', component: SignIn},
-        {path: '/overview', name: 'OverviewPage', component: OverviewPage},
+        {path: '/', name: 'SignIn', component: SignIn, meta: { title: 'Sign In - Plauti Duplicate Check ML' }},
+        {path: '/overview', name: 'OverviewPage', component: OverviewPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
         {path: '/training', name: 'TrainingPage', component: TrainingPage},
     ]
 })
@@ -26,6 +26,7 @@ export const store = createStore({
     state() {
         return {
             token: localStorage.getItem('token') || null,
+            user: localStorage.getItem('user') || null,
         };
     },
     mutations: {
@@ -36,6 +37,14 @@ export const store = createStore({
         removeToken(state) {
             state.token = null;
             localStorage.removeItem('token');
+        },
+        setUser(state, user ) {
+            state.user = JSON.stringify(user);
+            localStorage.setItem('user', JSON.stringify(user));
+        },
+        removeUser(state) {
+            state.user = null;
+            localStorage.removeItem('user');
         }
     },
 });
@@ -46,6 +55,10 @@ export const store = createStore({
 //     else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
 //     else next();
 // });
+
+router.afterEach((to) => {
+    document.title = to.meta.title;
+});
 
 
 const app = createApp(App);

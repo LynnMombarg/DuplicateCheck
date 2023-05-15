@@ -8,7 +8,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthDAO } from './auth.dao';
-import { Auth, AuthSchema } from './auth.schema';
+import {
+  Auth,
+  AuthBlacklist,
+  AuthBlacklistSchema,
+  AuthSchema,
+} from './auth.schema';
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
@@ -17,11 +22,11 @@ import { jwtConfig } from '../config/jwt.config';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }]),
+    MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }, { name: AuthBlacklist.name, schema: AuthBlacklistSchema }]),
     JwtModule.register(jwtConfig),
   ],
   controllers: [AuthController],
   providers: [AuthDAO, AuthGuard, AuthService],
-  exports: [AuthGuard, AuthDAO],
+  exports: [AuthGuard, AuthService],
 })
 export class AuthModule {}
