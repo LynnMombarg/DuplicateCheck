@@ -1,7 +1,7 @@
 // Authors: Marloes
 // Jira-task: 130
 // Sprint: 3
-// Last modified: 12-05-2023
+// Last modified: 15-05-2023
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { TrainingDTO } from './dto/training.dto';
