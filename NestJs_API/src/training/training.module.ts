@@ -6,6 +6,7 @@ import { TrainingDAO } from './training.dao';
 import { Training, TrainingSchema } from './training.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
+import { PythonDAO } from 'src/python/python.dao';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { AuthModule } from '../auth/auth.module';
     AuthModule,
   ],
   controllers: [TrainingController],
-  providers: [TrainingService, TrainingDAO],
+  providers: [TrainingService, TrainingDAO, PythonDAO],
 })
 
 export class TrainingModule {}

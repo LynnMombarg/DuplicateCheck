@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { TrainingDAO } from "./training.dao";
-import { PythonDAO } from "src/python/python.dao";
+import { PythonDAO } from "../python/python.dao";
 
 @Injectable()
 export class TrainingService {

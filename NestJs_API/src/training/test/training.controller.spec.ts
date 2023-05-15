@@ -1,36 +1,51 @@
-import { Test } from "@nestjs/testing";
+import { Test, TestingModule } from "@nestjs/testing";
 import { TrainingController } from "../training.controller";
 import { TrainingService } from "../training.service";
+import { TrainingDAO } from "../training.dao";
+import { PythonDAO } from "../../python/python.dao";
 
 describe('TrainingController', () => {
     let trainingController: TrainingController;
 
     const mockedTrainingService = {
-        saveTraining: jest.fn(),
-      };
+      saveTraining: jest.fn(),
+    };
 
       beforeEach(async () => {
-        const moduleRef = await Test.createTestingModule({
+        const moduleRef: TestingModule = await Test.createTestingModule({
           controllers: [TrainingController],
-          providers: [TrainingService],
+          providers: [
+            TrainingService,
+          {
+            provide: TrainingDAO,
+            useValue: jest.fn(),
+          },
+          {
+            provide: PythonDAO,
+            useValue: jest.fn(),
+          }],
         })
-          .overrideProvider(TrainingService)
+        .overrideProvider(TrainingService)
           .useValue(mockedTrainingService)
-          .compile();
+            .compile();
     
         trainingController = moduleRef.get<TrainingController>(TrainingController);
       });
 
-    //   describe('saveTraining', () => {
-    //     it('should call saveTraining on TrainingService', () => {
-    //       // Arrange
-    //       const json = { "modelId": "modelId", "trainingId": "trainingId", "userId": "userId" };
+      it('should be defined', () => {
+        expect(trainingController).toBeDefined();
+      });
+
+      describe('saveTraining', () => {
+        it('should call saveTraining on TrainingService', () => {
+          // Arrange
+          const json = { "modelId": "modelId", "trainingId": "trainingId" };
     
-    //       // Act
-    //       trainingController.saveTraining(json, 'test');
+          // Act
+          trainingController.saveTraining(json, '123');
     
-    //       // Assert
-    //       expect(mockedTrainingService.saveTraining).toHaveBeenCalledWith(json, 'test');
-    //     });
-    //   });
+          // Assert
+          expect(mockedTrainingService.saveTraining).toHaveBeenCalledWith("modelId", "trainingId", '123');
+        });
+      });
 })
