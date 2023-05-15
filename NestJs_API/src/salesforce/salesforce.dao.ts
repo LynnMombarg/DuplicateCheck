@@ -68,15 +68,63 @@ export class SalesforceDAO {
     return resultSet;
   }
 
-  async getDatasets(tokens: AuthDTO, jobId: string): Promise<DatasetDTO[]> {
-    const datasetA = new DatasetDTO([
-      new RecordDTO(['1', 'Hoi']),
-      new RecordDTO(['2', 'Doei']),
-    ]);
-    const datasetB = new DatasetDTO([
-      new RecordDTO(['1', 'Hi']),
-      new RecordDTO(['3', 'Doei']),
-    ]);
-    return [datasetA, datasetB];
+  async getDatasets(
+    tokens: AuthDTO,
+    jobId: string,
+    tableName: string,
+  ): Promise<DatasetDTO[]> {
+    let columns = '';
+    switch (tableName) {
+      case 'leads':
+        columns = 'Name, Title, Company, Phone, MobilePhone, Email, Status';
+        break;
+      case 'contacts':
+        columns = 'Name, Account.Name, Account.Site, Phone, Email';
+        break;
+      case 'accounts':
+        columns = 'Name, Site, Phone';
+        break;
+      default:
+        throw new BadRequestException();
+        break;
+    }
+    const resultSet: DatasetDTO[] = [];
+
+    await new Promise((resolve, reject) => {
+      const conn = new this.jsforce.Connection({
+        oauth2: this.oauth2,
+        instanceUrl: process.env.SF_INSTANCE_URL,
+        accessToken: tokens.getAccessToken(),
+        refreshToken: tokens.getRefreshToken(),
+      });
+      conn.on(
+        'refresh',
+        function (accessToken, res) {
+          console.log('refreshed token: ' + accessToken);
+          this.authService.updateToken(accessToken);
+        }.bind(this),
+      );
+      conn.query(
+        "SELECT id, " + columns + " FROM " + tableName + " WHERE EXISTS = '" +
+          jobId +
+          "'",
+
+          //SELECT dupcheck__SourceObject__c, dupcheck__Group__c FROM dupcheck__dc3Duplicate__c D WHERE dupcheck__Group__c IN (SELECT G.Id FROM dupcheck__dcGroup__c G WHERE G.dupcheck__dcJob__c = 'a0C7Q00000Cz26UUAR')
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            reject(new UnauthorizedException());
+          } else {
+            for (let i = 0; i < result.records.length; i++) {
+              const jobName = result.records[i]['Name'];
+              const jobId = result.records[i]['Id'];
+              resultSet.push(new JobDTO(jobName, jobId));
+            }
+            resolve(resultSet);
+          }
+        },
+      );
+    });
+    return resultSet;
   }
 }
