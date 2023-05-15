@@ -1,3 +1,8 @@
+// Authors: Silke
+// Jira-task: 123
+// Sprint: 3
+// Last modified: 15-05-2023
+
 import { Test } from '@nestjs/testing';
 import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';

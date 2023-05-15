@@ -1,3 +1,8 @@
+// Authors: Silke
+// Jira-task: 123
+// Sprint: 3
+// Last modified: 15-05-2023
+
 import { Injectable, Req } from '@nestjs/common';
 import { RecordDto } from './dto/record.dto';
 import { TrainingDao } from './training.dao';
