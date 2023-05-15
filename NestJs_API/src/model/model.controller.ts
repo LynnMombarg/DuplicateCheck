@@ -19,13 +19,13 @@ import { ModelDTO } from './dto/model.dto';
 import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('model')
-@UseGuards(AuthGuard)
+// @UseGuards(AuthGuard)
 export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Post('/create')
   createModel(@Body() model: CreateModelDTO, @Req() req) {
-    this.modelService.createModel(model, req.user.userId);
+    this.modelService.createModel(model, "123");
   }
 
   @Get('/models')

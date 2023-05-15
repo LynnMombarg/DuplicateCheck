@@ -13,15 +13,17 @@ from .RecordLinkageModel import RecordLinkageModel
 import pickle
 
 class PythonService:
+    picklePath = 'src/pickles/'
+    pickleFormat = '.pkl'
     
     def createModel(self, modelId):
         model = RecordLinkageModel()
-        filehandler = open('pickles/' + modelId + '.pkl', 'wb')
+        filehandler = open(self.picklePath + modelId + self.pickleFormat, 'wb')
         pickle.dump(model, filehandler)
         
     def loadModel(self, modelId):
         model: RecordLinkageModel
-        with open('pickles/' + modelId + '.pkl', 'rb') as file:
+        with open(self.picklePath + modelId + self.pickleFormat, 'rb') as file:
             model = pickle.load(file)
             if not model:
                 raise FileNotFoundError('Model not found')
@@ -33,5 +35,5 @@ class PythonService:
         model.trainModel(json_dataframe)
         
     def deleteModel(self, modelId):
-        os.remove('pickles/' + modelId + '.pkl')
+        os.remove(self.picklePath + modelId + self.pickleFormat)
         
