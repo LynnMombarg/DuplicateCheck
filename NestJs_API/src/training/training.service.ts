@@ -4,7 +4,7 @@
 // Last modified: 15-05-2023
 
 import { Injectable, NotFoundException, Req } from "@nestjs/common";
-import { RecordDto } from './dto/record.dto';
+import { RecordDTO } from './dto/record.dto';
 import { TrainingDAO } from "./training.dao";
 import { AuthDAO } from "../auth/auth.dao";
 import { SalesforceDAO } from "../salesforce/salesforce.dao";
@@ -44,7 +44,7 @@ export class TrainingService {
   }
   
 
-    async getRecords(trainingID: string, @Req() req): Promise<RecordDto[]> {
+    async getRecords(trainingID: string, @Req() req): Promise<RecordDTO[]> {
       return this.trainingDAO.getNextRecords(trainingID);
     }
   

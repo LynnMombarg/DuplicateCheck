@@ -6,10 +6,10 @@
 import { Controller, Get, Post, Query, Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from '../auth/auth.guard';
 import { TrainingService } from './training.service';
-import { RecordDto } from "./dto/record.dto";
+import { RecordDTO } from "./dto/record.dto";
 
 @Controller('training')
-@UseGuards(AuthGuard)
+//@UseGuards(AuthGuard)
 export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
@@ -20,7 +20,7 @@ export class TrainingController {
 
   
   @Get('/records')
-  getRecords(@Query('trainingId') trainingId: string, @Req() req): Promise<RecordDto[]> {
+  getRecords(@Query('trainingId') trainingId: string, @Req() req): Promise<RecordDTO[]> {
     return this.trainingService.getRecords(trainingId, req);
   }
 

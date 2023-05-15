@@ -98,6 +98,9 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
         trainingID,
         req,
+      );
+    });
+
   describe('selectJob', () => {
     it('should call selectJob on TrainingService', () => {
       // Arrange
@@ -112,6 +115,8 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
         jobId,
         userId,
-      );
-    });
+    );
+});
   });
+});
+});

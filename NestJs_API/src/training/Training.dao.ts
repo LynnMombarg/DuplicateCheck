@@ -1,20 +1,30 @@
-import { Injectable } from '@nestjs/common';
-import { RecordDto } from './dto/record.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { Training } from './schema/training.schema';
-import { Model } from 'mongoose';
-
-// Authors: Silke
-// Jira-task: 123
+// Authors: Marloes, Silke
+// Jira-task: 130, 129
 // Sprint: 3
 // Last modified: 15-05-2023
 
+import { Injectable } from '@nestjs/common';
+import { TrainingDTO } from './dto/training.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Training } from './schema/training.schema';
+import { Model } from 'mongoose';
+import { RecordDTO } from "./dto/record.dto";
 
 @Injectable()
-export class TrainingDao {
+export class TrainingDAO {
   constructor(@InjectModel(Training.name) private model: Model<Training>) {}
 
-  async getNextRecords(trainingId: string): Promise<RecordDto[]> {
+  async createTraining(training: TrainingDTO) {
+    //try {
+    const createdTraining = new this.model(training);
+    await createdTraining.save();
+    //} catch {
+    //  throw new NotFoundException();
+    //}
+  }
+
+
+  async getNextRecords(trainingId: string): Promise<RecordDTO[]> {
     const training = await this.model.findOne({ trainingId: trainingId }).exec();
     const lengthMatches = training.matches.length;
     const recordA = training.datasetA.records[lengthMatches];
