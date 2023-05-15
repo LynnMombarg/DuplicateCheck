@@ -25,6 +25,7 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/record.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/training.schema.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/test/training.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/test/training.dao.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/test/training.service.spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.controller.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.dao.ts" afterDir="false" />
@@ -81,24 +82,12 @@
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\vue_ui\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\NestJs_API\src\training\test\support" />
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\NestJs_API\src\training\schema" />
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\NestJs_API\src\model\schema" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.Tests in test/ (2)">
-    <configuration name="ModelController.createModel" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/NestJs_API" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" />
-      <test-names>
-        <test-name value="ModelController" />
-        <test-name value="createModel" />
-      </test-names>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Jest.training.dao.spec.ts">
     <configuration name="Tests in test/ (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
@@ -139,6 +128,15 @@
       <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.controller.spec.ts" />
       <method v="2" />
     </configuration>
+    <configuration name="training.dao.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.dao.spec.ts" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -150,7 +148,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Jest.ModelController.createModel" />
+      <item itemvalue="Jest.training.dao.spec.ts" />
       <item itemvalue="Jest.Tests in test/ (2)" />
       <item itemvalue="Jest.TrainingService.selectJob" />
       <item itemvalue="Jest.training.controller.spec.ts" />
@@ -163,11 +161,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.training.dao.spec.ts" />
         <item itemvalue="Jest.Tests in test/ (2)" />
         <item itemvalue="Jest.Tests in test/ (1)" />
         <item itemvalue="Jest.TrainingService.selectJob" />
         <item itemvalue="Jest.training.controller.spec.ts" />
-        <item itemvalue="Jest.ModelController.createModel" />
       </list>
     </recent_temporary>
   </component>
@@ -194,7 +192,8 @@
       <workItem from="1683796370626" duration="586000" />
       <workItem from="1683797045621" duration="315000" />
       <workItem from="1683876714908" duration="5916000" />
-      <workItem from="1683882710476" duration="11112000" />
+      <workItem from="1683882710476" duration="11126000" />
+      <workItem from="1684134297540" duration="5758000" />
     </task>
     <servers />
   </component>
@@ -206,7 +205,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___2_.info" NAME="Tests in test/ (2) Coverage Results" MODIFIED="1683893918951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___2_.info" NAME="Tests in test/ (2) Coverage Results" MODIFIED="1684140108106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$training_controller_spec_ts.info" NAME="training.controller.spec.ts Coverage Results" MODIFIED="1683892573977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/DuplicateCheck$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683637630868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

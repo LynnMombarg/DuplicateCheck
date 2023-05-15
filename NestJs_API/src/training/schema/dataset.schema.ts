@@ -5,6 +5,10 @@
 
 import { Record, RecordSchema } from './record.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+import { Model } from '../../model/schema/model.schema';
+
+export type DatasetDocument = HydratedDocument<Model>;
 
 @Schema()
 export class Dataset {

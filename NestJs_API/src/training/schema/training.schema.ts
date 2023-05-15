@@ -5,6 +5,10 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Dataset, DatasetSchema } from './dataset.schema';
+import { HydratedDocument } from 'mongoose';
+import { Model } from '../../model/schema/model.schema';
+
+export type TrainingDocument = HydratedDocument<Model>;
 
 @Schema()
 export class Training {
