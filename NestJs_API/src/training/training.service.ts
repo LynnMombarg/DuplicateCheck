@@ -15,7 +15,7 @@ export class TrainingService {
     trainingID: string,
     @Req() req,
   ): Promise<void> {
-    await this.TrainingDOA.saveRecord(trainingID);
+    await this.TrainingDOA.saveRecord(trainingID, answer);
   }
 
   checkForRecords(trainingID: string, req): Promise<boolean> {

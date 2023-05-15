@@ -6,21 +6,32 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class TrainingDao {
-  constructor(@InjectModel(Training.name) private model: Model<Training>
-  ) {}
+  constructor(@InjectModel(Training.name) private model: Model<Training>) {}
 
   async getNextRecords(trainingId: string): Promise<RecordDto[]> {
-
-    return null;
+    const training = await this.model.findOne({ trainingId: trainingId }).exec();
+    const lengthMatches = training.matches.length;
+    const recordA = training.datasetA.records[lengthMatches];
+    const recordB = training.datasetB.records[lengthMatches];
+    const records = [recordA, recordB];
+    return records;
   }
 
-  async saveRecord(trainingID: string) {
-    //this.model.updateOne({ trainingId: trainingID }, { $addToSet });
-    return null;
+  async saveRecord(trainingID: string, answer: boolean) {
+    this.model.updateOne(
+      { trainingId: trainingID },
+      { $push: { answer: answer } },
+    );
   }
 
-  checkForRecords(trainingID: string): Promise<boolean> {
-    // this.model.findOne({ trainingId: trainingID });
-    return null;
+  async checkForRecords(trainingID: string): Promise<boolean> {
+    const training = await this.model.findOne({ trainingId: trainingID }).exec();
+    const lengthMatches = training.matches.length;
+    const lengthDatasets = training.datasetA.records.length;
+    if (lengthDatasets > lengthMatches) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
