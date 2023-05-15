@@ -23,7 +23,7 @@ export class TrainingService {
     await this.TrainingDOA.saveRecord(trainingID, answer);
   }
 
-  checkForRecords(trainingID: string, req): Promise<boolean> {
-    return this.TrainingDOA.checkForRecords(trainingID);
+  checkForRecords(trainingId: string, req): Promise<boolean> {
+    return this.TrainingDOA.checkForRecords(trainingId);
   }
 }

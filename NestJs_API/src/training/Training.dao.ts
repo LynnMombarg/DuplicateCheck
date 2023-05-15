@@ -24,9 +24,9 @@ export class TrainingDao {
   }
 
   async saveRecord(trainingId: string, answer: boolean) {
-    this.model.updateOne(
+    await this.model.updateOne(
       { trainingId: trainingId },
-      { $push: { answer: answer } },
+      { $push: { matches: { $each: [answer] } } },
     );
   }
 
