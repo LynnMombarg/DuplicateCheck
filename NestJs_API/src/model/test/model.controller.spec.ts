@@ -15,6 +15,7 @@ describe('ModelController', () => {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
     getAllModels: jest.fn(),
+    getJobs: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -83,6 +84,19 @@ describe('ModelController', () => {
 
       // Assert
       expect(mockedModelService.getAllModels).toHaveBeenCalled();
+    });
+  });
+  describe('getJobs', () => {
+    it('should call getJobs on ModelService', () => {
+      // Arrange
+      const token = 'secretToken';
+      const tableName = 'contacts';
+
+      // Act
+      modelController.getJobs(token, tableName);
+
+      // Assert
+      expect(mockedModelService.getJobs).toHaveBeenCalled();
     });
   });
 });

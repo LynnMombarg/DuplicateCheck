@@ -3,10 +3,10 @@
 // Sprint: 3
 // Last modified: 12-05-2023
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/auth.dto';
-import { AuthService } from 'src/auth/auth.service';
-import { JobDTO } from 'src/model/dto/job-model.dto';
+import { AuthService } from '../auth/auth.service';
+import { JobDTO } from '../model/dto/job-model.dto';
 
 @Injectable()
 export class SalesforceDAO {
@@ -21,6 +21,9 @@ export class SalesforceDAO {
   });
 
   async getJobs(tableId: String, tokens: AuthDTO): Promise<JobDTO[]> {
+    if(tableId == "error"){
+      throw new NotFoundException();
+    }
     const conn = new this.jsforce.Connection({
       oauth2: this.oauth2,
       instanceUrl: process.env.SF_INSTANCE_URL,

@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="" />
+    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,36 +27,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck/vue_ui/src/components&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck/NestJs_API/node_modules/jest&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;C:/Program Files/nodejs/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/marlo/OneDrive/Documenten/HBO-ICT/2/OOSE-Project/DuplicateCheck/vue_ui/src/components",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/rowar/OneDrive/Documenten/GitHub/duplicate-record-rest-api/NestJs_API/node_modules/jest",
+    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "C:\\Users\\rowar\\OneDrive\\Documenten\\GitHub\\duplicate-record-rest-api\\NestJs_API\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\vue_ui\src\components" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.Tests in test/ (1)">
+  <component name="RunManager" selected="Jest.model.controller.spec.ts">
     <configuration name="ModelService.deleteModel.should throw an UnauthorizedException" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -88,6 +90,16 @@
       <scope-kind value="ALL" />
       <method v="2" />
     </configuration>
+    <configuration name="model.controller.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -114,6 +126,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Jest.model.controller.spec.ts" />
       <item itemvalue="Jest.Tests in test/ (1)" />
       <item itemvalue="Jest.ModelService.deleteModel.should throw an UnauthorizedException" />
       <item itemvalue="Jest.Tests in test/" />
@@ -125,6 +138,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.model.controller.spec.ts" />
         <item itemvalue="Jest.Tests in test/ (1)" />
         <item itemvalue="Jest.Tests in test/" />
         <item itemvalue="Jest.ModelService.deleteModel.should throw an UnauthorizedException" />
@@ -153,6 +167,7 @@
       <workItem from="1682493013765" duration="4933000" />
       <workItem from="1683796370626" duration="586000" />
       <workItem from="1683797045621" duration="315000" />
+      <workItem from="1684137292688" duration="417000" />
     </task>
     <servers />
   </component>
@@ -168,5 +183,6 @@
     <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___1_.info" NAME="Tests in test/ (1) Coverage Results" MODIFIED="1683797284171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683536273875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$model_controller_spec_ts.info" NAME="model.controller.spec.ts Coverage Results" MODIFIED="1684137667946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

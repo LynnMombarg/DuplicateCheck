@@ -10,7 +10,7 @@ import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [AuthModule],
-  providers: [SalesforceDAO, AuthService,],
-  exports: [SalesforceDAO]
+  providers: [SalesforceDAO, AuthService],
+  exports: [SalesforceDAO],
 })
 export class SalesforceModule {}

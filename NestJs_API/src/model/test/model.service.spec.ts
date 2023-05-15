@@ -9,6 +9,7 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { ModelDAO } from '../model.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
+import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
 
 describe('ModelService', () => {
   let modelService: ModelService;
@@ -30,6 +31,9 @@ describe('ModelService', () => {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
   };
+  const mockedSalesforceDAO = {
+    getJobs: jest.fn(),
+  }
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -41,6 +45,8 @@ describe('ModelService', () => {
       .useValue(mockedAuthDAO)
       .overrideProvider(PythonDAO)
       .useValue(mockedPythonDAO)
+      .overrideProvider(SalesforceDAO)
+      .useValue(mockedSalesforceDAO)
       .compile();
 
     modelService = moduleRef.get<ModelService>(ModelService);
@@ -130,5 +136,18 @@ describe('ModelService', () => {
     //     modelService.deleteModel(modelId, token);
     //   }).toThrow(new UnauthorizedException());
     // });
+  });
+  describe('getJobs', () => {
+    it('should call getJobs on SalesforceDao', () => {
+      // Arrange
+      const tableName = 'contacts';
+      const userId = 'test123';
+
+      // Act
+      modelService.getJobs(userId, tableName);
+
+      // Assert
+      expect(mockedModelDAO.deleteModel).toHaveBeenCalled();
+    });
   });
 });

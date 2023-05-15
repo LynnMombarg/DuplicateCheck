@@ -9,9 +9,9 @@ import { ModelDAO } from './model.dao';
 import { CreateModelDTO } from './dto/create-model.dto';
 import { PythonDAO } from '../python/python.dao';
 import { v4 as uuid } from 'uuid';
-import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
+import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { JobDTO } from './dto/job-model.dto';
-import { AuthDAO } from 'src/auth/auth.dao';
+import { AuthDAO } from '../auth/auth.dao';
 
 @Injectable()
 export class ModelService {
@@ -60,6 +60,9 @@ export class ModelService {
         break;
       case "accounts":
         tableId = "001";
+        break;
+      default:
+        tableId = "error";
         break;
     }
     return this.salesforceDAO.getJobs(tableId, authDTO);
