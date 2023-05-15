@@ -70,7 +70,7 @@ describe('TrainingDAO', () => {
   });
 
     describe('getNextRecords', () => {
-      it('should fetch records from the mongoose model', async () => {
+      it('should fetch the correct records from the mongoose model', async () => {
         // Arrange
         const trainingsid = 'trainingId';
         const mockTraining = {
