@@ -35,11 +35,11 @@ export class ModelService {
     );
 
     await this.modelDAO.createModel(model);
-    await this.pythonDAO.createModel(modelId);
+    //await this.pythonDAO.createModel(modelId);
   }
 
   async deleteModel(userId: string, modelId: string): Promise<void> {
     await this.modelDAO.deleteModel(modelId, userId);
-    await this.pythonDAO.deleteModel(modelId);
+    //await this.pythonDAO.deleteModel(modelId);
   }
 }
