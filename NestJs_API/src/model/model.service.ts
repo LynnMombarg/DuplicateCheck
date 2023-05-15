@@ -1,6 +1,6 @@
 // Authors: Marloes, Roward
 // Jira-task: 107, 110
-// Sprint: 2
+// Sprint: 2, 3
 // Last modified: 15-05-2023
 
 import { Injectable } from '@nestjs/common';
