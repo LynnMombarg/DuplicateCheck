@@ -9,7 +9,7 @@ import { TrainingService } from './training.service';
 import { RecordDTO } from "./dto/record.dto";
 
 @Controller('training')
-//@UseGuards(AuthGuard)
+@UseGuards(AuthGuard)
 export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
