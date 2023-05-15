@@ -24,6 +24,7 @@ export const store = createStore({
     state() {
         return {
             token: localStorage.getItem('token') || null,
+            user: localStorage.getItem('user') || null,
         };
     },
     mutations: {
@@ -34,6 +35,14 @@ export const store = createStore({
         removeToken(state) {
             state.token = null;
             localStorage.removeItem('token');
+        },
+        setUser(state, user ) {
+            state.user = JSON.stringify(user);
+            localStorage.setItem('user', JSON.stringify(user));
+        },
+        removeUser(state) {
+            state.user = null;
+            localStorage.removeItem('user');
         }
     },
 });

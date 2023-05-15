@@ -1,7 +1,7 @@
-<!--Author(s): Silke Bertisen, Roward-->
+<!--Author(s): Silke Bertisen, Roward, Diederik-->
 <!--Jira-task: Dashboard realiseren 104 -->
-<!--Sprint: 2 -->
-<!--Last modified: 11-05-2023-->
+<!--Sprint: 2, 3 -->
+<!--Last modified: 15-05-2023-->
 
 <template>
         <div class="h-36 2xl:h-48 bg-sky-400" style="background-color: rgb(56 189 248); height: 144px"></div>
@@ -17,9 +17,9 @@
                                 style="margin-top: -2px;"> beta </span></div>
                     </div>
                 </div>
-                <div class="rounded-lg bg-white overflow-hidden shadow mt-6 mb-6">
+                <div class="rounded-lg bg-white shadow mt-6 mb-6">
                     <div class="flex justify-between" style="margin: 8px">
-                        <div class="text-3xl font-medium flex items-center">
+                        <div class="text-3xl font-medium flex items-center mt-2">
                             <div class="margin-logo">
                                 <img src="src/assets/logo_duplicatecheck.png">
                             </div>
