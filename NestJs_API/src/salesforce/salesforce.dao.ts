@@ -3,7 +3,7 @@
 // Sprint: 3
 // Last modified: 15-05-2023
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/auth.dto';
 import { AuthService } from '../auth/auth.service';
 import { JobDTO } from '../model/dto/job-model.dto';
@@ -24,26 +24,30 @@ export class SalesforceDAO {
     if (tableId == 'error') {
       throw new NotFoundException();
     }
-    const conn = new this.jsforce.Connection({
-      oauth2: this.oauth2,
-      instanceUrl: process.env.SF_INSTANCE_URL,
-      accessToken: tokens.getAccessToken(),
-      refreshToken: tokens.getRefreshToken(),
-    });
     const resultSet: JobDTO[] = [];
 
     await new Promise((resolve, reject) => {
-      conn.on('refresh', (accessToken, res) => {
-        this.authService.updateToken(accessToken);
+      const conn = new this.jsforce.Connection({
+        oauth2: this.oauth2,
+        instanceUrl: process.env.SF_INSTANCE_URL,
+        accessToken: tokens.getAccessToken(),
+        refreshToken: tokens.getRefreshToken(),
       });
+      conn.on(
+        'refresh',
+        function (accessToken, res) {
+          console.log('refreshed token: ' + accessToken);
+          this.authService.updateToken(accessToken);
+        }.bind(this),
+      );
       conn.query(
         "SELECT id, name FROM dupcheck__dcJob__c WHERE dupcheck__SourceObject__c = '" +
           tableId +
           "'",
         (err, result) => {
           if (err) {
-            console.error(err);
-            reject(err);
+            console.log(err); 
+            reject(new UnauthorizedException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
               const jobName = result.records[i]['Name'];
