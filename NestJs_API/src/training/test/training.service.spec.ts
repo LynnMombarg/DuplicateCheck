@@ -22,10 +22,12 @@ describe('TrainingService', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
+
       providers: [
         AuthService,
         JwtService,
         TrainingDao,
+        TrainingService,
         {
           provide: AuthDAO,
           useValue: jest.fn(),
@@ -36,7 +38,7 @@ describe('TrainingService', () => {
         },
       ],
     })
-      .overrideProvider(mockedTrainingdao)
+      .overrideProvider(TrainingDao)
       .useValue(mockedTrainingdao)
       .compile();
 
@@ -61,8 +63,8 @@ describe('TrainingService', () => {
     it('should call giveAnswer on TrainingDao', () => {
       // Arrange
       const trainingID = '123';
-      const req = '123';
       const answer = false;
+      const req = '123';
 
       // Act
       trainingservice.giveAnswer(false, trainingID, req);
@@ -70,7 +72,6 @@ describe('TrainingService', () => {
       // Assert
       expect(mockedTrainingdao.saveRecord).toHaveBeenCalledWith(
         trainingID,
-        req,
         answer,
       );
     });
