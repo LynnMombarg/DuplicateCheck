@@ -5,7 +5,7 @@
 
 import { ModelDTO } from './dto/model.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from './model.schema';
+import { Model } from './schema/model.schema';
 import mongoose from 'mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
 

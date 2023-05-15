@@ -1,12 +1,18 @@
-// Authors: Roward
-// Jira-task: 115 - Jobs ophalen van Salesforce in NestJS
+// Authors: Roward, Marloes
+// Jira-task: 115, 130
 // Sprint: 3
 // Last modified: 15-05-2023
 
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { AuthDTO } from 'src/auth/auth.dto';
 import { AuthService } from '../auth/auth.service';
 import { JobDTO } from '../model/dto/job-model.dto';
+import { RecordDTO } from '../training/dto/record.dto';
+import { DatasetDTO } from '../training/dto/dataset.dto';
 
 @Injectable()
 export class SalesforceDAO {
@@ -46,7 +52,7 @@ export class SalesforceDAO {
           "'",
         (err, result) => {
           if (err) {
-            console.log(err); 
+            console.log(err);
             reject(new UnauthorizedException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
@@ -60,5 +66,17 @@ export class SalesforceDAO {
       );
     });
     return resultSet;
+  }
+
+  async getDatasets(tokens: AuthDTO, jobId: string): Promise<DatasetDTO[]> {
+    const datasetA = new DatasetDTO([
+      new RecordDTO(['1', 'Hoi']),
+      new RecordDTO(['2', 'Doei']),
+    ]);
+    const datasetB = new DatasetDTO([
+      new RecordDTO(['1', 'Hi']),
+      new RecordDTO(['3', 'Doei']),
+    ]);
+    return [datasetA, datasetB];
   }
 }
