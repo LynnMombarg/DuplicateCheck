@@ -25,7 +25,7 @@ export class TrainingDAO {
 
 
   async getNextRecords(trainingId: string): Promise<RecordDTO[]> {
-    const training = await this.model.findOne({ trainingId: trainingId }).exec();
+    const training = await this.model.findOne({ trainingId: trainingId });
     const lengthMatches = training.matches.length;
     const recordA = training.datasetA.records[lengthMatches];
     const recordB = training.datasetB.records[lengthMatches];
