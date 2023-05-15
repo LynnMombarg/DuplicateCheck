@@ -1,6 +1,6 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110, 115
-// Sprint: 2
+// Sprint: 2, 3
 // Last modified: 12-05-2023
 
 import {
