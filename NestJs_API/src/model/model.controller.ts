@@ -25,9 +25,9 @@ export class ModelController {
   constructor(private readonly modelService: ModelService) {}
 
   @Post('/create')
-  createModel(@Body() model: CreateModelDTO, @Req() req) {
-    this.modelService.createModel(model, req.user.userId);
-    return this.modelService.getAllModels(req.user.userId);
+  async createModel(@Body() model: CreateModelDTO, @Req() req) {
+    await this.modelService.createModel(model, req.user.userId);
+    return await this.modelService.getAllModels(req.user.userId);
   }
 
   @Get('/models')

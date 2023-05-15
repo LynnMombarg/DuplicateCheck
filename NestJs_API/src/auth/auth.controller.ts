@@ -83,10 +83,6 @@ export class AuthController {
         }
         console.log('conn.accessToken: ' + conn.accessToken);
         console.log('conn.refreshToken: ' + conn.refreshToken);
-        console.log('conn.instanceUrl: ' + conn.instanceUrl);
-        console.log('User ID: ' + userInfo.id);
-        console.log('Org ID: ' + userInfo.organizationId);
-        console.log('Expires at: ' + conn.accessTokenExpiresAt);
         const jwtToken = await this.jwtService.signAsync(
           {
             userId: userInfo.id,
@@ -102,10 +98,27 @@ export class AuthController {
           conn.refreshToken,
           jwtToken,
         );
+        let displayName;
+        let email;
+        await conn.identity(function (err, res) {
+          if (err) {
+            return console.error(err);
+          }
+          displayName = res.display_name;
+          email = res.username;
+        });
+        const json = JSON.stringify({
+          message: 'success',
+          token: jwtToken,
+          user: {
+            username: displayName,
+            email: email,
+          },
+        });
         const script =
-          "<script>window.opener.postMessage({ message: 'success', token: '" +
-          jwtToken +
-          "'}, 'http://localhost:8002')</script>";
+          '<script>window.opener.postMessage(' +
+          json +
+          ", 'http://localhost:8002')</script>";
         return res.status(HttpStatus.OK).send(script);
       }.bind(this),
     );
