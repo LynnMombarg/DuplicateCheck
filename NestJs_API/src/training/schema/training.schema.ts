@@ -5,22 +5,26 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Dataset, DatasetSchema } from './dataset.schema';
+import { HydratedDocument } from 'mongoose';
+import { Model } from '../../model/schema/model.schema';
+
+export type TrainingDocument = HydratedDocument<Model>;
 
 @Schema()
 export class Training {
-    @Prop()
-    trainingId: string;
+  @Prop()
+  trainingId: string;
 
-    @Prop()
-    userId: string;
+  @Prop()
+  userId: string;
 
-    @Prop({ type: DatasetSchema, ref: Dataset.name })
-    datasetA: Dataset;
+  @Prop({ type: DatasetSchema, ref: Dataset.name })
+  datasetA: Dataset;
 
-    @Prop({ type: DatasetSchema, ref: Dataset.name })
-    datasetB: Dataset;
+  @Prop({ type: DatasetSchema, ref: Dataset.name })
+  datasetB: Dataset;
 
-    @Prop()
-    matches: boolean[];
+  @Prop()
+  matches: boolean[];
 }
 export const TrainingSchema = SchemaFactory.createForClass(Training);

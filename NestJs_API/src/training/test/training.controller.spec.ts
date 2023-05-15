@@ -1,16 +1,15 @@
-// Authors: Silke
-// Jira-task: 123
+// Authors: Silke, Marloes
+// Jira-task: 123, 129, 130
 // Sprint: 3
 // Last modified: 15-05-2023
 
-
 import { Test } from '@nestjs/testing';
-import { TrainingService } from '../training.service';
 import { TrainingController } from '../training.controller';
-import { AuthDAO } from '../../auth/auth.dao';
+import { TrainingService } from '../training.service';
 import { AuthGuard } from '../../auth/auth.guard';
-import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
+import { AuthService } from "../../auth/auth.service";
+import { AuthDAO } from "../../auth/auth.dao";
 
 describe('TrainingController', () => {
   let trainingController: TrainingController;
@@ -19,7 +18,9 @@ describe('TrainingController', () => {
     getRecords: jest.fn(),
     giveAnswer: jest.fn(),
     checkForRecords: jest.fn(),
+    selectJob: jest.fn(),
   };
+  const mockedAuthGuard = {};
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -27,6 +28,7 @@ describe('TrainingController', () => {
       providers: [
         AuthService,
         JwtService,
+        AuthGuard,
         TrainingService,
         {
           provide: AuthDAO,
@@ -40,6 +42,8 @@ describe('TrainingController', () => {
     })
       .overrideProvider(TrainingService)
       .useValue(mockedTrainingService)
+      .overrideProvider(AuthGuard)
+      .useValue(mockedAuthGuard)
       .compile();
 
     trainingController = moduleRef.get<TrainingController>(TrainingController);
@@ -94,7 +98,20 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
         trainingID,
         req,
+  describe('selectJob', () => {
+    it('should call selectJob on TrainingService', () => {
+      // Arrange
+      const jobId = 'test123';
+      const userId = 'userId';
+      const req = { user: { userId: userId } };
+
+      // Act
+      trainingController.selectJob(jobId, req);
+
+      // Assert
+      expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
+        jobId,
+        userId,
       );
     });
   });
-});

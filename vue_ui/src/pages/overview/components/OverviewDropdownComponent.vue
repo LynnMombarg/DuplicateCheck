@@ -50,7 +50,7 @@ export default {
         // code delete model from backend
         // deleteModel(modelId);
         // code to refresh page
-        this.$parent.deleteModel(modelId);
+        this.$parent.deleteModel(modelId, this.token);
       }
     },
 
@@ -63,7 +63,13 @@ export default {
       // window.location.href = "/Execute";
       console.log("execute model pressed");
     },
-  }
+  },
+  props: {
+    token: {
+      type: String,
+        required: true,
+    },
+  },
 };
 
 </script>
@@ -76,7 +82,7 @@ defineProps({
     modelId: {
       type: String,
     },
-  });
+});
 
 </script>
 

@@ -1,29 +1,66 @@
-// Authors: Silke
-// Jira-task: 123
+// Authors: Silke, Marloes
+// Jira-task: 129, 130
 // Sprint: 3
 // Last modified: 15-05-2023
 
-import { Injectable, Req } from '@nestjs/common';
+import { Injectable, NotFoundException, Req } from "@nestjs/common";
 import { RecordDto } from './dto/record.dto';
-import { TrainingDao } from './training.dao';
+import { TrainingDAO } from "./training.dao";
+import { AuthDAO } from "../auth/auth.dao";
+import { SalesforceDAO } from "../salesforce/salesforce.dao";
+import { DatasetDTO } from "./dto/dataset.dto";
+import { AuthDTO } from "../auth/auth.dto";
+import { TrainingDTO } from "./dto/training.dto";
+import { v4 as uuid } from 'uuid';
+
 
 @Injectable()
 export class TrainingService {
-  constructor(private readonly TrainingDOA: TrainingDao) {}
+  constructor(
+    private readonly trainingDAO: TrainingDAO,
+    private readonly authDAO: AuthDAO,
+    private readonly salesforceDAO: SalesforceDAO,
+  ) {}
 
-  async getRecords(trainingID: string, @Req() req): Promise<RecordDto[]> {
-    return this.TrainingDOA.getNextRecords(trainingID);
+  async selectJob(jobId, userId) {
+    const tokens: AuthDTO = await this.authDAO.getTokensByUserId(userId);
+    const records: DatasetDTO[] = await this.salesforceDAO.getDatasets(
+      tokens,
+      jobId,
+    );
+
+    if (records.length > 1) {
+      const training: TrainingDTO = new TrainingDTO(
+        uuid(),
+        userId,
+        records[0],
+        records[1],
+        [],
+      );
+      this.trainingDAO.createTraining(training);
+    } else {
+      throw new NotFoundException();
+    }
+  }
+  
+
+    async getRecords(trainingID: string, @Req() req): Promise<RecordDto[]> {
+      return this.trainingDAO.getNextRecords(trainingID);
+    }
+  
+    async giveAnswer(
+      answer: boolean,
+      trainingID: string,
+      @Req() req,
+    ): Promise<void> {
+      await this.trainingDAO.saveRecord(trainingID, answer);
+    }
+  
+    checkForRecords(trainingId: string, req): Promise<boolean> {
+      return this.trainingDAO.checkForRecords(trainingId);
+    }
+    
   }
 
-  async giveAnswer(
-    answer: boolean,
-    trainingID: string,
-    @Req() req,
-  ): Promise<void> {
-    await this.TrainingDOA.saveRecord(trainingID, answer);
-  }
 
-  checkForRecords(trainingId: string, req): Promise<boolean> {
-    return this.TrainingDOA.checkForRecords(trainingId);
-  }
-}
+

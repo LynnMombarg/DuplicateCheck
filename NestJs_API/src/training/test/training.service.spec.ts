@@ -3,12 +3,17 @@
 // Sprint: 3
 // Last modified: 15-05-2023
 
+// Authors: Marloes
+// Jira-task: 130
+// Sprint: 3
+// Last modified: 12-05-2023
+
 import { Test } from '@nestjs/testing';
 import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthGuard } from '../../auth/auth.guard';
-import { TrainingDao } from '../training.dao';
+import { TrainingDAO } from '../training.dao';
 import { TrainingService } from '../training.service';
 
 describe('TrainingService', () => {
@@ -20,14 +25,33 @@ describe('TrainingService', () => {
     checkForRecords: jest.fn(),
   };
 
+describe('TrainingService', () => {
+  let trainingService: TrainingService;
+
+  const mockedTrainingDAO = {
+    createTraining: jest.fn(),
+    getNextRecords: jest.fn(),
+    saveRecord: jest.fn(),
+    checkForRecords: jest.fn(),
+  };
+  const mockedAuthDAO = {
+    getTokensByUserId: jest.fn(),
+  };
+  const mockedSalesforceDAO = {
+    getDatasets: jest.fn(() => {
+      return ['test', 'test'];
+    }),
+  };
+
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
 
       providers: [
         AuthService,
         JwtService,
-        TrainingDao,
+        TrainingDAO,
         TrainingService,
+        
         {
           provide: AuthDAO,
           useValue: jest.fn(),
@@ -38,10 +62,9 @@ describe('TrainingService', () => {
         },
       ],
     })
-      .overrideProvider(TrainingDao)
+      .overrideProvider(TrainingDAO)
       .useValue(mockedTrainingdao)
       .compile();
-
     trainingservice = moduleRef.get<TrainingService>(TrainingService);
   });
 
@@ -74,6 +97,41 @@ describe('TrainingService', () => {
         trainingID,
         answer,
       );
+  });
+
+  describe('selectJob', () => {
+    it('should call getTokensByUserId on AuthDAO', () => {
+      // Arrange
+      const jobId = 'test123';
+      const userId = 'token';
+
+      // Act
+      trainingService.selectJob(jobId, userId);
+
+      // Assert
+      expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
+    });
+    it('should call getDatasets on SalesforceDAO', () => {
+      // Arrange
+      const jobId = 'test123';
+      const userId = 'token';
+
+      // Act
+      trainingService.selectJob(jobId, userId);
+
+      // Assert
+      expect(mockedSalesforceDAO.getDatasets).toHaveBeenCalled();
+    });
+    it('should call createTraining on TrainingDAO', () => {
+      // Arrange
+      const jobId = 'test123';
+      const userId = 'token';
+
+      // Act
+      trainingService.selectJob(jobId, userId);
+
+      // Assert
+      expect(mockedTrainingDAO.createTraining).toHaveBeenCalled();
     });
   });
 });
