@@ -16,6 +16,7 @@ describe('TrainingDAO', () => {
   const mockedTrainingModel = {
     model: jest.fn(),
     save: jest.fn(),
+    findOne: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -55,5 +56,75 @@ describe('TrainingDAO', () => {
       // Assert
       expect(mockedTrainingModel.save).toHaveBeenCalled();
     });
+  });
+
+  describe('getNextRecords', () => {
+    it ('it should fetch records from the mongoose model', async () => {
+
+      const trainingsid = 'trainingId';
+
+      await trainingDAO.getNextRecords(trainingsid);
+
+      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
+
+  });
+
+    describe('getNextRecords', () => {
+      it('should fetch records from the mongoose model', async () => {
+        // Arrange
+        const trainingsid = 'trainingId';
+        const mockTraining = {
+          _id: '6461fddec0437f4f44cbdb53',
+          trainingId: 'trainingId',
+          userId: 'req.user.userId',
+          datasetA: {
+            records: [
+              {
+                data: ['1', 'Hoi'],
+                _id: { $oid: '6461fcde17a65a5fbd3809e2' },
+              },
+              {
+                data: ['2', 'Doei'],
+                _id: { $oid: '6461fcde17a65a5fbd3809e3' },
+              },
+            ],
+            _id: { $oid: '6461fcde17a65a5fbd3809e1' },
+          },
+          datasetB: {
+            records: [
+              {
+                data: ['1', 'Hi'],
+                _id: { $oid: '6461fcde17a65a5fbd3809e5' },
+              },
+              {
+                data: ['3', 'Doei'],
+                _id: { $oid: '6461fcde17a65a5fbd3809e6' },
+              },
+            ],
+            _id: { $oid: '6461fcde17a65a5fbd3809e4' },
+          },
+          matches: [],
+          __v: 0,
+        };
+
+        mockedTrainingModel.findOne.mockResolvedValueOnce(mockTraining);
+
+        // Act
+        const result = await trainingDAO.getNextRecords(trainingsid);
+
+        // Assert
+        expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
+        expect(result).toEqual([
+          {
+            data: ['1', 'Hoi'],
+            _id: { $oid: '6461fcde17a65a5fbd3809e2' },
+          },
+          {
+            data: ['1', 'Hi'],
+            _id: { $oid: '6461fcde17a65a5fbd3809e5' },
+          },
+        ]);
+      });
+});
   });
 });
