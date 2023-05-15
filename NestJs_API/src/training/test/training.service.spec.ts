@@ -3,7 +3,7 @@ import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthGuard } from '../../auth/auth.guard';
-import { TrainingDao } from '../Training.dao';
+import { TrainingDao } from '../training.dao';
 import { TrainingService } from '../training.service';
 
 describe('TrainingService', () => {
