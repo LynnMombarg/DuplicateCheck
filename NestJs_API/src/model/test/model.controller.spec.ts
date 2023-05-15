@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 11-05-2023
+// Last modified: 15-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';

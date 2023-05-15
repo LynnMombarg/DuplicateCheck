@@ -1,7 +1,7 @@
 // Authors: Roward
 // Jira-task: 115 - Jobs ophalen van Salesforce in NestJS
 // Sprint: 3
-// Last modified: 12-05-2023
+// Last modified: 15-05-2023
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/auth.dto';
