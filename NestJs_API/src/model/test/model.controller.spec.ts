@@ -1,12 +1,16 @@
-// Authors: Marloes, Roward
+// Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 08-05-2023
+// Last modified: 15-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
 import { ModelService } from '../model.service';
 import { CreateModelDTO } from '../dto/create-model.dto';
+import { AuthGuard } from '../../auth/auth.guard';
+import { AuthService } from '../../auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
+import { AuthDAO } from '../../auth/auth.dao';
 
 describe('ModelController', () => {
   let modelController: ModelController;
@@ -15,12 +19,25 @@ describe('ModelController', () => {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
     getAllModels: jest.fn(),
+    getJobs: jest.fn(),
   };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [ModelController],
-      providers: [ModelService],
+      providers: [
+        AuthService,
+        JwtService,
+        ModelService,
+        {
+          provide: AuthDAO,
+          useValue: jest.fn(),
+        },
+        {
+          provide: AuthGuard,
+          useValue: jest.fn(),
+        },
+      ],
     })
       .overrideProvider(ModelService)
       .useValue(mockedModelService)
@@ -32,6 +49,7 @@ describe('ModelController', () => {
   describe('createModel', () => {
     it('should call createModel on ModelService', () => {
       // Arrange
+      const req = { user: { userId: 'test' } };
       const model = new CreateModelDTO(
         'modelName',
         'tableName',
@@ -39,35 +57,36 @@ describe('ModelController', () => {
       );
 
       // Act
-      modelController.createModel(model, 'token');
+      modelController.createModel(model, req);
 
       // Assert
       expect(mockedModelService.createModel).toHaveBeenCalledWith(
         model,
-        'token',
+        'test',
       );
     });
   });
   describe('getAllModels', () => {
     it('should call getAllModels on ModelService', () => {
       // Arrange
-      const token = '123';
+      const req = { user: { userId: 'test' } };
 
       // Act
-      modelController.getAllModels(token);
+      modelController.getAllModels(req);
 
       // Assert
-      expect(mockedModelService.getAllModels).toHaveBeenCalledWith(token);
+      expect(mockedModelService.getAllModels).toHaveBeenCalledWith('test');
     });
   });
+
   describe('deleteModel', () => {
     it('should call deleteModel on ModelService', () => {
       // Arrange
-      const token = 'secretToken';
+      const req = { user: { userId: 'test' } };
       const modelId = '123';
 
       // Act
-      modelController.deleteModel(token, modelId);
+      modelController.deleteModel(req, modelId);
 
       // Assert
       expect(mockedModelService.deleteModel).toHaveBeenCalled();
@@ -75,14 +94,27 @@ describe('ModelController', () => {
 
     it('should call getAllModels on ModelService', () => {
       // Arrange
-      const token = 'secretToken';
-      const modelId = '123';
+      const req = { user: { userId: 'test' } };
+      const modelId = 'test';
 
       // Act
-      modelController.deleteModel(token, modelId);
+      modelController.deleteModel(req, modelId);
 
       // Assert
       expect(mockedModelService.getAllModels).toHaveBeenCalled();
+    });
+  });
+  describe('getJobs', () => {
+    it('should call getJobs on ModelService', () => {
+      // Arrange
+      const req = { user: { userId: 'test' } };
+      const tableName = 'contacts';
+
+      // Act
+      modelController.getJobs(req, tableName);
+
+      // Assert
+      expect(mockedModelService.getJobs).toHaveBeenCalled();
     });
   });
 });
