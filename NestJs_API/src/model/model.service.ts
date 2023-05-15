@@ -48,21 +48,21 @@ export class ModelService {
     await this.pythonDAO.deleteModel(modelId);
   }
 
-  async getJobs(tableName: string, userId: string): Promise<JobDTO[]>{
+  async getJobs(tableName: string, userId: string): Promise<JobDTO[]> {
     const authDTO = await this.authDAO.getTokensByUserId(userId);
-    var tableId = "";
-    switch(tableName){
-      case "leads":
-        tableId = "00Q";
+    let tableId = '';
+    switch (tableName) {
+      case 'leads':
+        tableId = '00Q';
         break;
-      case "contacts":
-        tableId = "003";
+      case 'contacts':
+        tableId = '003';
         break;
-      case "accounts":
-        tableId = "001";
+      case 'accounts':
+        tableId = '001';
         break;
       default:
-        tableId = "error";
+        tableId = 'error';
         break;
     }
     return this.salesforceDAO.getJobs(tableId, authDTO);

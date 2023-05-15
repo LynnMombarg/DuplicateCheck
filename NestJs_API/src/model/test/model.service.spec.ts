@@ -9,7 +9,7 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { ModelDAO } from '../model.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
-import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('ModelService', () => {
   let modelService: ModelService;
@@ -19,13 +19,7 @@ describe('ModelService', () => {
     getAllModels: jest.fn(),
   };
   const mockedAuthDAO = {
-    getUserId: jest.fn((token) => {
-      if (token === 'secretToken') {
-        return '1';
-      } else {
-        return null;
-      }
-    }),
+    getTokensByUserId: jest.fn(),
   };
   const mockedPythonDAO = {
     createModel: jest.fn(),
@@ -33,11 +27,11 @@ describe('ModelService', () => {
   };
   const mockedSalesforceDAO = {
     getJobs: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [ModelService, ModelDAO, AuthDAO, PythonDAO],
+      providers: [ModelService, ModelDAO, AuthDAO, PythonDAO, SalesforceDAO],
     })
       .overrideProvider(ModelDAO)
       .useValue(mockedModelDAO)
@@ -107,6 +101,17 @@ describe('ModelService', () => {
     });
   });
   describe('getJobs', () => {
+    it('should call getTokensByUserId on AuthDAO', () => {
+      // Arrange
+      const tableName = 'contacts';
+      const userId = 'test123';
+
+      // Act
+      modelService.getJobs(userId, tableName);
+
+      // Assert
+      expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
+    });
     it('should call getJobs on SalesforceDao', () => {
       // Arrange
       const tableName = 'contacts';
@@ -116,7 +121,7 @@ describe('ModelService', () => {
       modelService.getJobs(userId, tableName);
 
       // Assert
-      expect(mockedModelDAO.deleteModel).toHaveBeenCalled();
+      expect(mockedSalesforceDAO.getJobs).toHaveBeenCalled();
     });
   });
 });

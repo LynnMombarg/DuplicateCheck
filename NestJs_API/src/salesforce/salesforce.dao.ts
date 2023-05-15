@@ -20,8 +20,8 @@ export class SalesforceDAO {
     redirectUri: process.env.BASE_URL + '/auth/callback',
   });
 
-  async getJobs(tableId: String, tokens: AuthDTO): Promise<JobDTO[]> {
-    if(tableId == "error"){
+  async getJobs(tableId: string, tokens: AuthDTO): Promise<JobDTO[]> {
+    if (tableId == 'error') {
       throw new NotFoundException();
     }
     const conn = new this.jsforce.Connection({

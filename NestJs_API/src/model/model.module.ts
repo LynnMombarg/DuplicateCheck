@@ -11,7 +11,7 @@ import { ModelDAO } from './model.dao';
 import { Model, ModelSchema } from './model.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
-import { SalesforceModule } from 'src/salesforce/salesforce.module';
+import { SalesforceModule } from '../salesforce/salesforce.module';
 
 @Module({
   imports: [

@@ -107,11 +107,11 @@ describe('ModelController', () => {
   describe('getJobs', () => {
     it('should call getJobs on ModelService', () => {
       // Arrange
-      const token = 'secretToken';
+      const req = { user: { userId: 'test' } };
       const tableName = 'contacts';
 
       // Act
-      modelController.getJobs(token, tableName);
+      modelController.getJobs(req, tableName);
 
       // Assert
       expect(mockedModelService.getJobs).toHaveBeenCalled();
