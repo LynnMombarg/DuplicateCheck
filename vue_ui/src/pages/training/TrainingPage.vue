@@ -4,15 +4,17 @@
 <!--Last modified: 15-05-2023-->
 
 <template>
-    <RecordModel></RecordModel>
+    <TrainModal />
 </template>
 
 <script>
 import RecordModel from "@/pages/training/components/RecordModel.vue";
+import TrainModal from "@/pages/training/components/TrainModal.vue";
 
 export default {
   name: "TrainingPage",
   components: {
+      TrainModal,
     RecordModel,
   },
   data() {

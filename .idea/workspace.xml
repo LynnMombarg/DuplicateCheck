@@ -31,11 +31,9 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.dao.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.module.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/TrainingPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/components/RecordModel.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/fetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/pages/training/TrainingPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/TrainingPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/pages/training/components/TrainModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/components/TrainModal.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +204,7 @@
       <workItem from="1683876714908" duration="5916000" />
       <workItem from="1683882710476" duration="11126000" />
       <workItem from="1684134297540" duration="5758000" />
-      <workItem from="1684150465779" duration="1804000" />
+      <workItem from="1684150465779" duration="2823000" />
     </task>
     <servers />
   </component>
