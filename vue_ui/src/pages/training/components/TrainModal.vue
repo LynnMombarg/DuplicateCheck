@@ -4,7 +4,7 @@
 <!--Last modified: 15-05-2023-->
 
 <template>
-  <div class="grid grid-cols-2 md:grid-cols-1 grid-rows-3 mx-auto bg-white">
+  <div class="grid grid-cols-1 grid-rows-3 mx-auto bg-white m-5 p-5">
     <div class="">
       <h1 class="text-center text-lg">Train model 1</h1>
     </div>
@@ -13,7 +13,7 @@
       <RecordModel />
     </div>
     <div>
-      <button class="static" @click="giveAnswer(true)">
+      <button class="border-green-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(true)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -27,7 +27,7 @@
           />
         </svg>
       </button>
-      <button class="static" @click="giveAnswer(false)">
+      <button class="bg-red-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(false)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
