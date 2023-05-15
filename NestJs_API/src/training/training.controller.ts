@@ -3,12 +3,7 @@
 // Sprint: 3
 // Last modified: 12-05-2023
 
-import {
-  Controller,
-  Post,
-  Req,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { TrainingService } from './training.service';
 import { AuthGuard } from '../auth/auth.guard';
 

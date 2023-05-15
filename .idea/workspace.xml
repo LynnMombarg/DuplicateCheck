@@ -87,16 +87,7 @@
       <recent name="C:\Users\marlo\OneDrive\Documenten\HBO-ICT\2\OOSE-Project\DuplicateCheck\NestJs_API\src\model\schema" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.training.dao.spec.ts">
-    <configuration name="Tests in test/ (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$/NestJs_API" />
-      <envs />
-      <scope-kind value="DIRECTORY" />
-      <test-directory value="$PROJECT_DIR$/NestJs_API/src/model/test" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Jest.TrainingDAO">
     <configuration name="Tests in test/ (2)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
@@ -106,26 +97,43 @@
       <test-directory value="$PROJECT_DIR$/NestJs_API/src/training/test" />
       <method v="2" />
     </configuration>
-    <configuration name="TrainingService.selectJob" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="TrainingDAO" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
       <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.service.spec.ts" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.dao.spec.ts" />
       <test-names>
-        <test-name value="TrainingService" />
-        <test-name value="selectJob" />
+        <test-name value="TrainingDAO" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="training.controller.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="TrainingDAO.createModel" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.controller.spec.ts" />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.dao.spec.ts" />
+      <test-names>
+        <test-name value="TrainingDAO" />
+        <test-name value="createModel" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TrainingDAO.createModel.should call save on Mongoose model" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/NestJs_API" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/NestJs_API/src/training/test/training.dao.spec.ts" />
+      <test-names>
+        <test-name value="TrainingDAO" />
+        <test-name value="createModel" />
+        <test-name value="should call save on Mongoose model" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="training.dao.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -148,11 +156,11 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Jest.TrainingDAO" />
+      <item itemvalue="Jest.TrainingDAO.createModel" />
+      <item itemvalue="Jest.TrainingDAO.createModel.should call save on Mongoose model" />
       <item itemvalue="Jest.training.dao.spec.ts" />
       <item itemvalue="Jest.Tests in test/ (2)" />
-      <item itemvalue="Jest.TrainingService.selectJob" />
-      <item itemvalue="Jest.training.controller.spec.ts" />
-      <item itemvalue="Jest.Tests in test/ (1)" />
       <item itemvalue="Node.js.Unnamed" />
       <item itemvalue="npm.NestJs" />
       <item itemvalue="npm.Vue" />
@@ -161,11 +169,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.TrainingDAO" />
+        <item itemvalue="Jest.TrainingDAO.createModel.should call save on Mongoose model" />
+        <item itemvalue="Jest.TrainingDAO.createModel" />
         <item itemvalue="Jest.training.dao.spec.ts" />
         <item itemvalue="Jest.Tests in test/ (2)" />
-        <item itemvalue="Jest.Tests in test/ (1)" />
-        <item itemvalue="Jest.TrainingService.selectJob" />
-        <item itemvalue="Jest.training.controller.spec.ts" />
       </list>
     </recent_temporary>
   </component>
@@ -200,12 +208,20 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JavaScriptTestRunnerJest">
+        <watch expression="this.model" />
+      </configuration>
+    </watches-manager>
+  </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___2_.info" NAME="Tests in test/ (2) Coverage Results" MODIFIED="1684140108106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$training_dao_spec_ts.info" NAME="training.dao.spec.ts Coverage Results" MODIFIED="1684140270296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___2_.info" NAME="Tests in test/ (2) Coverage Results" MODIFIED="1684140142063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$training_controller_spec_ts.info" NAME="training.controller.spec.ts Coverage Results" MODIFIED="1683892573977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/DuplicateCheck$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683637630868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

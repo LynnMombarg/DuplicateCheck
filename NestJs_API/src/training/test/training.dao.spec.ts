@@ -8,32 +8,28 @@ import { TrainingDAO } from '../training.dao';
 import { TrainingDTO } from '../dto/training.dto';
 import { DatasetDTO } from '../dto/dataset.dto';
 import { RecordDTO } from '../dto/record.dto';
-import { TrainingDocument } from '../schema/training.schema';
-import { Model } from 'mongoose';
+import { Training } from '../schema/training.schema';
 import { getModelToken } from '@nestjs/mongoose';
 
 describe('TrainingDAO', () => {
   let trainingDAO: TrainingDAO;
-  let trainingModel: Model<TrainingDocument>;
+  const mockedTrainingModel = {
+    model: jest.fn(),
+    save: jest.fn(),
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
         TrainingDAO,
         {
-          provide: getModelToken('Training'),
-          useValue: {
-            save: jest.fn().mockResolvedValue({}),
-            constructor: jest.fn(),
-          },
+          provide: getModelToken(Training.name),
+          useValue: mockedTrainingModel,
         },
       ],
     }).compile();
 
     trainingDAO = moduleRef.get<TrainingDAO>(TrainingDAO);
-    trainingModel = moduleRef.get(
-      getModelToken('Training'),
-    ) as Model<TrainingDocument>; // Type assertion
   });
 
   describe('createModel', () => {
@@ -57,7 +53,7 @@ describe('TrainingDAO', () => {
       trainingDAO.createTraining(expected);
 
       // Assert
-      expect(trainingModel.save).toHaveBeenCalled();
+      expect(mockedTrainingModel.save).toHaveBeenCalled();
     });
   });
 });
