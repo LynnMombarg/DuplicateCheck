@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/vue_ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/NestJs_API" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">

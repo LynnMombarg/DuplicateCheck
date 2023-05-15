@@ -5,11 +5,13 @@
 
 import { Injectable } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/auth.dto';
+import { AuthService } from 'src/auth/auth.service';
 import { JobDTO } from 'src/model/dto/job-model.dto';
 
 @Injectable()
 export class SalesforceDAO {
-	resultSet = [];
+  constructor(private readonly authService: AuthService) {}
+
   jsforce = require('jsforce');
   oauth2 = new this.jsforce.OAuth2({
     loginUrl: 'https://login.salesforce.com',
@@ -17,6 +19,7 @@ export class SalesforceDAO {
     clientSecret: process.env.SF_CLIENT_SECRET,
     redirectUri: process.env.BASE_URL + '/auth/callback',
   });
+
   async getJobs(tableId: String, tokens: AuthDTO): Promise<JobDTO[]> {
     const conn = new this.jsforce.Connection({
       oauth2: this.oauth2,
@@ -24,33 +27,31 @@ export class SalesforceDAO {
       accessToken: tokens.getAccessToken(),
       refreshToken: tokens.getRefreshToken(),
     });
-    conn.on(
-      'refresh',
-      function (accessToken, res) {
-        console.log('refreshed token: ' + accessToken);
+    const resultSet: JobDTO[] = [];
+
+    await new Promise((resolve, reject) => {
+      conn.on('refresh', (accessToken, res) => {
         this.authService.updateToken(accessToken);
-      }.bind(this),
-    );
-    conn.query(
-      "SELECT id, name FROM dupcheck__dcJob__c WHERE dupcheck__SourceObject__c = '" +
-        tableId +
-        "'",
-      function (err, result) {
-        if (err) {
-          return console.error(err);
-        }
-		this.resultSet = [];
-		console.log("test");
-		// console.log(result.records);
-        for (var i = 0; i < result.records.length; i++) {
-          let jobName = result.records[i]['Name'];
-          let jobId = result.records[i]['Id'];
-		  console.log(jobId + ' ' + jobName);
-          this.resultSet.push(new JobDTO(jobName, jobId));
-		  console.log(this.resultSet);
-        }
-      },
-	);
-    return this.resultSet;
+      });
+      conn.query(
+        "SELECT id, name FROM dupcheck__dcJob__c WHERE dupcheck__SourceObject__c = '" +
+          tableId +
+          "'",
+        (err, result) => {
+          if (err) {
+            console.error(err);
+            reject(err);
+          } else {
+            for (let i = 0; i < result.records.length; i++) {
+              const jobName = result.records[i]['Name'];
+              const jobId = result.records[i]['Id'];
+              resultSet.push(new JobDTO(jobName, jobId));
+            }
+            resolve(resultSet);
+          }
+        },
+      );
+    });
+    return resultSet;
   }
 }

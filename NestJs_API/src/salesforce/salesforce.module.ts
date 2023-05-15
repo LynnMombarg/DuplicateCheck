@@ -5,10 +5,12 @@
 
 import { Module } from '@nestjs/common';
 import { SalesforceDAO } from './salesforce.dao';
+import { AuthService } from 'src/auth/auth.service';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [],
-  providers: [SalesforceDAO],
+  imports: [AuthModule],
+  providers: [SalesforceDAO, AuthService,],
   exports: [SalesforceDAO]
 })
 export class SalesforceModule {}
