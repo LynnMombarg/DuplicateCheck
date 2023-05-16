@@ -5,13 +5,20 @@ Sprint: 1, 2
 Last modified: 25-04-2023
 '''
 
-from fastapi.responses import JSONResponse
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .PythonService import PythonService
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['localhost:8001'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
+
 service = PythonService()
-  
 
 # Post request to send json datasets to train the model
 # Expected form of json:
@@ -36,10 +43,10 @@ async def createModel(json: dict):
         
       
 # Delete model based on filename
-@app.post('/delete-model')
-async def deleteModel(json: dict):
+@app.delete('/delete-model/{modelId}')
+async def deleteModel(modelId: str):
     try:
-      service.deleteModel(json['modelId'])
+      service.deleteModel(modelId)
       return 'Model deleted!'
     except:
       return 'Model could not be deleted'
