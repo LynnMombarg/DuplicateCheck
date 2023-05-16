@@ -18,6 +18,7 @@ export const router = createRouter({
     routes: [
         {path: '/', name: 'SignIn', component: SignIn, meta: { title: 'Sign In - Plauti Duplicate Check ML' }},
         {path: '/overview', name: 'OverviewPage', component: OverviewPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
+        {path: '/training', name: 'TrainingPage', component: TrainingPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
     ]
 })
 
@@ -39,7 +40,7 @@ export const store = createStore({
         },
         setUser(state, user ) {
             state.user = JSON.stringify(user);
-            localStorage.setItem('user', JSON.stringify(user));
+            // localStorage.setItem('user', JSON.stringify(user));
         },
         removeUser(state) {
             state.user = null;
@@ -48,12 +49,12 @@ export const store = createStore({
     },
 });
 
-router.beforeEach((to, from, next) => {
-    const token = store.state.token;
-    if (to.name !== 'SignIn' && !token) next({ name: 'SignIn' });
-    else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
-    else next();
-});
+// router.beforeEach((to, from, next) => {
+//     const token = store.state.token;
+//     if (to.name !== 'SignIn' && !token) next({ name: 'SignIn' });
+//     else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
+//     else next();
+// });
 
 router.afterEach((to) => {
     document.title = to.meta.title;

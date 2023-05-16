@@ -17,7 +17,7 @@ import OverviewModelComponent from "@/pages/overview/components/OverviewModelCom
 import {getModels} from "./services/GetModels";
 import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";
-import Navbar from "@/pages/overview/components/Navbar.vue";
+import Navbar from "../../components/Navbar.vue";
 import {signOut} from "@/pages/overview/services/SignOut";
 
 export default {
