@@ -4,7 +4,7 @@
 <!--Last modified: 11-05-2023-->
 
 <template>
-  <div class="flex justify-between bg-gray rounded-md px-3 py-5 text-xl font-medium model">
+  <div class="flex justify-between rounded-md px-3 py-5 text-xl font-medium">
     <div class="flex items-center w-50">
       <div class="flex items-center w-50 px-2 rounded-md"
         :class="{ bgContacts: isContacts(this.model.tableName), bgLeads: isLeads(this.model.tableName), bgAccounts: isAccounts(this.model.tableName) }">
@@ -45,7 +45,7 @@
       </p>
     </div>
     <div>
-      <OverviewDropdownComponent :modelId="this.model.modelId" />
+      <OverviewDropdownComponent :modelId="this.model.modelId" :token="token" />
     </div>
   </div>
 </template>
@@ -58,11 +58,15 @@ export default {
   components: { OverviewDropdownComponent },
   props: {
     model: Array,
+    token: {
+        type: String,
+        required: true,
+    },
   },
   methods: {
     deleteModel(modelId){
-      this.$parent.deleteModel(modelId);
-    },  
+      this.$parent.deleteModel(modelId, this.token);
+    },
     isContacts(tableName) {
       return tableName === 'contacts';
     },
@@ -88,9 +92,5 @@ export default {
 
 .bgAccounts {
   background-color: rgb(11, 145, 212);
-}
-
-.model {
-  margin-top: 2rem;
 }
 </style>
