@@ -1,7 +1,7 @@
 // Authors: Marloes
 // Jira-task: 106 - Front-end maken
-// Sprint: 2
-// Last modified: 26-04-2023
+// Sprint: 2, 3
+// Last modified: 15-05-2023
 
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
@@ -11,12 +11,14 @@ import '../dist/output.css';
 import SignIn from "@/pages/login/SignIn.vue";
 import OverviewPage from "@/pages/overview/OverviewPage.vue";
 import './fetch.js';
+import TrainingPage from "@/pages/training/TrainingPage.vue";
 
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
         {path: '/', name: 'SignIn', component: SignIn, meta: { title: 'Sign In - Plauti Duplicate Check ML' }},
         {path: '/overview', name: 'OverviewPage', component: OverviewPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
+        {path: '/training', name: 'TrainingPage', component: TrainingPage, meta: { title: 'Train model - Plauti Duplicate Check ML' }},
     ]
 })
 
@@ -47,12 +49,12 @@ export const store = createStore({
     },
 });
 
-router.beforeEach((to, from, next) => {
-    const token = store.state.token;
-    if (to.name !== 'SignIn' && !token) next({ name: 'SignIn' });
-    else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
-    else next();
-});
+// router.beforeEach((to, from, next) => {
+//     const token = store.state.token;
+//     if (to.name !== 'SignIn' && !token) next({ name: 'SignIn' });
+//     else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
+//     else next();
+// });
 
 router.afterEach((to) => {
     document.title = to.meta.title;
