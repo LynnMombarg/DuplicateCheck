@@ -9,6 +9,7 @@ import { ModelModule } from './model/model.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { validationSchema } from './config/validation';
+import { TrainingModule } from './training/training.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { validationSchema } from './config/validation';
     MongooseModule.forRoot(process.env.MONGODB_URI),
     AuthModule,
     ModelModule,
+    TrainingModule,
   ],
 })
 export class AppModule {}
