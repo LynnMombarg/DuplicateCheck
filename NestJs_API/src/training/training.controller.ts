@@ -30,7 +30,7 @@ export class TrainingController {
     return this.trainingService.giveAnswer(answer, trainingId, req);
   }
 
-  @Get('/check/records')
+  @Get('/check-records')
   checkForRecords(@Query('trainingId') trainingId: string, @Req() req): Promise<boolean> {
     return this.trainingService.checkForRecords(trainingId, req);
 }
