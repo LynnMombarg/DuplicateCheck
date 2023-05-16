@@ -25,7 +25,7 @@ export class TrainingController {
     return this.trainingService.getRecords(trainingId, req);
   }
 
-  @Post('/give/answer')
+  @Post('/give-answer')
   giveAnswer(@Query('answer') answer: boolean, @Query('trainingId') trainingId: string, @Req() req): Promise<void> {
     return this.trainingService.giveAnswer(answer, trainingId, req);
   }
