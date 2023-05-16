@@ -64,7 +64,7 @@ export default {
     data() {},
     methods: {
         giveAnswer(answer) {
-            console.log(answer);
+            this.$parent.giveAnswer(answer);
         },
     },
 };
