@@ -19,10 +19,12 @@ import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";
 import Navbar from "../../components/Navbar.vue";
 import {signOut} from "@/pages/overview/services/SignOut";
+import Footer from "@/pages/overview/components/Footer.vue";
 
 export default {
   name: 'OverviewPage',
   components: {
+      Footer,
       Navbar,
     OverviewBannerComponent,
     OverviewModelComponent

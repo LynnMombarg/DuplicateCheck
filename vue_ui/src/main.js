@@ -1,7 +1,7 @@
 // Authors: Marloes
 // Jira-task: 106 - Front-end maken
-// Sprint: 2
-// Last modified: 26-04-2023
+// Sprint: 2, 3
+// Last modified: 15-05-2023
 
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
@@ -12,13 +12,14 @@ import SignIn from "@/pages/login/SignIn.vue";
 import OverviewPage from "@/pages/overview/OverviewPage.vue";
 import TrainingPage from "@/pages/training/TrainingPage.vue";
 import './fetch.js';
+import TrainingPage from "@/pages/training/TrainingPage.vue";
 
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
         {path: '/', name: 'SignIn', component: SignIn, meta: { title: 'Sign In - Plauti Duplicate Check ML' }},
         {path: '/overview', name: 'OverviewPage', component: OverviewPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
-        {path: '/training', name: 'TrainingPage', component: TrainingPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
+        {path: '/training', name: 'TrainingPage', component: TrainingPage, meta: { title: 'Train model - Plauti Duplicate Check ML' }},
     ]
 })
 
