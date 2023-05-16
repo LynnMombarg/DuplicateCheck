@@ -1,7 +1,7 @@
 <!--Author(s): Silke Bertisen, Roward, Diederik-->
 <!--Jira-task: Dashboard realiseren 104 -->
 <!--Sprint: 2, 3 -->
-<!--Last modified: 15-05-2023-->
+<!--Last modified: 16-05-2023-->
 
 <template>
     <div class="flex pl-64 flex-col flex-1">
@@ -19,7 +19,7 @@ import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";
 import Navbar from "../../components/Navbar.vue";
 import {signOut} from "@/pages/overview/services/SignOut";
-import Footer from "@/pages/overview/components/Footer.vue";
+import Footer from "../../components/Footer.vue";
 
 export default {
   name: 'OverviewPage',

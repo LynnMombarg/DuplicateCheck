@@ -10,7 +10,6 @@ import App from './App.vue';
 import '../dist/output.css';
 import SignIn from "@/pages/login/SignIn.vue";
 import OverviewPage from "@/pages/overview/OverviewPage.vue";
-import TrainingPage from "@/pages/training/TrainingPage.vue";
 import './fetch.js';
 import TrainingPage from "@/pages/training/TrainingPage.vue";
 
@@ -19,7 +18,7 @@ export const router = createRouter({
     routes: [
         {path: '/', name: 'SignIn', component: SignIn, meta: { title: 'Sign In - Plauti Duplicate Check ML' }},
         {path: '/overview', name: 'OverviewPage', component: OverviewPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
-        {path: '/training', name: 'TrainingPage', component: TrainingPage, meta: { title: 'Train model - Plauti Duplicate Check ML' }},
+        {path: '/training/:modelId?/:tableName?', name: 'TrainingPage', component: TrainingPage, meta: { title: 'Train model - Plauti Duplicate Check ML' }},
     ]
 })
 

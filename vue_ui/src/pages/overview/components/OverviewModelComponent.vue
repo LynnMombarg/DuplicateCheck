@@ -1,7 +1,7 @@
 <!--Author(s): Silke Bertisen, Roward Dorrestijn-->
 <!--Jira-task: Dashboard realiseren 104 -->
-<!--Sprint: 2 -->
-<!--Last modified: 11-05-2023-->
+<!--Sprint: 2,3 -->
+<!--Last modified: 16-05-2023-->
 
 <template>
   <div class="flex justify-between rounded-md px-3 py-5 text-xl font-medium">
@@ -43,7 +43,7 @@
       </p>
     </div>
     <div>
-      <OverviewDropdownComponent :modelId="this.model.modelId" :token="token" />
+      <OverviewDropdownComponent :modelId="this.model.modelId" :tableName="this.model.tableName" :token="token" />
     </div>
   </div>
 </template>
@@ -74,6 +74,9 @@ export default {
     isAccounts(tableName) {
       return tableName === 'accounts';
     },
+  },
+  mounted(){
+    console.log("test:" + this.model.tableName);
   }
 };
 </script>

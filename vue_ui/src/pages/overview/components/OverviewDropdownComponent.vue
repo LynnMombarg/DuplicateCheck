@@ -1,7 +1,7 @@
 <!--Author(s): Silke Bertisen, Roward-->
 <!--Jira-task: Dashboard realiseren 104 -->
-<!--Sprint: 2 -->
-<!--Last modified: 11-05-2023-->
+<!--Sprint: 2,3 -->
+<!--Last modified: 16-05-2023-->
 <!--Description: This component is used to display the dropdown menu for the model options. -->
 
 <template>
@@ -21,7 +21,7 @@
         class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div class="py-1">
           <MenuItem v-slot="{ active }">
-          <a @click="trainModel"
+          <a @click="trainModel(modelId, tableName)"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Train model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
@@ -54,9 +54,8 @@ export default {
       }
     },
 
-    trainModel() {
-      // window.location.href = "/Trainmodel";
-      console.log("train model pressed");
+    trainModel(modelId, tableName) {
+      this.$router.push({ name: 'TrainingPage', params: {tableName: tableName, modelId: modelId} });
     },
 
     executeModel() {
@@ -67,9 +66,12 @@ export default {
   props: {
     token: {
       type: String,
-        required: true,
+      required: true,
     },
   },
+  setup() {
+    console.log("test" + this.tableName);
+  }
 };
 
 </script>
@@ -79,9 +81,13 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
 defineProps({
-    modelId: {
-      type: String,
-    },
+  modelId: {
+    type: String,
+  },
+  tableName: {
+    type: String,
+    required: true,
+  }
 });
 
 </script>
