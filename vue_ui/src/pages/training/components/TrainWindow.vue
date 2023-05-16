@@ -10,7 +10,7 @@
         </li>
     </ul>
     <div>
-        <button class="border-green-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(true)">
+        <button class="bg-green-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(true)">
             <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
