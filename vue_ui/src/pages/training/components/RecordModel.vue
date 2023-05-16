@@ -4,36 +4,30 @@
 <!--Last modified: 15-05-2023-->
 
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th>Column 1</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
-        <th>Column 4</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Value 1</th>
-        <th>Value 2</th>
-        <th>Value 3</th>
-        <th>Value 4</th>
-      </tr>
-    </tbody>
-  </table>
+    <table>
+        <thead>
+        <tr>
+            <th v-for="column in this.record.columns">{{ column }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td v-for="value in this.record.values">{{ value }}</td>
+        </tr>
+        </tbody>
+    </table>
 </template>
 
 <script>
 export default {
-  name: "RecordModel",
-  components: {},
-  data() {
-    return {
-      columns: [],
-      values: [],
-    };
-  },
-  methods: {},
+    name: "RecordModel",
+    components: {},
+    props: {
+        record: {
+            columns: Array,
+            values: Array,
+        },
+    },
+    methods: {},
 };
 </script>

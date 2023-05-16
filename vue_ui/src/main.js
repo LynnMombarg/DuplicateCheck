@@ -18,7 +18,7 @@ export const router = createRouter({
     routes: [
         {path: '/', name: 'SignIn', component: SignIn, meta: { title: 'Sign In - Plauti Duplicate Check ML' }},
         {path: '/overview', name: 'OverviewPage', component: OverviewPage, meta: { title: 'Overview - Plauti Duplicate Check ML' }},
-        {path: '/training', name: 'TrainingPage', component: TrainingPage},
+        {path: '/training', name: 'TrainingPage', component: TrainingPage, meta: { title: 'Train model - Plauti Duplicate Check ML' }},
     ]
 })
 
