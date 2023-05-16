@@ -38,6 +38,18 @@ const records = [
 
 export function selectJob(jobId, token) {
     return 0;
+
+    // const response = await fetch("http://localhost:8001/training", {
+    //     method: "POST",
+    //     headers: {
+    //         Authorization: "Bearer " + token,
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         jobId: jobId,
+    //     }),
+    // });
+    // return await response.json();
 }
 
 function checkForRecords(trainingId, token) {
@@ -66,7 +78,7 @@ export function getRecords(trainingId, token) {
         // });
         // return await response.json();
     } else {
-        saveTraining(trainingId, token);
+        return null;
     }
 }
 
@@ -87,7 +99,7 @@ export async function giveAnswer(answer, trainingId, token) {
     // return await response.json();
 }
 
-function saveTraining(trainingId, token) {
+export function saveTraining(trainingId, token) {
     console.log('Training completed');
 
     // const response = await fetch("http://localhost:8001/training/?", {
