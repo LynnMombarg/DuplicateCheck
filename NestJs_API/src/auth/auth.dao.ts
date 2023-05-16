@@ -7,7 +7,7 @@
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Auth } from './auth.schema';
+import { Auth, AuthBlacklist } from './auth.schema';
 import mongoose from 'mongoose';
 import { AuthDTO } from './auth.dto';
 
@@ -15,6 +15,8 @@ import { AuthDTO } from './auth.dto';
 export class AuthDAO {
   constructor(
     @InjectModel(Auth.name) private authModel: mongoose.Model<Auth>,
+    @InjectModel(AuthBlacklist.name)
+    private authBlacklistModel: mongoose.Model<AuthBlacklist>,
   ) {}
 
   storeToken(
@@ -75,5 +77,26 @@ export class AuthDAO {
 
   getUserId(token: string): string {
     return 'test123';
+  }
+
+  blackListToken(userId: string, jwtToken: string) {
+    const authBlacklist = new this.authBlacklistModel({
+      userId: userId,
+      jwtToken: jwtToken,
+    });
+    authBlacklist.save();
+  }
+
+  isBlacklisted(userId: string, jwtToken: string) {
+    return this.authBlacklistModel
+      .findOne({ userId: userId, jwtToken: jwtToken })
+      .exec()
+      .then((doc) => {
+        return !!doc;
+      });
+  }
+
+  removeBlacklistedToken(userId: string) {
+    this.authBlacklistModel.deleteOne({ userId: userId }).exec();
   }
 }

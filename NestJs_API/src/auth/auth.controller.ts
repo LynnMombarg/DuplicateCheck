@@ -2,7 +2,7 @@
  * Author(s): Diederik Lensink
  * Jira-task: 102 - NestJS oauth2 token opslaan, 103 - NestJS oauth2 token afhandelen
  * Sprint: 2
- * Last modified: 08-05-2023
+ * Last modified: 11-05-2023
  */
 
 import {
@@ -20,9 +20,12 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
+import { jwtConfig } from '../config/jwt.config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
+require('dotenv').config({
+  path: 'src/config/env/' + process.env.NODE_ENV + '.env',
+});
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const jsforce = require('jsforce');
 const oauth2 = new jsforce.OAuth2({
@@ -31,6 +34,7 @@ const oauth2 = new jsforce.OAuth2({
   clientSecret: process.env.SF_CLIENT_SECRET,
   redirectUri: process.env.BASE_URL + '/auth/callback',
 });
+const clientId = process.env.SF_CLIENT_ID;
 
 /**
  * Login Controller
@@ -56,6 +60,7 @@ export class AuthController {
   login(): void {
     console.log('login');
     console.log(process.env);
+    console.log(clientId);
   }
 
   /**
@@ -78,23 +83,42 @@ export class AuthController {
         }
         console.log('conn.accessToken: ' + conn.accessToken);
         console.log('conn.refreshToken: ' + conn.refreshToken);
-        console.log('conn.instanceUrl: ' + conn.instanceUrl);
-        console.log('User ID: ' + userInfo.id);
-        console.log('Org ID: ' + userInfo.organizationId);
-        console.log('Expires at: ' + conn.accessTokenExpiresAt);
-        const jwtToken = await this.jwtService.signAsync({
-          userId: userInfo.id,
-        });
+        const jwtToken = await this.jwtService.signAsync(
+          {
+            userId: userInfo.id,
+          },
+          {
+            secret: process.env.JWT_SECRET,
+            expiresIn: process.env.JWT_EXPIRES_IN,
+          },
+        );
         this.authService.login(
           userInfo.id,
           conn.accessToken,
           conn.refreshToken,
           jwtToken,
         );
+        let displayName;
+        let email;
+        await conn.identity(function (err, res) {
+          if (err) {
+            return console.error(err);
+          }
+          displayName = res.display_name;
+          email = res.username;
+        });
+        const json = JSON.stringify({
+          message: 'success',
+          token: jwtToken,
+          user: {
+            username: displayName,
+            email: email,
+          },
+        });
         const script =
-          "<script>window.opener.postMessage({ message: 'success', token: '" +
-          jwtToken +
-          "' }, 'http://localhost:8002')</script>";
+          '<script>window.opener.postMessage(' +
+          json +
+          ", 'http://localhost:8002')</script>";
         return res.status(HttpStatus.OK).send(script);
       }.bind(this),
     );

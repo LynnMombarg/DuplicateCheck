@@ -12,12 +12,17 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { jwtConfig } from '../config/jwt.config';
 import { Request } from 'express';
+import * as process from 'process';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    private authService: AuthService,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
@@ -25,13 +30,20 @@ export class AuthGuard implements CanActivate {
     if (!token) {
       throw new UnauthorizedException();
     }
+    // if request to logout, blacklist token
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
+        secret: process.env.JWT_SECRET,
       });
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request['user'] = payload;
+      if (await this.authService.isBlacklisted(payload.userId, token)) {
+        throw new UnauthorizedException();
+      }
+      if (request.url.includes('logout')) {
+        this.authService.blackListToken(payload.userId, token);
+      }
     } catch {
       throw new UnauthorizedException();
     }

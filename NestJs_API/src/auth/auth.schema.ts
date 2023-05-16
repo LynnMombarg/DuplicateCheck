@@ -26,3 +26,16 @@ export class Auth {
 }
 
 export const AuthSchema = SchemaFactory.createForClass(Auth);
+
+export type AuthBlacklistDocument = HydratedDocument<AuthBlacklist>;
+
+@Schema()
+export class AuthBlacklist {
+  @Prop()
+  userId: string;
+
+  @Prop()
+  jwtToken: string;
+}
+
+export const AuthBlacklistSchema = SchemaFactory.createForClass(AuthBlacklist);

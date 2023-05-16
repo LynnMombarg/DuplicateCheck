@@ -8,24 +8,25 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthDAO } from './auth.dao';
-import { Auth, AuthSchema } from './auth.schema';
+import {
+  Auth,
+  AuthBlacklist,
+  AuthBlacklistSchema,
+  AuthSchema,
+} from './auth.schema';
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { jwtConfig } from '../config/jwt.config';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }]),
-    JwtModule.register({
-      global: true,
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '10m' },
-    }),
+    MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }, { name: AuthBlacklist.name, schema: AuthBlacklistSchema }]),
+    JwtModule.register(jwtConfig),
   ],
   controllers: [AuthController],
   providers: [AuthDAO, AuthGuard, AuthService],
-  exports: [AuthGuard],
+  exports: [AuthGuard, AuthService],
 })
 export class AuthModule {}
