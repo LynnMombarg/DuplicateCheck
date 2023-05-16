@@ -1,7 +1,7 @@
 // Authors: Marloes
 // Jira-task: 130
 // Sprint: 3
-// Last modified: 15-05-2023
+// Last modified: 16-05-2023
 
 import { Test } from '@nestjs/testing';
 import { TrainingDAO } from '../training.dao';
