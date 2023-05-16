@@ -48,15 +48,11 @@ export class TrainingService {
       return this.trainingDAO.getNextRecords(trainingID);
     }
   
-    async giveAnswer(
-      answer: boolean,
-      trainingID: string,
-      @Req() req,
-    ): Promise<void> {
-      await this.trainingDAO.saveRecord(trainingID, answer);
+    async giveAnswer(answer: boolean, trainingID: string, @Req() req,): Promise<void> {
+      await this.trainingDAO.saveAnswer(trainingID, answer);
     }
   
-    checkForRecords(trainingId: string, req): Promise<boolean> {
+    checkForRecords(trainingId: string, @Req() req): Promise<boolean> {
       return this.trainingDAO.checkForRecords(trainingId);
     }
     

@@ -33,7 +33,7 @@ export class TrainingDAO {
     return records;
   }
 
-  async saveRecord(trainingId: string, answer: boolean) {
+  async saveAnswer(trainingId: string, answer: boolean) {
     await this.model.updateOne(
       { trainingId: trainingId },
       { $push: { matches: { $each: [answer] } } },
@@ -41,7 +41,7 @@ export class TrainingDAO {
   }
 
   async checkForRecords(trainingId: string): Promise<boolean> {
-    const training = await this.model.findOne({ trainingId: trainingId }).exec();
+    const training = await this.model.findOne({ trainingId: trainingId });
     const lengthMatches = training.matches.length;
     const lengthDatasets = training.datasetA.records.length;
     if (lengthDatasets > lengthMatches) {

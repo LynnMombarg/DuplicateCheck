@@ -100,6 +100,7 @@ describe('TrainingController', () => {
         req,
       );
     });
+  });
 
   describe('selectJob', () => {
     it('should call selectJob on TrainingService', () => {
@@ -116,7 +117,6 @@ describe('TrainingController', () => {
         jobId,
         userId,
     );
-});
   });
 });
 });

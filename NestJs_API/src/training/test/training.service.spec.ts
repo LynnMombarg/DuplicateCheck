@@ -19,7 +19,7 @@ describe('TrainingService', () => {
   const mockedTrainingDAO = {
     createTraining: jest.fn(),
     getNextRecords: jest.fn(),
-    saveRecord: jest.fn(),
+    saveAnswer: jest.fn(),
     checkForRecords: jest.fn(),
   };
   const mockedAuthDAO = {
@@ -85,7 +85,7 @@ describe('TrainingService', () => {
       trainingservice.giveAnswer(false, trainingID, req);
 
       // Assert
-      expect(mockedTrainingDAO.saveRecord).toHaveBeenCalledWith(
+      expect(mockedTrainingDAO.saveAnswer).toHaveBeenCalledWith(
         trainingID,
         answer,
       );
