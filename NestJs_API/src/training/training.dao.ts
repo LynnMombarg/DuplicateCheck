@@ -9,6 +9,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Training } from './schema/training.schema';
 import { Model } from 'mongoose';
 import { RecordDTO } from "./dto/record.dto";
+import { DatasetDTO } from "./dto/dataset.dto";
 
 @Injectable()
 export class TrainingDAO {
@@ -24,12 +25,12 @@ export class TrainingDAO {
   }
 
 
-  async getNextRecords(trainingId: string): Promise<RecordDTO[]> {
+  async getNextRecords(trainingId: string): Promise<DatasetDTO> {
     const training = await this.model.findOne({ trainingId: trainingId });
     const lengthMatches = training.matches.length;
     const recordA = training.datasetA.records[lengthMatches];
     const recordB = training.datasetB.records[lengthMatches];
-    const records = [recordA, recordB];
+    const records = new DatasetDTO([recordA, recordB]);
     return records;
   }
 

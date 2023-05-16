@@ -7,9 +7,10 @@ import { Controller, Get, Post, Query, Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from '../auth/auth.guard';
 import { TrainingService } from './training.service';
 import { RecordDTO } from "./dto/record.dto";
+import { DatasetDTO } from "./dto/dataset.dto";
 
 @Controller('training')
-@UseGuards(AuthGuard)
+//@UseGuards(AuthGuard)
 export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
@@ -20,16 +21,16 @@ export class TrainingController {
 
   
   @Get('/records')
-  getRecords(@Query('trainingId') trainingId: string, @Req() req): Promise<RecordDTO[]> {
+  getRecords(@Query('trainingId') trainingId: string, @Req() req): Promise<DatasetDTO> {
     return this.trainingService.getRecords(trainingId, req);
   }
 
-  @Post('/giveAnswer')
+  @Post('/give/answer')
   giveAnswer(@Query('answer') answer: boolean, @Query('trainingId') trainingId: string, @Req() req): Promise<void> {
     return this.trainingService.giveAnswer(answer, trainingId, req);
   }
 
-  @Get('/checkForRecords')
+  @Get('/check/records')
   checkForRecords(@Query('trainingId') trainingId: string, @Req() req): Promise<boolean> {
     return this.trainingService.checkForRecords(trainingId, req);
 }

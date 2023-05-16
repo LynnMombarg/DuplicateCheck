@@ -172,16 +172,18 @@ describe('TrainingDAO', () => {
 
       // Assert
       expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
-      expect(result).toEqual([
-        {
-          data: ['1', 'Hoi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-        },
-        {
-          data: ['1', 'Hi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-        },
-      ]);
+      expect(result).toEqual({
+        "records": [
+          {
+            "_id": { "$oid": "6461fcde17a65a5fbd3809e2" },
+            "data": ["1", "Hoi"]
+          },
+          {
+            "_id": { "$oid": "6461fcde17a65a5fbd3809e5" },
+            "data": ["1", "Hi"]
+          }
+        ]
+      });
     });
   });
 
@@ -196,16 +198,14 @@ describe('TrainingDAO', () => {
 
       // Assert
       expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
-      expect(result).toEqual([
+      expect(result).toEqual(
         {
-          data: ['2', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e3' },
+          records: [
+            { _id: { $oid: '6461fcde17a65a5fbd3809e3' }, data: ['2', 'Doei'] },
+            { _id: { $oid: '6461fcde17a65a5fbd3809e6' }, data: ['3', 'Doei'] },
+          ],
         },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e6' },
-        },
-      ]);
+      );
     });
   });
 

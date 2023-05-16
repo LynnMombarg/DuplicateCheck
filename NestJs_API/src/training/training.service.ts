@@ -44,7 +44,7 @@ export class TrainingService {
   }
   
 
-    async getRecords(trainingID: string, @Req() req): Promise<RecordDTO[]> {
+    async getRecords(trainingID: string, @Req() req): Promise<DatasetDTO> {
       return this.trainingDAO.getNextRecords(trainingID);
     }
   
