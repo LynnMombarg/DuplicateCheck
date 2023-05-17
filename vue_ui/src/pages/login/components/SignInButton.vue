@@ -1,3 +1,7 @@
+<!--Authors: Diederik-->
+<!--Sprint: 2, 3-->
+<!--Last modified: 15-05-2023-->
+
 <template>
   <button
     @click="login"
@@ -27,6 +31,7 @@ export default {
             popupWindow.close();
             console.log(event.data.token);
             this.$store.commit("setToken", event.data.token);
+            this.$store.commit("setUser", event.data.user);
             this.$router.push({ name: "OverviewPage" });
         }
       });

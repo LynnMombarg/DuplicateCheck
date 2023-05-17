@@ -9,18 +9,25 @@ import axios from 'axios';
 @Injectable()
 export class PythonDAO {
   async createModel(modelId: string) {
-    await axios
-      .post('http://localhost:8000/create-model', {
+    try {
+      const response = await axios.post(
+        'http://duplicatecheck-python-backend-1:8000/create-model',
+        {
         modelId: modelId,
-      })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.toJSON());
-        }
       });
+      console.log('Request successful:', response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   async deleteModel(fileName: string) {
-    await axios.delete('http://localhost:8000/delete-model/' + fileName);
+    try {
+      await axios.delete(
+        'http://duplicatecheck-python-backend-1:8000/delete-model/' + fileName,
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-md mt-2">
     <div
-      class="flex flex-row justify-between text-xs text-slate-400 pb-6 py-2 px-2 bg-white shadow sm:rounded-lg  "
+      class="flex flex-row justify-between text-xs text-slate-400 pb-6 py-2 px-2 sm:rounded-lg  "
       data-v-fdb56dc8=""
     >
       <span data-v-fdb56dc8="">© Plauti B.V. 2023</span

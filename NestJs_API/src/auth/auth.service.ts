@@ -20,6 +20,7 @@ export class AuthService {
     jwtToken: string,
   ): void {
     this.authDAO.storeToken(userID, accessToken, refresh_token, jwtToken);
+    this.removeBlacklistedToken(userID);
   }
 
   updateToken(accessToken: string): void {
@@ -32,5 +33,17 @@ export class AuthService {
 
   async getTokensByUserId(userId: string): Promise<AuthDTO> {
     return await this.authDAO.getTokensByUserId(userId);
+  }
+
+  blackListToken(userId: string, jwtToken: string): void {
+    this.authDAO.blackListToken(userId, jwtToken);
+  }
+
+  async isBlacklisted(userId: string, jwtToken: string): Promise<boolean> {
+    return await this.authDAO.isBlacklisted(userId, jwtToken);
+  }
+
+  removeBlacklistedToken(userId: string): void {
+    this.authDAO.removeBlacklistedToken(userId);
   }
 }

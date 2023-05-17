@@ -37,6 +37,8 @@ services:
     volumes:
       - './Python_API/RecordLinkage_API/src:/app'
       - '/app/node_modules'
+    networks:
+      - node-network
 
   mongodb:
     image: mongo:latest
