@@ -49,7 +49,7 @@ describe('ModelDAO', () => {
   });
 
   describe('getAllModels', () => {
-    it('should return the models', async () => {
+    it('should return the model', async () => {
       // Arrange
       const findSpy = jest.spyOn(modelModel, 'find').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce([modelDTO]),
