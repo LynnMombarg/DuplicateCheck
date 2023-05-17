@@ -20,11 +20,12 @@ export class TrainingService {
     private readonly salesforceDAO: SalesforceDAO,
   ) {}
 
-  async selectJob(jobId, userId) {
+  async selectJob(jobId, tableName, userId) {
     const tokens: AuthDTO = await this.authDAO.getTokensByUserId(userId);
     const records: DatasetDTO[] = await this.salesforceDAO.getDatasets(
       tokens,
       jobId,
+      tableName
     );
 
     if (records.length > 1) {
