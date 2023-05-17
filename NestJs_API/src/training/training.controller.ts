@@ -3,10 +3,11 @@
 // Sprint: 3
 // Last modified: 16-05-2023
 
-import { Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { TrainingService } from './training.service';
 import { DatasetDTO } from './dto/dataset.dto';
+import { CreateTrainingDTO } from './dto/create-training.dto';
 
 @Controller('training')
 @UseGuards(AuthGuard)
@@ -14,8 +15,12 @@ export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
   @Post()
-  async selectJob(jobId: string, @Req() req): Promise<string> {
-    return await this.trainingService.selectJob(jobId, req.user.userId);
+  async selectJob(@Body() training : CreateTrainingDTO, @Req() req): Promise<string> {
+    return await this.trainingService.selectJob(
+      training.jobId,
+      training.tableName,
+      req.user.userId,
+    );
   }
 
   @Get('/records')
