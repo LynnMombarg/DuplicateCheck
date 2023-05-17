@@ -1,9 +1,7 @@
-<!-- 
-Authors: Roward, Marloes
-Jira-task: 131 - Vue 3 - na klikken op "train model" jobs tonen
-Sprint: 3
-Last modified: 16-05-2023 
--->
+<!--Author(s): Marloes, Roward-->
+<!--Jira-task: 131, 132, 133, 134-->
+<!--Sprint: 3-->
+<!--Last modified: 16-05-2023-->
 
 <template>
 	<!-- <div class="flex pl-64 flex-col flex-1">
@@ -101,8 +99,10 @@ export default {
 			this.$store.commit('removeModels');
 			this.$router.push({ name: 'SignIn' });
 		},
-		selectJob(jobId) {
-			this.trainingId = selectJob(jobId, this.token);
+		async selectJob(jobId) {
+			const modelId = this.$route.params.modelId;
+			this.model = await this.$store.getters.getModelById(modelId);
+			this.trainingId = selectJob(jobId, this.model.tableName, this.token);
 			this.selectJobActive = false;
 			this.trainingActive = true;
 			this.getRecords();

@@ -68,12 +68,12 @@ export const store = createStore({
     },
 });
 
-// router.beforeEach((to, from, next) => {
-//     const token = store.state.token;
-//     if (to.name !== 'SignIn' && !token) next({ name: 'SignIn' });
-//     else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
-//     else next();
-// });
+router.beforeEach((to, from, next) => {
+    const token = store.state.token;
+    if (to.name !== 'SignIn' && !token) next({ name: 'SignIn' });
+    else if (to.name === 'SignIn' && token) next({ name: 'OverviewPage' });
+    else next();
+});
 
 router.afterEach((to) => {
     document.title = to.meta.title;
