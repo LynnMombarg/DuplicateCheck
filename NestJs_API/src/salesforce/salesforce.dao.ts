@@ -1,7 +1,7 @@
 // Authors: Roward, Marloes
-// Jira-task: 115, 130
+// Jira-task: 115, 130, 141
 // Sprint: 3
-// Last modified: 15-05-2023
+// Last modified: 17-05-2023
 
 import {
   Injectable,
@@ -74,68 +74,42 @@ export class SalesforceDAO {
     jobId: string,
     tableName: string,
   ): Promise<DatasetDTO[]> {
+    console.log(tableName);
     let columns = '';
-    switch (tableName) {
-      case 'leads':
-        columns = 'Name, Title, Company, Phone, MobilePhone, Email, Status';
-        break;
-      case 'contacts':
-        columns = 'Name, Account.Name, Account.Site, Phone, Email';
-        break;
-      case 'accounts':
-        columns = 'Name, Site, Phone';
-        break;
-      default:
-        throw new BadRequestException();
+    try {
+      switch (tableName) {
+        case 'Lead':
+          columns = 'Name, Title, Company, Phone, MobilePhone, Email, Status';
+          break;
+        case 'Contact':
+          columns = 'Name, Account.Name, Account.Site, Phone, Email';
+          break;
+        case 'Account':
+          columns = 'Name, Site, Phone';
+          break;
+        default:
+          throw new BadRequestException();
+      }
+    } catch (err) {
+      console.error(err.message);
     }
-    const resultSet: string[] = [];
+    const resultSet: DatasetDTO[] = [];
 
-    const sourceIndexes = await this.getSourceIndexes(jobId, tokens);
-    const matchIndexes = await this.getMatchIndexes(jobId, tokens);
-    const datasetA = await this.getMatchRecords(columns, matchIndexes, tokens);
-  }
-
-  async getSourceIndexes(jobId: string, tokens: AuthDTO): Promise<string[]> {
-    const resultSet: string[] = [];
-
-    await new Promise((resolve, reject) => {
-      const conn = new this.jsforce.Connection({
-        oauth2: this.oauth2,
-        instanceUrl: process.env.SF_INSTANCE_URL,
-        accessToken: tokens.getAccessToken(),
-        refreshToken: tokens.getRefreshToken(),
-      });
-      conn.on(
-        'refresh',
-        function (accessToken, res) {
-          console.log('refreshed token: ' + accessToken);
-          this.authService.updateToken(accessToken);
-        }.bind(this),
-      );
-      conn.query(
-        "SELECT dupcheck__SourceObject__c, dupcheck__Group__c FROM dupcheck__dc3Duplicate__c D WHERE dupcheck__dcGroup__c IN (SELECT G.Id FROM dupcheck__dcGroup__c G WHERE G.dupcheck__dcJob__c = '" +
-          jobId +
-          "')",
-        (err, result) => {
-          if (err) {
-            console.log(err);
-            reject(new UnauthorizedException());
-          } else {
-            for (let i = 0; i < result.records.length; i++) {
-              const index = result.records[i]['dupcheck__SourceObject__c'];
-              resultSet.push(index);
-            }
-            resolve(resultSet);
-          }
-        },
-      );
-    });
+    const [sourceIndexes, matchIndexes] = await this.getIndexes(jobId, tokens);
+    const datasetA = new DatasetDTO(
+      await this.getSourceRecords(columns, tableName, sourceIndexes, tokens),
+    );
+    const datasetB = new DatasetDTO(
+      await this.getMatchRecords(columns, tableName, matchIndexes, tokens),
+    );
+    resultSet.push(datasetA);
+    resultSet.push(datasetB);
     return resultSet;
   }
 
-  async getMatchIndexes(jobId: string, tokens: AuthDTO): Promise<string> {
-    let resultSet = "";
-
+  async getIndexes(jobId: string, tokens: AuthDTO): Promise<[string, string]> {
+    let matchIndexes = '';
+    let sourceIndexes = '';
     await new Promise((resolve, reject) => {
       const conn = new this.jsforce.Connection({
         oauth2: this.oauth2,
@@ -151,7 +125,7 @@ export class SalesforceDAO {
         }.bind(this),
       );
       conn.query(
-        "SELECT dupcheck__MatchObject__c, dupcheck__Group__c FROM dupcheck__dc3Duplicate__c D WHERE dupcheck__dcGroup__c IN (SELECT G.Id FROM dupcheck__dcGroup__c G WHERE G.dupcheck__dcJob__c = '" +
+        "SELECT dupcheck__SourceObject__c, dupcheck__MatchObject__c FROM dupcheck__dc3Duplicate__c D WHERE dupcheck__dcGroup__c IN (SELECT Id FROM dupcheck__dcGroup__c G WHERE dupcheck__dcJob__c = '" +
           jobId +
           "')",
         (err, result) => {
@@ -160,15 +134,72 @@ export class SalesforceDAO {
             reject(new UnauthorizedException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
-              const index = result.records[i]['dupcheck__MatchObject__c'];
-              resultSet += ("'" + index + "',");
+              const matchIndex = result.records[i]['dupcheck__MatchObject__c'];
+              const sourceIndex =
+                result.records[i]['dupcheck__SourceObject__c'];
+              matchIndexes += "'" + matchIndex + "',";
+              sourceIndexes += "'" + sourceIndex + "',";
+            }
+            resolve([matchIndexes, sourceIndexes]);
+          }
+        },
+      );
+    });
+    matchIndexes = matchIndexes.slice(0, -1);
+    sourceIndexes = sourceIndexes.slice(0, -1);
+    return [sourceIndexes, matchIndexes];
+  }
+
+  async getSourceRecords(
+    columns: string,
+    tableName: string,
+    sourceIndexes: string,
+    tokens: AuthDTO,
+  ): Promise<RecordDTO[]> {
+    const resultSet: RecordDTO[] = [];
+
+    await new Promise((resolve, reject) => {
+      const conn = new this.jsforce.Connection({
+        oauth2: this.oauth2,
+        instanceUrl: process.env.SF_INSTANCE_URL,
+        accessToken: tokens.getAccessToken(),
+        refreshToken: tokens.getRefreshToken(),
+      });
+      conn.on(
+        'refresh',
+        function (accessToken, res) {
+          console.log('refreshed token: ' + accessToken);
+          this.authService.updateToken(accessToken);
+        }.bind(this),
+      );
+      try{
+      conn.query(
+        'SELECT ' +
+          columns +
+          ' FROM ' +
+          tableName +
+          ' WHERE Id IN (' +
+          sourceIndexes +
+          ')',
+        (err, result) => {
+          if (err) {
+            console.log(err.message);
+            throw new BadRequestException();
+          } else {
+            for (let i = 0; i < result.records.length; i++) {
+              const record = result.records[i];
+              resultSet.push(new RecordDTO(record));
             }
             resolve(resultSet);
           }
         },
       );
+      }
+      catch(err){
+        console.error(err.message);
+        throw new BadRequestException(err.message);
+      }
     });
-    resultSet = resultSet.slice(0, -1);
     return resultSet;
   }
 
@@ -177,7 +208,7 @@ export class SalesforceDAO {
     tableName: string,
     matchIndexes: string,
     tokens: AuthDTO,
-  ): Promise<string[]> {
+  ): Promise<RecordDTO[]> {
     const resultSet: RecordDTO[] = [];
 
     await new Promise((resolve, reject) => {
@@ -195,17 +226,21 @@ export class SalesforceDAO {
         }.bind(this),
       );
       conn.query(
-        "SELECT " + columns + " FROM " + tableName + " WHERE Id IN (" +
+        'SELECT ' +
+          columns +
+          ' FROM ' +
+          tableName +
+          ' WHERE Id IN (' +
           matchIndexes +
-          ")",
+          ')',
         (err, result) => {
           if (err) {
             console.log(err);
             reject(new UnauthorizedException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
-              const index = result.records[i]['dupcheck__MatchObject__c'];
-              resultSet.push(index);
+              const record = result.records[i];
+              resultSet.push(new RecordDTO(record));
             }
             resolve(resultSet);
           }

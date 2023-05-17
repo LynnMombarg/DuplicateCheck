@@ -8,7 +8,7 @@ window.fetch = function(url, options) {
         .then(response => {
             if (response.status === 401) {
                 store.commit('removeToken');
-                // router.push({ name: 'SignIn' });
+                router.push({ name: 'SignIn' });
             }
             return response;
         })
