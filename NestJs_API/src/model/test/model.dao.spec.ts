@@ -14,6 +14,14 @@ describe('ModelDAO', () => {
   let modelDAO: ModelDAO;
   let modelModel: mongoose.Model<ModelDocument>;
 
+  const modelDTO: ModelDTO = {
+    modelName: 'Test Model',
+    modelId: 'test-model-id',
+    tableName: 'test-table',
+    modelDescription: 'Test model description',
+    userId: 'test-user-id',
+  };
+
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [
@@ -30,15 +38,8 @@ describe('ModelDAO', () => {
 
   describe('createModel', () => {
     it('should call save on model', async () => {
-      // Arrange
-      const modelDTO: ModelDTO = {
-        modelName: 'Test Model',
-        modelId: 'test-model-id',
-        tableName: 'test-table',
-        modelDescription: 'Test model description',
-        userId: 'test-user-id',
-      };
 
+      // Arrange
       const saveSpy = jest.spyOn(modelModel.prototype, 'save');
 
       // Act
@@ -51,15 +52,8 @@ describe('ModelDAO', () => {
 
   describe('getAllModels', () => {
     it('should return the models', async () => {
-      // Arrange
-      const modelDTO: ModelDTO = {
-        modelName: 'Test Model',
-        modelId: 'test-model-id',
-        tableName: 'test-table',
-        modelDescription: 'Test model description',
-        userId: 'test-user-id',
-      };
 
+      // Arrange
       const findSpy = jest.spyOn(modelModel, 'find').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce([modelDTO]),
       } as any);
@@ -69,7 +63,14 @@ describe('ModelDAO', () => {
 
       // Assert
       expect(findSpy).toHaveBeenCalledWith({ userId: 'test-user-id' });
-      expect(result).toEqual([modelDTO]);
+      expect(result).toEqual([{
+          modelName: 'Test Model',
+          modelId: 'test-model-id',
+          tableName: 'test-table',
+          modelDescription: 'Test model description',
+          userId: 'test-user-id',
+        }]
+      );
     });
   });
 });
