@@ -8,27 +8,22 @@
     <div class="flex items-center w-50">
       <div class="flex items-center w-50 px-2 rounded-md"
         :class="{ bgContacts: isContacts(this.model.tableName), bgLeads: isLeads(this.model.tableName), bgAccounts: isAccounts(this.model.tableName) }">
-        <div class="w-10">
-          <svg v-if="isContacts(this.model.tableName)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+        <div class="flex flex-row">
+          <svg v-if="isContacts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+            <use xlink:href="@/assets/symbols.svg#contact"></use>
+
           </svg>
 
-          <svg v-if="isLeads(this.model.tableName)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          <svg v-if="isLeads(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+            <use xlink:href="@/assets/symbols.svg#lead"></use>
           </svg>
 
-          <svg v-if="isAccounts(this.model.tableName)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+          <svg v-if="isAccounts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+            <use xlink:href="@/assets/symbols.svg#account"></use>
           </svg>
 
         </div>
-        <div class="">
+        <div class="text-sm text-white capitalize-first">
           {{ this.model.tableName }}
         </div>
       </div>
@@ -37,12 +32,12 @@
         {{ this.model.modelName }}
       </div>
     </div>
-    <div>
+    <div style="overflow: overlay">
       <p class="text-lg">
         {{ this.model.modelDescription }}
       </p>
     </div>
-    <div>
+    <div style="margin-left: 1rem;">
       <OverviewDropdownComponent :modelId="this.model.modelId" :token="token" />
     </div>
   </div>
@@ -81,14 +76,21 @@ export default {
 
 <style>
 .bgContacts {
-  background-color: rgb(132 204 22);
+  background-color: rgb(160 148 237);
 }
 
 .bgLeads {
-  background-color: rgb(240, 171, 12);
+  background-color: rgb(248 137 98);
 }
 
 .bgAccounts {
-  background-color: rgb(11, 145, 212);
+  background-color: rgb(127 141 225);
 }
+.capitalize-first::first-letter {
+  text-transform: uppercase;
+}
+::-webkit-scrollbar {width: 5px; height: 5px;}
+::-webkit-scrollbar-track {background: #f1f1f1;}
+::-webkit-scrollbar-thumb {background: #888; border-radius: 5px;}
+::-webkit-scrollbar-thumb:hover {background: #555;}
 </style>
