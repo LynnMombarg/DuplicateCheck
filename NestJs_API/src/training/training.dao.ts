@@ -8,8 +8,8 @@ import { TrainingDTO } from './dto/training.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Training } from './schema/training.schema';
 import { Model } from 'mongoose';
-import { RecordDTO } from "./dto/record.dto";
-import { DatasetDTO } from "./dto/dataset.dto";
+import { RecordDTO } from './dto/record.dto';
+import { DatasetDTO } from './dto/dataset.dto';
 
 @Injectable()
 export class TrainingDAO {
@@ -23,7 +23,6 @@ export class TrainingDAO {
     //  throw new NotFoundException();
     //}
   }
-
 
   async getNextRecords(trainingId: string): Promise<DatasetDTO> {
     const training = await this.model.findOne({ trainingId: trainingId });

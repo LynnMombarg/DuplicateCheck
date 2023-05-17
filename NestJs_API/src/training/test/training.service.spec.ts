@@ -10,8 +10,7 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { AuthGuard } from '../../auth/auth.guard';
 import { TrainingDAO } from '../training.dao';
 import { TrainingService } from '../training.service';
-import { SalesforceDAO } from "../../salesforce/salesforce.dao";
-
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('TrainingService', () => {
   let trainingservice: TrainingService;
@@ -33,7 +32,6 @@ describe('TrainingService', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-
       providers: [
         AuthService,
         JwtService,
@@ -89,45 +87,44 @@ describe('TrainingService', () => {
         trainingID,
         answer,
       );
+    });
+
+    describe('selectJob', () => {
+      it('should call getTokensByUserId on AuthDAO', () => {
+        // Arrange
+        const jobId = 'test123';
+        const userId = 'token';
+
+        // Act
+        trainingservice.selectJob(jobId, userId);
+
+        // Assert
+        expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
+      });
+
+      it('should call getDatasets on SalesforceDAO', () => {
+        // Arrange
+        const jobId = 'test123';
+        const userId = 'token';
+
+        // Act
+        trainingservice.selectJob(jobId, userId);
+
+        // Assert
+        expect(mockedSalesforceDAO.getDatasets).toHaveBeenCalled();
+      });
+
+      it('should call createTraining on TrainingDAO', () => {
+        // Arrange
+        const jobId = 'test123';
+        const userId = 'token';
+
+        // Act
+        trainingservice.selectJob(jobId, userId);
+
+        // Assert
+        expect(mockedTrainingDAO.createTraining).toHaveBeenCalled();
+      });
+    });
   });
-
-  describe('selectJob', () => {
-    it('should call getTokensByUserId on AuthDAO', () => {
-      // Arrange
-      const jobId = 'test123';
-      const userId = 'token';
-
-      // Act
-      trainingservice.selectJob(jobId, userId);
-
-      // Assert
-      expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
-    });
-
-    it('should call getDatasets on SalesforceDAO', () => {
-      // Arrange
-      const jobId = 'test123';
-      const userId = 'token';
-
-      // Act
-      trainingservice.selectJob(jobId, userId);
-
-      // Assert
-      expect(mockedSalesforceDAO.getDatasets).toHaveBeenCalled();
-    });
-
-    it('should call createTraining on TrainingDAO', () => {
-      // Arrange
-      const jobId = 'test123';
-      const userId = 'token';
-
-      // Act
-      trainingservice.selectJob(jobId, userId);
-
-      // Assert
-      expect(mockedTrainingDAO.createTraining).toHaveBeenCalled();
-    });
-  });
-});
-
 });

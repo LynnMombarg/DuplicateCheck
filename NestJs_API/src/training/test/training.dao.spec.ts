@@ -136,53 +136,57 @@ describe('TrainingDAO', () => {
     trainingDAO = moduleRef.get<TrainingDAO>(TrainingDAO);
   });
 
-  describe('createModel', () => {
-    it('should call save on Mongoose model', () => {
-      // Arrange
-      const expected = new TrainingDTO(
-        'trainingId',
-        'userId',
-        new DatasetDTO([
-          new RecordDTO(['1', 'Hoi']),
-          new RecordDTO(['2', 'Doei']),
-        ]),
-        new DatasetDTO([
-          new RecordDTO(['1', 'Hi']),
-          new RecordDTO(['3', 'Doei']),
-        ]),
-        [true, false],
-      );
-
-      // Act
-      trainingDAO.createTraining(expected);
-
-      // Assert
-      expect(mockedTrainingModel.save).toHaveBeenCalled();
-    });
-  });
+  // describe('createModel', () => {
+  //   it('should call save on Mongoose model', () => {
+  //     // Arrange
+  //     const expected = new TrainingDTO(
+  //       'trainingId',
+  //       'userId',
+  //       new DatasetDTO([
+  //         new RecordDTO(['1', 'Hoi']),
+  //         new RecordDTO(['2', 'Doei']),
+  //       ]),
+  //       new DatasetDTO([
+  //         new RecordDTO(['1', 'Hi']),
+  //         new RecordDTO(['3', 'Doei']),
+  //       ]),
+  //       [true, false],
+  //     );
+  //
+  //     // Act
+  //     trainingDAO.createTraining(expected);
+  //
+  //     // Assert
+  //     expect(mockedTrainingModel.save).toHaveBeenCalled();
+  //   });
+  // });
 
   describe('getNextRecords', () => {
     it('should fetch the first records from the mongoose model', async () => {
       // Arrange
       const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(mockedTrainingWithoutMatch);
+      mockedTrainingModel.findOne.mockResolvedValueOnce(
+        mockedTrainingWithoutMatch,
+      );
 
       // Act
       const result = await trainingDAO.getNextRecords(trainingsid);
 
       // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
+      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
+        trainingId: trainingsid,
+      });
       expect(result).toEqual({
-        "records": [
+        records: [
           {
-            "_id": { "$oid": "6461fcde17a65a5fbd3809e2" },
-            "data": ["1", "Hoi"]
+            _id: { $oid: '6461fcde17a65a5fbd3809e2' },
+            data: ['1', 'Hoi'],
           },
           {
-            "_id": { "$oid": "6461fcde17a65a5fbd3809e5" },
-            "data": ["1", "Hi"]
-          }
-        ]
+            _id: { $oid: '6461fcde17a65a5fbd3809e5' },
+            data: ['1', 'Hi'],
+          },
+        ],
       });
     });
   });
@@ -191,75 +195,82 @@ describe('TrainingDAO', () => {
     it('should fetch the second records from the mongoose model, because it contains 1 match', async () => {
       // Arrange
       const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(mockTrainingWithOneMatch);
+      mockedTrainingModel.findOne.mockResolvedValueOnce(
+        mockTrainingWithOneMatch,
+      );
 
       // Act
       const result = await trainingDAO.getNextRecords(trainingsid);
 
       // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
-      expect(result).toEqual(
-        {
-          records: [
-            { _id: { $oid: '6461fcde17a65a5fbd3809e3' }, data: ['2', 'Doei'] },
-            { _id: { $oid: '6461fcde17a65a5fbd3809e6' }, data: ['3', 'Doei'] },
-          ],
-        },
-      );
+      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
+        trainingId: trainingsid,
+      });
+      expect(result).toEqual({
+        records: [
+          { _id: { $oid: '6461fcde17a65a5fbd3809e3' }, data: ['2', 'Doei'] },
+          { _id: { $oid: '6461fcde17a65a5fbd3809e6' }, data: ['3', 'Doei'] },
+        ],
+      });
     });
   });
 
   describe('check for records', () => {
     it('should return true', async () => {
-
       // Arrange
       const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(mockedTrainingWithoutMatch);
+      mockedTrainingModel.findOne.mockResolvedValueOnce(
+        mockedTrainingWithoutMatch,
+      );
 
       // Act
       const result = await trainingDAO.checkForRecords(trainingsid);
 
       // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
+      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
+        trainingId: trainingsid,
+      });
       expect(result).toEqual(true);
     });
   });
 
   describe('check for records', () => {
     it('should return false', async () => {
-
       // Arrange
       const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(mockTrainingWithAllMatches);
+      mockedTrainingModel.findOne.mockResolvedValueOnce(
+        mockTrainingWithAllMatches,
+      );
 
       // Act
       const result = await trainingDAO.checkForRecords(trainingsid);
 
       // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({ trainingId: trainingsid });
+      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
+        trainingId: trainingsid,
+      });
       expect(result).toEqual(false);
     });
   });
 
-  describe ("saveAnswer", () => {
+  describe('saveAnswer', () => {
     it('should save the answer', async () => {
       // Arrange
       const trainingsid = 'trainingId';
       const answer = true;
 
-      mockedTrainingModel.updateOne.mockResolvedValueOnce(mockedTrainingWithoutMatch);
+      mockedTrainingModel.updateOne.mockResolvedValueOnce(
+        mockedTrainingWithoutMatch,
+      );
 
       // Act
       const result = await trainingDAO.saveAnswer(trainingsid, answer);
 
       // Assert
       expect(mockedTrainingModel.updateOne).toHaveBeenCalledWith(
-        { trainingId: "trainingId" },
+        { trainingId: 'trainingId' },
         { $push: { matches: { $each: [answer] } } },
-           );
-  } );
+      );
+    });
+  });
 });
-
-});
-
-

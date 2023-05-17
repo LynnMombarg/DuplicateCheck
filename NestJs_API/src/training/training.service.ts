@@ -3,16 +3,15 @@
 // Sprint: 3
 // Last modified: 16-05-2023
 
-import { Injectable, NotFoundException, Req } from "@nestjs/common";
+import { Injectable, NotFoundException, Req } from '@nestjs/common';
 import { RecordDTO } from './dto/record.dto';
-import { TrainingDAO } from "./training.dao";
-import { AuthDAO } from "../auth/auth.dao";
-import { SalesforceDAO } from "../salesforce/salesforce.dao";
-import { DatasetDTO } from "./dto/dataset.dto";
-import { AuthDTO } from "../auth/auth.dto";
-import { TrainingDTO } from "./dto/training.dto";
+import { TrainingDAO } from './training.dao';
+import { AuthDAO } from '../auth/auth.dao';
+import { SalesforceDAO } from '../salesforce/salesforce.dao';
+import { DatasetDTO } from './dto/dataset.dto';
+import { AuthDTO } from '../auth/auth.dto';
+import { TrainingDTO } from './dto/training.dto';
 import { v4 as uuid } from 'uuid';
-
 
 @Injectable()
 export class TrainingService {
@@ -42,21 +41,20 @@ export class TrainingService {
       throw new NotFoundException();
     }
   }
-  
 
-    async getRecords(trainingID: string, @Req() req): Promise<DatasetDTO> {
-      return this.trainingDAO.getNextRecords(trainingID);
-    }
-  
-    async giveAnswer(answer: boolean, trainingID: string, @Req() req,): Promise<void> {
-      await this.trainingDAO.saveAnswer(trainingID, answer);
-    }
-  
-    checkForRecords(trainingId: string, @Req() req): Promise<boolean> {
-      return this.trainingDAO.checkForRecords(trainingId);
-    }
-    
+  async getRecords(trainingID: string, @Req() req): Promise<DatasetDTO> {
+    return this.trainingDAO.getNextRecords(trainingID);
   }
 
+  async giveAnswer(
+    answer: boolean,
+    trainingID: string,
+    @Req() req,
+  ): Promise<void> {
+    await this.trainingDAO.saveAnswer(trainingID, answer);
+  }
 
-
+  checkForRecords(trainingId: string, @Req() req): Promise<boolean> {
+    return this.trainingDAO.checkForRecords(trainingId);
+  }
+}

@@ -8,8 +8,8 @@ import { TrainingController } from '../training.controller';
 import { TrainingService } from '../training.service';
 import { AuthGuard } from '../../auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
-import { AuthService } from "../../auth/auth.service";
-import { AuthDAO } from "../../auth/auth.dao";
+import { AuthService } from '../../auth/auth.service';
+import { AuthDAO } from '../../auth/auth.dao';
 
 describe('TrainingController', () => {
   let trainingController: TrainingController;
@@ -116,7 +116,7 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
         jobId,
         userId,
-    );
+      );
+    });
   });
-});
 });
