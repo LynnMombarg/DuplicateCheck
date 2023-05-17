@@ -32,13 +32,9 @@
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.module.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/pickles/eb9ac9c3-4f7a-4d58-9917-6d0d36884f83.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/pickles/test.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_API/RecordLinkage_API/src/pickles/test2.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/fetch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue_ui/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue_ui/src/pages/training/TrainingPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/TrainingPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/pages/training/components/RecordModel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/components/RecordModel.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/pages/training/components/TrainWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/components/TrainWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue_ui/src/pages/training/services/TrainService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vue_ui/src/pages/training/services/TrainService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

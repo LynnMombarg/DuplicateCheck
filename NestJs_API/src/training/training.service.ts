@@ -21,16 +21,17 @@ export class TrainingService {
     private readonly salesforceDAO: SalesforceDAO,
   ) {}
 
-  async selectJob(jobId, userId) {
+  async selectJob(jobId, userId): Promise<string> {
     const tokens: AuthDTO = await this.authDAO.getTokensByUserId(userId);
     const records: DatasetDTO[] = await this.salesforceDAO.getDatasets(
       tokens,
       jobId,
     );
+    const trainingId = uuid();
 
     if (records.length > 1) {
       const training: TrainingDTO = new TrainingDTO(
-        uuid(),
+        trainingId,
         userId,
         records[0],
         records[1],
@@ -40,6 +41,7 @@ export class TrainingService {
     } else {
       throw new NotFoundException();
     }
+    return trainingId;
   }
 
   async getRecords(trainingID: string, @Req() req): Promise<DatasetDTO> {

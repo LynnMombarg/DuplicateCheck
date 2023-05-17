@@ -60,7 +60,7 @@ export default {
     data() {
         return {
             token: null,
-            jobId: null,
+            jobId: 'testJobId', //TODO: Set to null once fully integrated.
             trainingId: null,
             records: [],
             trainingActive: false,
@@ -71,12 +71,14 @@ export default {
     },
     methods: {
         async selectJob() {
-            this.trainingId = await selectJob(this.jobId, this.token);
+            //this.trainingId = await selectJob(this.jobId, this.token);
+            console.log(await selectJob(this.jobId, this.token));
+            await this.getRecords();
             this.trainingActive = true;
-            this.getRecords();
+            console.log('Records: ' + this.records);
         },
-       getRecords: function () {
-            this.records = getRecords(this.trainingId, this.token);
+       async getRecords() {
+            this.records = await getRecords(this.trainingId, this.token);
             if (this.records === null) {
                 this.saveTraining();
             }

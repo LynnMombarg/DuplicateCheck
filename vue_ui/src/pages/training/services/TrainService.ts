@@ -15,7 +15,7 @@ export async function selectJob(jobId, token) {
             jobId: jobId,
         }),
     });
-    return await response.json();
+    return await response.text();
 }
 
 async function checkForRecords(trainingId, token) {

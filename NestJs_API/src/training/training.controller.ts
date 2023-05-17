@@ -6,7 +6,6 @@
 import { Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { TrainingService } from './training.service';
-import { RecordDTO } from './dto/record.dto';
 import { DatasetDTO } from './dto/dataset.dto';
 
 @Controller('training')
@@ -15,8 +14,8 @@ export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
   @Post()
-  selectJob(jobId: string, @Req() req) {
-    this.trainingService.selectJob(jobId, req.user.userId);
+  async selectJob(jobId: string, @Req() req): Promise<string> {
+    return await this.trainingService.selectJob(jobId, req.user.userId);
   }
 
   @Get('/records')
