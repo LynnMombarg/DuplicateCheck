@@ -43,7 +43,7 @@
       </p>
     </div>
     <div>
-      <OverviewDropdownComponent :modelId="this.model.modelId" :tableName="this.model.tableName" :token="token" />
+      <OverviewDropdownComponent :modelId="this.model.modelId" :token="token" />
     </div>
   </div>
 </template>
@@ -75,9 +75,6 @@ export default {
       return tableName === 'accounts';
     },
   },
-  mounted(){
-    console.log("test:" + this.model.tableName);
-  }
 };
 </script>
 

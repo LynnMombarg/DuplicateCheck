@@ -21,7 +21,7 @@
         class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div class="py-1">
           <MenuItem v-slot="{ active }">
-          <a @click="trainModel(modelId, tableName)"
+          <a @click="trainModel(modelId)"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Train model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
@@ -54,8 +54,8 @@ export default {
       }
     },
 
-    trainModel(modelId, tableName) {
-      this.$router.push({ name: 'TrainingPage', params: {tableName: tableName, modelId: modelId} });
+    trainModel(modelId) {
+      this.$router.push({ name: 'TrainingPage', params: {modelId: modelId} });
     },
 
     executeModel() {
@@ -69,9 +69,6 @@ export default {
       required: true,
     },
   },
-  setup() {
-    console.log("test" + this.tableName);
-  }
 };
 
 </script>
@@ -84,10 +81,6 @@ defineProps({
   modelId: {
     type: String,
   },
-  tableName: {
-    type: String,
-    required: true,
-  }
 });
 
 </script>

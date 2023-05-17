@@ -34,7 +34,7 @@ Last modified: 16-05-2023
 									<img src="@/assets/logo_duplicatecheck.png">
 								</div>
 								<div>
-									Train model 1
+									{{ model && model.modelName }}
 								</div>
 							</div>
 						</div>
@@ -71,12 +71,13 @@ export default {
 		token: {
 			type: String,
 			required: true,
-		},
+		}
 	},
 	data() {
 		return {
 			jobs: [],
 			token: null,
+			model: null,
 			trainingId: null,
 			records: [],
 			trainingActive: false,
@@ -84,14 +85,20 @@ export default {
 		}
 	},
 	async mounted() {
+		const modelId = this.$route.params.modelId;
+		this.model = await this.$store.getters.getModelById(modelId);
+		if (!this.model) {
+			this.$router.push({ name: 'OverviewPage' });
+		}
 		this.token = await this.$store.state.token;
-		this.jobs = await getJobs(this.token, this.$route.params.tableName);
+		this.jobs = await getJobs(this.token, this.model.tableName);
 	},
 	methods: {
 		async signOut() {
 			await signOut(this.token)
 			this.$store.commit('removeUser');
 			this.$store.commit('removeToken');
+			this.$store.commit('removeModels');
 			this.$router.push({ name: 'SignIn' });
 		},
 		selectJob(jobId) {
@@ -115,9 +122,9 @@ export default {
 			this.trainingActive = false;
 			saveTraining(this.trainingId, this.token);
 			this.$router.push({ name: "OverviewPage" });
-		}
-	}
-};
+		},
+	},
+}
 </script>
 <style>
 .selectJob {

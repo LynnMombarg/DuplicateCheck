@@ -44,7 +44,7 @@ export default {
   async mounted() {
       this.token = await this.$store.state.token;
       this.models = await getModels(this.token);
-      console.log(this.models);
+      this.$store.commit('setModels', this.models);
   },
   methods: {
     async deleteModel(modelId) {
@@ -57,6 +57,7 @@ export default {
       await signOut(this.token)
       this.$store.commit('removeUser');
       this.$store.commit('removeToken');
+      this.$store.commit('removeModels');
       this.$router.push({name: 'SignIn'});
     }
   },

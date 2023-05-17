@@ -5,13 +5,13 @@
 
 <template>
 	<div class="flex justify-between rounded-md px-3 py-5 text-xl font-medium">
-		<div class="flex items-center w-50">
-			<div class="flex w-50 px-2 rounded-md">
-				<div class="w-100">
+		<div class="flex flex-col items-center w-full">
+			<div class="flex w-full px-2 rounded-md">
+				<div class="w-full">
 					<ul
-						class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+						class="w-full text-sm font-medium text-gray-900 bg-white rounded-lg">
 						<li v-for="job in jobs" :key="job.information"
-							class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+							class="w-full border border-gray-200 rounded-lg" style="margin-bottom: 10px;">
 							<div class="flex items-center px-3 pr">
 								<input :id="'list-radio-license-' + job.jobId" type="radio" v-model="jobId"
 									:value="job.jobId" name="list-radio"
