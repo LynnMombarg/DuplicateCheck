@@ -7,6 +7,7 @@
     <div class="flex pl-64 flex-col flex-1">
         <Navbar :token="token"/>
         <OverviewBannerComponent :models="models"/>
+        <Footer />
     </div>
 </template>
 
