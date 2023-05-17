@@ -74,7 +74,6 @@ export class SalesforceDAO {
     jobId: string,
     tableName: string,
   ): Promise<DatasetDTO[]> {
-    console.log(tableName);
     let columns = '';
     try {
       switch (tableName) {
