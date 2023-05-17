@@ -4,47 +4,47 @@
 // Last modified: 17-05-2023
 
 import { Test } from '@nestjs/testing';
-import { ModelDAO } from "../model.dao";
+import { ModelDAO } from '../model.dao';
+import { Model, ModelDocument, ModelSchema } from "../schema/model.schema";
+import { ModelDTO } from '../dto/model.dto';
+import { getModelToken, MongooseModule } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 
 describe('ModelDAO', () => {
   let modelDAO: ModelDAO;
-
-  const mockedModel = {
-    model: jest.fn(),
-    save: jest.fn(),
-    findOne: jest.fn(),
-    updateOne: jest.fn(),
-  };
+  let modelModel: mongoose.Model<ModelDocument>;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [
-        ModelDAO,
-        {
-          provide: 'Model',
-          useValue: mockedModel,
-        },
+      imports: [
+        MongooseModule.forRoot('mongodb://localhost:27017/test'),
+        MongooseModule.forFeature([{ name: Model.name, schema: ModelSchema }]),
       ],
+      providers: [ModelDAO],
     }).compile();
 
     modelDAO = moduleRef.get<ModelDAO>(ModelDAO);
+    modelModel = moduleRef.get(getModelToken(Model.name));
   });
 
   describe('createModel', () => {
-
-it('should call save on model', async () => {
+    it('should call save on model', async () => {
       // Arrange
+      const modelDTO: ModelDTO = {
+        modelName: 'Test Model',
+        modelId: 'test-model-id',
+        tableName: 'test-table',
+        modelDescription: 'Test model description',
+        userId: 'test-user-id',
+      };
+
+      const saveSpy = jest.spyOn(modelModel.prototype, 'save');
 
       // Act
-      await modelDAO.createModel(model);
+      await modelDAO.createModel(modelDTO);
 
       // Assert
-      expect(mockedModel.save).toBeCalled();
+      expect(saveSpy).toHaveBeenCalled();
     });
   });
 });
-
-
-
-
-
