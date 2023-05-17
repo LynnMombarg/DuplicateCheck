@@ -115,7 +115,6 @@ export default {
 		},
 		giveAnswer(answer) {
 			giveAnswer(answer, this.trainingId, this.token);
-			this.trainingId++; // Delete this statement when fully implemented
 			this.getRecords();
 		},
 		saveTraining() {
