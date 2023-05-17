@@ -5,7 +5,7 @@
 
 import { Test } from '@nestjs/testing';
 import { ModelDAO } from '../model.dao';
-import { Model, ModelDocument, ModelSchema } from "../schema/model.schema";
+import { Model, ModelDocument, ModelSchema } from '../schema/model.schema';
 import { ModelDTO } from '../dto/model.dto';
 import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
@@ -29,8 +29,7 @@ describe('ModelDAO', () => {
         MongooseModule.forFeature([{ name: Model.name, schema: ModelSchema }]),
       ],
       providers: [ModelDAO],
-    }).
-    compile();
+    }).compile();
 
     modelDAO = moduleRef.get<ModelDAO>(ModelDAO);
     modelModel = moduleRef.get(getModelToken(Model.name));
@@ -38,7 +37,6 @@ describe('ModelDAO', () => {
 
   describe('createModel', () => {
     it('should call save on model', async () => {
-
       // Arrange
       const saveSpy = jest.spyOn(modelModel.prototype, 'save');
 
@@ -52,7 +50,6 @@ describe('ModelDAO', () => {
 
   describe('getAllModels', () => {
     it('should return the models', async () => {
-
       // Arrange
       const findSpy = jest.spyOn(modelModel, 'find').mockReturnValueOnce({
         exec: jest.fn().mockResolvedValueOnce([modelDTO]),
@@ -63,29 +60,46 @@ describe('ModelDAO', () => {
 
       // Assert
       expect(findSpy).toHaveBeenCalledWith({ userId: 'test-user-id' });
-      expect(result).toEqual([{
+      expect(result).toEqual([
+        {
           modelName: 'Test Model',
           modelId: 'test-model-id',
           tableName: 'test-table',
           modelDescription: 'Test model description',
           userId: 'test-user-id',
-        }]
-      );
+        },
+      ]);
     });
   });
 
-  describe('deletemodel', () => {
-    it('should call delete on model', async () => {
-
+  describe('deleteModel', () => {
+    it('should call deleteOne on model', async () => {
       // Arrange
-      const DeleteSpy = jest.spyOn(modelModel.prototype, 'deleteOne');
+      const deleteOneSpy = jest.spyOn(modelModel, 'deleteOne');
 
       // Act
       await modelDAO.deleteModel('test-model-id', 'test-user-id');
 
       // Assert
-      expect(DeleteSpy).toHaveBeenCalled();
+      expect(deleteOneSpy).toHaveBeenCalledWith({
+        modelId: 'test-model-id',
+        userId: 'test-user-id',
+      });
     });
   });
-  
+
+  describe('deleteModel', () => {
+    it('should throw NotFoundException when no model is found', async () => {
+      // Arrange
+      jest.spyOn(modelModel, 'deleteOne').mockResolvedValueOnce({
+        deletedCount: 0,
+      } as any);
+
+      // Act
+      const result = modelDAO.deleteModel('test-model-id', 'test-user-id');
+
+      // Assert
+      await expect(result).rejects.toThrowError('Not Found');
+    });
+  });
 });
