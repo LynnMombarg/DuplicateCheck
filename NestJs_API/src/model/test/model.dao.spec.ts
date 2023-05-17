@@ -21,7 +21,8 @@ describe('ModelDAO', () => {
         MongooseModule.forFeature([{ name: Model.name, schema: ModelSchema }]),
       ],
       providers: [ModelDAO],
-    }).compile();
+    }).
+    compile();
 
     modelDAO = moduleRef.get<ModelDAO>(ModelDAO);
     modelModel = moduleRef.get(getModelToken(Model.name));
@@ -49,7 +50,8 @@ describe('ModelDAO', () => {
   });
 
   describe('getAllModels', () => {
-    it('it should return the model', async () => {
+    it('should return the models', async () => {
+      // Arrange
       const modelDTO: ModelDTO = {
         modelName: 'Test Model',
         modelId: 'test-model-id',
@@ -58,7 +60,16 @@ describe('ModelDAO', () => {
         userId: 'test-user-id',
       };
 
-      //mockReturnValueOnce(modelModel, modelDTO);
+      const findSpy = jest.spyOn(modelModel, 'find').mockReturnValueOnce({
+        exec: jest.fn().mockResolvedValueOnce([modelDTO]),
+      } as any);
+
+      // Act
+      const result = await modelDAO.getAllModels('test-user-id');
+
+      // Assert
+      expect(findSpy).toHaveBeenCalledWith({ userId: 'test-user-id' });
+      expect(result).toEqual([modelDTO]);
     });
   });
 });
