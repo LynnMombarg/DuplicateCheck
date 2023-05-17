@@ -24,7 +24,7 @@ export class Training {
   @Prop({ type: DatasetSchema, ref: Dataset.name })
   datasetB: Dataset;
 
-  @Prop()
+  @Prop([Boolean])
   matches: boolean[];
 }
 export const TrainingSchema = SchemaFactory.createForClass(Training);

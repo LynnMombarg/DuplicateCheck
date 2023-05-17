@@ -1,5 +1,5 @@
 <!--Author(s): Marloes-->
-<!--Jira-task: 132-->
+<!--Jira-task: 132, 133, 134-->
 <!--Sprint: 3-->
 <!--Last modified: 16-05-2023-->
 
@@ -42,11 +42,11 @@
 <script>
 import RecordModel from "@/pages/training/components/RecordModel.vue";
 import TrainWindow from "@/pages/training/components/TrainWindow.vue";
-import {getRecords, giveAnswer, saveTraining, selectJob} from "@/pages/training/services/TrainService";
 import Navbar from "@/pages/overview/components/Navbar.vue";
 import Footer from "@/pages/overview/components/Footer.vue";
 import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
 import CreateModelButton from "@/pages/overview/components/CreateModelButton.vue";
+import {getMappedRecords, giveAnswer, saveTraining, selectJob} from "./services/TrainService";
 
 export default {
     name: "TrainingPage",
@@ -60,7 +60,8 @@ export default {
     data() {
         return {
             token: null,
-            jobId: null,
+            jobId: 'a0C7Q00000Cz1zsUAB', //TODO: Set to null once fully integrated.
+            tableName: 'Lead',
             trainingId: null,
             records: [],
             trainingActive: false,
@@ -70,20 +71,19 @@ export default {
         this.token = await this.$store.state.token;
     },
     methods: {
-        selectJob() {
-            this.trainingId = selectJob(this.jobId, this.token);
+        async selectJob() {
+            this.trainingId = await selectJob(this.jobId, this.tableName, this.token);
+            await this.getRecords();
             this.trainingActive = true;
-            this.getRecords();
         },
-        getRecords: function () {
-            this.records = getRecords(this.trainingId, this.token);
-            if (this.records === null) {
+       async getRecords() {
+            this.records = await getMappedRecords(this.trainingId, this.token);
+            if(this.records === null) {
                 this.saveTraining();
             }
         },
         giveAnswer(answer) {
             giveAnswer(answer, this.trainingId, this.token);
-            this.trainingId++; // Delete this statement when fully implemented
             this.getRecords();
         },
         saveTraining() {
