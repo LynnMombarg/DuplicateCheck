@@ -1,4 +1,4 @@
-<!--Author(s): Silke Bertisen, Roward-->
+<!--Author(s): Silke Bertisen, Roward, Diederik-->
 <!--Jira-task: Dashboard realiseren 104 -->
 <!--Sprint: 2,3 -->
 <!--Last modified: 16-05-2023-->
