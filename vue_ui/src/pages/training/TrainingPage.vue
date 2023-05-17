@@ -46,7 +46,7 @@ import Navbar from "@/pages/overview/components/Navbar.vue";
 import Footer from "@/pages/overview/components/Footer.vue";
 import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
 import CreateModelButton from "@/pages/overview/components/CreateModelButton.vue";
-import {getRecords, giveAnswer, saveTraining, selectJob} from "./services/TrainService";
+import {getMappedRecords, giveAnswer, saveTraining, selectJob} from "./services/TrainService";
 
 export default {
     name: "TrainingPage",
@@ -71,14 +71,13 @@ export default {
     },
     methods: {
         async selectJob() {
-            //this.trainingId = await selectJob(this.jobId, this.token);
-            console.log(await selectJob(this.jobId, this.token));
+            this.trainingId = await selectJob(this.jobId, this.token);
             await this.getRecords();
             this.trainingActive = true;
             console.log('Records: ' + this.records);
         },
        async getRecords() {
-            this.records = await getRecords(this.trainingId, this.token);
+            this.records = await getMappedRecords(this.trainingId, this.token);
             if (this.records === null) {
                 this.saveTraining();
             }

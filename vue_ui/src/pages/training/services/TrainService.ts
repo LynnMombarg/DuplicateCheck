@@ -27,10 +27,10 @@ async function checkForRecords(trainingId, token) {
             "Content-Type": "application/json",
         },
     });
-    return await response.json();
+    return await response.text();
 }
 
-export async function getRecords(trainingId, token) {
+async function getRecords(trainingId, token) {
     if (await checkForRecords(trainingId, token)) {
         console.log('Fetched records');
         const response = await fetch("http://localhost:8001/training/records?trainingId=" + trainingId, {
@@ -44,6 +44,14 @@ export async function getRecords(trainingId, token) {
     } else {
         return null;
     }
+}
+
+export async function getMappedRecords(trainingId, token) {
+    let mappedRecords = [];
+    const records = await getRecords(trainingId, token);
+    records.forEach()
+
+    return records;
 }
 
 export async function giveAnswer(answer, trainingId, token) {

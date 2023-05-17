@@ -8,7 +8,6 @@ import { TrainingDTO } from './dto/training.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Training } from './schema/training.schema';
 import { Model } from 'mongoose';
-import { RecordDTO } from './dto/record.dto';
 import { DatasetDTO } from './dto/dataset.dto';
 
 @Injectable()
@@ -16,12 +15,8 @@ export class TrainingDAO {
   constructor(@InjectModel(Training.name) private model: Model<Training>) {}
 
   async createTraining(training: TrainingDTO) {
-    //try {
     const createdTraining = new this.model(training);
     await createdTraining.save();
-    //} catch {
-    //  throw new NotFoundException();
-    //}
   }
 
   async getNextRecords(trainingId: string): Promise<DatasetDTO> {
@@ -29,8 +24,7 @@ export class TrainingDAO {
     const lengthMatches = training.matches.length;
     const recordA = training.datasetA.records[lengthMatches];
     const recordB = training.datasetB.records[lengthMatches];
-    const records = new DatasetDTO([recordA, recordB]);
-    return records;
+    return new DatasetDTO([recordA, recordB]);
   }
 
   async saveAnswer(trainingId: string, answer: boolean) {
@@ -44,10 +38,6 @@ export class TrainingDAO {
     const training = await this.model.findOne({ trainingId: trainingId });
     const lengthMatches = training.matches.length;
     const lengthDatasets = training.datasetA.records.length;
-    if (lengthDatasets > lengthMatches) {
-      return true;
-    } else {
-      return false;
-    }
+    return lengthDatasets > lengthMatches;
   }
 }
