@@ -21,15 +21,15 @@
         class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div class="py-1">
           <MenuItem v-slot="{ active }">
-          <a @click="trainModel(modelId)"
+          <a @click="trainModel(modelId)" style="cursor: pointer;"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Train model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
-          <a @click="executeModel"
+          <a @click="executeModel" style="cursor: pointer;"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Execute model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
-          <a @click="confirmDelete(modelId)"
+          <a @click="confirmDelete(modelId)" style="cursor: pointer;"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Delete model</a>
           </MenuItem>
         </div>
