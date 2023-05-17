@@ -4,7 +4,6 @@
 // Last modified: 17-05-2023
 
 export async function selectJob(jobId, tableName, token) {
-  console.log("Job selected");
   const response = await fetch("http://localhost:8001/training", {
     method: "POST",
     headers: {
@@ -20,9 +19,8 @@ export async function selectJob(jobId, tableName, token) {
 }
 
 async function checkForRecords(trainingId, token) {
-  console.log("Checked for records");
   const response = await fetch(
-    "http://localhost:8001//training/check-records/?trainingId=" + trainingId,
+    "http://localhost:8001/training/check-records/?trainingId=" + trainingId,
     {
       method: "GET",
       headers: {
@@ -36,7 +34,6 @@ async function checkForRecords(trainingId, token) {
 
 async function getRecords(trainingId, token) {
   if (await checkForRecords(trainingId, token)) {
-    console.log("Fetched records");
     const response = await fetch(
       "http://localhost:8001/training/records?trainingId=" + trainingId,
       {
@@ -49,32 +46,35 @@ async function getRecords(trainingId, token) {
     );
     return await response.json();
   } else {
+    console.log('Ik ben null');
     return null;
   }
 }
 
 export async function getMappedRecords(trainingId, token) {
-    const records = await getRecords(trainingId, token);
-    let mappedRecords = [];
+  const records = await getRecords(trainingId, token);
+  if (records.records[0] === null) {
+    return null;
+  }
 
-    for (let i = 0; i < records.records.length; i++) {
-        let columns = [];
-        let values = [];
-        for (let key in records.records[i].data[0]) {
-            if (key !== 'attributes') {
-                columns.push(key);
-                values.push(records.records[i].data[0][key]);
-            }
-        }
-        mappedRecords.push({columns, values});
+  let mappedRecords = [];
+  for (let i = 0; i < records.records.length; i++) {
+    let columns = [];
+    let values = [];
+    for (let key in records.records[i].data[0]) {
+      if (key !== "attributes") {
+        columns.push(key);
+        values.push(records.records[i].data[0][key]);
+      }
     }
-    return mappedRecords;
+    mappedRecords.push({ columns, values });
+  }
+  return mappedRecords;
 }
 
 export async function giveAnswer(answer, trainingId, token) {
-  console.log("Answered " + answer);
   const response = await fetch("http://localhost:8001/training/give-answer", {
-    method: "POST",
+    method: "PUT",
     headers: {
       Authorization: "Bearer " + token,
       "Content-Type": "application/json",
@@ -88,7 +88,6 @@ export async function giveAnswer(answer, trainingId, token) {
 }
 
 export async function saveTraining(trainingId, token) {
-  console.log("Training saved");
   // const response = await fetch("http://localhost:8001/training/save", {
   //     method: "POST",
   //     headers: {

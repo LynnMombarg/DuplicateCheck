@@ -45,19 +45,15 @@ export class TrainingService {
     return trainingId;
   }
 
-  async getRecords(trainingID: string, @Req() req): Promise<DatasetDTO> {
+  async getRecords(trainingID: string): Promise<DatasetDTO> {
     return this.trainingDAO.getNextRecords(trainingID);
   }
 
-  async giveAnswer(
-    answer: boolean,
-    trainingID: string,
-    @Req() req,
-  ): Promise<void> {
+  async giveAnswer(answer: boolean, trainingID: string): Promise<void> {
     await this.trainingDAO.saveAnswer(trainingID, answer);
   }
 
-  checkForRecords(trainingId: string, @Req() req): Promise<boolean> {
+  checkForRecords(trainingId: string): Promise<boolean> {
     return this.trainingDAO.checkForRecords(trainingId);
   }
 }

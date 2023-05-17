@@ -8,6 +8,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Query,
   Req,
   UseGuards,
@@ -16,6 +17,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { TrainingService } from './training.service';
 import { DatasetDTO } from './dto/dataset.dto';
 import { CreateTrainingDTO } from './dto/create-training.dto';
+import { AnswerDTO } from './dto/answer.dto';
 
 @Controller('training')
 @UseGuards(AuthGuard)
@@ -23,7 +25,10 @@ export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
   @Post()
-  async selectJob(@Body() training : CreateTrainingDTO, @Req() req): Promise<string> {
+  async selectJob(
+    @Body() training: CreateTrainingDTO,
+    @Req() req,
+  ): Promise<string> {
     return await this.trainingService.selectJob(
       training.jobId,
       training.tableName,
@@ -32,27 +37,17 @@ export class TrainingController {
   }
 
   @Get('/records')
-  getRecords(
-    @Query('trainingId') trainingId: string,
-    @Req() req,
-  ): Promise<DatasetDTO> {
-    return this.trainingService.getRecords(trainingId, req);
+  getRecords(@Query('trainingId') trainingId: string): Promise<DatasetDTO> {
+    return this.trainingService.getRecords(trainingId);
   }
 
-  @Post('/give-answer')
-  giveAnswer(
-    @Query('answer') answer: boolean,
-    @Query('trainingId') trainingId: string,
-    @Req() req,
-  ): Promise<void> {
-    return this.trainingService.giveAnswer(answer, trainingId, req);
+  @Put('/give-answer')
+  giveAnswer(@Body() answer: AnswerDTO) {
+    this.trainingService.giveAnswer(answer.answer, answer.trainingId);
   }
 
   @Get('/check-records')
-  checkForRecords(
-    @Query('trainingId') trainingId: string,
-    @Req() req,
-  ): Promise<boolean> {
-    return this.trainingService.checkForRecords(trainingId, req);
+  checkForRecords(@Query('trainingId') trainingId: string): Promise<boolean> {
+    return this.trainingService.checkForRecords(trainingId);
   }
 }

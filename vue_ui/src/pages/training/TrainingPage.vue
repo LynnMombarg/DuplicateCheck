@@ -78,7 +78,7 @@ export default {
         },
        async getRecords() {
             this.records = await getMappedRecords(this.trainingId, this.token);
-            if (this.records === null) {
+            if(this.records === null) {
                 this.saveTraining();
             }
         },
