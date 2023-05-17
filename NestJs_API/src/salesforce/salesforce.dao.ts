@@ -76,14 +76,14 @@ export class SalesforceDAO {
   ): Promise<DatasetDTO[]> {
     let columns = '';
     try {
-      switch (tableName) {
-        case 'Lead':
+      switch (tableName.toLowerCase()) {
+        case 'lead':
           columns = 'Name, Title, Company, Phone, MobilePhone, Email, Status';
           break;
-        case 'Contact':
+        case 'contact':
           columns = 'Name, Account.Name, Account.Site, Phone, Email';
           break;
-        case 'Account':
+        case 'account':
           columns = 'Name, Site, Phone';
           break;
         default:

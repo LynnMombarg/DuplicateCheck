@@ -52,7 +52,7 @@ import { getJobs } from './services/GetJobs';
 import SelectJobBody from './components/SelectJobBody.vue';
 import RecordModel from "@/pages/training/components/RecordModel.vue";
 import TrainWindow from "@/pages/training/components/TrainWindow.vue";
-import { getRecords, giveAnswer, saveTraining, selectJob } from "@/pages/training/services/TrainService";
+import { getMappedRecords, giveAnswer, saveTraining, selectJob } from "@/pages/training/services/TrainService";
 import Navbar from '../../components/Navbar.vue';
 import Footer from '../../components/Footer.vue';
 
@@ -102,13 +102,13 @@ export default {
 		async selectJob(jobId) {
 			const modelId = this.$route.params.modelId;
 			this.model = await this.$store.getters.getModelById(modelId);
-			this.trainingId = selectJob(jobId, this.model.tableName, this.token);
+			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1), this.token);
 			this.selectJobActive = false;
 			this.trainingActive = true;
 			this.getRecords();
 		},
-		getRecords: function () {
-			this.records = getRecords(this.trainingId, this.token);
+		getRecords: async function () {
+			this.records = await getMappedRecords(this.trainingId, this.token);
 			if (this.records === null) {
 				this.saveTraining();
 			}
