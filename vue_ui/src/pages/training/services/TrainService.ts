@@ -19,6 +19,7 @@ export async function selectJob(jobId, tableName, token) {
 }
 
 async function checkForRecords(trainingId, token) {
+  console.log(trainingId);
   const response = await fetch(
     "http://localhost:8001/training/check-records/?trainingId=" + trainingId,
     {
