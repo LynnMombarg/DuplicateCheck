@@ -47,4 +47,18 @@ describe('ModelDAO', () => {
       expect(saveSpy).toHaveBeenCalled();
     });
   });
+
+  describe('getAllModels', () => {
+    it('it should return the model', async () => {
+      const modelDTO: ModelDTO = {
+        modelName: 'Test Model',
+        modelId: 'test-model-id',
+        tableName: 'test-table',
+        modelDescription: 'Test model description',
+        userId: 'test-user-id',
+      };
+
+      //mockReturnValueOnce(modelModel, modelDTO);
+    });
+  });
 });
