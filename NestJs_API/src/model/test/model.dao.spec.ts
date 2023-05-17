@@ -73,4 +73,19 @@ describe('ModelDAO', () => {
       );
     });
   });
+
+  describe('deletemodel', () => {
+    it('should call delete on model', async () => {
+
+      // Arrange
+      const DeleteSpy = jest.spyOn(modelModel.prototype, 'deleteOne');
+
+      // Act
+      await modelDAO.deleteModel('test-model-id', 'test-user-id');
+
+      // Assert
+      expect(DeleteSpy).toHaveBeenCalled();
+    });
+  });
+  
 });
