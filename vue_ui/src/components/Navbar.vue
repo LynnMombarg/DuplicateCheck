@@ -7,7 +7,7 @@
         <div class="flex-1 pl-4 flex justify-between">
             <div class="flex items-center flex-shrink-0 px-4">
                 <div class="flex overflow-hidden">
-                    <div class="flex-none w-10 pr-1"><img alt="Plauti Logo" src="src/assets/plauti.svg">
+                    <div class="flex-none w-10 pr-1"><img alt="Plauti Logo" src="@/assets/plauti.svg">
                     </div>
                     <div class="flex-initial w-64 text-left leading-9 text-lg font-semibold text-slate-500">
                         <div class="animated">DCML <span

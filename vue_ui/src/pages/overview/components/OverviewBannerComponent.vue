@@ -37,13 +37,12 @@
                 </div>
             </div>
         </div>
-    <Footer/>
 </template>
 
 <script>
 
 import CreateModelButton from "@/pages/overview/components/CreateModelButton.vue";
-import Footer from "@/pages/overview/components/Footer.vue";
+import Footer from "../../../components/Footer.vue";
 import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
 
 export default {

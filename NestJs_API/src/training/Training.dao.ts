@@ -1,5 +1,5 @@
-// Authors: Marloes, Lynn, Silke
-// Jira-task: 130, 137, 129
+// Authors: Marloes, Silke
+// Jira-task: 130, 129
 // Sprint: 3
 // Last modified: 16-05-2023
 
@@ -40,8 +40,4 @@ export class TrainingDAO {
     const lengthDatasets = training.datasetA.records.length;
     return lengthDatasets > lengthMatches;
   }
-
-  async getTraining(trainingId: string): Promise<TrainingDTO> {
-    return await this.model.findOne({ trainingId: trainingId }).exec();
-}
 }

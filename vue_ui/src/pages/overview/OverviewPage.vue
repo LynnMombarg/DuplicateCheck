@@ -1,12 +1,13 @@
 <!--Author(s): Silke Bertisen, Roward, Diederik-->
 <!--Jira-task: Dashboard realiseren 104 -->
 <!--Sprint: 2, 3 -->
-<!--Last modified: 15-05-2023-->
+<!--Last modified: 16-05-2023-->
 
 <template>
     <div class="flex pl-64 flex-col flex-1">
         <Navbar :token="token"/>
         <OverviewBannerComponent :models="models"/>
+        <Footer />
     </div>
 </template>
 
@@ -17,12 +18,14 @@ import OverviewModelComponent from "@/pages/overview/components/OverviewModelCom
 import {getModels} from "./services/GetModels";
 import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";
-import Navbar from "@/pages/overview/components/Navbar.vue";
+import Navbar from "../../components/Navbar.vue";
 import {signOut} from "@/pages/overview/services/SignOut";
+import Footer from "../../components/Footer.vue";
 
 export default {
   name: 'OverviewPage',
   components: {
+      Footer,
       Navbar,
     OverviewBannerComponent,
     OverviewModelComponent
@@ -42,7 +45,7 @@ export default {
   async mounted() {
       this.token = await this.$store.state.token;
       this.models = await getModels(this.token);
-      console.log(this.models);
+      this.$store.commit('setModels', this.models);
   },
   methods: {
     async deleteModel(modelId) {
@@ -55,6 +58,7 @@ export default {
       await signOut(this.token)
       this.$store.commit('removeUser');
       this.$store.commit('removeToken');
+      this.$store.commit('removeModels');
       this.$router.push({name: 'SignIn'});
     }
   },

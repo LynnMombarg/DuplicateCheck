@@ -11,22 +11,22 @@ import { TrainingDTO } from 'src/training/training.dto';
 export class PythonDAO {
 
   async createModel(modelId: string) {
-    await axios
-      .post('http://localhost:8000/create-model', {
-        modelId: modelId,
-      })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.toJSON());
-        }
-      });
+    try {
+      const response = await axios.post(
+        'http://duplicatecheck-python-backend-1:8000/create-model',
+        {
+          modelId: modelId,
+        },
+      );
+      console.log('Request successful:', response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   async deleteModel(modelId: string) {
     await axios
-      .post('http://localhost:8000/delete-model', {
-        modelId: modelId,
-      })
+      .delete('http://duplicatecheck-python-backend-1:8000/delete-model/' + modelId, )
       .catch(function (error) {
         if (error.response) {
           console.log(error.toJSON());
@@ -36,7 +36,7 @@ export class PythonDAO {
 
   async saveTraining(modelId: string, training: TrainingDTO) {
     await axios
-      .post('http://localhost:8000/train-model/' + modelId, {
+      .put('http://duplicatecheck-python-backend-1:8000/train-model/' + modelId, {
         training: training,
       })
       .catch(function (error) {
@@ -44,5 +44,5 @@ export class PythonDAO {
           console.log(error.toJSON());
         }
       });
+    }
   }
-}

@@ -12,6 +12,5 @@ export async function getModels(token: string) {
       "Content-Type": "application/json",
     },
   });
-  const data = await response.json();
-  return data;
+  return await response.json();
 }
