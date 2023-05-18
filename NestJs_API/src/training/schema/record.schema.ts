@@ -11,7 +11,7 @@ export type RecordDocument = HydratedDocument<Model>;
 
 @Schema()
 export class Record {
-  @Prop()
+  @Prop([String])
   data: string[];
 }
 export const RecordSchema = SchemaFactory.createForClass(Record);

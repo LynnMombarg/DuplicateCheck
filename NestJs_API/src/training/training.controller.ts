@@ -51,7 +51,7 @@ export class TrainingController {
     return this.trainingService.checkForRecords(trainingId);
   }
 
-  @Post('/save')
+  @Put('/save')
   saveTraining(@Body() json, @Req() req) {
       this.trainingService.saveTraining(json['modelId'], json['trainingId'], '123'); //123 = req.user.userId
   }

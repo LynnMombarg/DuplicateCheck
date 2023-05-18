@@ -1,5 +1,5 @@
-// Authors: Marloes
-// Jira-task: 130
+// Authors: Marloes, Lynn
+// Jira-task: 130, 137
 // Sprint: 3
 // Last modified: 16-05-2023
 
@@ -273,4 +273,18 @@ describe('TrainingDAO', () => {
       );
     });
   });
+
+  describe('getTraining', () => {
+    it('should call findOne on Mongoose model', () => {
+      //Arrange
+      const trainingId = '123';
+
+      //Act
+      trainingDAO.getTraining(trainingId);
+
+      //Assert
+      expect(mockedTrainingModel.findOne).toHaveBeenCalled();
+    })
+  })
+
 });
