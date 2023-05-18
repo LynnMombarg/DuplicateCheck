@@ -25,7 +25,9 @@ export class TrainingService {
 
   async saveTraining(modelId: string, trainingId: string, userId: string) {
     const training = await this.trainingDAO.getTraining(trainingId);
-    await this.pythonDAO.saveTraining(modelId, training);
+    if(training !== null) {
+      await this.pythonDAO.saveTraining(modelId, training);
+    }
   }
 
   async selectJob(jobId, tableName, userId): Promise<string> {

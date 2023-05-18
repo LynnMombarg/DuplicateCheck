@@ -53,7 +53,7 @@ export class TrainingController {
 
   @Put('/save')
   saveTraining(@Body() json, @Req() req) {
-      this.trainingService.saveTraining(json['modelId'], json['trainingId'], '123'); //123 = req.user.userId
+      this.trainingService.saveTraining(json['modelId'], json['trainingId'], req.user.userId);
   }
 
 }

@@ -89,15 +89,15 @@ export async function giveAnswer(answer, trainingId, token) {
 }
 
 export async function saveTraining(trainingId, token) {
-  // const response = await fetch("http://localhost:8001/training/save", {
-  //     method: "POST",
-  //     headers: {
-  //         Authorization: "Bearer " + token,
-  //         "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //         trainingId: trainingId,
-  //     }),
-  // });
-  // return await response.json();
+  const response = await fetch("http://localhost:8001/training/save", {
+      method: "POST",
+      headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          trainingId: trainingId,
+      }),
+  });
+  return await response.json();
 }

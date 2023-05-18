@@ -11,7 +11,7 @@ import { TrainingDAO } from './training.dao';
 import { Training, TrainingSchema } from './training.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
-import { PythonDAO } from 'src/python/python.dao';
+import { PythonDAO } from '../python/python.dao';
 import { SalesforceModule } from '../salesforce/salesforce.module';
 import { Record, RecordSchema } from './schema/record.schema';
 import { Dataset, DatasetSchema } from './schema/dataset.schema';
