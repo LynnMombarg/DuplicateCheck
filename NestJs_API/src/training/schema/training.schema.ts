@@ -16,7 +16,7 @@ export class Training {
   trainingId: string;
 
   @Prop()
-  userId: string;
+  orgId: string;
 
   @Prop({ type: DatasetSchema, ref: Dataset.name })
   datasetA: Dataset;

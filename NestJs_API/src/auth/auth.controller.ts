@@ -20,7 +20,6 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
-import { jwtConfig } from '../config/jwt.config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({
@@ -85,7 +84,7 @@ export class AuthController {
         console.log('conn.refreshToken: ' + conn.refreshToken);
         const jwtToken = await this.jwtService.signAsync(
           {
-            userId: userInfo.organisationId,
+            orgId: userInfo.id,
           },
           {
             secret: process.env.JWT_SECRET,
@@ -93,7 +92,7 @@ export class AuthController {
           },
         );
         this.authService.login(
-          userInfo.organisationId,
+          userInfo.id,
           conn.accessToken,
           conn.refreshToken,
           jwtToken,
@@ -129,7 +128,7 @@ export class AuthController {
   async logout(@Req() req): Promise<void> {
     console.log('logout');
 
-    const authDTO = await this.authService.getTokensByUserId(req.user.userId);
+    const authDTO = await this.authService.getTokensByOrgId(req.user.orgId);
     const conn = new jsforce.Connection({
       oauth2: oauth2,
       instanceUrl: process.env.SF_INSTANCE_URL,
@@ -150,35 +149,6 @@ export class AuthController {
       }
       console.log('Logged out');
     });
-    this.authService.logout(authDTO.userId);
-  }
-
-  @UseGuards(AuthGuard)
-  @Get('test')
-  async test(@Req() req): Promise<void> {
-    console.log(req.user.userId);
-
-    const authDTO = await this.authService.getTokensByUserId(req.user.userId);
-    const conn = new jsforce.Connection({
-      oauth2: oauth2,
-      instanceUrl: process.env.SF_INSTANCE_URL,
-      accessToken: authDTO.getAccessToken(),
-      refreshToken: authDTO.getRefreshToken(),
-    });
-    conn.on(
-      'refresh',
-      function (accessToken, res) {
-        console.log('refreshed token: ' + accessToken);
-        this.authService.updateToken(accessToken);
-      }.bind(this),
-    );
-
-    conn.query('SELECT id FROM dupcheck__dcJob__c', function (err, result) {
-      if (err) {
-        return console.error(err);
-      }
-      console.log('total : ' + result.totalSize);
-      console.log('fetched : ' + result.records.length);
-    });
+    this.authService.logout(authDTO.orgId);
   }
 }

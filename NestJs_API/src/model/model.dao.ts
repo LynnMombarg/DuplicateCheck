@@ -18,14 +18,14 @@ export class ModelDAO {
     await createdModel.save();
   }
 
-  async getAllModels(userId: string): Promise<ModelDTO[]> {
-    return this.model.find({ userId: userId }).exec();
+  async getAllModels(orgId: string): Promise<ModelDTO[]> {
+    return this.model.find({ orgId: orgId }).exec();
   }
 
-  async deleteModel(modelId: string, userId: string): Promise<void> {
+  async deleteModel(modelId: string, orgId: string): Promise<void> {
     const result = await this.model.deleteOne({
       modelId: modelId,
-      userId: userId,
+      orgId: orgId,
     });
 
     if (result.deletedCount === 0) {

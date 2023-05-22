@@ -32,7 +32,7 @@ export class TrainingController {
     return await this.trainingService.selectJob(
       training.jobId,
       training.tableName,
-      req.user.userId,
+      req.user.orgId,
     );
   }
 

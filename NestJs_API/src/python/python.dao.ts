@@ -22,10 +22,10 @@ export class PythonDAO {
     }
   }
 
-  async deleteModel(fileName: string) {
+  async deleteModel(modelId: string) {
     try {
       await axios.delete(
-        'http://duplicatecheck-python-backend-1:8000/delete-model/' + fileName,
+        'http://duplicatecheck-python-backend-1:8000/delete-model/' + modelId,
       );
     } catch (error) {
       console.log(error.message);

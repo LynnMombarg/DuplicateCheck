@@ -20,14 +20,15 @@ export class AuthDAO {
   ) {}
 
   storeToken(
-    orgID: string,
+    orgId: string,
     accessToken: string,
     refresh_token: string,
     jwtToken: string,
   ): void {
     console.log('Storing token');
+    console.log(orgId);
     this.authModel
-      .findOne({ orgId: orgID })
+      .findOne({ orgId: orgId })
       .exec()
       .then((doc) => {
         if (doc) {
@@ -37,7 +38,7 @@ export class AuthDAO {
           doc.save();
         } else {
           const auth = new this.authModel({
-            orgId: orgID,
+            orgId: orgId,
             accessToken: accessToken,
             refreshToken: refresh_token,
             jwtToken: jwtToken,

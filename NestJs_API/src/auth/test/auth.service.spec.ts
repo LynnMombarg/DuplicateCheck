@@ -74,7 +74,7 @@ describe('AuthService', () => {
       const userId = '123';
       const getTokensByUserIdMock = jest.spyOn(authDAO, 'getTokensByOrgId');
 
-      await authService.getTokensByUserId(userId);
+      await authService.getTokensByOrgId(userId);
 
       expect(getTokensByUserIdMock).toHaveBeenCalledWith(userId);
     });
@@ -86,7 +86,7 @@ describe('AuthService', () => {
         .spyOn(authDAO, 'getTokensByOrgId')
         .mockResolvedValueOnce(authDTO);
 
-      const result = await authService.getTokensByUserId(userId);
+      const result = await authService.getTokensByOrgId(userId);
 
       expect(getTokensByUserIdMock).toHaveBeenCalledWith(userId);
       expect(result).toEqual(authDTO);
