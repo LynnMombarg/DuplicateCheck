@@ -1,8 +1,7 @@
 // Authors: Silke, Marloes
 // Jira-task: 123, 129, 130
 // Sprint: 3
-// Last modified: 16-05-2023
-
+// Last modified: 22-05-2023
 import { Test } from '@nestjs/testing';
 import { TrainingController } from '../training.controller';
 import { TrainingService } from '../training.service';

@@ -1,13 +1,10 @@
 // Authors: Marloes
 // Jira-task: 130
 // Sprint: 3
-// Last modified: 16-05-2023
+// Last modified: 22-05-2023
 
 import { Test } from '@nestjs/testing';
 import { TrainingDAO } from '../training.dao';
-import { TrainingDTO } from '../dto/training.dto';
-import { DatasetDTO } from '../dto/dataset.dto';
-import { RecordDTO } from '../dto/record.dto';
 import { Training } from '../schema/training.schema';
 import { getModelToken } from '@nestjs/mongoose';
 
@@ -136,13 +133,14 @@ describe('TrainingDAO', () => {
   });
 
   describe('createModel', () => {
-    it('should call save on Mongoose model', () => {
+    it('should call create on Mongoose model', () => {
       // Act
-
-      TrainingDAO.createTraining(mockedTrainingWithoutMatch);
+      trainingDAO.createTraining(mockedTrainingWithoutMatch);
 
       // Assert
-      expect(mockedTrainingModel.create).toHaveBeenCalledWith(TrainingDTO);
+      expect(mockedTrainingModel.create).toHaveBeenCalledWith(
+        mockedTrainingWithoutMatch,
+      );
     });
   });
 
