@@ -19,7 +19,7 @@ export class ModelDAO {
   }
 
   async getAllModels(userId: string): Promise<ModelDTO[]> {
-    return this.model.find({ userId: userId }).exec();
+    return this.model.find({ userId: userId });
   }
 
   async deleteModel(modelId: string, userId: string): Promise<void> {
