@@ -8,6 +8,7 @@ import { ModelDAO } from '../model.dao';
 import { ModelDTO } from '../dto/model.dto';
 import { getModelToken } from '@nestjs/mongoose';
 import { NotFoundException } from '@nestjs/common';
+import { Model } from 'mongoose';
 
 describe('ModelDAO', () => {
   let modelDAO: ModelDAO;
@@ -24,6 +25,7 @@ describe('ModelDAO', () => {
     find: jest.fn(),
     save: jest.fn(),
     deleteOne: jest.fn(),
+    create: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -38,19 +40,6 @@ describe('ModelDAO', () => {
     }).compile();
 
     modelDAO = moduleRef.get<ModelDAO>(ModelDAO);
-  });
-
-  describe('createModel', () => {
-    it('should call save on model', async () => {
-      // Arrange
-      const saveSpy = jest.spyOn(mockedMongooseModel, 'save');
-
-      // Act
-      await modelDAO.createModel(modelDTO);
-
-      // Assert
-      expect(saveSpy).toHaveBeenCalledWith();
-    });
   });
 
   describe('getAllModels', () => {
@@ -94,6 +83,18 @@ describe('ModelDAO', () => {
       await expect(
         modelDAO.deleteModel('test-model-id', 'test-user-id'),
       ).rejects.toThrowError(NotFoundException);
+    });
+  });
+
+  describe('createModel', () => {
+    it('should call create on model', async () => {
+      // Arrange
+
+      // Act
+      await modelDAO.createModel(modelDTO);
+
+      // Assert
+      expect(mockedMongooseModel.create).toHaveBeenCalledWith(modelDTO);
     });
   });
 });
