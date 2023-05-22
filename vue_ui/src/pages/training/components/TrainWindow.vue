@@ -5,9 +5,7 @@
 
 <template>
     <ul role="list" class="divide-y divide-gray-100">
-        <li v-for="record in records">
-            <RecordModel :record="record"/>
-        </li>
+        <RecordModel :record1="records[0]" :record2="records[1]" />
     </ul>
     <div>
         <button class="bg-green-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(true)">
