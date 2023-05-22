@@ -7,6 +7,7 @@ import { Test } from '@nestjs/testing';
 import { ModelDAO } from '../model.dao';
 import { ModelDTO } from '../dto/model.dto';
 import { getModelToken } from '@nestjs/mongoose';
+import { NotFoundException } from '@nestjs/common';
 
 describe('ModelDAO', () => {
   let modelDAO: ModelDAO;
@@ -86,15 +87,12 @@ describe('ModelDAO', () => {
   describe('deleteModel', () => {
     it('should throw NotFoundException when no model is found', async () => {
       // Arrange
-      jest
-        .spyOn(modelDAO, 'deleteModel')
-        .mockRejectedValueOnce(new Error('Not Found'));
+      mockedMongooseModel.deleteOne.mockReturnValue({ deletedCount: 0 });
 
-      // Act
-      const result = modelDAO.deleteModel('test-model-id', 'test-user-id');
-
-      // Assert
-      await expect(result).rejects.toThrowError('Not Found');
+      // Act and Assert
+      await expect(
+        modelDAO.deleteModel('test-model-id', 'test-user-id'),
+      ).rejects.toThrowError(NotFoundException);
     });
   });
 });
