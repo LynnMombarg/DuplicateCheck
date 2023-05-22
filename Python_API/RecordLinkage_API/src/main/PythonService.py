@@ -17,12 +17,12 @@ class PythonService:
     
     def createModel(self, modelId):
         model = RecordLinkageModel()
-        filehandler = open('pickles/' + modelId + '.pkl', 'wb')
+        filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'wb')
         pickle.dump(model, filehandler)
         
     def loadModel(self, modelId):
         model: RecordLinkageModel
-        with open('pickles/' + modelId + '.pkl', 'rb') as file:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'rb') as file:
             model = pickle.load(file)
             if not model:
                 raise FileNotFoundError('Model not found')
@@ -30,7 +30,7 @@ class PythonService:
                 return model
     
     def saveModel(self, modelId, model):
-        filehandler = open('pickles/' + modelId + '.pkl', 'wb')
+        filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'wb')
         pickle.dump(model, filehandler)
         
     def trainModel(self, modelId, json_dataframe):
@@ -39,7 +39,7 @@ class PythonService:
         self.saveModel(modelId, model)
         
     def deleteModel(self, modelId):
-        os.remove('pickles/' + modelId + '.pkl')
+        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'))
     
     def executeModel(self, modelId, json_dataframe):
         model = self.loadModel(modelId)
