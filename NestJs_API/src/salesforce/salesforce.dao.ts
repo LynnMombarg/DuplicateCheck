@@ -76,14 +76,14 @@ export class SalesforceDAO {
   ): Promise<DatasetDTO[]> {
     let columns = '';
     try {
-      switch (tableName) {
-        case 'Lead':
+      switch (tableName.toLowerCase()) {
+        case 'lead':
           columns = 'Name, Title, Company, Phone, MobilePhone, Email, Status';
           break;
-        case 'Contact':
+        case 'contact':
           columns = 'Name, Account.Name, Account.Site, Phone, Email';
           break;
-        case 'Account':
+        case 'account':
           columns = 'Name, Site, Phone';
           break;
         default:
@@ -171,30 +171,29 @@ export class SalesforceDAO {
           this.authService.updateToken(accessToken);
         }.bind(this),
       );
-      try{
-      conn.query(
-        'SELECT ' +
-          columns +
-          ' FROM ' +
-          tableName +
-          ' WHERE Id IN (' +
-          sourceIndexes +
-          ')',
-        (err, result) => {
-          if (err) {
-            console.log(err.message);
-            throw new BadRequestException();
-          } else {
-            for (let i = 0; i < result.records.length; i++) {
-              const record = result.records[i];
-              resultSet.push(new RecordDTO(record));
+      try {
+        conn.query(
+          'SELECT ' +
+            columns +
+            ' FROM ' +
+            tableName +
+            ' WHERE Id IN (' +
+            sourceIndexes +
+            ')',
+          (err, result) => {
+            if (err) {
+              console.log(err.message);
+              throw new BadRequestException();
+            } else {
+              for (let i = 0; i < result.records.length; i++) {
+                const record = result.records[i];
+                resultSet.push(new RecordDTO(record));
+              }
+              resolve(resultSet);
             }
-            resolve(resultSet);
-          }
-        },
-      );
-      }
-      catch(err){
+          },
+        );
+      } catch (err) {
         console.error(err.message);
         throw new BadRequestException(err.message);
       }

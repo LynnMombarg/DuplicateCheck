@@ -13,8 +13,9 @@ export class PythonDAO {
       const response = await axios.post(
         'http://duplicatecheck-python-backend-1:8000/create-model',
         {
-        modelId: modelId,
-      });
+          modelId: modelId,
+        },
+      );
       console.log('Request successful:', response.data);
     } catch (error) {
       console.error(error.message);

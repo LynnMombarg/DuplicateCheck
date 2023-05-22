@@ -22,7 +22,10 @@ import { jwtConfig } from '../config/jwt.config';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }, { name: AuthBlacklist.name, schema: AuthBlacklistSchema }]),
+    MongooseModule.forFeature([
+      { name: Auth.name, schema: AuthSchema },
+      { name: AuthBlacklist.name, schema: AuthBlacklistSchema },
+    ]),
     JwtModule.register(jwtConfig),
   ],
   controllers: [AuthController],

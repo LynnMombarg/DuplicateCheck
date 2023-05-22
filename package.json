@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "joi": "^17.9.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
