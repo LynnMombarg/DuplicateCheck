@@ -8,7 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TrainingController } from './training.controller';
 import { TrainingService } from './training.service';
 import { TrainingDAO } from './training.dao';
-import { Training, TrainingSchema } from './training.schema';
+import { Training, TrainingSchema } from './schema/training.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
 import { PythonDAO } from '../python/python.dao';
