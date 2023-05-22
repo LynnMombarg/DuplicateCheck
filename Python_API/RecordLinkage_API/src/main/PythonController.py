@@ -7,6 +7,7 @@ Last modified: 16-05-2023
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from .PythonService import PythonService
 from .JsonTestData import *
 

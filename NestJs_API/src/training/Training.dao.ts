@@ -42,17 +42,6 @@ export class TrainingDAO {
   }
 
   async getTraining(trainingId: string): Promise<TrainingDTO> {
-    let training: TrainingDTO;
-    try {
-      training = await this.model.findOne({ trainingId: trainingId }).exec();
-      if (training == null) {
-        throw new NotFoundException();
-        training = null;
-      }
-    } catch (NotFoundException) {
-      console.log('No trainings found')
-    } finally {
-      return training;
-    }
+    return await this.model.findOne({ trainingId: trainingId });
   }
 }
