@@ -27,8 +27,7 @@ service = PythonService()
 @app.put('/train-model/{modelId}', status_code=200)
 async def trainModel(json : dict, modelId: str):
     try:
-      # service.trainModel(modelId, json)
-      service.trainModel(modelId, getTrainData())
+      service.trainModel(modelId, json)
       return 'Model trained!'
     except:
       return 'Model could not be trained'
