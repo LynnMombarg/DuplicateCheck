@@ -40,17 +40,18 @@ describe('ModelDAO', () => {
     modelDAO = moduleRef.get<ModelDAO>(ModelDAO);
   });
 
-  // describe('createModel', () => {
-  //   it('should call create on model', async () => {
-  //     // Arrange
-  //
-  //     // Act
-  //     await modelDAO.createModel(modelDTO);
-  //
-  //     // Assert
-  //     expect(mockedMongooseModel.save).toHaveBeenCalledWith(modelDTO);
-  //   });
-  // });
+  describe('createModel', () => {
+    it('should call save on model', async () => {
+      // Arrange
+      const saveSpy = jest.spyOn(mockedMongooseModel, 'save');
+
+      // Act
+      await modelDAO.createModel(modelDTO);
+
+      // Assert
+      expect(saveSpy).toHaveBeenCalledWith();
+    });
+  });
 
   describe('getAllModels', () => {
     it('should return the model', async () => {
