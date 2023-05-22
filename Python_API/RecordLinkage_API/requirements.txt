@@ -3,4 +3,3 @@ uvicorn
 recordlinkage
 pandas
 numpy
-pickle
