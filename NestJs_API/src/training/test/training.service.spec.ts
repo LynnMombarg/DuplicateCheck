@@ -1,7 +1,7 @@
 // Authors: Silke, Marloes
 // Jira-task: 123, 129, 130
 // Sprint: 3
-// Last modified: 16-05-2023
+// Last modified: 22-05-2023
 
 import { Test } from '@nestjs/testing';
 import { AuthService } from '../../auth/auth.service';
@@ -65,7 +65,7 @@ describe('TrainingService', () => {
       const req = '123';
 
       // Act
-      trainingservice.getRecords(trainingID, req);
+      trainingservice.getRecords(trainingID);
 
       // Assert
       expect(mockedTrainingDAO.getNextRecords).toHaveBeenCalledWith(trainingID);
@@ -80,7 +80,7 @@ describe('TrainingService', () => {
       const req = '123';
 
       // Act
-      trainingservice.giveAnswer(false, trainingID, req);
+      trainingservice.giveAnswer(false, trainingID);
 
       // Assert
       expect(mockedTrainingDAO.saveAnswer).toHaveBeenCalledWith(
@@ -94,9 +94,10 @@ describe('TrainingService', () => {
         // Arrange
         const jobId = 'test123';
         const userId = 'token';
+        const tableName = 'test';
 
         // Act
-        trainingservice.selectJob(jobId, userId);
+        trainingservice.selectJob(jobId, tableName, userId);
 
         // Assert
         expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
@@ -106,9 +107,10 @@ describe('TrainingService', () => {
         // Arrange
         const jobId = 'test123';
         const userId = 'token';
+        const tableName = 'test';
 
         // Act
-        trainingservice.selectJob(jobId, userId);
+        trainingservice.selectJob(jobId, tableName, userId);
 
         // Assert
         expect(mockedSalesforceDAO.getDatasets).toHaveBeenCalled();
@@ -118,9 +120,10 @@ describe('TrainingService', () => {
         // Arrange
         const jobId = 'test123';
         const userId = 'token';
+        const tableName = 'test';
 
         // Act
-        trainingservice.selectJob(jobId, userId);
+        trainingservice.selectJob(jobId, tableName, userId);
 
         // Assert
         expect(mockedTrainingDAO.createTraining).toHaveBeenCalled();
