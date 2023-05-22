@@ -76,6 +76,7 @@ export default {
 			jobs: [],
 			token: null,
 			model: null,
+			modelId: null,
 			trainingId: null,
 			records: [],
 			trainingActive: false,
@@ -100,8 +101,8 @@ export default {
 			this.$router.push({ name: 'SignIn' });
 		},
 		async selectJob(jobId) {
-			const modelId = this.$route.params.modelId;
-			this.model = await this.$store.getters.getModelById(modelId);
+			this.modelId = await this.$route.params.modelId;
+			this.model = await this.$store.getters.getModelById(this.modelId);
 			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1), this.token);
 			this.selectJobActive = false;
 			this.trainingActive = true;
@@ -119,7 +120,7 @@ export default {
 		},
 		saveTraining() {
 			this.trainingActive = false;
-			saveTraining(this.trainingId, this.token);
+			saveTraining(this.modelId, this.trainingId, this.token);
 			this.$router.push({ name: "OverviewPage" });
 		},
 	},

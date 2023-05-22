@@ -6,10 +6,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelModule } from './model/model.module';
+import { TrainingModule } from './training/training.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { validationSchema } from './config/validation';
-import { TrainingModule } from './training/training.module';
 
 @Module({
   imports: [

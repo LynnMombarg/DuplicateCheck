@@ -1,9 +1,9 @@
-// Authors: Marloes, Silke
-// Jira-task: 130, 129
+// Authors: Marloes, Lynn, Silke
+// Jira-task: 130, 137, 129
 // Sprint: 3
 // Last modified: 22-05-2023
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { TrainingDTO } from './dto/training.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Training } from './schema/training.schema';
@@ -42,4 +42,7 @@ export class TrainingDAO {
     return lengthDatasets > lengthMatches;
   }
 
+  async getTraining(trainingId: string): Promise<TrainingDTO> {
+    return await this.model.findOne({ trainingId: trainingId });
+  }
 }
