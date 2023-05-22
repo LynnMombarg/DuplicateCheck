@@ -1,3 +1,7 @@
 fastapi
 uvicorn
 recordlinkage
+csv
+pandas
+numpy
+pickle
