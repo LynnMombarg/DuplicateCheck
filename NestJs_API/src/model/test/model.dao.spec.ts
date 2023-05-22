@@ -42,6 +42,16 @@ describe('ModelDAO', () => {
     modelDAO = moduleRef.get<ModelDAO>(ModelDAO);
   });
 
+  describe('createModel', () => {
+    it('should call create on model', async () => {
+      // Act
+      await modelDAO.createModel(modelDTO);
+
+      // Assert
+      expect(mockedMongooseModel.create).toHaveBeenCalledWith(modelDTO);
+    });
+  });
+
   describe('getAllModels', () => {
     it('should return the model', async () => {
       // Arrange
@@ -83,18 +93,6 @@ describe('ModelDAO', () => {
       await expect(
         modelDAO.deleteModel('test-model-id', 'test-user-id'),
       ).rejects.toThrowError(NotFoundException);
-    });
-  });
-
-  describe('createModel', () => {
-    it('should call create on model', async () => {
-      // Arrange
-
-      // Act
-      await modelDAO.createModel(modelDTO);
-
-      // Assert
-      expect(mockedMongooseModel.create).toHaveBeenCalledWith(modelDTO);
     });
   });
 });
