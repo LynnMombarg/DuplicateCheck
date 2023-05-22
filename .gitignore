@@ -24,6 +24,5 @@ Python_API/RecordLinkage_API/src/main/node_modules
 Python_API/RecordLinkage_API/src/main/__pycache__
 
 vue_ui/node_modules
-vue_ui/dist
 vue_ui/.vscode
 vue_ui/.idea
