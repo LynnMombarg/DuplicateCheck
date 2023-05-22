@@ -100,8 +100,7 @@ describe('TrainingController', () => {
       // Arrange
       const CreateTraining = new CreateTrainingDTO('jobId', 'tableName');
 
-      const userId = 'userId';
-      const req = { user: { userId: userId } };
+      const req = { user: { userId: 'userId' } };
 
       // Act
       trainingController.selectJob(CreateTraining, req);
@@ -110,7 +109,7 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
         CreateTraining.jobId,
         CreateTraining.tableName,
-        userId,
+        req.user.userId,
       );
     });
   });

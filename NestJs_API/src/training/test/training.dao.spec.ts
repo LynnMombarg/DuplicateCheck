@@ -14,10 +14,9 @@ import { getModelToken } from '@nestjs/mongoose';
 describe('TrainingDAO', () => {
   let trainingDAO: TrainingDAO;
   const mockedTrainingModel = {
-    model: jest.fn(),
-    save: jest.fn(),
     findOne: jest.fn(),
     updateOne: jest.fn(),
+    create: jest.fn(),
   };
 
   const mockedTrainingWithoutMatch = {
@@ -136,30 +135,16 @@ describe('TrainingDAO', () => {
     trainingDAO = moduleRef.get<TrainingDAO>(TrainingDAO);
   });
 
-  // describe('createModel', () => {
-  //   it('should call save on Mongoose model', () => {
-  //     // Arrange
-  //     const expected = new TrainingDTO(
-  //       'trainingId',
-  //       'userId',
-  //       new DatasetDTO([
-  //         new RecordDTO(['1', 'Hoi']),
-  //         new RecordDTO(['2', 'Doei']),
-  //       ]),
-  //       new DatasetDTO([
-  //         new RecordDTO(['1', 'Hi']),
-  //         new RecordDTO(['3', 'Doei']),
-  //       ]),
-  //       [true, false],
-  //     );
-  //
-  //     // Act
-  //     trainingDAO.createTraining(expected);
-  //
-  //     // Assert
-  //     expect(mockedTrainingModel.save).toHaveBeenCalled();
-  //   });
-  // });
+  describe('createModel', () => {
+    it('should call save on Mongoose model', () => {
+      // Act
+
+      TrainingDAO.createTraining(mockedTrainingWithoutMatch);
+
+      // Assert
+      expect(mockedTrainingModel.create).toHaveBeenCalledWith(TrainingDTO);
+    });
+  });
 
   describe('getNextRecords', () => {
     it('should fetch the first records from the mongoose model', async () => {
