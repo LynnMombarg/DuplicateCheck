@@ -77,6 +77,7 @@ describe('ModelDAO', () => {
       await modelDAO.deleteModel('test-model-id', 'test-user-id');
 
       // Assert
+      expect(mockedMongooseModel.deleteOne).not.toThrow();
       expect(mockedMongooseModel.deleteOne).toHaveBeenCalledWith({
         modelId: 'test-model-id',
         userId: 'test-user-id',
