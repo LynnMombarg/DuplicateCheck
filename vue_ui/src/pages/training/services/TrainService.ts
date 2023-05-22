@@ -88,14 +88,15 @@ export async function giveAnswer(answer, trainingId, token) {
   return await response.json();
 }
 
-export async function saveTraining(trainingId, token) {
+export async function saveTraining(modelId, trainingId, token) {
   const response = await fetch("http://localhost:8001/training/save", {
-      method: "POST",
+      method: "PUT",
       headers: {
           Authorization: "Bearer " + token,
           "Content-Type": "application/json"
       },
       body: JSON.stringify({
+          modelId: modelId,
           trainingId: trainingId,
       }),
   });
