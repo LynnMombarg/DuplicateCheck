@@ -85,7 +85,7 @@ export class AuthController {
         console.log('conn.refreshToken: ' + conn.refreshToken);
         const jwtToken = await this.jwtService.signAsync(
           {
-            userId: userInfo.id,
+            userId: userInfo.organisationId,
           },
           {
             secret: process.env.JWT_SECRET,
@@ -93,7 +93,7 @@ export class AuthController {
           },
         );
         this.authService.login(
-          userInfo.id,
+          userInfo.organisationId,
           conn.accessToken,
           conn.refreshToken,
           jwtToken,

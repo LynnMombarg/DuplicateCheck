@@ -72,7 +72,7 @@ describe('AuthService', () => {
   describe('getTokensByUserId', () => {
     it('should call authDAO.getTokensByUserId with the correct argument', async () => {
       const userId = '123';
-      const getTokensByUserIdMock = jest.spyOn(authDAO, 'getTokensByUserId');
+      const getTokensByUserIdMock = jest.spyOn(authDAO, 'getTokensByOrgId');
 
       await authService.getTokensByUserId(userId);
 
@@ -83,7 +83,7 @@ describe('AuthService', () => {
       const userId = '123';
       const authDTO = new AuthDTO(userId, 'access_token', 'refresh_token');
       const getTokensByUserIdMock = jest
-        .spyOn(authDAO, 'getTokensByUserId')
+        .spyOn(authDAO, 'getTokensByOrgId')
         .mockResolvedValueOnce(authDTO);
 
       const result = await authService.getTokensByUserId(userId);

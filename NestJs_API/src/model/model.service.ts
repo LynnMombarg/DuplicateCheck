@@ -49,7 +49,7 @@ export class ModelService {
   }
 
   async getJobs(tableName: string, userId: string): Promise<JobDTO[]> {
-    const authDTO = await this.authDAO.getTokensByUserId(userId);
+    const authDTO = await this.authDAO.getTokensByOrgId(userId);
     let tableId = '';
     switch (tableName) {
       case 'leads':

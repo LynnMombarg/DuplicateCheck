@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   async getTokensByUserId(userId: string): Promise<AuthDTO> {
-    return await this.authDAO.getTokensByUserId(userId);
+    return await this.authDAO.getTokensByOrgId(userId);
   }
 
   blackListToken(userId: string, jwtToken: string): void {

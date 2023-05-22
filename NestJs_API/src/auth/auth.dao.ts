@@ -20,14 +20,14 @@ export class AuthDAO {
   ) {}
 
   storeToken(
-    userID: string,
+    orgID: string,
     accessToken: string,
     refresh_token: string,
     jwtToken: string,
   ): void {
     console.log('Storing token');
     this.authModel
-      .findOne({ userId: userID })
+      .findOne({ orgId: orgID })
       .exec()
       .then((doc) => {
         if (doc) {
@@ -37,7 +37,7 @@ export class AuthDAO {
           doc.save();
         } else {
           const auth = new this.authModel({
-            userId: userID,
+            orgId: orgID,
             accessToken: accessToken,
             refreshToken: refresh_token,
             jwtToken: jwtToken,
@@ -59,44 +59,40 @@ export class AuthDAO {
       });
   }
 
-  removeTokens(userId: string): void {
-    this.authModel.deleteOne({ userId: userId }).exec();
+  removeTokens(orgId: string): void {
+    this.authModel.deleteOne({ orgId: orgId }).exec();
   }
 
-  async getTokensByUserId(userId: string): Promise<AuthDTO> {
+  async getTokensByOrgId(orgId: string): Promise<AuthDTO> {
     return await this.authModel
-      .findOne({ userId: userId })
+      .findOne({ orgId: orgId })
       .exec()
       .then((doc) => {
-        return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
+        return new AuthDTO(doc.orgId, doc.accessToken, doc.refreshToken);
       })
       .catch((err) => {
         throw new UnauthorizedException();
       });
   }
 
-  getUserId(token: string): string {
-    return 'test123';
-  }
-
-  blackListToken(userId: string, jwtToken: string) {
+  blackListToken(orgId: string, jwtToken: string) {
     const authBlacklist = new this.authBlacklistModel({
-      userId: userId,
+      orgId: orgId,
       jwtToken: jwtToken,
     });
     authBlacklist.save();
   }
 
-  isBlacklisted(userId: string, jwtToken: string) {
+  isBlacklisted(orgId: string, jwtToken: string) {
     return this.authBlacklistModel
-      .findOne({ userId: userId, jwtToken: jwtToken })
+      .findOne({ orgId: orgId, jwtToken: jwtToken })
       .exec()
       .then((doc) => {
         return !!doc;
       });
   }
 
-  removeBlacklistedToken(userId: string) {
-    this.authBlacklistModel.deleteOne({ userId: userId }).exec();
+  removeBlacklistedToken(orgId: string) {
+    this.authBlacklistModel.deleteOne({ orgId: orgId }).exec();
   }
 }
