@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  vue-app:
+    build:
+      context: ./vue_ui
+      dockerfile: Dockerfile
+    ports:
+      - "8002:5173"
+    volumes:
+      - './vue_ui:/app'
+      - '/app/node_modules'
+
+  nestjs-backend:
+    build:
+      context: ./NestJs_API
+      dockerfile: Dockerfile
+    ports:
+      - "8001:3000"
+    volumes:
+      - './NestJs_API:/app'
+      - '/app/node_modules'
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/DuplicateCheck
+      - BASE_URL=http://localhost:8001
+    networks:
+      - node-network
+
+  python-backend:
+    build:
+      context: ./Python_API/RecordLinkage_API
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - './Python_API/RecordLinkage_API/src:/app'
+      - '/app/node_modules'
+    networks:
+      - node-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - node-network
+
+volumes:
+  mongodb-data:
+
+networks:
+  node-network:
+    driver: bridge

@@ -1,0 +1,24 @@
+{
+  "name": "vue_ui",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "setup": "npm install -D tailwindcss && npx tailwindcss init && npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.13",
+    "@heroicons/vue": "^2.0.17",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.1.4"
+  }
+}

@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+recordlinkage
+pandas
+numpy
+requests
