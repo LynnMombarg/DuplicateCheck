@@ -9,7 +9,6 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Auth, AuthBlacklist } from './schema/auth.schema';
 import mongoose from 'mongoose';
-mongoose.Promise = Promise;
 import { AuthDTO } from './dto/auth.dto';
 
 @Injectable()
@@ -58,18 +57,16 @@ export class AuthDAO {
     this.authModel.deleteOne({ userId: id }).exec();
   }
 
-  async getTokensByUserId(id: string): Promise<AuthDTO> {
-    return await Promise.resolve(
-      this.authModel
-        .findOne({ userId: id })
-        .exec()
-        .then((doc) => {
-          return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
-        })
-        .catch((err) => {
-          throw new UnauthorizedException();
-        }),
-    );
+  getTokensByUserId(id: string): Promise<AuthDTO> {
+    return this.authModel
+      .findOne({ userId: id })
+      .exec()
+      .then((doc) => {
+        return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
+      })
+      .catch((err) => {
+        throw new UnauthorizedException();
+      });
   }
 
   blackListToken(id: string, jwt: string) {

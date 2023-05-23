@@ -53,15 +53,26 @@ export class TrainingService {
     return trainingId;
   }
 
-  async getRecords(trainingID: string): Promise<DatasetDTO> {
-    return this.trainingDAO.getNextRecords(trainingID);
+  async getRecords(trainingId: string): Promise<DatasetDTO> {
+    const training: TrainingDTO = await this.trainingDAO.getTraining(
+      trainingId,
+    );
+    const lengthMatches = training.matches.length;
+    const recordA = training.datasetA.records[lengthMatches];
+    const recordB = training.datasetB.records[lengthMatches];
+    return new DatasetDTO([recordA, recordB]);
   }
 
   async giveAnswer(answer: boolean, trainingID: string): Promise<void> {
     await this.trainingDAO.saveAnswer(trainingID, answer);
   }
 
-  checkForRecords(trainingId: string): Promise<boolean> {
-    return this.trainingDAO.checkForRecords(trainingId);
+  async checkForRecords(trainingId: string): Promise<boolean> {
+    const training: TrainingDTO = await this.trainingDAO.getTraining(
+      trainingId,
+    );
+    const lengthMatches = training.matches.length;
+    const lengthDatasets = training.datasetA.records.length;
+    return lengthDatasets > lengthMatches;
   }
 }
