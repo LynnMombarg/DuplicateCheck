@@ -9,8 +9,8 @@
             <div class="flex items-center w-full px-2 rounded-md">
                     <table class="w-full">
                         <tbody class="flex flex-col w-full">
-                            <tr v-for="column in this.record1.columns" 
-                            style="border-top-width: 1px; border-bottom-width: 1px; border-color: white;" 
+                            <tr v-for="column in this.record1.columns"
+                            style="border-top-width: 1px; border-bottom-width: 1px; border-color: white;"
                             class="flex justify-between w-full rounded-md" :class="getRowColor(column)">
                                 <td class="column-cell">
                                     {{ column }}
