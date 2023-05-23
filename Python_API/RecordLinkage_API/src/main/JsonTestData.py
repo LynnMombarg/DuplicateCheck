@@ -9,7 +9,9 @@ import csv
 
 headers = []
 
-with open('main/devData/traindata.csv', newline='') as csvfile:
+trainDataCSV = 'main/devData/traindata.csv'
+
+with open(trainDataCSV, newline='') as csvfile:
     reader = csv.reader(csvfile)
     headers = next(reader)
 
@@ -25,7 +27,7 @@ def getTrainRecordset1():
 
 def getTrainRecordset2():
     recordset2 = []
-    with open('main/devData/traindata.csv', newline='') as csvfile:
+    with open(trainDataCSV, newline='') as csvfile:
         reader = csv.reader(csvfile)
         for i in range(11):
             next(reader)
@@ -36,7 +38,7 @@ def getTrainRecordset2():
 
 def getTestRecordset():
     recordset = []
-    with open('main/devData/testdata.csv', newline='') as csvfile:
+    with open(trainDataCSV, newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
