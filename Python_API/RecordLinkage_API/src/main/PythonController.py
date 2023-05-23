@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from .PythonService import PythonService
-from .JsonTestData import *
+from .devData.JsonTestData import *
 
 app = FastAPI()
 app.add_middleware(
