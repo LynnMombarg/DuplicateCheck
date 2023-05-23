@@ -59,7 +59,6 @@ class RecordLinkageModel:
     def filter_matches(self, predictions):
         matches = []
         for match in predictions:
-            if match[0] != match[1]:
-                if (match[1], match[0]) not in matches:
-                    matches.append(match)
+            if match[0] != match[1] and (match[1], match[0]) not in matches:
+                matches.append(match)
         return matches
