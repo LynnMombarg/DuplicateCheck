@@ -74,6 +74,9 @@ export class AuthController {
     conn.authorize(
       code,
       async function (err, userInfo) {
+        console.log('[OrgId]: ' + userInfo.organizationId);
+        console.log('[UserId]: ' + userInfo.id);
+
         if (err) {
           return res.status(HttpStatus.UNAUTHORIZED).json({
             statusCode: HttpStatus.UNAUTHORIZED,
@@ -84,7 +87,7 @@ export class AuthController {
         console.log('conn.refreshToken: ' + conn.refreshToken);
         const jwtToken = await this.jwtService.signAsync(
           {
-            orgId: userInfo.id,
+            orgId: userInfo.organizationId,
           },
           {
             secret: process.env.JWT_SECRET,
@@ -92,7 +95,7 @@ export class AuthController {
           },
         );
         this.authService.login(
-          userInfo.id,
+          userInfo.organizationId,
           conn.accessToken,
           conn.refreshToken,
           jwtToken,
