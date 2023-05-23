@@ -7,7 +7,7 @@
 
 import { Injectable } from '@nestjs/common';
 import { AuthDAO } from './auth.dao';
-import { AuthDTO } from './auth.dto';
+import { AuthDTO } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {

@@ -9,7 +9,7 @@ import { TrainingDAO } from './training.dao';
 import { AuthDAO } from '../auth/auth.dao';
 import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { DatasetDTO } from './dto/dataset.dto';
-import { AuthDTO } from '../auth/auth.dto';
+import { AuthDTO } from '../auth/dto/auth.dto';
 import { PythonDAO } from 'src/python/python.dao';
 import { TrainingDTO } from './dto/training.dto';
 import { v4 as uuid } from 'uuid';

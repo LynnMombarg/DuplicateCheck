@@ -7,9 +7,9 @@
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Auth, AuthBlacklist } from './auth.schema';
+import { Auth, AuthBlacklist } from './schema/auth.schema';
 import mongoose from 'mongoose';
-import { AuthDTO } from './auth.dto';
+import { AuthDTO } from './dto/auth.dto';
 
 @Injectable()
 export class AuthDAO {

@@ -106,6 +106,7 @@ export class AuthController {
           }
           displayName = res.display_name;
           email = res.username;
+          return console.log('Identity fetched');
         });
         const json = JSON.stringify({
           message: 'success',

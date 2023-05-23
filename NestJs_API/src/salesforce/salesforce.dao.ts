@@ -9,7 +9,7 @@ import {
   UnauthorizedException,
   BadRequestException,
 } from '@nestjs/common';
-import { AuthDTO } from 'src/auth/auth.dto';
+import { AuthDTO } from 'src/auth/dto/auth.dto';
 import { AuthService } from '../auth/auth.service';
 import { JobDTO } from '../model/dto/job-model.dto';
 import { RecordDTO } from '../training/dto/record.dto';
