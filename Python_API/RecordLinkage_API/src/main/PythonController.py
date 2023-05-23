@@ -25,7 +25,7 @@ service = PythonService()
 # Post request to send json datasets to train the model
 # Expected form of json:
 # {"recordset1": [{"columns":}, {"columns":}], "recordset2": [{"columns":}, {"columns":}], "golden_matches_index": [{"index1": , "index2": }]}
-@app.put('/train-model/{modelId}', status_code=200)
+@app.put('/train-model/{model_id}', status_code=200)
 async def train_model(json : dict, model_id: str):
     try:
       service.train_model(model_id, json)
@@ -45,7 +45,7 @@ async def create_model(json: dict):
         
       
 # Delete model based on filename
-@app.delete('/delete-model/{modelId}', status_code=200)
+@app.delete('/delete-model/{model_id}', status_code=200)
 async def delete_model(model_id: str):
     try:
       service.delete_model(model_id)
@@ -54,7 +54,7 @@ async def delete_model(model_id: str):
       return 'Model could not be deleted'
 
 # Execute model based on a given filename
-@app.post('/execute-model/{modelId}')
+@app.post('/execute-model/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
       # matches = service.executeModel(modelId, json)
