@@ -46,7 +46,7 @@
 		<Footer />
 	</div>
 </template>
-  
+
 <script>
 import { getJobs } from './services/GetJobs';
 import SelectJobBody from './components/SelectJobBody.vue';
