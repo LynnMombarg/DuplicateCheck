@@ -55,10 +55,11 @@ async def deleteModel(modelId: str):
 
 # Execute model based on a given filename
 @app.post('/execute-model/{modelId}')
-async def executeModel(json: dict, modelId: str):
+async def executeModel(modelId: str):
     try:
       # matches = service.executeModel(modelId, json)
       matches = service.executeModel(modelId, getTestData())
+      print(matches)
       return JSONResponse(content=matches)
     except:
       return 'Model could not be executed'

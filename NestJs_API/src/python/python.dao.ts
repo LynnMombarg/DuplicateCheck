@@ -13,7 +13,7 @@ export class PythonDAO {
   async createModel(modelId: string) {
     try {
       const response = await axios.post(
-        'http://duplicatecheck-python-backend-1:8000/create-model',
+        'http://duplicate-record-rest-api-python-backend-1:8000/create-model',
         {
           modelId: modelId,
         },
@@ -26,7 +26,7 @@ export class PythonDAO {
 
   async deleteModel(modelId: string) {
     await axios
-      .delete('http://duplicatecheck-python-backend-1:8000/delete-model/' + modelId, )
+      .delete('http://duplicate-record-rest-api-python-backend-1:8000/delete-model/' + modelId, )
       .catch(function (error) {
         if (error.response) {
           console.log(error.toJSON());
@@ -36,7 +36,7 @@ export class PythonDAO {
 
   async saveTraining(modelId: string, training: TrainingDTO) {
     await axios
-      .put('http://duplicatecheck-python-backend-1:8000/train-model/' + modelId, {
+      .put('http://duplicate-record-rest-api-python-backend-1:8000/train-model/' + modelId, {
         training: training,
       })
       .catch(function (error) {
