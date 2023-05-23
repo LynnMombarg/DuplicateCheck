@@ -4,3 +4,4 @@ recordlinkage
 pandas
 numpy
 requests
+httpx
