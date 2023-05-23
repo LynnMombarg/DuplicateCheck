@@ -26,7 +26,7 @@ export const store = createStore({
     state() {
         return {
             token: localStorage.getItem('token') || null,
-            user: localStorage.getItem('user') || null,
+            user: JSON.parse(localStorage.getItem('user')) || null,
             models: JSON.parse(localStorage.getItem('models')) || null,
         };
     },

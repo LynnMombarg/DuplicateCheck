@@ -22,7 +22,7 @@ import { AnswerDTO } from './dto/answer.dto';
 @Controller('training')
 @UseGuards(AuthGuard)
 export class TrainingController {
-  constructor(private readonly trainingService: TrainingService) { }
+  constructor(private readonly trainingService: TrainingService) {}
 
   @Post()
   async selectJob(
@@ -52,8 +52,7 @@ export class TrainingController {
   }
 
   @Put('/save')
-  saveTraining(@Body() json, @Req() req) {
-    this.trainingService.saveTraining(json['modelId'], json['trainingId'], req.user.userId);
+  saveTraining(@Body() json) {
+    this.trainingService.saveTraining(json['modelId'], json['trainingId']);
   }
-
 }

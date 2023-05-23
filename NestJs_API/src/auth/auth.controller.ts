@@ -14,6 +14,7 @@ import {
   Redirect,
   Req,
   Res,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -93,12 +94,14 @@ export class AuthController {
         let displayName;
         let email;
         await conn.identity(function (err, res) {
-          if (err) {
-            return console.error(err);
-          }
+          try {
+            if (err) {
+              console.error(err);
+              throw UnauthorizedException;
+            }
+          } catch {}
           displayName = res.display_name;
           email = res.username;
-          return console.log('Identity fetched');
         });
         const json = JSON.stringify({
           message: 'success',
@@ -135,10 +138,12 @@ export class AuthController {
     );
 
     conn.logout(function (err) {
-      if (err) {
-        return console.error('Error logging out: ' + err);
-      }
-      return console.log('Logged out');
+      try {
+        if (err) {
+          console.error('Error logging out: ' + err);
+          throw UnauthorizedException;
+        }
+      } catch {}
     });
     this.authService.logout(authDTO.userId);
   }

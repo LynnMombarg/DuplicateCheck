@@ -3,16 +3,15 @@
 // Sprint: 3
 // Last modified: 16-05-2023
 
-import { Injectable, NotFoundException, Req } from '@nestjs/common';
-import { RecordDTO } from './dto/record.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { TrainingDAO } from './training.dao';
 import { AuthDAO } from '../auth/auth.dao';
 import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { DatasetDTO } from './dto/dataset.dto';
 import { AuthDTO } from '../auth/dto/auth.dto';
-import { PythonDAO } from 'src/python/python.dao';
 import { TrainingDTO } from './dto/training.dto';
 import { v4 as uuid } from 'uuid';
+import { PythonDAO } from '../python/python.dao';
 
 @Injectable()
 export class TrainingService {
@@ -23,9 +22,9 @@ export class TrainingService {
     private readonly pythonDAO: PythonDAO,
   ) {}
 
-  async saveTraining(modelId: string, trainingId: string, userId: string) {
+  async saveTraining(modelId: string, trainingId: string) {
     const training = await this.trainingDAO.getTraining(trainingId);
-    if(training !== null) {
+    if (training !== null) {
       await this.pythonDAO.saveTraining(modelId, training);
     }
   }
