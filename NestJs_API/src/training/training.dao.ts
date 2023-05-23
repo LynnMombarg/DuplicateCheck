@@ -18,13 +18,13 @@ export class TrainingDAO {
   ) {}
 
   async createTraining(training: TrainingDTO) {
-    //const createdTraining = new this.model(training);
-    //await createdTraining.save();
     this.model.create(training);
   }
 
   async getNextRecords(trainingId: string): Promise<DatasetDTO> {
-    const training = await this.model.findOne({ trainingId: trainingId });
+    const training = await Promise.resolve(
+      this.model.findOne({ trainingId: trainingId }),
+    );
     const lengthMatches = training.matches.length;
     const recordA = training.datasetA.records[lengthMatches];
     const recordB = training.datasetB.records[lengthMatches];
@@ -32,20 +32,26 @@ export class TrainingDAO {
   }
 
   async saveAnswer(trainingId: string, answer: boolean) {
-    await this.model.updateOne(
-      { trainingId: trainingId },
-      { $push: { matches: { $each: [answer] } } },
+    await Promise.resolve(
+      this.model.updateOne(
+        { trainingId: trainingId },
+        { $push: { matches: { $each: [answer] } } },
+      ),
     );
   }
 
   async checkForRecords(trainingId: string): Promise<boolean> {
-    const training = await this.model.findOne({ trainingId: trainingId });
+    const training = await Promise.resolve(
+      this.model.findOne({ trainingId: trainingId }),
+    );
     const lengthMatches = training.matches.length;
     const lengthDatasets = training.datasetA.records.length;
     return lengthDatasets > lengthMatches;
   }
 
   async getTraining(trainingId: string): Promise<TrainingDTO> {
-    return await this.model.findOne({ trainingId: trainingId });
+    return await Promise.resolve(
+      this.model.findOne({ trainingId: trainingId }),
+    );
   }
 }
