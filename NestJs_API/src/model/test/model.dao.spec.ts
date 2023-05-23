@@ -1,7 +1,7 @@
 // Authors:  Silke
 // Jira-task: 142
 // Sprint: 3
-// Last modified: 22-05-2023
+// Last modified: 23-05-2023
 
 import { Test } from '@nestjs/testing';
 import { ModelDAO } from '../model.dao';
