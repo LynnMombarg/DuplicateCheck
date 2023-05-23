@@ -21,13 +21,12 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
+import * as jsforce from 'jsforce';
+import * as dotenv from 'dotenv';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config({
-  path: 'src/config/env/' + process.env.NODE_ENV + '.env',
+dotenv.config({
+  path: `src/config/env/${process.env.NODE_ENV}.env`,
 });
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const jsforce = require('jsforce');
 const oauth2 = new jsforce.OAuth2({
   loginUrl: 'https://login.salesforce.com',
   clientId: process.env.SF_CLIENT_ID,
