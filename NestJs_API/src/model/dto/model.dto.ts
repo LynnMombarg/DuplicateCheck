@@ -8,19 +8,19 @@ export class ModelDTO {
   modelId: string;
   tableName: string;
   modelDescription: string;
-  userId: string;
+  orgId: string;
 
   constructor(
     modelName: string,
     modelId: string,
     tableName: string,
     modelDescription: string,
-    userId: string,
+    orgId: string,
   ) {
     this.modelName = modelName;
     this.modelId = modelId;
     this.tableName = tableName;
     this.modelDescription = modelDescription;
-    this.userId = userId;
+    this.orgId = orgId;
   }
 }
