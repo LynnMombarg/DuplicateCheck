@@ -9,6 +9,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Auth, AuthBlacklist } from './schema/auth.schema';
 import mongoose from 'mongoose';
+mongoose.Promise = Promise;
 import { AuthDTO } from './dto/auth.dto';
 
 @Injectable()
