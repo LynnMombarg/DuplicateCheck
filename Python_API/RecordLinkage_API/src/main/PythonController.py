@@ -30,7 +30,7 @@ async def trainModel(json : dict, modelId: str):
     try:
       service.trainModel(modelId, json)
       return 'Model trained!'
-    except:
+    except Exception:
       return 'Model could not be trained'
     
   
@@ -40,7 +40,7 @@ async def createModel(json: dict):
     try:
       service.createModel(json['modelId'])
       return 'Model created!'
-    except:
+    except Exception:
       return 'Model could not be created'
         
       
@@ -50,7 +50,7 @@ async def deleteModel(modelId: str):
     try:
       service.deleteModel(modelId)
       return 'Model deleted!'
-    except:
+    except Exception:
       return 'Model could not be deleted'
 
 # Execute model based on a given filename
@@ -60,5 +60,5 @@ async def executeModel(json: dict, modelId: str):
       # matches = service.executeModel(modelId, json)
       matches = service.executeModel(modelId, getTestData())
       return JSONResponse(content=matches)
-    except:
+    except Exception:
       return 'Model could not be executed'

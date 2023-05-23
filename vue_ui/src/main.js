@@ -40,7 +40,7 @@ export const store = createStore({
             localStorage.removeItem('token');
         },
         setUser(state, user ) {
-            state.user = JSON.stringify(user);
+            state.user = user;
             localStorage.setItem('user', JSON.stringify(user));
         },
         removeUser(state) {
