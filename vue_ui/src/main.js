@@ -41,7 +41,7 @@ export const store = createStore({
         },
         setUser(state, user ) {
             state.user = JSON.stringify(user);
-            // localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
         },
         removeUser(state) {
             state.user = null;
