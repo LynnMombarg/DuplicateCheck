@@ -5,6 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da095ce2-aadd-42f2-a134-129dd6351917" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/NestJs_API/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/create-model.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/dto/model.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.dao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/model.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/schema/model.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.dao.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/model/test/model.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/python/python.dao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/salesforce/salesforce.dao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/salesforce/salesforce.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/answer.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/dataset.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/record.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/dto/training.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/dataset.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/record.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/schema/training.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/test/training.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/test/training.dao.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/test/training.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NestJs_API/src/training/training.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +47,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/NestJs_API" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -54,7 +81,7 @@
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\prettier",
     "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Users\\SBert\\OneDrive\\Documenten\\GitHub\\duplicatecheck\\NestJs_API\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\marlo\\OneDrive\\Documenten\\HBO-ICT\\2\\OOSE-Project\\DuplicateCheck\\NestJs_API\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -73,7 +100,6 @@
   <component name="RunManager" selected="Jest.training.controller.spec.ts">
     <configuration name="TrainingController" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
@@ -86,7 +112,6 @@
     </configuration>
     <configuration name="TrainingController.giveAnswer" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
@@ -100,7 +125,6 @@
     </configuration>
     <configuration name="auth.service.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
@@ -110,7 +134,6 @@
     </configuration>
     <configuration name="training.controller.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
@@ -120,7 +143,6 @@
     </configuration>
     <configuration name="training.dao.spec.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/NestJs_API/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$/NestJs_API" />
       <envs />
@@ -208,16 +230,17 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$training_doa2_0_spec_ts.info" NAME="training.doa2.0.spec.ts Coverage Results" MODIFIED="1684160334568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/DuplicateCheck$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683637630868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___2_.info" NAME="Tests in test/ (2) Coverage Results" MODIFIED="1684140142063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$training_service_spec_ts.info" NAME="training.service.spec.ts Coverage Results" MODIFIED="1684158264857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1684309195846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$auth_controller_spec_ts.info" NAME="auth.controller.spec.ts Coverage Results" MODIFIED="1683708926312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$All_Tests.info" NAME="All Tests Coverage Results" MODIFIED="1684227398952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___1_.info" NAME="Tests in test/ (1) Coverage Results" MODIFIED="1683719493425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/package_lock_json$training_controller_spec_ts.info" NAME="training.controller.spec.ts Coverage Results" MODIFIED="1684741277237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/package_lock_json$training_dao_spec_ts.info" NAME="training.dao.spec.ts Coverage Results" MODIFIED="1684741244218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___2_.info" NAME="Tests in test/ (2) Coverage Results" MODIFIED="1684140142063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$auth_controller_spec_ts.info" NAME="auth.controller.spec.ts Coverage Results" MODIFIED="1683708926312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$ModelController.info" NAME="ModelController Coverage Results" MODIFIED="1682515895908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$All_Tests.info" NAME="All Tests Coverage Results" MODIFIED="1684227398952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$training_doa2_0_spec_ts.info" NAME="training.doa2.0.spec.ts Coverage Results" MODIFIED="1684160334568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$training_controller_spec_ts.info" NAME="training.controller.spec.ts Coverage Results" MODIFIED="1684741277237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$ModelDAO.info" NAME="ModelDAO Coverage Results" MODIFIED="1684741740919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/DuplicateCheck$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1683637630868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test___1_.info" NAME="Tests in test/ (1) Coverage Results" MODIFIED="1683719493425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$Tests_in_test_.info" NAME="Tests in test/ Coverage Results" MODIFIED="1684760013341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/package_lock_json$training_service_spec_ts.info" NAME="training.service.spec.ts Coverage Results" MODIFIED="1684158264857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
