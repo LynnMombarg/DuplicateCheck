@@ -58,7 +58,7 @@ async def delete_model(modelId: str):
 async def execute_model(json: dict, modelId: str):
     try:
       # matches = service.executeModel(modelId, json)
-      matches = service.execute_model(modelId, getTestData())
+      matches = service.execute_model(modelId, get_test_data())
       return JSONResponse(content=matches)
     except Exception:
       return 'Model could not be executed'

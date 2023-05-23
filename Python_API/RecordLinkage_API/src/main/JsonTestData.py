@@ -45,7 +45,7 @@ def get_test_recordset():
             recordset.append(dict(zip(headers, row)))
     return recordset
 
-def getTrainData():
+def get_train_data():
     recordset1 = get_train_recordset1()
     recordset2 = get_train_recordset2()
     json = {
@@ -66,7 +66,7 @@ def getTrainData():
     }
     return json
 
-def getTestData():
+def get_test_data():
     recordset = get_test_recordset()
     json = {
         "recordset": recordset
