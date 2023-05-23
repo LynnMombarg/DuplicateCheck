@@ -77,8 +77,7 @@ export default {
         }
     },
     async mounted() {
-        console.log("user: " + await this.$store.state.user);
-        const user = JSON.parse(await this.$store.state.user);
+        const user = await this.$store.state.user;
         this.username = user.username;
         this.email = user.email;
     },

@@ -26,7 +26,7 @@ export const store = createStore({
     state() {
         return {
             token: localStorage.getItem('token') || null,
-            user: localStorage.getItem('user') || null,
+            user: JSON.parse(localStorage.getItem('user')) || null,
             models: JSON.parse(localStorage.getItem('models')) || null,
         };
     },
@@ -40,8 +40,8 @@ export const store = createStore({
             localStorage.removeItem('token');
         },
         setUser(state, user ) {
-            state.user = JSON.stringify(user);
-            // localStorage.setItem('user', JSON.stringify(user));
+            state.user = user;
+            localStorage.setItem('user', JSON.stringify(user));
         },
         removeUser(state) {
             state.user = null;
