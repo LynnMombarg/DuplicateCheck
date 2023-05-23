@@ -23,40 +23,40 @@ class RecordLinkageModel:
     
     # Train the model with the recordsets
     # Extracts dataframes and the golden matches index from the JSON input
-    def trainModel(self, json_df):
-        df_a, df_b, golden_matches_index = self.getDataFrameStructure(json_df)
-        self.setCompareColumn(df_a)
+    def train_model(self, json_df):
+        df_a, df_b, golden_matches_index = self.get_data_frame_structure(json_df)
+        self.set_compare_column(df_a)
         self.nrOfTrainings = self.nrOfTrainings + 1
-        self.logreg.fit(self.getFeatures(df_a, df_b), golden_matches_index)
+        self.logreg.fit(self.get_features(df_a, df_b), golden_matches_index)
 
-    def executeModel(self, json_df):
-        df_a, df_b, golden_matches_index = self.getDataFrameStructure(json_df)
-        features = self.getFeatures(df_a, df_b)
+    def execute_model(self, json_df):
+        df_a, df_b, golden_matches_index = self.get_data_frame_structure(json_df)
+        features = self.get_features(df_a, df_b)
         predictions = self.logreg.predict(features)
-        return self.filterMatches(predictions)
+        return self.filter_matches(predictions)
 
     # Returns all pairs possible between recordset 1 and recordset 2
-    def getPairs(self, df_a, df_b):
+    def get_pairs(self, df_a, df_b):
         return self.indexer.index(df_a, df_b)
     
     # Get JSON as input and returns it as panda dataframes
-    def getDataFrameStructure(self, jsonStructure):
+    def get_data_frame_structure(self, jsonStructure):
         if 'golden_matches_index' not in jsonStructure:
             return pd.json_normalize(jsonStructure, record_path = ['recordset']), pd.json_normalize(jsonStructure, record_path = ['recordset']), None
         else:
             return pd.json_normalize(jsonStructure, record_path = ['recordset1']), pd.json_normalize(jsonStructure, record_path = ['recordset2']), pd.MultiIndex.from_frame(pd.json_normalize(jsonStructure, record_path = ['golden_matches_index']))
 
     # Set up compares between columns
-    def setCompareColumn(self, dataframe):
+    def set_compare_column(self, dataframe):
         for column in dataframe:
             self.compare.string(column, column, method=self.method, threshold=self.threshold, label=column)
 
     # Returns features after the columns are compared
-    def getFeatures(self, df_a, df_b):
-        return self.compare.compute(self.getPairs(df_a, df_b), df_a, df_b)
+    def get_features(self, df_a, df_b):
+        return self.compare.compute(self.get_pairs(df_a, df_b), df_a, df_b)
     
     # Returns matches after filtering out the duplicates or matches with itself
-    def filterMatches(self, predictions):
+    def filter_matches(self, predictions):
         matches = []
         for match in predictions:
             if match[0] != match[1]:

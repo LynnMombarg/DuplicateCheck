@@ -21,25 +21,25 @@ class test_PythonController(TestCase):
     
     def setUp(self) -> None:
         service = PythonService()
-        service.createModel('test')
+        service.create_model('test')
     
     
     @patch('requests.post')
-    def test_trainModel(self, mock_post):
+    def test_train_model(self, mock_post):
         data = { "record1": { "Name": "Jan" }, "record2": { "Name": "Piet" } }
         response = requests.post('http://localhost:8000/train-model/test', data=json.dumps(data), headers={'Content-type': 'application/json'})
         mock_post.assert_called_with('http://localhost:8000/train-model/test', data=json.dumps(data), headers={'Content-type': 'application/json'})
         
         
     @patch('requests.post')
-    def test_createModel(self, mock_post):
+    def test_create_model(self, mock_post):
         data = {'filename': 'test'}
         response = requests.post('http://localhost:8000/create-model', data=json.dumps(data), headers={'Content-type': 'application/json'})
         mock_post.assert_called_with('http://localhost:8000/create-model', data=json.dumps(data), headers={'Content-type': 'application/json'})
         
     
     @patch('requests.post')
-    def test_deleteModel(self, mock_post):
+    def test_delete_model(self, mock_post):
         response = requests.post('http://localhost:8000/delete-model', headers={'Content-type': 'application/json'})
         mock_post.assert_called_with('http://localhost:8000/delete-model', headers={'Content-type': 'application/json'})
         

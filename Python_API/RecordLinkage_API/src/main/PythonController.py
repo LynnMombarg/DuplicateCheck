@@ -26,9 +26,9 @@ service = PythonService()
 # Expected form of json:
 # {"recordset1": [{"columns":}, {"columns":}], "recordset2": [{"columns":}, {"columns":}], "golden_matches_index": [{"index1": , "index2": }]}
 @app.put('/train-model/{modelId}', status_code=200)
-async def trainModel(json : dict, modelId: str):
+async def train_model(json : dict, modelId: str):
     try:
-      service.trainModel(modelId, json)
+      service.train_model(modelId, json)
       return 'Model trained!'
     except Exception:
       return 'Model could not be trained'
@@ -36,9 +36,9 @@ async def trainModel(json : dict, modelId: str):
   
 # Create model based on a given filename
 @app.post('/create-model', status_code=201)
-async def createModel(json: dict):
+async def create_model(json: dict):
     try:
-      service.createModel(json['modelId'])
+      service.create_model(json['modelId'])
       return 'Model created!'
     except Exception:
       return 'Model could not be created'
@@ -46,19 +46,19 @@ async def createModel(json: dict):
       
 # Delete model based on filename
 @app.delete('/delete-model/{modelId}', status_code=200)
-async def deleteModel(modelId: str):
+async def delete_model(modelId: str):
     try:
-      service.deleteModel(modelId)
+      service.delete_model(modelId)
       return 'Model deleted!'
     except Exception:
       return 'Model could not be deleted'
 
 # Execute model based on a given filename
 @app.post('/execute-model/{modelId}')
-async def executeModel(json: dict, modelId: str):
+async def execute_model(json: dict, modelId: str):
     try:
       # matches = service.executeModel(modelId, json)
-      matches = service.executeModel(modelId, getTestData())
+      matches = service.execute_model(modelId, getTestData())
       return JSONResponse(content=matches)
     except Exception:
       return 'Model could not be executed'
