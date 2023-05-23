@@ -1,4 +1,4 @@
-// Authors: Marloes, Roward
+// Authors: Marloes, Roward, Silke
 // Jira-task: 157 - nestjs tests schrijven python.dao
 // Sprint: 3
 // Last modified: 22-05-2023
