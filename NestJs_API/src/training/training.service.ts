@@ -1,5 +1,5 @@
-// Authors: Silke, Marloes
-// Jira-task: 129, 130
+// Authors: Marloes, Lynn, Silke
+// Jira-task: 130, 137, 129
 // Sprint: 3
 // Last modified: 16-05-2023
 
@@ -10,6 +10,7 @@ import { AuthDAO } from '../auth/auth.dao';
 import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { DatasetDTO } from './dto/dataset.dto';
 import { AuthDTO } from '../auth/auth.dto';
+import { PythonDAO } from 'src/python/python.dao';
 import { TrainingDTO } from './dto/training.dto';
 import { v4 as uuid } from 'uuid';
 
@@ -19,7 +20,15 @@ export class TrainingService {
     private readonly trainingDAO: TrainingDAO,
     private readonly authDAO: AuthDAO,
     private readonly salesforceDAO: SalesforceDAO,
+    private readonly pythonDAO: PythonDAO,
   ) {}
+
+  async saveTraining(modelId: string, trainingId: string) {
+    const training = await this.trainingDAO.getTraining(trainingId);
+    if (training !== null) {
+      await this.pythonDAO.saveTraining(modelId, training);
+    }
+  }
 
   async selectJob(jobId, tableName, orgId): Promise<string> {
     const tokens: AuthDTO = await this.authDAO.getTokensByOrgId(orgId);

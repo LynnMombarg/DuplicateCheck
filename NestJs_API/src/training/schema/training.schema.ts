@@ -12,6 +12,9 @@ export type TrainingDocument = HydratedDocument<Model>;
 
 @Schema()
 export class Training {
+  // @Prop()
+  // modelId: string;
+
   @Prop()
   trainingId: string;
 

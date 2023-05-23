@@ -1,5 +1,5 @@
-// Authors: Silke, Marloes
-// Jira-task: 129, 130
+// Authors: Marloes, Lynn, Silke
+// Jira-task: 130, 137, 129
 // Sprint: 3
 // Last modified: 16-05-2023
 
@@ -22,7 +22,7 @@ import { AnswerDTO } from './dto/answer.dto';
 @Controller('training')
 @UseGuards(AuthGuard)
 export class TrainingController {
-  constructor(private readonly trainingService: TrainingService) {}
+  constructor(private readonly trainingService: TrainingService) { }
 
   @Post()
   async selectJob(
@@ -49,5 +49,10 @@ export class TrainingController {
   @Get('/check-records')
   checkForRecords(@Query('trainingId') trainingId: string): Promise<boolean> {
     return this.trainingService.checkForRecords(trainingId);
+  }
+
+  @Put('/save')
+  saveTraining(@Body() json, @Req() req) {
+    this.trainingService.saveTraining(json['modelId'], json['trainingId']);
   }
 }

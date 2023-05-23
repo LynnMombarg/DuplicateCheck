@@ -5,6 +5,7 @@
 
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { TrainingDTO } from '../training/dto/training.dto';
 
 @Injectable()
 export class PythonDAO {
@@ -23,12 +24,29 @@ export class PythonDAO {
   }
 
   async deleteModel(modelId: string) {
-    try {
-      await axios.delete(
+    await axios
+      .delete(
         'http://duplicatecheck-python-backend-1:8000/delete-model/' + modelId,
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
+      )
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.toJSON());
+        }
+      });
+  }
+
+  async saveTraining(modelId: string, training: TrainingDTO) {
+    await axios
+      .put(
+        'http://duplicatecheck-python-backend-1:8000/train-model/' + modelId,
+        {
+          training: training,
+        },
+      )
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.toJSON());
+        }
+      });
   }
 }

@@ -7,6 +7,7 @@ Last modified: 16-05-2023
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from .PythonService import PythonService
 from .JsonTestData import *
 
@@ -24,11 +25,10 @@ service = PythonService()
 # Post request to send json datasets to train the model
 # Expected form of json:
 # {"recordset1": [{"columns":}, {"columns":}], "recordset2": [{"columns":}, {"columns":}], "golden_matches_index": [{"index1": , "index2": }]}
-@app.post('/train-model/{modelId}', status_code=200)
+@app.put('/train-model/{modelId}', status_code=200)
 async def trainModel(json : dict, modelId: str):
     try:
-      # service.trainModel(modelId, json)
-      service.trainModel(modelId, getTrainData())
+      service.trainModel(modelId, json)
       return 'Model trained!'
     except:
       return 'Model could not be trained'
