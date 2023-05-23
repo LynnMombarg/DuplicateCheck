@@ -13,7 +13,7 @@ class RecordLinkageModel:
     # Setup variables for the model
     def __init__(self):
         #Filename is an unique UUID string (identifier)
-        self.nrOfTrainings = 0
+        self.nr_of_trainings = 0
         self.indexer = recordlinkage.Index()
         self.indexer.full()
         self.compare = recordlinkage.Compare()
@@ -26,7 +26,7 @@ class RecordLinkageModel:
     def train_model(self, json_df):
         df_a, df_b, golden_matches_index = self.get_dataframe_structure(json_df)
         self.set_compare_column(df_a)
-        self.nrOfTrainings = self.nrOfTrainings + 1
+        self.nr_of_trainings = self.nr_of_trainings + 1
         self.logreg.fit(self.get_features(df_a, df_b), golden_matches_index)
 
     def execute_model(self, json_df):
