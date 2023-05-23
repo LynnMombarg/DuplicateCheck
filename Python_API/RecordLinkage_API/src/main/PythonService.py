@@ -15,34 +15,34 @@ import pickle
 
 class PythonService:
     
-    def create_model(self, modelId):
+    def create_model(self, model_id):
         model = RecordLinkageModel()
-        filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'wb')
+        filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', model_id + '.pkl'), 'wb')
         pickle.dump(model, filehandler)
         
-    def load_model(self, modelId):
+    def load_model(self, model_id):
         model: RecordLinkageModel
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'rb') as file:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', model_id + '.pkl'), 'rb') as file:
             model = pickle.load(file)
             if not model:
                 raise FileNotFoundError('Model not found')
             else :
                 return model
     
-    def save_model(self, modelId, model):
-        filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'wb')
+    def save_model(self, model_id, model):
+        filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', model_id + '.pkl'), 'wb')
         pickle.dump(model, filehandler)
         
-    def train_model(self, modelId, json_dataframe):
-        model = self.load_model(modelId)
+    def train_model(self, model_id, json_dataframe):
+        model = self.load_model(model_id)
         model.train_model(json_dataframe)
-        self.save_model(modelId, model)
+        self.save_model(model_id, model)
         
-    def delete_model(self, modelId):
-        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'))
+    def delete_model(self, model_id):
+        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', model_id + '.pkl'))
     
-    def execute_model(self, modelId, json_dataframe):
-        model = self.load_model(modelId)
+    def execute_model(self, model_id, json_dataframe):
+        model = self.load_model(model_id)
         matches = model.execute_model(json_dataframe)
         return {
             'matches': [{'index1': match[0], 'index2': match[1]} for match in matches],
