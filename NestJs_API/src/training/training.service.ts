@@ -23,15 +23,15 @@ export class TrainingService {
     private readonly pythonDAO: PythonDAO,
   ) {}
 
-  async saveTraining(modelId: string, trainingId: string, userId: string) {
+  async saveTraining(modelId: string, trainingId: string) {
     const training = await this.trainingDAO.getTraining(trainingId);
-    if(training !== null) {
+    if (training !== null) {
       await this.pythonDAO.saveTraining(modelId, training);
     }
   }
 
-  async selectJob(jobId, tableName, userId): Promise<string> {
-    const tokens: AuthDTO = await this.authDAO.getTokensByUserId(userId);
+  async selectJob(jobId, tableName, orgId): Promise<string> {
+    const tokens: AuthDTO = await this.authDAO.getTokensByOrgId(orgId);
     const records: DatasetDTO[] = await this.salesforceDAO.getDatasets(
       tokens,
       jobId,
@@ -42,7 +42,7 @@ export class TrainingService {
     if (records.length > 1) {
       const training: TrainingDTO = new TrainingDTO(
         trainingId,
-        userId,
+        orgId,
         records[0],
         records[1],
         [],

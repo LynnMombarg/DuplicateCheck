@@ -8,7 +8,7 @@ import { DatasetDTO } from './dataset.dto';
 export class TrainingDTO {
   constructor(
     public trainingId: string,
-    public userId: string,
+    public orgId: string,
     public datasetA: DatasetDTO,
     public datasetB: DatasetDTO,
     public matches: boolean[],

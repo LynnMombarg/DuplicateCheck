@@ -22,34 +22,31 @@ export class ModelService {
     private readonly authDAO: AuthDAO,
   ) {}
 
-  async getAllModels(userId: string): Promise<ModelDTO[]> {
-    return this.modelDAO.getAllModels(userId);
+  async getAllModels(orgId: string): Promise<ModelDTO[]> {
+    return this.modelDAO.getAllModels(orgId);
   }
 
-  async createModel(
-    createModel: CreateModelDTO,
-    userId: string,
-  ): Promise<void> {
+  async createModel(createModel: CreateModelDTO, orgId: string): Promise<void> {
     const modelId: string = uuid();
     const model = new ModelDTO(
       createModel.modelName,
       modelId,
       createModel.tableName,
       createModel.modelDescription,
-      userId,
+      orgId,
     );
 
     await this.modelDAO.createModel(model);
     await this.pythonDAO.createModel(modelId);
   }
 
-  async deleteModel(userId: string, modelId: string): Promise<void> {
-    await this.modelDAO.deleteModel(modelId, userId);
+  async deleteModel(orgId: string, modelId: string): Promise<void> {
+    await this.modelDAO.deleteModel(modelId, orgId);
     await this.pythonDAO.deleteModel(modelId);
   }
 
-  async getJobs(tableName: string, userId: string): Promise<JobDTO[]> {
-    const authDTO = await this.authDAO.getTokensByUserId(userId);
+  async getJobs(tableName: string, orgId: string): Promise<JobDTO[]> {
+    const authDTO = await this.authDAO.getTokensByOrgId(orgId);
     let tableId = '';
     switch (tableName) {
       case 'leads':
