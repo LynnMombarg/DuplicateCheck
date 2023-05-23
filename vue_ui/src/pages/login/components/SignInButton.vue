@@ -19,14 +19,16 @@ export default {
   name: "SignInButton",
   methods: {
     login() {
-      let popupWindow = window.open(
+      const popupWindow = window.open(
         "http://localhost:8001/auth/login",
         "Login",
         "width=800,height=600"
       );
       window.addEventListener("message", (event) => {
         console.log(event);
-        if (event.origin !== "http://localhost:8001") return;
+        if (event.origin !== "http://localhost:8001") {
+          return;
+        }
         if (event.data.message === "success") {
             popupWindow.close();
             console.log(event.data.token);
