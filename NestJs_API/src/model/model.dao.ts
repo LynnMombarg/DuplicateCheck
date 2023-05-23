@@ -23,10 +23,12 @@ export class ModelDAO {
   }
 
   async deleteModel(modelId: string, userId: string): Promise<void> {
-    const result = await this.model.deleteOne({
-      modelId: modelId,
-      userId: userId,
-    });
+    const result = await Promise.resolve(
+      this.model.deleteOne({
+        modelId: modelId,
+        userId: userId,
+      }),
+    );
 
     if (result.deletedCount === 0) {
       throw new NotFoundException();
