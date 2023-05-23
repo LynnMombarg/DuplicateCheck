@@ -38,5 +38,11 @@ class test_RecordLinkageModel(TestCase):
         jsonString = '{"recordset1": [{"name": "Piet", "lastname": "Janssen", "age": "18", "country": "NL"}, {"name": "Jan", "lastname": "Pietersen", "age": "19", "country": "BE"}], "recordset2": [{"name": "Henk", "lastname": "van Dijk", "age": "20", "country": "DE"}, {"name": "Piet", "lastname": "Jansen", "age": "18", "country": "NL"}], "golden_matches_index": [{"index1": 0, "index2": 1}]}'
         self.jsonObject = json.loads(jsonString)
             
+    def test_trainModel(self):
+        try:
+            self.sut.trainModel(self.jsonObject)
+        except:
+            self.fail()
+                
 if __name__ == '__main__':
     unittest.main()
