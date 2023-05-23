@@ -9,11 +9,13 @@ import csv
 
 headers = []
 
-with open('main/devData/traindata.csv', newline='') as csvfile:
+trainDataCSV = 'main/devData/traindata.csv'
+
+with open(trainDataCSV, newline='') as csvfile:
     reader = csv.reader(csvfile)
     headers = next(reader)
 
-def getTrainRecordset1():
+def get_train_recordset1():
     recordset1 = []
     with open('main/devData/traindata.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
@@ -23,9 +25,9 @@ def getTrainRecordset1():
                 recordset1.append(dict(zip(headers, row)))
     return recordset1
 
-def getTrainRecordset2():
+def get_train_recordset2():
     recordset2 = []
-    with open('main/devData/traindata.csv', newline='') as csvfile:
+    with open(trainDataCSV, newline='') as csvfile:
         reader = csv.reader(csvfile)
         for i in range(11):
             next(reader)
@@ -34,18 +36,18 @@ def getTrainRecordset2():
                 recordset2.append(dict(zip(headers, row)))
     return recordset2
 
-def getTestRecordset():
+def get_test_recordset():
     recordset = []
-    with open('main/devData/testdata.csv', newline='') as csvfile:
+    with open(trainDataCSV, newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
             recordset.append(dict(zip(headers, row)))
     return recordset
 
-def getTrainData():
-    recordset1 = getTrainRecordset1()
-    recordset2 = getTrainRecordset2()
+def get_train_data():
+    recordset1 = get_train_recordset1()
+    recordset2 = get_train_recordset2()
     json = {
         "recordset1": recordset1
         ,
@@ -64,8 +66,8 @@ def getTrainData():
     }
     return json
 
-def getTestData():
-    recordset = getTestRecordset()
+def get_test_data():
+    recordset = get_test_recordset()
     json = {
         "recordset": recordset
     }
