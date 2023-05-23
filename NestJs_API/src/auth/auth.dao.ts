@@ -20,83 +20,80 @@ export class AuthDAO {
   ) {}
 
   storeToken(
-    userID: string,
+    id: string,
     accessToken: string,
-    refresh_token: string,
-    jwtToken: string,
+    refreshToken: string,
+    jwt: string,
   ): void {
-    console.log('Storing token');
     this.authModel
-      .findOne({ userId: userID })
+      .findOne({ userId: id })
       .exec()
       .then((doc) => {
         if (doc) {
           doc.accessToken = accessToken;
-          doc.refreshToken = refresh_token;
-          doc.jwtToken = jwtToken;
+          doc.refreshToken = refreshToken;
+          doc.jwtToken = jwt;
           doc.save();
         } else {
           const auth = new this.authModel({
-            userId: userID,
+            userId: id,
             accessToken: accessToken,
-            refreshToken: refresh_token,
-            jwtToken: jwtToken,
+            refreshToken: refreshToken,
+            jwtToken: jwt,
           });
           auth.save();
         }
       });
   }
 
-  updateToken(accessToken: string): void {
+  updateToken(access: string): void {
     this.authModel
-      .findOne({ accessToken: accessToken })
+      .findOne({ accessToken: access })
       .exec()
       .then((doc) => {
         if (doc) {
-          doc.accessToken = accessToken;
+          doc.accessToken = access;
           doc.save();
         }
       });
   }
 
-  removeTokens(userId: string): void {
-    this.authModel.deleteOne({ userId: userId }).exec();
+  removeTokens(id: string): void {
+    this.authModel.deleteOne({ userId: id }).exec();
   }
 
-  async getTokensByUserId(userId: string): Promise<AuthDTO> {
-    return await this.authModel
-      .findOne({ userId: userId })
-      .exec()
-      .then((doc) => {
-        return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
-      })
-      .catch((err) => {
-        throw new UnauthorizedException();
-      });
+  async getTokensByUserId(id: string): Promise<AuthDTO> {
+    return await Promise.resolve(
+      this.authModel
+        .findOne({ userId: id })
+        .exec()
+        .then((doc) => {
+          return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
+        })
+        .catch((err) => {
+          throw new UnauthorizedException();
+        }),
+    );
   }
 
-  getUserId(token: string): string {
-    return 'test123';
-  }
-
-  blackListToken(userId: string, jwtToken: string) {
+  blackListToken(id: string, jwt: string) {
     const authBlacklist = new this.authBlacklistModel({
-      userId: userId,
-      jwtToken: jwtToken,
+      userId: id,
+      jwtToken: jwt,
     });
     authBlacklist.save();
   }
 
-  isBlacklisted(userId: string, jwtToken: string) {
+  isBlacklisted(id: string, jwt: string) {
     return this.authBlacklistModel
-      .findOne({ userId: userId, jwtToken: jwtToken })
+      .findOne({ userId: id, jwtToken: jwt })
       .exec()
       .then((doc) => {
         return !!doc;
       });
   }
 
-  removeBlacklistedToken(userId: string) {
-    this.authBlacklistModel.deleteOne({ userId: userId }).exec();
+  removeBlacklistedToken(id: string) {
+    this.authBlacklistModel.deleteOne({ userId: id }).exec();
   }
 }
