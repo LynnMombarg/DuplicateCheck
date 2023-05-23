@@ -27,11 +27,11 @@ import * as dotenv from 'dotenv';
 dotenv.config({
   path: `src/config/env/${process.env.NODE_ENV}.env`,
 });
-const oauth2 = new jsforce.OAuth2({
+const auth = new jsforce.OAuth2({
   loginUrl: 'https://login.salesforce.com',
   clientId: process.env.SF_CLIENT_ID,
   clientSecret: process.env.SF_CLIENT_SECRET,
-  redirectUri: process.env.BASE_URL + '/auth/callback',
+  redirectUri: `${process.env.BASE_URL}/auth/callback`,
 });
 
 /**
@@ -49,7 +49,7 @@ export class AuthController {
    * Redirect to Salesforce login page
    */
   @Redirect(
-    oauth2.getAuthorizationUrl({
+    auth.getAuthorizationUrl({
       scope: 'api id refresh_token',
       response_type: 'code',
     }),
@@ -65,7 +65,7 @@ export class AuthController {
    */
   @Get('/callback')
   callback(@Query('code') code: string, @Res() res): void {
-    const conn = new jsforce.Connection({ oauth2: oauth2 });
+    const conn = new jsforce.Connection({ oauth2: auth });
     conn.authorize(
       code,
       async function (err, userInfo) {
@@ -91,29 +91,25 @@ export class AuthController {
           jwtToken,
         );
         let displayName;
-        let email;
+        let mail;
         await conn.identity(function (err, res) {
           try {
             if (err) {
-              console.error(err);
               throw UnauthorizedException;
             }
           } catch {}
           displayName = res.display_name;
-          email = res.username;
+          mail = res.username;
         });
         const json = JSON.stringify({
           message: 'success',
           token: jwtToken,
           user: {
             username: displayName,
-            email: email,
+            email: mail,
           },
         });
-        const script =
-          '<script>window.opener.postMessage(' +
-          json +
-          ", 'http://localhost:8002')</script>";
+        const script = `<script>window.opener.postMessage(${json}, 'http://localhost:8002')</script>`;
         return res.status(HttpStatus.OK).send(script);
       }.bind(this),
     );
@@ -124,7 +120,7 @@ export class AuthController {
   async logout(@Req() req): Promise<void> {
     const authDTO = await this.authService.getTokensByUserId(req.user.userId);
     const conn = new jsforce.Connection({
-      oauth2: oauth2,
+      oauth2: auth,
       instanceUrl: process.env.SF_INSTANCE_URL,
       accessToken: authDTO.getAccessToken(),
       refreshToken: authDTO.getRefreshToken(),
@@ -139,7 +135,6 @@ export class AuthController {
     conn.logout(function (err) {
       try {
         if (err) {
-          console.error('Error logging out: ' + err);
           throw UnauthorizedException;
         }
       } catch {}
