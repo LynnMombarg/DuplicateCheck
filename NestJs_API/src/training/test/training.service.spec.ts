@@ -11,17 +11,26 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { TrainingDAO } from '../training.dao';
 import { TrainingService } from '../training.service';
 import { SalesforceDAO } from '../../salesforce/salesforce.dao';
-import { PythonDAO } from 'src/python/python.dao';
+import { PythonDAO } from '../../python/python.dao';
 
 describe('TrainingService', () => {
   let trainingservice: TrainingService;
+  const training = {
+    trainingId: 'training1',
+    userId: '123',
+    datasetA: {},
+    datasetB: {},
+    matches: {},
+  };
 
   const mockedTrainingDAO = {
     createTraining: jest.fn(),
     getNextRecords: jest.fn(),
     saveAnswer: jest.fn(),
     checkForRecords: jest.fn(),
-    getTraining: jest.fn();
+    getTraining: jest.fn(() => {
+      return training;
+    }),
   };
   const mockedAuthDAO = {
     getTokensByUserId: jest.fn(),
@@ -33,7 +42,7 @@ describe('TrainingService', () => {
   };
   const mockedPythonDAO = {
     saveTraining: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -76,7 +85,7 @@ describe('TrainingService', () => {
       trainingservice.getRecords(trainingID);
 
       // Assert
-      expect(mockedTrainingDAO.getNextRecords).toHaveBeenCalledWith(trainingID);
+      expect(mockedTrainingDAO.getTraining).toHaveBeenCalledWith(trainingID);
     });
   });
 
@@ -139,34 +148,39 @@ describe('TrainingService', () => {
     });
   });
 
-
   describe('saveTraining', () => {
     it('should call saveTraining on PythonDAO', () => {
       //Arrange
       const modelId = 'model1';
       const trainingId = 'training1';
-      const userId = '123';
-      const training = { 'trainingId': trainingId, 'userId': userId, 'datasetA': { }, 'datasetB': { }, 'matches': { } };
+      const training = {
+        trainingId: 'training1',
+        userId: '123',
+        datasetA: {},
+        datasetB: {},
+        matches: {},
+      };
 
       //Act
-      trainingservice.saveTraining(modelId, trainingId, userId);
+      trainingservice.saveTraining(modelId, trainingId);
 
       // Assert
-      expect(mockedPythonDAO.saveTraining).toHaveBeenCalledWith(modelId, training)
+      expect(mockedPythonDAO.saveTraining).toHaveBeenCalledWith(
+        modelId,
+        training,
+      );
     });
 
     it('should call getTraining on trainingDAO', () => {
       //Arrange
       const modelId = 'model1';
       const trainingId = 'training1';
-      const userId = '123';
 
       //Act
-      trainingservice.saveTraining(modelId, trainingId, userId);
+      trainingservice.saveTraining(modelId, trainingId);
 
       //Assert
       expect(mockedTrainingDAO.getTraining).toHaveBeenCalledWith(trainingId);
-    })
-  })
-  
+    });
+  });
 });
