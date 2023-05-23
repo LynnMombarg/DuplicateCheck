@@ -51,4 +51,5 @@ class test_PythonService(TestCase):
         os.remove('Python_API/RecordLinkage_API/src/pickles/test.pkl')
         
             
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()

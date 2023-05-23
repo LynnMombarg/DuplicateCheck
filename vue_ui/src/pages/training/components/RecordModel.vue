@@ -5,22 +5,23 @@
 
 <template>
     <div class="flex justify-between rounded-md px-3 py-5 text-xl font-medium">
-        <div class="flex items-center w-50">
-            <div class="flex items-center w-50 px-2 rounded-md">
-                <div class="w-10">
-                    <table class="border">
-                        <thead>
-                        <tr>
-                            <th class="border" v-for="column in this.record.columns">{{ column }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="border" v-for="value in this.record.values">{{ value }}</td>
-                        </tr>
+        <div class="flex items-center w-full">
+            <div class="flex items-center w-full px-2 rounded-md">
+                    <table class="w-full">
+                        <tbody class="flex flex-col w-full">
+                            <tr v-for="column in this.record1.columns" style="border-top-width: 1px; border-bottom-width: 1px; border-color: white;" class="flex justify-between w-full rounded-md" :class="getRowColor(column)">
+                                <td class="column-cell">
+                                    {{ column }}
+                                </td>
+                                <td class="column-cell">
+                                    {{ this.record1.values[this.record1.columns.indexOf(column)] }}
+                                </td>
+                                <td class="column-cell">
+                                    {{ this.record2.values[this.record2.columns.indexOf(column)] }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
     </div>
@@ -33,11 +34,36 @@ export default {
     name: "RecordModel",
     components: {OverviewDropdownComponent},
     props: {
-        record: {
+        record1: {
+            columns: Array,
+            values: Array,
+        },
+        record2: {
             columns: Array,
             values: Array,
         },
     },
-    methods: {},
+    methods: {
+        getRowColor(column) {
+            if (this.record1.values[this.record1.columns.indexOf(column)] != this.record2.values[this.record2.columns.indexOf(column)]) {
+                return "record-different";
+            } else {
+                return "record-same";
+            }
+        }
+    },
 };
 </script>
+
+<style>
+.column-cell {
+    width: 33%;
+    margin: 0.25rem;
+}
+.record-different {
+    background-color: rgba(255, 165, 0, 0.5); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
+}
+.record-same {
+    background-color: rgba(0, 255, 0, 0.3); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
+}
+</style>

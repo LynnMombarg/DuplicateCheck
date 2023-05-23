@@ -14,12 +14,11 @@ export class ModelDAO {
   constructor(@InjectModel(Model.name) private model: mongoose.Model<Model>) {}
 
   async createModel(model: ModelDTO): Promise<void> {
-    const createdModel = new this.model(model);
-    await createdModel.save();
+    await this.model.create(model);
   }
 
   async getAllModels(userId: string): Promise<ModelDTO[]> {
-    return this.model.find({ userId: userId }).exec();
+    return this.model.find({ userId: userId });
   }
 
   async deleteModel(modelId: string, userId: string): Promise<void> {
