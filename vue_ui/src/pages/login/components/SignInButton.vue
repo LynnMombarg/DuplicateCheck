@@ -18,7 +18,7 @@
 export default {
   name: "SignInButton",
   methods: {
-    login() {F
+    login() {
       const popupWindow = window.open(
         "http://localhost:8001/auth/login",
         "Login",
