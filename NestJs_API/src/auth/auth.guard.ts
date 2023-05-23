@@ -38,11 +38,11 @@ export class AuthGuard implements CanActivate {
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request['user'] = payload;
-      if (await this.authService.isBlacklisted(payload.userId, token)) {
+      if (await this.authService.isBlacklisted(payload.orgId, token)) {
         throw new UnauthorizedException();
       }
       if (request.url.includes('logout')) {
-        this.authService.blackListToken(payload.userId, token);
+        this.authService.blackListToken(payload.orgId, token);
       }
     } catch {
       throw new UnauthorizedException();
