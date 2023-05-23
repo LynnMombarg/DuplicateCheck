@@ -9,7 +9,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from .PythonService import PythonService
-from .devData.JsonTestData import *
 
 app = FastAPI()
 app.add_middleware(
@@ -57,8 +56,7 @@ async def delete_model(model_id: str):
 @app.post('/execute-model/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
-      # matches = service.executeModel(modelId, json)
-      matches = service.execute_model(model_id, get_test_data())
+      matches = service.execute_model(model_id, json)
       return JSONResponse(content=matches)
     except Exception:
       return 'Model could not be executed'

@@ -9,7 +9,7 @@ import csv
 
 headers = []
 
-trainDataCSV = './traindata.csv'
+trainDataCSV = 'main/devData/traindata.csv'
 
 with open(trainDataCSV, newline='') as csvfile:
     reader = csv.reader(csvfile)
