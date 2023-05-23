@@ -32,7 +32,7 @@ export class TrainingController {
     return await this.trainingService.selectJob(
       training.jobId,
       training.tableName,
-      req.user.userId,
+      req.user.orgId,
     );
   }
 
@@ -53,7 +53,6 @@ export class TrainingController {
 
   @Put('/save')
   saveTraining(@Body() json, @Req() req) {
-    this.trainingService.saveTraining(json['modelId'], json['trainingId'], req.user.userId);
+    this.trainingService.saveTraining(json['modelId'], json['trainingId']);
   }
-
 }

@@ -23,7 +23,7 @@ export class Model {
   modelDescription: string;
 
   @Prop()
-  userId: string;
+  orgId: string;
 }
 
 export const ModelSchema = SchemaFactory.createForClass(Model);

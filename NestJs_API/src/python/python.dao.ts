@@ -9,7 +9,6 @@ import { TrainingDTO } from '../training/dto/training.dto';
 
 @Injectable()
 export class PythonDAO {
-
   async createModel(modelId: string) {
     try {
       const response = await axios.post(
@@ -26,7 +25,9 @@ export class PythonDAO {
 
   async deleteModel(modelId: string) {
     await axios
-      .delete('http://duplicatecheck-python-backend-1:8000/delete-model/' + modelId, )
+      .delete(
+        'http://duplicatecheck-python-backend-1:8000/delete-model/' + modelId,
+      )
       .catch(function (error) {
         if (error.response) {
           console.log(error.toJSON());
@@ -36,13 +37,16 @@ export class PythonDAO {
 
   async saveTraining(modelId: string, training: TrainingDTO) {
     await axios
-      .put('http://duplicatecheck-python-backend-1:8000/train-model/' + modelId, {
-        training: training,
-      })
+      .put(
+        'http://duplicatecheck-python-backend-1:8000/train-model/' + modelId,
+        {
+          training: training,
+        },
+      )
       .catch(function (error) {
         if (error.response) {
           console.log(error.toJSON());
         }
       });
-    }
   }
+}
