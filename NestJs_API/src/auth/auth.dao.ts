@@ -58,17 +58,15 @@ export class AuthDAO {
   }
 
   async getTokensByUserId(id: string): Promise<AuthDTO> {
-    return await Promise.resolve(
-      this.authModel
-        .findOne({ userId: id })
-        .exec()
-        .then((doc) => {
-          return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
-        })
-        .catch((err) => {
-          throw new UnauthorizedException();
-        }),
-    );
+    return await this.authModel
+      .findOne({ userId: id })
+      .exec()
+      .then((doc) => {
+        return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
+      })
+      .catch((err) => {
+        throw new UnauthorizedException();
+      });
   }
 
   blackListToken(id: string, jwt: string) {
