@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 10-05-2023
+// Last modified: 23-05-2023
 
 import { ModelDTO } from './dto/model.dto';
 import { InjectModel } from '@nestjs/mongoose';
