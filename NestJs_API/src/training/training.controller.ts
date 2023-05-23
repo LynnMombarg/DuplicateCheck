@@ -29,7 +29,7 @@ export class TrainingController {
     @Body() training: CreateTrainingDTO,
     @Req() req,
   ): Promise<string> {
-    return await this.trainingService.selectJob(
+    return this.trainingService.selectJob(
       training.jobId,
       training.tableName,
       req.user.userId,
