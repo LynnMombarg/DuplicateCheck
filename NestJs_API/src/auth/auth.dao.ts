@@ -19,26 +19,21 @@ export class AuthDAO {
     private authBlacklistModel: mongoose.Model<AuthBlacklist>,
   ) {}
 
-  storeToken(
-    id: string,
-    accessToken: string,
-    refreshToken: string,
-    jwt: string,
-  ): void {
+  storeToken(id: string, access: string, refresh: string, jwt: string): void {
     this.authModel
       .findOne({ userId: id })
       .exec()
       .then((doc) => {
         if (doc) {
-          doc.accessToken = accessToken;
-          doc.refreshToken = refreshToken;
+          doc.accessToken = access;
+          doc.refreshToken = refresh;
           doc.jwtToken = jwt;
           doc.save();
         } else {
           const auth = new this.authModel({
             userId: id,
-            accessToken: accessToken,
-            refreshToken: refreshToken,
+            accessToken: access,
+            refreshToken: refresh,
             jwtToken: jwt,
           });
           auth.save();
