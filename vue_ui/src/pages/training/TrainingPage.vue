@@ -92,9 +92,9 @@ export default {
 			this.modelId = await this.$route.params.modelId;
 			this.model = await this.$store.getters.getModelById(this.modelId);
 			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1));
+			await this.getRecords();
 			this.selectJobActive = false;
 			this.trainingActive = true;
-			this.getRecords();
 		},
 		getRecords: async function () {
 			this.records = await getMappedRecords(this.trainingId);
