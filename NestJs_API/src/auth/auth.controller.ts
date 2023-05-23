@@ -20,7 +20,6 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
-import { jwtConfig } from '../config/jwt.config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({
@@ -34,7 +33,6 @@ const oauth2 = new jsforce.OAuth2({
   clientSecret: process.env.SF_CLIENT_SECRET,
   redirectUri: process.env.BASE_URL + '/auth/callback',
 });
-const clientId = process.env.SF_CLIENT_ID;
 
 /**
  * Login Controller
@@ -57,11 +55,7 @@ export class AuthController {
     }),
   )
   @Get('/login')
-  login(): void {
-    console.log('login');
-    console.log(process.env);
-    console.log(clientId);
-  }
+  login(): void {}
 
   /**
    * Callback from Salesforce login page
@@ -81,8 +75,6 @@ export class AuthController {
             message: 'unauthorized',
           });
         }
-        console.log('conn.accessToken: ' + conn.accessToken);
-        console.log('conn.refreshToken: ' + conn.refreshToken);
         const jwtToken = await this.jwtService.signAsync(
           {
             userId: userInfo.id,
@@ -128,8 +120,6 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Post('/logout')
   async logout(@Req() req): Promise<void> {
-    console.log('logout');
-
     const authDTO = await this.authService.getTokensByUserId(req.user.userId);
     const conn = new jsforce.Connection({
       oauth2: oauth2,
@@ -139,8 +129,7 @@ export class AuthController {
     });
     conn.on(
       'refresh',
-      function (accessToken, res) {
-        console.log('refreshed token: ' + accessToken);
+      function (accessToken) {
         this.authService.updateToken(accessToken);
       }.bind(this),
     );
@@ -149,37 +138,8 @@ export class AuthController {
       if (err) {
         return console.error('Error logging out: ' + err);
       }
-      console.log('Logged out');
+      return console.log('Logged out');
     });
     this.authService.logout(authDTO.userId);
-  }
-
-  @UseGuards(AuthGuard)
-  @Get('test')
-  async test(@Req() req): Promise<void> {
-    console.log(req.user.userId);
-
-    const authDTO = await this.authService.getTokensByUserId(req.user.userId);
-    const conn = new jsforce.Connection({
-      oauth2: oauth2,
-      instanceUrl: process.env.SF_INSTANCE_URL,
-      accessToken: authDTO.getAccessToken(),
-      refreshToken: authDTO.getRefreshToken(),
-    });
-    conn.on(
-      'refresh',
-      function (accessToken, res) {
-        console.log('refreshed token: ' + accessToken);
-        this.authService.updateToken(accessToken);
-      }.bind(this),
-    );
-
-    conn.query('SELECT id FROM dupcheck__dcJob__c', function (err, result) {
-      if (err) {
-        return console.error(err);
-      }
-      console.log('total : ' + result.totalSize);
-      console.log('fetched : ' + result.records.length);
-    });
   }
 }
