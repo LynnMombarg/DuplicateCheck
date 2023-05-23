@@ -18,7 +18,7 @@ describe('ModelDAO', () => {
     modelId: 'test-model-id',
     tableName: 'test-table',
     modelDescription: 'Test model description',
-    userId: 'test-user-id',
+    orgId: 'test-user-id',
   };
 
   const mockedMongooseModel = {
@@ -62,7 +62,7 @@ describe('ModelDAO', () => {
 
       // Assert
       expect(mockedMongooseModel.find).toHaveBeenCalledWith({
-        userId: 'test-user-id',
+        orgId: 'test-user-id',
       });
       expect(result).toEqual(modelDTO);
     });
@@ -80,7 +80,7 @@ describe('ModelDAO', () => {
       expect(mockedMongooseModel.deleteOne).not.toThrow();
       expect(mockedMongooseModel.deleteOne).toHaveBeenCalledWith({
         modelId: 'test-model-id',
-        userId: 'test-user-id',
+        orgId: 'test-user-id',
       });
     });
   });

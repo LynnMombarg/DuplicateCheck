@@ -18,7 +18,7 @@ export class ModelDAO {
   }
 
   async getAllModels(orgId: string): Promise<ModelDTO[]> {
-    return this.model.find({ orgId: orgId }).exec();
+    return this.model.find({ orgId: orgId });
   }
 
   async deleteModel(modelId: string, orgId: string): Promise<void> {
