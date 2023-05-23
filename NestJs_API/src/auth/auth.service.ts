@@ -16,10 +16,10 @@ export class AuthService {
   login(
     userID: string,
     accessToken: string,
-    refresh_token: string,
+    refreshToken: string,
     jwtToken: string,
   ): void {
-    this.authDAO.storeToken(userID, accessToken, refresh_token, jwtToken);
+    this.authDAO.storeToken(userID, accessToken, refreshToken, jwtToken);
     this.removeBlacklistedToken(userID);
   }
 
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   async getTokensByUserId(userId: string): Promise<AuthDTO> {
-    return await this.authDAO.getTokensByUserId(userId);
+    return await Promise.resolve(this.authDAO.getTokensByUserId(userId));
   }
 
   blackListToken(userId: string, jwtToken: string): void {
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   async isBlacklisted(userId: string, jwtToken: string): Promise<boolean> {
-    return await this.authDAO.isBlacklisted(userId, jwtToken);
+    return await Promise.resolve(this.authDAO.isBlacklisted(userId, jwtToken));
   }
 
   removeBlacklistedToken(userId: string): void {

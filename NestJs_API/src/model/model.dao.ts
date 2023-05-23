@@ -18,7 +18,7 @@ export class ModelDAO {
     await this.model.create(model);
   }
 
-  async getAllModels(userId: string): Promise<ModelDTO[]> {
+  getAllModels(userId: string): Promise<ModelDTO[]> {
     return this.model.find({ userId: userId });
   }
 
