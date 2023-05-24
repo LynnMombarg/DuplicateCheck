@@ -31,9 +31,9 @@
                             </div>
                             <div class="ml-2">
                                 <p
-                                        class="text-sm font-medium text-gray-700 group-hover:text-gray-900 leading-none">
+                                        class="text-sm font-medium text-gray-700 group-hover:text-gray-900 leading-none flex">
                                     {{ this.username }}</p>
-                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">{{
+                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 flex">{{
                                     this.email
                                     }}</p></div>
                         </MenuButton>

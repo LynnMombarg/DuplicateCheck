@@ -1,7 +1,7 @@
-<!--Author(s): Marloes-->
-<!--Jira-task: 132, 133, 134-->
+<!--Author(s): Marloes, Diederik-->
+<!--Jira-task: 132, 133, 134, 162-->
 <!--Sprint: 3-->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 
 <template>
     <ul role="list" class="divide-y divide-gray-100">
@@ -52,10 +52,6 @@ export default {
         RecordModel,
     },
     props: {
-        token: {
-            type: String,
-            required: true,
-        },
         records: Array,
     },
     data() {
