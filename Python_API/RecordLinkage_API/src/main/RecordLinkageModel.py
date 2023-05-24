@@ -49,8 +49,8 @@ class RecordLinkageModel:
     
     # Get JSON as input and returns it as panda dataframes
     def getDataFrameStructure(self, jsonStructure):
-        datasetA = {'records': []}
-        datasetB = {'records': []}
+        datasetA = {"records": []}
+        datasetB = {"records": []}
         golden_matches_index = []
 
         for record in jsonStructure['training']['datasetA']['records']:

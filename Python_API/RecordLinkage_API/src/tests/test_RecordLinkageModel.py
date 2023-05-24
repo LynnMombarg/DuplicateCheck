@@ -17,25 +17,11 @@ from unittest import TestCase
 import json
 from main.RecordLinkageModel import RecordLinkageModel
 
-# # URL to send request to
-# URL = "http://localhost:8000/train-model"
-
-# # Example dataset
-# jsonString = '{"recordset1": [{"name": "Piet", "lastname": "Janssen", "age": "18", "country": "NL"}, {"name": "Jan", "lastname": "Pietersen", "age": "19", "country": "BE"}], "recordset2": [{"name": "Henk", "lastname": "van Dijk", "age": "20", "country": "DE"}, {"name": "Piet", "lastname": "Jansen", "age": "18", "country": "NL"}], "golden_matches_index": [{"index1": 0, "index2": 1}]}'
-# jsonObject = json.loads(jsonString)
-
-# # Send request
-# r = requests.post(url = URL, json = jsonObject)
-
-# # Print response code and text
-# print(r)
-# print(r.text)
-
 class test_RecordLinkageModel(TestCase):
     
     def setUp(self) -> None:
         self.sut = RecordLinkageModel()
-        jsonString = '{"recordset1": [{"name": "Piet", "lastname": "Janssen", "age": "18", "country": "NL"}, {"name": "Jan", "lastname": "Pietersen", "age": "19", "country": "BE"}], "recordset2": [{"name": "Henk", "lastname": "van Dijk", "age": "20", "country": "DE"}, {"name": "Piet", "lastname": "Jansen", "age": "18", "country": "NL"}], "golden_matches_index": [{"index1": 0, "index2": 1}]}'
+        jsonString = '{ "trainingId": "12hdbs", "userId": "shge723", "datasetA": [{ "records": [{ 1: [{"name": "Piet", "lastname": "Janssen", "age": 18, "country": "NL"}], 2: [{"name": "Jan", "lastname": "Pietersen", "age": 19, "country": "BE"}] }] }], "datasetB": [{ "records": [{ 1: [{"name": "Henk", "lastname": "van Dijk", "age": 20, "country": "DE"}], 2: [{"name": "Piet", "lastname": "Jansen", "age": 18, "country": "NL"}] }] }], "matches": [{"index1": 0, "index2": 1 }] }'
         self.jsonObject = json.loads(jsonString)
             
     def test_trainModel(self):
@@ -43,6 +29,12 @@ class test_RecordLinkageModel(TestCase):
             self.sut.trainModel(self.jsonObject)
         except:
             self.fail()
+            
+    # def test_executeModel(self):
+    #     try:
+    #         self.sut.executeModel(self.jsonObject)
+    #     except:
+    #         self.fail()
                 
 if __name__ == '__main__':
     unittest.main()
