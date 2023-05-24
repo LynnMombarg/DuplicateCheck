@@ -1,11 +1,11 @@
 <!--Author(s): Silke Bertisen, Roward, Diederik-->
 <!--Jira-task: Dashboard realiseren 104 -->
 <!--Sprint: 2, 3 -->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 
 <template>
     <div class="flex pl-64 flex-col flex-1">
-        <Navbar :token="token"/>
+        <Navbar />
         <OverviewBannerComponent :models="models"/>
         <Footer />
     </div>
@@ -30,29 +30,21 @@ export default {
     OverviewBannerComponent,
     OverviewModelComponent
   },
-  props: {
-    token: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       models: [],
-      token: null
     }
   },
   async mounted() {
-      this.token = await this.$store.state.token;
-      this.models = await getModels(this.token);
+      this.models = await getModels();
       this.$store.commit('setModels', this.models);
   },
   methods: {
     async deleteModel(modelId) {
-      this.models = await deleteModel(modelId, this.token);
+      this.models = await deleteModel(modelId);
     },
     async createModel(modelName, tableName, description) {
-      this.models = await createModel(modelName, tableName, description, this.token);
+      this.models = await createModel(modelName, tableName, description);
     }
   },
 };

@@ -1,15 +1,14 @@
-// Authors: Roward
-// Jira-task: 110 - Models verwijderen uit database
-// Sprint: 2
-// Last modified: 10-05-2023 
+// Authors: Roward, Diederik
+// Jira-task: 110 - Models verwijderen uit database, 162
+// Sprint: 2, 3
+// Last modified: 23-05-2023
 
-export async function deleteModel(modelId: string, token: string) {
+export async function deleteModel(modelId: string) {
 	const response = await fetch(
-    "http://localhost:8001/model?modelId=" + modelId,
+    "model?modelId=" + modelId,
     {
       method: "DELETE",
       headers: {
-        Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
     }

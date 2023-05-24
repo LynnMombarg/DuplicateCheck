@@ -1,7 +1,7 @@
 <!--Author(s): Silke Bertisen, Roward, Diederik-->
-<!--Jira-task: Dashboard realiseren 104 -->
+<!--Jira-task: Dashboard realiseren 104, 162 -->
 <!--Sprint: 2,3 -->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 <!--Description: This component is used to display the dropdown menu for the model options. -->
 
 <template>
@@ -50,7 +50,7 @@ export default {
         // code delete model from backend
         // deleteModel(modelId);
         // code to refresh page
-        this.$parent.deleteModel(modelId, this.token);
+        this.$parent.deleteModel(modelId);
       }
     },
 
@@ -61,12 +61,6 @@ export default {
     executeModel() {
       // window.location.href = "/Execute";
       console.log("execute model pressed");
-    },
-  },
-  props: {
-    token: {
-      type: String,
-      required: true,
     },
   },
 };
