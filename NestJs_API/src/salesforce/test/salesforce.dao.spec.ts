@@ -2,9 +2,7 @@ import { SalesforceDAO } from '../salesforce.dao';
 import { Test } from '@nestjs/testing';
 import { AuthService } from '../../auth/auth.service';
 import { AuthDAO } from '../../auth/auth.dao';
-import { AuthModule } from '../../auth/auth.module';
 import { AuthDTO } from '../../auth/auth.dto';
-import { getModelToken } from '@nestjs/mongoose';
 
 describe('SalesforceDAO', () => {
   let salesforcedao: SalesforceDAO;
@@ -16,6 +14,8 @@ describe('SalesforceDAO', () => {
   const mockedAuthService = {
     updateToken: jest.fn(),
   };
+
+  const authDTO = new AuthDTO(null, null, null);
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -35,6 +35,14 @@ describe('SalesforceDAO', () => {
       await expect(salesforcedao.getJobs('error', null)).rejects.toThrow(
         'Not Found',
       );
+    });
+  });
+
+  describe('getJobs', () => {
+    it('should return an error if there are no valid tokens', async () => {
+      await expect(
+        salesforcedao.getJobs('table name', authDTO),
+      ).rejects.toThrow();
     });
   });
 });
