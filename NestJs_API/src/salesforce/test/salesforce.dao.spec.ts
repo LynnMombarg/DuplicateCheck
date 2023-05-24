@@ -45,4 +45,12 @@ describe('SalesforceDAO', () => {
       ).rejects.toThrow();
     });
   });
+
+  describe('getIndexes', () => {
+    it('should return an error if there are no valid tokens', async () => {
+      await expect(
+        salesforcedao.getIndexes('table name', authDTO),
+      ).rejects.toThrow();
+    });
+  });
 });
