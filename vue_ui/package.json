@@ -6,11 +6,19 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "setup": "npm install -D tailwindcss && npx tailwindcss init && npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "setup": "npm install -D tailwindcss && npx tailwindcss init && npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "test": "jest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.21.5",
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.17",
+    "@vue/vue3-jest": "^29.2.4",
+    "babel-jest": "^29.5.0",
+    "coverage": "^0.4.1",
+    "happy-dom": "^9.19.2",
+    "jest-environment-jsdom": "^29.5.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"
@@ -18,7 +26,9 @@
   "devDependencies": {
     "@types/jest": "^29.5.1",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/test-utils": "^2.4.0-alpha.1",
     "tailwindcss": "^3.3.2",
-    "vite": "^4.1.4"
+    "vite": "^4.1.4",
+    "vitest": "^0.31.1"
   }
 }
