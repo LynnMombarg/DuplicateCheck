@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import RecordModel from "@/pages/training/components/RecordModel.vue";
-import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
+import RecordModel from "./RecordModel.vue";
+import OverviewModelComponent from "../../overview/components/OverviewModelComponent.vue";
 
 export default {
     name: "TrainWindow",
