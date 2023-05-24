@@ -5,11 +5,11 @@
 <template>
     <div class="sticky top-0 z-10 flex-shrink-0 flex bg-white shadow">
         <div class="flex-1 pl-4 flex justify-between">
-            <div class="flex items-center flex-shrink-0 px-4">
+            <div class="flex items-center flex-shrink-0 px-4 cursor-pointer select-none hover:bg-gray-50 active:bg-sky-400" @click="navigateToOverview">
                 <div class="flex overflow-hidden">
                     <div class="flex-none w-10 pr-1"><img alt="Plauti Logo" src="@/assets/plauti.svg">
                     </div>
-                    <div class="flex-initial w-64 text-left leading-9 text-lg font-semibold text-slate-500">
+                    <div class="flex-initial text-left leading-9 text-lg font-semibold text-slate-500">
                         <div class="animated">DCML <span
                                 class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-blue-100 text-blue-800"
                                 style="margin-top: -2px;"> beta </span></div>
@@ -18,7 +18,7 @@
             </div>
             <div class="flex">
                 <Menu as="div" tabindex="-1"
-                      class="px-4 py-4 border-l border-gray-300 cursor-pointer select-none hover:bg-gray-50 active:bg-sky-100">
+                      class="px-4 py-4 border-l border-gray-300 cursor-pointer select-none hover:bg-gray-50 active:bg-sky-400">
                     <div>
                         <MenuButton class="flex items-center">
                             <div>
@@ -84,12 +84,14 @@ export default {
     },
     methods: {
         signOut() {
-            this.$parent.signOut();
-        }
+            this.$store.commit('removeUser');
+            this.$store.commit('removeToken');
+            this.$store.commit('removeModels');
+            this.$router.push({name: 'SignIn'});
+        },
+        navigateToOverview() {
+            this.$router.push({name: 'OverviewPage'});
+        },
     },
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -93,13 +93,6 @@ export default {
 		this.jobs = await getJobs(this.token, this.model.tableName);
 	},
 	methods: {
-		async signOut() {
-			await signOut(this.token)
-			this.$store.commit('removeUser');
-			this.$store.commit('removeToken');
-			this.$store.commit('removeModels');
-			this.$router.push({ name: 'SignIn' });
-		},
 		async selectJob(jobId) {
 			this.modelId = await this.$route.params.modelId;
 			this.model = await this.$store.getters.getModelById(this.modelId);

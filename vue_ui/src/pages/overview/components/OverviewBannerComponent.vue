@@ -7,7 +7,7 @@
         <div class="h-36 2xl:h-48 bg-sky-400" style="background-color: rgb(56 189 248); height: 144px"></div>
         <div class="py-6 px-6" style="margin-top: -7rem">
             <div class="max-w-7xl mx-auto -mt-32">
-                <div class="flex overflow-hidden ml-2">
+                <div class="flex overflow-hidden ml-2 select-none">
                     <div class="flex-none w-10 pr-1">
                         <img alt="Plauti Logo"
                              src="src/assets/plauti-white.svg"></div>
@@ -17,9 +17,9 @@
                                 style="margin-top: -2px;"> beta </span></div>
                     </div>
                 </div>
-                <div class="rounded-lg bg-white shadow mt-6 mb-6">
-                    <div class="flex justify-between" style="margin: 8px">
-                        <div class="text-3xl font-medium flex items-center mt-2">
+                <div class="rounded-lg bg-white shadow mt-6 mb-6 divide-y divide-gray-100">
+                    <div class="flex justify-between">
+                        <div class="text-3xl font-medium flex items-center" style="margin: 0.75rem;">
                             <div class="margin-logo">
                                 <img src="src/assets/logo_duplicatecheck.png">
                             </div>
