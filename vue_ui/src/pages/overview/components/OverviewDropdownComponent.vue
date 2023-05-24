@@ -1,7 +1,7 @@
 <!--Author(s): Silke Bertisen, Roward, Diederik-->
-<!--Jira-task: Dashboard realiseren 104 -->
+<!--Jira-task: Dashboard realiseren 104, 162 -->
 <!--Sprint: 2,3 -->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 <!--Description: This component is used to display the dropdown menu for the model options. -->
 
 <template>
@@ -18,7 +18,7 @@
       enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75"
       leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
       <MenuItems
-        class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        class="absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div class="py-1">
           <MenuItem v-slot="{ active }">
           <a @click="trainModel(modelId)" style="cursor: pointer;"
@@ -50,7 +50,7 @@ export default {
         // code delete model from backend
         // deleteModel(modelId);
         // code to refresh page
-        this.$parent.deleteModel(modelId, this.token);
+        this.$parent.deleteModel(modelId);
       }
     },
 
@@ -61,12 +61,6 @@ export default {
     executeModel() {
       // window.location.href = "/Execute";
       console.log("execute model pressed");
-    },
-  },
-  props: {
-    token: {
-      type: String,
-      required: true,
     },
   },
 };

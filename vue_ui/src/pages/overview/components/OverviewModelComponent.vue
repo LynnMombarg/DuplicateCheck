@@ -1,7 +1,7 @@
-<!--Author(s): Silke Bertisen, Roward Dorrestijn-->
-<!--Jira-task: Dashboard realiseren 104 -->
+<!--Author(s): Silke Bertisen, Roward Dorrestijn, Diederik-->
+<!--Jira-task: Dashboard realiseren 104, 162 -->
 <!--Sprint: 2,3 -->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 
 <template>
   <div class="flex justify-between rounded-md px-3 py-5 text-xl font-medium">
@@ -37,8 +37,8 @@
         {{ this.model.modelDescription }}
       </p>
     </div>
-    <div style="margin-left: 1rem;">
-      <OverviewDropdownComponent :modelId="this.model.modelId" :token="token" />
+    <div class="select-none" style="margin-left: 1rem;">
+      <OverviewDropdownComponent :modelId="this.model.modelId" />
     </div>
   </div>
 </template>
@@ -51,14 +51,10 @@ export default {
   components: { OverviewDropdownComponent },
   props: {
     model: Array,
-    token: {
-        type: String,
-        required: true,
-    },
   },
   methods: {
     deleteModel(modelId){
-      this.$parent.deleteModel(modelId, this.token);
+      this.$parent.deleteModel(modelId);
     },
     isContacts(tableName) {
       return tableName === 'contacts';
