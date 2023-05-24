@@ -21,7 +21,7 @@ export class AuthDAO {
 
   storeToken(id: string, access: string, refresh: string, jwt: string): void {
     this.authModel
-      .findOne({ userId: id })
+      .findOne({ orgId: id })
       .exec()
       .then((doc) => {
         if (doc) {
@@ -31,7 +31,7 @@ export class AuthDAO {
           doc.save();
         } else {
           const auth = new this.authModel({
-            userId: id,
+            orgId: id,
             accessToken: access,
             refreshToken: refresh,
             jwtToken: jwt,
@@ -54,15 +54,15 @@ export class AuthDAO {
   }
 
   removeTokens(id: string): void {
-    this.authModel.deleteOne({ userId: id }).exec();
+    this.authModel.deleteOne({ orgId: id }).exec();
   }
 
-  getTokensByUserId(id: string): Promise<AuthDTO> {
+  getTokensByOrgId(id: string): Promise<AuthDTO> {
     return this.authModel
-      .findOne({ userId: id })
+      .findOne({ orgId: id })
       .exec()
       .then((doc) => {
-        return new AuthDTO(doc.userId, doc.accessToken, doc.refreshToken);
+        return new AuthDTO(doc.orgId, doc.accessToken, doc.refreshToken);
       })
       .catch((err) => {
         throw new UnauthorizedException();
@@ -71,7 +71,7 @@ export class AuthDAO {
 
   blackListToken(id: string, jwt: string) {
     const authBlacklist = new this.authBlacklistModel({
-      userId: id,
+      orgId: id,
       jwtToken: jwt,
     });
     authBlacklist.save();
@@ -79,7 +79,7 @@ export class AuthDAO {
 
   isBlacklisted(id: string, jwt: string) {
     return this.authBlacklistModel
-      .findOne({ userId: id, jwtToken: jwt })
+      .findOne({ orgId: id, jwtToken: jwt })
       .exec()
       .then((doc) => {
         return !!doc;
@@ -87,6 +87,6 @@ export class AuthDAO {
   }
 
   removeBlacklistedToken(id: string) {
-    this.authBlacklistModel.deleteOne({ userId: id }).exec();
+    this.authBlacklistModel.deleteOne({ orgId: id }).exec();
   }
 }

@@ -26,13 +26,13 @@ export class ModelController {
 
   @Post('/create')
   async createModel(@Body() model: CreateModelDTO, @Req() req) {
-    await this.modelService.createModel(model, req.user.userId);
-    return this.modelService.getAllModels(req.user.userId);
+    await this.modelService.createModel(model, req.user.orgId);
+    return this.modelService.getAllModels(req.user.orgId);
   }
 
   @Get('/models')
   getAllModels(@Req() req): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels(req.user.userId);
+    return this.modelService.getAllModels(req.user.orgId);
   }
 
   @Delete()
@@ -40,12 +40,12 @@ export class ModelController {
     @Req() req,
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
-    await this.modelService.deleteModel(req.user.userId, modelId);
-    return this.modelService.getAllModels(req.user.userId);
+    await this.modelService.deleteModel(req.user.orgId, modelId);
+    return this.modelService.getAllModels(req.user.orgId);
   }
 
   @Get('/jobs')
   getJobs(@Req() req, @Query('tableName') tableName): Promise<JobDTO[]> {
-    return this.modelService.getJobs(tableName, req.user.userId);
+    return this.modelService.getJobs(tableName, req.user.orgId);
   }
 }

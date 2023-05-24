@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 10-05-2023
+// Last modified: 23-05-2023
 
 import { ModelDTO } from './dto/model.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -19,14 +19,14 @@ export class ModelDAO {
   }
 
   getAllModels(id: string): Promise<ModelDTO[]> {
-    return this.model.find({ userId: id });
+    return this.model.find({ orgId: id });
   }
 
   async deleteModel(model: string, id: string): Promise<void> {
     const result = await Promise.resolve(
       this.model.deleteOne({
         modelId: model,
-        userId: id,
+        orgId: id,
       }),
     );
 

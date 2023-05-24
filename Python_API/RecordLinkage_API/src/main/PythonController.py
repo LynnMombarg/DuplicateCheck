@@ -9,6 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from .PythonService import PythonService
+from .devData.JsonTestData import get_test_data
 
 app = FastAPI()
 app.add_middleware(
@@ -31,8 +32,8 @@ async def train_model(json : dict, model_id: str):
       return 'Model trained!'
     except Exception:
       return 'Model could not be trained'
-    
-  
+
+
 # Create model based on a given filename
 @app.post('/create-model', status_code=201)
 async def create_model(json: dict):
@@ -41,8 +42,8 @@ async def create_model(json: dict):
       return 'Model created!'
     except Exception:
       return 'Model could not be created'
-        
-      
+
+
 # Delete model based on filename
 @app.delete('/delete-model/{model_id}', status_code=200)
 async def delete_model(model_id: str):
@@ -56,7 +57,7 @@ async def delete_model(model_id: str):
 @app.post('/execute-model/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
-      matches = service.execute_model(model_id, json)
+      matches = service.execute_model(model_id, get_test_data())
       return JSONResponse(content=matches)
     except Exception:
       return 'Model could not be executed'

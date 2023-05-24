@@ -77,7 +77,7 @@ export class AuthController {
         }
         const jwtToken = await this.jwtService.signAsync(
           {
-            userId: userInfo.id,
+            orgId: userInfo.organizationId,
           },
           {
             secret: process.env.JWT_SECRET,
@@ -85,7 +85,7 @@ export class AuthController {
           },
         );
         this.authService.login(
-          userInfo.id,
+          userInfo.organizationId,
           conn.accessToken,
           conn.refreshToken,
           jwtToken,
@@ -118,7 +118,7 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Post('/logout')
   async logout(@Req() req): Promise<void> {
-    const authDTO = await this.authService.getTokensByUserId(req.user.userId);
+    const authDTO = await this.authService.getTokensByOrgId(req.user.orgId);
     const conn = new jsforce.Connection({
       oauth2: auth,
       instanceUrl: process.env.SF_INSTANCE_URL,
@@ -139,6 +139,6 @@ export class AuthController {
         }
       } catch {}
     });
-    this.authService.logout(authDTO.userId);
+    this.authService.logout(authDTO.orgId);
   }
 }
