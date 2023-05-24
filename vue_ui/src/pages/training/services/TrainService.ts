@@ -1,13 +1,12 @@
-// Authors: Marloes
-// Jira-task: 132, 133, 134
+// Authors: Marloes, Diederik
+// Jira-task: 132, 133, 134, 162
 // Sprint: 3
-// Last modified: 17-05-2023
+// Last modified: 23-05-2023
 
-export async function selectJob(jobId, tableName, token) {
-  const response = await fetch("http://localhost:8001/training", {
+export async function selectJob(jobId, tableName) {
+  const response = await fetch("training", {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + token,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -18,14 +17,13 @@ export async function selectJob(jobId, tableName, token) {
   return await response.text();
 }
 
-async function checkForRecords(trainingId, token) {
+async function checkForRecords(trainingId) {
   console.log(trainingId);
   const response = await fetch(
-    "http://localhost:8001/training/check-records/?trainingId=" + trainingId,
+    "training/check-records/?trainingId=" + trainingId,
     {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
     }
@@ -33,14 +31,13 @@ async function checkForRecords(trainingId, token) {
   return await response.text();
 }
 
-async function getRecords(trainingId, token) {
-  if (await checkForRecords(trainingId, token)) {
+async function getRecords(trainingId) {
+  if (await checkForRecords(trainingId)) {
     const response = await fetch(
-      "http://localhost:8001/training/records?trainingId=" + trainingId,
+      "training/records?trainingId=" + trainingId,
       {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + token,
           "Content-Type": "application/json",
         },
       }
@@ -52,8 +49,8 @@ async function getRecords(trainingId, token) {
   }
 }
 
-export async function getMappedRecords(trainingId, token) {
-  const records = await getRecords(trainingId, token);
+export async function getMappedRecords(trainingId) {
+  const records = await getRecords(trainingId);
   if (records.records[0] === null) {
     return null;
   }
@@ -73,11 +70,10 @@ export async function getMappedRecords(trainingId, token) {
   return mappedRecords;
 }
 
-export async function giveAnswer(answer, trainingId, token) {
-  const response = await fetch("http://localhost:8001/training/give-answer", {
+export async function giveAnswer(answer, trainingId) {
+  const response = await fetch("training/give-answer", {
     method: "PUT",
     headers: {
-      Authorization: "Bearer " + token,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -88,11 +84,10 @@ export async function giveAnswer(answer, trainingId, token) {
   return await response.json();
 }
 
-export async function saveTraining(modelId, trainingId, token) {
-  const response = await fetch("http://localhost:8001/training/save", {
+export async function saveTraining(modelId, trainingId) {
+  const response = await fetch("training/save", {
       method: "PUT",
       headers: {
-          Authorization: "Bearer " + token,
           "Content-Type": "application/json"
       },
       body: JSON.stringify({

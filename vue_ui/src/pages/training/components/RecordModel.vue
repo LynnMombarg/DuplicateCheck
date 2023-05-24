@@ -50,7 +50,7 @@ export default {
             if (this.record1.values[this.record1.columns.indexOf(column)] !== this.record2.values[this.record2.columns.indexOf(column)]) {
                 return "record-different";
             } else {
-                return "record-same";
+                return "bg-gray-100";
             }
         }
     },
@@ -63,9 +63,9 @@ export default {
     margin: 0.25rem;
 }
 .record-different {
-    background-color: rgba(255, 165, 0, 0.5); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
+    background-color: rgb(249, 105, 0); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
 }
 .record-same {
-    background-color: rgba(0, 255, 0, 0.3); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
+    background-color: rgb(137, 147, 124); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
 }
 </style>

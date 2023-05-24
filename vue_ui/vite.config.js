@@ -11,5 +11,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
     }
-  }
+  },
+  test: {
+    environment: "happy-dom",
+  },
 })
