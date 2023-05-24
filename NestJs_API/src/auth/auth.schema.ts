@@ -13,7 +13,7 @@ export type AuthDocument = HydratedDocument<Auth>;
 @Schema()
 export class Auth {
   @Prop()
-  userId: string;
+  orgId: string;
 
   @Prop()
   accessToken: string;

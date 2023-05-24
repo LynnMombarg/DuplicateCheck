@@ -6,18 +6,18 @@
  */
 
 export class AuthDTO {
-  constructor(userId: string, accessToken: string, refreshToken: string) {
-    this.userId = userId;
+  constructor(orgId: string, accessToken: string, refreshToken: string) {
+    this.orgId = orgId;
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
   }
 
-  userId: string;
+  orgId: string;
   accessToken: string;
   refreshToken: string;
 
-  getUserId(): string {
-    return this.userId;
+  getOrgId(): string {
+    return this.orgId;
   }
 
   getAccessToken(): string {
