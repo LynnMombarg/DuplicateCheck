@@ -34,7 +34,7 @@ async function checkForRecords(trainingId) {
 async function getRecords(trainingId) {
   if (await checkForRecords(trainingId)) {
     const response = await fetch(
-      "records?trainingId=" + trainingId,
+      "training/records?trainingId=" + trainingId,
       {
         method: "GET",
         headers: {
