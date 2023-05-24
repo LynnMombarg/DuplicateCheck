@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import OverviewDropdownComponent from "@/pages/overview/components/OverviewDropdownComponent.vue";
+import OverviewDropdownComponent from "./OverviewDropdownComponent.vue";
 
 export default {
   name: "OverviewModelComponent",

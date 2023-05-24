@@ -13,8 +13,8 @@
 
 <script>
 
-import OverviewBannerComponent from "@/pages/overview/components/OverviewBannerComponent.vue";
-import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
+import OverviewBannerComponent from "./components/OverviewBannerComponent.vue";
+import OverviewModelComponent from "./components/OverviewModelComponent.vue";
 import {getModels} from "./services/GetModels";
 import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";

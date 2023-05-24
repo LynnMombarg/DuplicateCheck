@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import OverviewDropdownComponent from "@/pages/overview/components/OverviewDropdownComponent.vue";
+import OverviewDropdownComponent from "../../overview/components/OverviewDropdownComponent.vue";
 
 export default {
     name: "RecordModel",

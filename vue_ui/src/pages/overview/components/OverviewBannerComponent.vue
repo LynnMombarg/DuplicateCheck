@@ -41,9 +41,9 @@
 
 <script>
 
-import CreateModelButton from "@/pages/overview/components/CreateModelButton.vue";
+import CreateModelButton from "./CreateModelButton.vue";
 import Footer from "../../../components/Footer.vue";
-import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
+import OverviewModelComponent from "./OverviewModelComponent.vue";
 
 export default {
     name: "OverviewBannerComponent",

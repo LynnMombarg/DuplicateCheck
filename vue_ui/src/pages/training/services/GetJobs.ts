@@ -3,7 +3,7 @@
 // Sprint: 3
 // Last modified: 16-05-2023 
 
-export async function getJobs(token: string, tableName) {
+export async function getJobs(token, tableName) {
   const response = await fetch("http://localhost:8001/model/jobs?tableName=" + tableName, {
     method: "GET",
     headers: {
