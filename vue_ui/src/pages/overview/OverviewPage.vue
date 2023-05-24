@@ -45,13 +45,6 @@ export default {
     },
     async createModel(modelName, tableName, description) {
       this.models = await createModel(modelName, tableName, description);
-    },
-    async signOut() {
-      await signOut()
-      this.$store.commit('removeUser');
-      this.$store.commit('removeToken');
-      this.$store.commit('removeModels');
-      this.$router.push({name: 'SignIn'});
     }
   },
 };

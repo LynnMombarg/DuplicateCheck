@@ -37,7 +37,7 @@
         {{ this.model.modelDescription }}
       </p>
     </div>
-    <div style="margin-left: 1rem;">
+    <div class="select-none" style="margin-left: 1rem;">
       <OverviewDropdownComponent :modelId="this.model.modelId" />
     </div>
   </div>
