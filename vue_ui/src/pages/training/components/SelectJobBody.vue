@@ -54,3 +54,11 @@ export default {
 	}
 };
 </script>
+
+<style>
+
+label {
+	cursor: pointer;
+}
+
+</style>
