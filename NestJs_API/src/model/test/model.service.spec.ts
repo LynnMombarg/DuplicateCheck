@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 15-05-2023
+// Last modified: 23-05-2023
 
 import { ModelService } from '../model.service';
 import { Test } from '@nestjs/testing';
@@ -19,7 +19,7 @@ describe('ModelService', () => {
     getAllModels: jest.fn(),
   };
   const mockedAuthDAO = {
-    getTokensByUserId: jest.fn(),
+    getTokensByOrgId: jest.fn(),
   };
   const mockedPythonDAO = {
     createModel: jest.fn(),
@@ -104,13 +104,13 @@ describe('ModelService', () => {
     it('should call getTokensByUserId on AuthDAO', () => {
       // Arrange
       const tableName = 'contacts';
-      const userId = 'test123';
+      const orgId = 'test123';
 
       // Act
-      modelService.getJobs(userId, tableName);
+      modelService.getJobs(orgId, tableName);
 
       // Assert
-      expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
+      expect(mockedAuthDAO.getTokensByOrgId).toHaveBeenCalled();
     });
     it('should call getJobs on SalesforceDao', () => {
       // Arrange

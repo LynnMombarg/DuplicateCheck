@@ -7,11 +7,12 @@ Last modified: 16-05-2023
 
 import csv
 
-headers = []
+headers = ["Name","Title","Company","Phone","MobilePhone","Email","Status"]
 
-with open('main/devData/traindata.csv', newline='') as csvfile:
-    reader = csv.reader(csvfile)
-    headers = next(reader)
+# with open('main/devData/traindata.csv', newline='') as csvfile:
+#     reader = csv.reader(csvfile)
+#     headers = next(reader)
+#     print(headers)
 
 def getTrainRecordset1():
     recordset1 = []
@@ -36,7 +37,7 @@ def getTrainRecordset2():
 
 def getTestRecordset():
     recordset = []
-    with open('main/devData/testdata.csv', newline='') as csvfile:
+    with open('main/devData/leads.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
