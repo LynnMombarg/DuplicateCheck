@@ -4,13 +4,13 @@
 // Last modified: 23-05-2023
 
 import OverviewDropdownComponent from '../../components/OverviewDropdownComponent.vue';
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import TrainingPage from '../../../training/TrainingPage.vue'
 
 describe("OverviewDropdownComponent.vue", () => {
     test('dropdown not visible when not clicked', () => {
-        const wrapper = mount(OverviewDropdownComponent);
+        const wrapper = shallowMount(OverviewDropdownComponent);
         expect(wrapper.find('MenuItems').exists()).toBe(false);
     })
 
@@ -28,7 +28,7 @@ describe("OverviewDropdownComponent.vue", () => {
         router.push('training');
         await router.isReady();
 
-        const wrapper = mount(OverviewDropdownComponent, {
+        const wrapper = shallowMount(OverviewDropdownComponent, {
             global: {
                 plugins: [router]
             }
