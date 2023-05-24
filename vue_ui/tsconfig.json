@@ -16,6 +16,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx", "__tests__/pages/training/TrainingPage.spec.js", "__tests__/pages/training/TrainingPage.spec.js"],
   "exclude": ["node_modules", "dist"]
 }

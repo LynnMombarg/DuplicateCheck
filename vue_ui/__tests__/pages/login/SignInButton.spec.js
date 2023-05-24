@@ -3,7 +3,7 @@
 // Sprint: 3
 // Last modified: 23-05-2023
 
-import SignInButton from '../../components/SignInButton.vue';
+import SignInButton from '../../../src/pages/login/components/SignInButton.vue';
 import { shallowMount } from '@vue/test-utils';
 
 describe("SignInButton.vue", () => {
