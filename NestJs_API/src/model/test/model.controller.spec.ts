@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 15-05-2023
+// Last modified: 23-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
@@ -49,7 +49,7 @@ describe('ModelController', () => {
   describe('createModel', () => {
     it('should call createModel on ModelService', () => {
       // Arrange
-      const req = { user: { userId: 'test' } };
+      const req = { user: { orgId: 'test' } };
       const model = new CreateModelDTO(
         'modelName',
         'tableName',
@@ -69,7 +69,7 @@ describe('ModelController', () => {
   describe('getAllModels', () => {
     it('should call getAllModels on ModelService', () => {
       // Arrange
-      const req = { user: { userId: 'test' } };
+      const req = { user: { orgId: 'test' } };
 
       // Act
       modelController.getAllModels(req);
