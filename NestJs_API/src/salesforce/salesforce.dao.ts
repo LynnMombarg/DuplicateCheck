@@ -31,7 +31,7 @@ export class SalesforceDAO {
   async getFields(tableName: string, tokens: AuthDTO): Promise<string[]> {
     try {
       const resultSet: string[] = [];
-      var jobId = await this.getJobId(tokens);
+      const jobId = await this.getJobId(tokens);
       await new Promise(async (resolve, reject) => {
         const interval = setInterval(async () => {
           if (await this.getStatusOfDownload(jobId, tokens)) {
@@ -57,15 +57,15 @@ export class SalesforceDAO {
                   console.error(err);
                 }
                 const jsonConfig = JSON.parse(res);
-                for (var i = 0; i < 3; i++) {
-                  var tableObject = jsonConfig['objects'][i];
+                for (let i = 0; i < 3; i++) {
+                  const tableObject = jsonConfig['objects'][i];
                   if (
                     tableObject['crossObjects'][0][
                       'objectFrom'
                     ].toLowerCase() == tableName
                   ) {
                     for (
-                      var j = 0;
+                      let j = 0;
                       j < tableObject['resultFields'].length;
                       j++
                     ) {
@@ -87,7 +87,7 @@ export class SalesforceDAO {
   }
 
   async getStatusOfDownload(jobId: String, tokens: AuthDTO): Promise<boolean> {
-    var status = false;
+    let status = false;
     await new Promise((resolve, reject) => {
       const conn = new this.jsforce.Connection({
         oauth2: this.oauth2,
@@ -117,8 +117,8 @@ export class SalesforceDAO {
     return status;
   }
 
-  async getJobId(tokens: AuthDTO): Promise<String> {
-    var jobId = '';
+  async getJobId(tokens: AuthDTO): Promise<string> {
+    let jobId = '';
     await new Promise((resolve, reject) => {
       const conn = new this.jsforce.Connection({
         oauth2: this.oauth2,
@@ -197,7 +197,7 @@ export class SalesforceDAO {
     tableName: string,
   ): Promise<DatasetDTO[]> {
     let columns = '';
-    for (var i = 0; i < fields.length; i++) {
+    for (let i = 0; i < fields.length; i++) {
       columns += fields[i] + ',';
     }
     columns = columns.slice(0, -1);
@@ -205,6 +205,9 @@ export class SalesforceDAO {
     const resultSet: DatasetDTO[] = [];
 
     const [sourceIndexes, matchIndexes] = await this.getIndexes(jobId, tokens);
+    if (sourceIndexes == '' || matchIndexes == '') {
+      throw new NotFoundException();
+    }
     const datasetA = new DatasetDTO(
       await this.getSourceRecords(columns, tableName, sourceIndexes, tokens),
     );

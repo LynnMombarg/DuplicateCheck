@@ -22,6 +22,9 @@ export class TrainingDAO {
 
   async getNextRecords(trainingId: string): Promise<DatasetDTO> {
     const training = await this.model.findOne({ trainingId: trainingId });
+    if (!training) {
+      throw new NotFoundException('Training not found');
+    }
     const lengthMatches = training.matches.length;
     const recordA = training.datasetA.records[lengthMatches];
     const recordB = training.datasetB.records[lengthMatches];
@@ -37,6 +40,9 @@ export class TrainingDAO {
 
   async checkForRecords(trainingId: string): Promise<boolean> {
     const training = await this.model.findOne({ trainingId: trainingId });
+    if (!training) {
+      throw new NotFoundException('Training not found');
+    }
     const lengthMatches = training.matches.length;
     const lengthDatasets = training.datasetA.records.length;
     return lengthDatasets > lengthMatches;
