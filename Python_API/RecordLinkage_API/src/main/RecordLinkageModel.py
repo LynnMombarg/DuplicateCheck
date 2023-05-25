@@ -24,23 +24,25 @@ class RecordLinkageModel:
     # Train the model with the recordsets
     # Extracts dataframes and the golden matches index from the JSON input
     def trainModel(self, json_df):
-        df_a, df_b, golden_matches_index = self.getDataFrameStructure(json_df)
+        df_a, df_b, golden_matches_index, nr_of_records = self.getDataFrameStructure(json_df)
+        df_a = df_a.iloc[0:nr_of_records]
+        df_b = df_b.iloc[0:nr_of_records]
         self.setCompareColumn(df_a)
+        print(df_a)
+        print(df_b)
         self.nrOfTrainings = self.nrOfTrainings + 1
         self.logreg.fit(self.getFeatures(df_a, df_b), golden_matches_index)
         print('Trained')
 
     def executeModel(self, json_df):
-        records = pd.read_csv('main/devData/Leads50k.csv')
+        records = pd.read_csv('main/devData/Leads50k2.csv')
         df = pd.DataFrame(records)
         df = df.astype(str)
 
         df_a = df.iloc[0:200]
         df_b = df.iloc[0:200]
-
         features = self.getFeatures(df_a, df_b)
         predictions = self.logreg.predict(features)
-                
         return self.filterMatches(predictions)
 
     # Returns all pairs possible between recordset 1 and recordset 2
@@ -64,8 +66,8 @@ class RecordLinkageModel:
         for i in range(len(jsonStructure['training']['matches'])):
             if(jsonStructure['training']['matches'][i] == True):
                 golden_matches_index.append(tuple((i, i)))
-
-        return pd.json_normalize(datasetA['records']), pd.json_normalize(datasetB['records']), pd.MultiIndex.from_tuples(golden_matches_index)
+        nr_of_records = len(jsonStructure['training']['matches'])
+        return pd.json_normalize(datasetA['records']), pd.json_normalize(datasetB['records']), pd.MultiIndex.from_tuples(golden_matches_index), nr_of_records
     
     # Set up compares between columns
     def setCompareColumn(self, dataframe):
