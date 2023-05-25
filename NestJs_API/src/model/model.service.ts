@@ -1,5 +1,5 @@
-// Authors: Marloes, Roward
-// Jira-task: 107, 110
+// Authors: Marloes, Roward, Silke
+// Jira-task: 107, 110, 166
 // Sprint: 2, 3
 // Last modified: 15-05-2023
 
