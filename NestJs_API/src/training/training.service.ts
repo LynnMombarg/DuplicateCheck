@@ -4,7 +4,6 @@
 // Last modified: 16-05-2023
 
 import { Injectable, NotFoundException, Req } from '@nestjs/common';
-import { RecordDTO } from './dto/record.dto';
 import { TrainingDAO } from './training.dao';
 import { AuthDAO } from '../auth/auth.dao';
 import { SalesforceDAO } from '../salesforce/salesforce.dao';
@@ -30,7 +29,7 @@ export class TrainingService {
     }
   }
 
-  async selectJob(jobId, tableName, orgId): Promise<string> {
+  async selectJob(jobId, tableName, modelId, orgId): Promise<string> {
     const tokens: AuthDTO = await this.authDAO.getTokensByOrgId(orgId);
     const fields = await this.salesforceDAO.getFields(tableName, tokens);
     let records: DatasetDTO[];
@@ -50,6 +49,7 @@ export class TrainingService {
       const training: TrainingDTO = new TrainingDTO(
         trainingId,
         orgId,
+        modelId,
         records[0],
         records[1],
         [],

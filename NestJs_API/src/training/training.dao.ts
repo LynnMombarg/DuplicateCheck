@@ -51,4 +51,8 @@ export class TrainingDAO {
   async getTraining(trainingId: string): Promise<TrainingDTO> {
     return await this.model.findOne({ trainingId: trainingId });
   }
+
+  async deleteTrainingen(modelId: string) {
+    await this.model.deleteMany({ modelId: modelId });
+  }
 }
