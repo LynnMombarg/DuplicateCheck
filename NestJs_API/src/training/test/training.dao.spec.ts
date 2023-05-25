@@ -19,7 +19,7 @@ describe('TrainingDAO', () => {
   const mockedTrainingWithoutMatch = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
-    userId: 'req.user.userId',
+    orgId: 'req.user.userId',
     datasetA: {
       records: [
         {
@@ -53,7 +53,7 @@ describe('TrainingDAO', () => {
   const mockTrainingWithOneMatch = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
-    userId: 'req.user.userId',
+    orgId: 'req.user.userId',
     datasetA: {
       records: [
         {
@@ -87,7 +87,7 @@ describe('TrainingDAO', () => {
   const mockTrainingWithAllMatches = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
-    userId: 'req.user.userId',
+    orgId: 'req.user.userId',
     datasetA: {
       records: [
         {
