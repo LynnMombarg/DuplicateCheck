@@ -1,5 +1,5 @@
-// Authors: Marloes, Diederik
-// Jira-task: 132, 133, 134, 162
+// Authors: Marloes, Diederik, Silke
+// Jira-task: 132, 133, 134, 162, 166
 // Sprint: 3
 // Last modified: 23-05-2023
 
