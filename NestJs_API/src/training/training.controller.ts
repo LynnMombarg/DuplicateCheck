@@ -50,6 +50,7 @@ export class TrainingController {
   checkForRecords(@Query('trainingId') trainingId: string): Promise<boolean> {
     return this.trainingService.checkForRecords(trainingId);
   }
+  
 
   @Put('/save')
   saveTraining(@Body() json) {

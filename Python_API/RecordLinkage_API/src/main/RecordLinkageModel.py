@@ -23,26 +23,25 @@ class RecordLinkageModel:
     
     # Train the model with the recordsets
     # Extracts dataframes and the golden matches index from the JSON input
-    def train_model(self, json_df):
-        df_a, df_b, golden_matches_index = self.get_data_frame_structure(json_df)
-        self.set_compare_column(df_a)
-        self.nr_of_trainings = self.nr_of_trainings + 1
-        self.logreg.fit(self.get_features(df_a, df_b), golden_matches_index)
+    def trainModel(self, json_df):
+        df_a, df_b, golden_matches_index, nr_of_records = self.getDataFrameStructure(json_df)
+        df_a = df_a.iloc[0:nr_of_records]
+        df_b = df_b.iloc[0:nr_of_records]
+        self.setCompareColumn(df_a)
+        self.nrOfTrainings = self.nrOfTrainings + 1
+        self.logreg.fit(self.getFeatures(df_a, df_b), golden_matches_index)
+        print('Trained')
 
-    def execute_model(self, json_df):
-        records = pd.read_csv('main/devData/Leads50k.csv')
+    def executeModel(self, json_df):
+        records = pd.read_csv('main/devData/Leads50k2.csv')
         df = pd.DataFrame(records)
         df = df.astype(str)
 
         df_a = df.iloc[0:200]
         df_b = df.iloc[0:200]
-
-        print('boven')
-        features = self.get_features(df_a, df_b)
-        print('onder')
+        features = self.getFeatures(df_a, df_b)
         predictions = self.logreg.predict(features)
-                
-        return self.filter_matches(predictions)
+        return self.filterMatches(predictions)
 
     # Returns all pairs possible between recordset 1 and recordset 2
     def get_pairs(self, df_a, df_b):
@@ -65,8 +64,8 @@ class RecordLinkageModel:
         for i in range(len(json_structure['training']['matches'])):
             if(json_structure['training']['matches'][i] == True):
                 golden_matches_index.append(tuple((i, i)))
-
-        return pd.json_normalize(dataset_a['records']), pd.json_normalize(dataset_b['records']), pd.MultiIndex.from_tuples(golden_matches_index)
+        nr_of_records = len(json_structure['training']['matches'])
+        return pd.json_normalize(dataset_a['records']), pd.json_normalize(dataset_b['records']), pd.MultiIndex.from_tuples(golden_matches_index), nr_of_records
     
     # Set up compares between columns
     def set_compare_column(self, dataframe):
