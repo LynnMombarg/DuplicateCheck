@@ -8,6 +8,7 @@ Last modified: 16-05-2023
 import os
 import sys
 import json
+import copy
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from .RecordLinkageModel import RecordLinkageModel
@@ -26,7 +27,7 @@ class PythonService:
             model = pickle.load(file)
             if not model:
                 raise FileNotFoundError('Model not found')
-            else :
+            else:
                 return model
     
     def saveModel(self, modelId, model):
@@ -35,6 +36,7 @@ class PythonService:
         
     def trainModel(self, modelId, json_dataframe):
         model = self.loadModel(modelId)
+        model.trainUnsupervisedModel(copy.deepcopy(json_dataframe))  # Train the unsupervised model
         model.trainModel(json_dataframe)
         self.saveModel(modelId, model)
         
@@ -47,3 +49,4 @@ class PythonService:
         return {
             'matches': [{'index1': match[0], 'index2': match[1]} for match in matches],
         }
+
