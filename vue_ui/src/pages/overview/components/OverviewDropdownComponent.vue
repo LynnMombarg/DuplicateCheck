@@ -26,7 +26,7 @@
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Train model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
-          <a @click="startExecuteModel(modelId)" style="cursor: pointer;"
+          <a @click="startExecuteModel(modelId, tableName)" style="cursor: pointer;"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Execute model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
@@ -95,6 +95,7 @@ export default {
   components: { DialogTitle, DialogPanel, Dialog, TransitionChild, TransitionRoot },
   data() {
     return {
+      executeTableName: '',
       executeModelId: '',
       recordid1: '',
       recordid2: '',
@@ -117,23 +118,24 @@ export default {
       this.$router.push({ name: 'TrainingPage', params: { modelId: modelId } });
     },
 
-    startExecuteModel(modelId) {
+    startExecuteModel(modelId, tableName) {
       this.dialog = true;
       this.executeModelId = modelId;
+      this.executeTableName = tableName;
       resetValues();
     },
 
     executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
-        this.percentage = this.$parent.executeModel(this.executeModelId, this.recordid1, this.recordid2);
-        // this.dialog = false;
+        this.percentage = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
+        this.dialog = false;
       } else {
         this.warningVisible = true;
       }
-      console.log("execute model pressed");
     },
 
     resetValues() {
+      this.executeTableName = '';
       this.executeModelId = '';
       this.recordid1 = '';
       this.recordid2 = '';
@@ -151,6 +153,9 @@ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
 defineProps({
   modelId: {
+    type: String,
+  },
+  tableName: {
     type: String,
   },
 });

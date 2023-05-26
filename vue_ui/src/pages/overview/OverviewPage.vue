@@ -47,8 +47,8 @@ export default {
     async createModel(modelName, tableName, description) {
       this.models = await createModel(modelName, tableName, description);
     },
-    async executeModel(modelId, recordId1, recordId2) {
-      return await executeModel(modelId, recordId1, recordId2);
+    async executeModel(tableName, modelId, recordId1, recordId2) {
+      return await executeModel(tableName, modelId, recordId1, recordId2);
     }
   },
 };

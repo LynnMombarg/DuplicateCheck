@@ -68,6 +68,9 @@ export default {
     isAccounts(tableName) {
       return tableName === 'accounts';
     },
+    executeModel(tableName, modelId, recordId1, recordId2) {
+      return this.$parent.executeModel(tableName, modelId, recordId1, recordId2);
+    }
   },
 };
 </script>
