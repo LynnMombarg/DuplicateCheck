@@ -141,9 +141,8 @@ export default {
     executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
         this.percentage = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
-        //this.dialog = false;
         this.showResult = true;
-        this.percentage=70;
+        //this.percentage=70; -- for testing
       } else {
         this.warningVisible = true;
       }
