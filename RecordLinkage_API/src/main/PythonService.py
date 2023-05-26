@@ -44,7 +44,7 @@ class PythonService:
         self.save_model(model_id, model)
 
     def delete_model(self, model_id):
-        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pickles', model_id + '.pkl'))
+        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickles', model_id + '.pkl'))
 
     def execute_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)
@@ -52,3 +52,12 @@ class PythonService:
         return {
             'matches': [{'index1': match[0], 'index2': match[1]} for match in matches],
         }
+
+    def execute_model_on_records(self, model_id, json : dict):
+        model = self.load_model(model_id)
+        percentage = model.execute_model(json)
+        return {
+            percentage
+        }
+
+
