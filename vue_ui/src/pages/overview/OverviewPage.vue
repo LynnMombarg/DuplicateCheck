@@ -45,6 +45,7 @@ export default {
     },
     async createModel(modelName, tableName, description) {
       this.models = await createModel(modelName, tableName, description);
+      this.$store.commit('setModels', this.models);
     }
   },
 };
