@@ -12,6 +12,8 @@ import { TrainingDAO } from '../training.dao';
 import { TrainingService } from '../training.service';
 import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 import { PythonDAO } from '../../python/python.dao';
+import { DatasetDTO } from '../dto/dataset.dto';
+import { RecordDTO } from '../dto/record.dto';
 
 describe('TrainingService', () => {
   let trainingservice: TrainingService;
@@ -37,6 +39,10 @@ describe('TrainingService', () => {
       return { oegid: 'orgid' };
     }),
   };
+
+  const mockedRecord = new RecordDTO(['1', 'Hoi', 'Hi', '(:']);
+  const mockedRecordArray = [mockedRecord, mockedRecord];
+  const mockedTraining2 = new DatasetDTO(mockedRecordArray);
 
   const mockedTrainingWithoutMatch = {
     _id: '6461fddec0437f4f44cbdb53',
@@ -82,7 +88,10 @@ describe('TrainingService', () => {
 
   const mockedSalesforceDAO = {
     getDatasets: jest.fn(() => {
-      return mockedTrainingWithoutMatch;
+      return mockedTraining2;
+    }),
+    getFields: jest.fn(() => {
+      return { fields: ['test'] };
     }),
   };
 

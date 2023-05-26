@@ -2,7 +2,7 @@ import { SalesforceDAO } from '../salesforce.dao';
 import { Test } from '@nestjs/testing';
 import { AuthService } from '../../auth/auth.service';
 import { AuthDAO } from '../../auth/auth.dao';
-import { AuthDTO } from '../../auth/auth.dto';
+import { AuthDTO } from '../../auth/dto/auth.dto';
 
 describe('SalesforceDAO', () => {
   let salesforcedao: SalesforceDAO;
