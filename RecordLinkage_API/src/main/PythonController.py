@@ -1,8 +1,9 @@
 '''
-Authors: Lynn, Roward, Diederik
+Authors: Lynn, Roward, Diederik, Silke
 Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in python, 116 - Model trainen in Python
-Sprint: 1, 2, 3
-Last modified: 16-05-2023
+176 - Python endpoint execute model
+Sprint: 1, 2, 3, 4
+Last modified: 26-05-2023
 '''
 
 from fastapi import FastAPI
@@ -61,3 +62,17 @@ async def execute_model(json: dict, model_id: str):
       return JSONResponse(content=matches)
     except Exception:
       return 'Model could not be executed'
+
+# Execute model based on given records
+@app.post('/execute-model-on-records/{model_id}')
+async def execute_model(json: dict, model_id: str):
+    try:
+      #percentage = service.execute_model_on_records(model_id, json)
+      percentage = 50
+      response_data = {
+          "percentage": f"{percentage}%",
+      }
+      return JSONResponse(content=response_data)
+    except Exception:
+      return 'Model could not be executed'
+
