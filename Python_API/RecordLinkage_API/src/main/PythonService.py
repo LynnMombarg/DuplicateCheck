@@ -12,13 +12,18 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from .RecordLinkageModel import RecordLinkageModel
 import pickle
+from .BlobStorageDAO import BlobStorageDAO
 
 class PythonService:
+    
+    def __init__(self):
+        self.blobStorageDAO = BlobStorageDAO()
     
     def createModel(self, modelId):
         model = RecordLinkageModel()
         filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'wb')
         pickle.dump(model, filehandler)
+        BlobStorageDAO.upload_blob(modelId + '.pkl', filehandler.read())
         
     def loadModel(self, modelId):
         model: RecordLinkageModel
