@@ -1,5 +1,5 @@
 <!--Author(s): Silke Bertisen, Roward, Diederik, Lynn Mombarg-->
-<!--Jira-task: Dashboard realiseren 104, 162, 172 -->
+<!--Jira-task: Dashboard realiseren 104, 162, 172, 174 -->
 <!--Sprint: 2, 3, 4 -->
 <!--Last modified: 25-05-2023-->
 <!--Description: This component is used to display the dropdown menu for the model options. -->
@@ -75,6 +75,7 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
+                <!--this is supposed to look like : https://flowbite.com/docs/components/progress/, With label outside-->
                 <div v-if="showResult" class="mt-2 flex flex-col">
                 <div class="flex justify-between mb-1">
                   <span class="text-base font-medium text-blue-700 dark:text-white"> Percentage </span>
