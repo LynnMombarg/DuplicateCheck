@@ -61,3 +61,17 @@ async def execute_model(json: dict, model_id: str):
       return JSONResponse(content=matches)
     except Exception:
       return 'Model could not be executed'
+
+# Execute model based on given records
+@app.get('/execute-model-on-records/{model_id}')
+async def execute_model(model_id: str):
+    try:
+      # percentage = service.execute_model(model_id, dict)
+      # return percentage
+      print("request made")
+      print("model id"+model_id)
+      percentage = 5
+      return JSONResponse(content=percentage)
+    except Exception:
+      return 'Model could not be executed'
+
