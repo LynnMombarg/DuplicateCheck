@@ -55,23 +55,23 @@
               <div class="px-4 py-6 bg-white sm:p-6 rounded-lg">
                 <DialogTitle class="text-lg leading-6 font-medium flex"
                   style="margin-bottom: 1.5rem; justify-content: space-around;">
-                  <div class="flex flex-row">
+                  <div class="flex flex-col">
                     <div class="text-lg">Execute model</div>
                   </div>
                 </DialogTitle>
                 <p v-if="warningVisible">Please fill in all fields.</p>
 
-                <div class="mt-2 flex flex-row">
-                  <label for="recordid1" style="margin-right: 2rem; width: 6rem; text-align: center; cursor: default;"
+                <div class="mt-2 flex flex-col">
+                  <label for="recordid1" style="margin-right: 2rem; width: 10rem; cursor: default;"
                     class="text-medium flex flex-start items-center">Record id 1</label>
-                  <input v-model="recordid1" placeholder="Record id 1" id="record1"
-                    class="p-1 focus-visible:border-sky-400" />
+                  <input v-model="recordid1" placeholder="id" id="record1"
+                    class=" rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
-                <div class="mt-2 flex flex-row">
-                  <label for="recordid2" style="margin-right: 2rem; width: 6rem; text-align: center; cursor: default;"
+                <div class="mt-2 flex flex-col">
+                  <label for="recordid2" style="margin-right: 2rem; width: 10rem; cursor: default;"
                     class="text-medium flex flex-start items-center">Record id 2</label>
-                  <input v-model="recordid2" placeholder="Record id 2" id="record2"
-                    class="p-1 focus-visible:border-sky-400" />
+                  <input v-model="recordid2" placeholder="id" id="record2"
+                    class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
                 <button @click="executeModel()" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
@@ -127,6 +127,7 @@ export default {
     executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
         this.percentage = this.$parent.executeModel(this.executeModelId, this.recordid1, this.recordid2);
+        // this.dialog = false;
       } else {
         this.warningVisible = true;
       }
