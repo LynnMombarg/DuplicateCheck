@@ -52,7 +52,7 @@ export class TrainingDAO {
     return await this.model.findOne({ trainingId: trainingId });
   }
 
-  async deleteTrainingen(modelId: string) {
+  async deleteTrainings(modelId: string) {
     await this.model.deleteMany({ modelId: modelId });
   }
 }

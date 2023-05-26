@@ -45,7 +45,7 @@ export class ModelService {
   async deleteModel(orgId: string, modelId: string): Promise<void> {
     await this.modelDAO.deleteModel(modelId, orgId);
     await this.pythonDAO.deleteModel(modelId);
-    await this.trainingDAO.deleteTrainingen(modelId);
+    await this.trainingDAO.deleteTrainings(modelId);
   }
 
   async getJobs(tableName: string, orgId: string): Promise<JobDTO[]> {
