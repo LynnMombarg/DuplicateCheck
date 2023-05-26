@@ -43,7 +43,7 @@ export class PythonDAO {
   ): Promise<string> {
     const response = await axios
       .post(
-        `http://duplicatecheck-python-backend-1:8000/execute-model/${modelId}`,
+        `http://duplicatecheck-python-backend-1:8000/execute-model-on-records/${modelId}`,
         {
           record1: recordA,
           record2: recordB,
