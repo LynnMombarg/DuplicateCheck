@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward
-// Jira-task: 107 - Models toevoegen aan database
-// Sprint: 2
-// Last modified: 08-05-2023
+// Jira-task: 107, 175
+// Sprint: 2, 4
+// Last modified: 26-05-2023
 
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
@@ -34,5 +34,20 @@ export class PythonDAO {
         },
       )
       .catch();
+  }
+
+  async executeModel(recordA: string, recordB: string, id: string): Promise<string> {
+    const response = await axios
+      .post(
+        `http://duplicatecheck-python-backend-1:8000/execute-model`,
+        {
+          record1: recordA,
+          record2: recordB,
+          modelId: id 
+        },
+      )
+      .catch();
+    console.log(response);
+    return 'test';
   }
 }
