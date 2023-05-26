@@ -13,7 +13,7 @@ import {
   AuthBlacklist,
   AuthBlacklistSchema,
   AuthSchema,
-} from './auth.schema';
+} from './schema/auth.schema';
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';

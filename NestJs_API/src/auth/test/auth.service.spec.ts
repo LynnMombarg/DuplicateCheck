@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from '../auth.service';
 import { AuthDAO } from '../auth.dao';
-import { AuthDTO } from '../auth.dto';
+import { AuthDTO } from '../dto/auth.dto';
 
 describe('AuthService', () => {
   let authService: AuthService;

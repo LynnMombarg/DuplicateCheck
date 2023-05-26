@@ -7,16 +7,17 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { TrainingDTO } from './dto/training.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Training } from './schema/training.schema';
-import { Model } from 'mongoose';
+import mongoose from 'mongoose';
 import { DatasetDTO } from './dto/dataset.dto';
+mongoose.Promise = Promise;
 
 @Injectable()
 export class TrainingDAO {
-  constructor(@InjectModel(Training.name) private model: Model<Training>) {}
+  constructor(
+    @InjectModel(Training.name) private model: mongoose.Model<Training>,
+  ) {}
 
   async createTraining(training: TrainingDTO) {
-    //const createdTraining = new this.model(training);
-    //await createdTraining.save();
     this.model.create(training);
   }
 

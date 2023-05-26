@@ -29,7 +29,7 @@ export class TrainingController {
     @Body() training: CreateTrainingDTO,
     @Req() req,
   ): Promise<string> {
-    return await this.trainingService.selectJob(
+    return this.trainingService.selectJob(
       training.jobId,
       training.tableName,
       training.modelId,
@@ -53,7 +53,7 @@ export class TrainingController {
   }
 
   @Put('/save')
-  saveTraining(@Body() json, @Req() req) {
+  saveTraining(@Body() json) {
     this.trainingService.saveTraining(json['modelId'], json['trainingId']);
   }
 }
