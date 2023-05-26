@@ -32,6 +32,7 @@ export class SalesforceDAO {
     try {
       const resultSet: string[] = [];
       const jobId = await this.getJobId(tokens);
+      console.log(jobId);
       await new Promise(async (resolve, reject) => {
         const interval = setInterval(async () => {
           if (await this.getStatusOfDownload(jobId, tokens)) {
