@@ -44,7 +44,7 @@ class PythonService:
         self.save_model(model_id, model)
 
     def delete_model(self, model_id):
-        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pickles', model_id + '.pkl'))
+        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickles', model_id + '.pkl'))
 
     def execute_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)

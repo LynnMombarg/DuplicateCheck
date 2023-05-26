@@ -30,12 +30,12 @@ services:
 
   python-backend:
     build:
-      context: ./Python_API/RecordLinkage_API
+      context: RecordLinkage_API
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - './Python_API/RecordLinkage_API/src:/app'
+      - './RecordLinkage_API/src:/app'
       - '/app/node_modules'
     networks:
       - node-network
