@@ -130,6 +130,7 @@ export default {
       } else {
         this.warningVisible = true;
       }
+      console.log("execute model pressed");
     },
 
     resetValues() {
