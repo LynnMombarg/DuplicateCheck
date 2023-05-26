@@ -1,6 +1,7 @@
 '''
 Authors: Lynn, Roward, Diederik, Silke
 Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in python, 116 - Model trainen in Python
+176 - Python endpoint execute model
 Sprint: 1, 2, 3, 4
 Last modified: 26-05-2023
 '''
@@ -64,14 +65,14 @@ async def execute_model(json: dict, model_id: str):
 
 # Execute model based on given records
 @app.post('/execute-model-on-records/{model_id}')
-async def execute_model(model_id: str):
+async def execute_model(json: dict, model_id: str):
     try:
-      # percentage = service.execute_model(model_id, dict)
-      # return percentage
-      print("request made")
-      print("model id"+model_id)
-      percentage = 5
-      return JSONResponse(content=percentage)
+      #percentage = service.execute_model_on_records(model_id, json)
+      percentage = 50
+      response_data = {
+          "percentage": f"{percentage}%",
+      }
+      return JSONResponse(content=response_data)
     except Exception:
       return 'Model could not be executed'
 

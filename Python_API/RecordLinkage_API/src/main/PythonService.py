@@ -53,9 +53,9 @@ class PythonService:
             'matches': [{'index1': match[0], 'index2': match[1]} for match in matches],
         }
 
-    def execute_model_on_records(self, model_id, json_dataframe):
+    def execute_model_on_records(self, model_id, json : dict):
         model = self.load_model(model_id)
-        percentage = model.execute_model(json_dataframe)
+        percentage = model.execute_model(json)
         return {
             percentage
         }
