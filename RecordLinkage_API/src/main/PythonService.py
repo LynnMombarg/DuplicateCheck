@@ -8,6 +8,7 @@ Last modified: 16-05-2023
 import os
 import sys
 import json
+import copy
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -40,6 +41,7 @@ class PythonService:
 
     def train_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)
+        model.train_unsupervised_model(copy.deepcopy(json_dataframe))  # Train the unsupervised model
         model.train_model(json_dataframe)
         self.save_model(model_id, model)
 
