@@ -85,6 +85,10 @@ export default {
 			this.modelId = await this.$route.params.modelId;
 			this.model = await this.$store.getters.getModelById(this.modelId);
 			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1));
+			if (!this.trainingId) {
+				alert("No training available for this job");
+				this.$router.push({ name: "OverviewPage" });
+			}
 			await this.getRecords();
 			this.selectJobActive = false;
 			this.trainingActive = true;
