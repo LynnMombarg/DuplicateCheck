@@ -21,7 +21,7 @@ class RecordLinkageModel:
         self.indexer.full()
         self.compare = recordlinkage.Compare()
         self.logreg = recordlinkage.LogisticRegressionClassifier()
-        self.method = 'cosine'
+        self.method = 'jarowinkler'
         self.thresholds = {}
     
     # Train the model with the recordsets
