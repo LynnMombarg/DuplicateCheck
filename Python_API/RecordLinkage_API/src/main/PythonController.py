@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from .PythonService import PythonService
-from .JsonTestData import *
+from .devData.JsonTestData import get_test_data
 
 app = FastAPI()
 app.add_middleware(
@@ -25,41 +25,39 @@ service = PythonService()
 # Post request to send json datasets to train the model
 # Expected form of json:
 # {"recordset1": [{"columns":}, {"columns":}], "recordset2": [{"columns":}, {"columns":}], "golden_matches_index": [{"index1": , "index2": }]}
-@app.put('/train-model/{modelId}', status_code=200)
-async def trainModel(json : dict, modelId: str):
+@app.put('/train-model/{model_id}', status_code=200)
+async def train_model(json : dict, model_id: str):
     try:
-      service.trainModel(modelId, json)
+      service.train_model(model_id, json)
       return 'Model trained!'
-    except:
+    except Exception:
       return 'Model could not be trained'
-    
-  
+
+
 # Create model based on a given filename
 @app.post('/create-model', status_code=201)
-async def createModel(json: dict):
+async def create_model(json: dict):
     try:
-      service.createModel(json['modelId'])
+      service.create_model(json['modelId'])
       return 'Model created!'
-    except:
+    except Exception:
       return 'Model could not be created'
-        
-      
+
+
 # Delete model based on filename
-@app.delete('/delete-model/{modelId}', status_code=200)
-async def deleteModel(modelId: str):
+@app.delete('/delete-model/{model_id}', status_code=200)
+async def delete_model(model_id: str):
     try:
-      service.deleteModel(modelId)
+      service.delete_model(model_id)
       return 'Model deleted!'
-    except:
+    except Exception:
       return 'Model could not be deleted'
 
 # Execute model based on a given filename
-@app.post('/execute-model/{modelId}')
-async def executeModel(modelId: str):
+@app.post('/execute-model/{model_id}')
+async def execute_model(json: dict, model_id: str):
     try:
-      # matches = service.executeModel(modelId, json)
-      matches = service.executeModel(modelId, getTestData())
-      print(matches)
+      matches = service.execute_model(model_id, get_test_data())
       return JSONResponse(content=matches)
-    except:
+    except Exception:
       return 'Model could not be executed'

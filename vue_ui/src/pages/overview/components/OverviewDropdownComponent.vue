@@ -8,7 +8,8 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <MenuButton
-        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm
+        font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
         Options
         <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
       </MenuButton>
@@ -45,8 +46,6 @@ export default {
   methods: {
     confirmDelete(modelId) {
       if (window.confirm("Are you sure you want to delete this model?")) {
-        console.log("Delete model pressed");
-        console.log("id of model:" + modelId);
         // code delete model from backend
         // deleteModel(modelId);
         // code to refresh page
@@ -59,7 +58,6 @@ export default {
     },
 
     executeModel() {
-      // window.location.href = "/Execute";
       console.log("execute model pressed");
     },
   },

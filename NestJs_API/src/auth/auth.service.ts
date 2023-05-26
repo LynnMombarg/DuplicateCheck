@@ -7,7 +7,7 @@
 
 import { Injectable } from '@nestjs/common';
 import { AuthDAO } from './auth.dao';
-import { AuthDTO } from './auth.dto';
+import { AuthDTO } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,10 +16,10 @@ export class AuthService {
   login(
     orgId: string,
     accessToken: string,
-    refresh_token: string,
+    refreshToken: string,
     jwtToken: string,
   ): void {
-    this.authDAO.storeToken(orgId, accessToken, refresh_token, jwtToken);
+    this.authDAO.storeToken(orgId, accessToken, refreshToken, jwtToken);
     this.removeBlacklistedToken(orgId);
   }
 
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   async getTokensByOrgId(orgId: string): Promise<AuthDTO> {
-    return await this.authDAO.getTokensByOrgId(orgId);
+    return this.authDAO.getTokensByOrgId(orgId);
   }
 
   blackListToken(orgId: string, jwtToken: string): void {
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   async isBlacklisted(orgId: string, jwtToken: string): Promise<boolean> {
-    return await this.authDAO.isBlacklisted(orgId, jwtToken);
+    return this.authDAO.isBlacklisted(orgId, jwtToken);
   }
 
   removeBlacklistedToken(orgId: string): void {
