@@ -75,6 +75,16 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
+                <div v-if="showResult">
+                <div class="flex justify-between mb-1">
+                  <span class="text-base font-medium text-blue-700 dark:text-white"> Percentage </span>
+                  <span class="text-sm font-medium text-blue-700 dark:text-white"> {{this.percentage}}</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                  <div class="bg-sky-400 h-2.5 rounded-full" style="width: 45%"></div>
+                </div>
+                </div>
+
                 <button @click="executeModel()" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
                                       hover:bg-sky-400 hover:text-white mt-2">
                   Execute
@@ -101,6 +111,7 @@ export default {
       recordid2: '',
       warningVisible: false,
       dialog: false,
+      showResult: false,
       percentage: 0,
     }
   },
@@ -128,7 +139,9 @@ export default {
     executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
         this.percentage = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
-        this.dialog = false;
+        //this.dialog = false;
+        this.showResult = true;
+        this.percentage=70;
       } else {
         this.warningVisible = true;
       }
