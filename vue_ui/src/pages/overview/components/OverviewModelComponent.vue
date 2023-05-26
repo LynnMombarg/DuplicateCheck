@@ -9,16 +9,19 @@
       <div class="flex items-center w-50 px-2 rounded-md"
         :class="{ bgContacts: isContacts(this.model.tableName), bgLeads: isLeads(this.model.tableName), bgAccounts: isAccounts(this.model.tableName) }">
         <div class="flex flex-row">
-          <svg v-if="isContacts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isContacts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
+          style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#contact"></use>
 
           </svg>
 
-          <svg v-if="isLeads(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isLeads(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
+          style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#lead"></use>
           </svg>
 
-          <svg v-if="isAccounts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isAccounts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
+          style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#account"></use>
           </svg>
 
