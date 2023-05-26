@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward
-// Jira-task: 107, 110
-// Sprint: 2, 3
-// Last modified: 15-05-2023
+// Jira-task: 107, 110, 175
+// Sprint: 2, 3, 4
+// Last modified: 26-05-2023
 
 import { Injectable } from '@nestjs/common';
 import { ModelDTO } from './dto/model.dto';
@@ -12,6 +12,7 @@ import { v4 as uuid } from 'uuid';
 import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { JobDTO } from './dto/job-model.dto';
 import { AuthDAO } from '../auth/auth.dao';
+import { ExecuteModelDTO } from './dto/execute-model.dto';
 
 @Injectable()
 export class ModelService {
@@ -63,5 +64,24 @@ export class ModelService {
         break;
     }
     return this.salesforceDAO.getJobs(tableId, authDTO);
+  }
+
+  async executeModel(
+    executeModel: ExecuteModelDTO,
+    orgId: string,
+  ): Promise<string> {
+    const authDTO = await this.authDAO.getTokensByOrgId(orgId);
+    const fields = await this.salesforceDAO.getFields(
+      executeModel.tableName,
+      authDTO,
+    );
+    const [record1, record2] = await this.salesforceDAO.getRecords(
+      fields,
+      executeModel.tableName,
+      executeModel.recordId1,
+      executeModel.recordId2,
+      authDTO,
+    );
+    return this.pythonDAO.executeModel(record1, record2, executeModel.modelId);
   }
 }

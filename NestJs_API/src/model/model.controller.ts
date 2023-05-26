@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
-// Jira-task: 107, 110, 115
-// Sprint: 2, 3
-// Last modified: 12-05-2023
+// Jira-task: 107, 110, 115, 175
+// Sprint: 2, 3, 4
+// Last modified: 26-05-2023
 
 import {
   Body,
@@ -18,6 +18,7 @@ import { CreateModelDTO } from './dto/create-model.dto';
 import { ModelDTO } from './dto/model.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { JobDTO } from './dto/job-model.dto';
+import { ExecuteModelDTO } from './dto/execute-model.dto';
 
 @Controller('model')
 @UseGuards(AuthGuard)
@@ -47,5 +48,13 @@ export class ModelController {
   @Get('/jobs')
   getJobs(@Req() req, @Query('tableName') tableName): Promise<JobDTO[]> {
     return this.modelService.getJobs(tableName, req.user.orgId);
+  }
+
+  @Post('/execute')
+  executeModel(
+    @Body() executeModel: ExecuteModelDTO,
+    @Req() req,
+  ): Promise<string> {
+    return this.modelService.executeModel(executeModel, req.user.orgId);
   }
 }

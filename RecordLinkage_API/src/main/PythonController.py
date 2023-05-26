@@ -57,7 +57,8 @@ async def delete_model(model_id: str):
 @app.post('/execute-model/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
-      matches = service.execute_model(model_id, get_test_data())
-      return JSONResponse(content=matches)
+      # matches = service.execute_model(model_id, get_test_data())
+      percentage = "10%"
+      return JSONResponse(content={"percentage": percentage})
     except Exception:
       return 'Model could not be executed'
