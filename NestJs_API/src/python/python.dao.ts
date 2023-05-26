@@ -36,18 +36,20 @@ export class PythonDAO {
       .catch();
   }
 
-  async executeModel(recordA: string, recordB: string, id: string): Promise<string> {
+  async executeModel(
+    recordA: string,
+    recordB: string,
+    modelId: string,
+  ): Promise<string> {
     const response = await axios
       .post(
-        `http://duplicatecheck-python-backend-1:8000/execute-model`,
+        `http://duplicatecheck-python-backend-1:8000/execute-model/${modelId}`,
         {
           record1: recordA,
           record2: recordB,
-          modelId: id 
         },
       )
       .catch();
-    console.log(response);
-    return 'test';
+    return response.data['percentage'];
   }
 }
