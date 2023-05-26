@@ -75,13 +75,13 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
-                <div v-if="showResult">
+                <div v-if="showResult" class="mt-2 flex flex-col">
                 <div class="flex justify-between mb-1">
                   <span class="text-base font-medium text-blue-700 dark:text-white"> Percentage </span>
                   <span class="text-sm font-medium text-blue-700 dark:text-white"> {{this.percentage}}</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                  <div class="bg-sky-400 h-2.5 rounded-full" style="width: 45%"></div>
+                  <div class="bg-sky-400 h-2.5 rounded-full" :style="{ width: `${percentage}%` }"></div>
                 </div>
                 </div>
 
@@ -133,6 +133,7 @@ export default {
       this.dialog = true;
       this.executeModelId = modelId;
       this.executeTableName = tableName;
+      this.showResult = false;
       resetValues();
     },
 
