@@ -7,6 +7,7 @@ import { ModelDTO } from './dto/model.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from './schema/model.schema';
 import mongoose from 'mongoose';
+mongoose.Promise = Promise;
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
@@ -17,15 +18,17 @@ export class ModelDAO {
     await this.model.create(model);
   }
 
-  async getAllModels(orgId: string): Promise<ModelDTO[]> {
-    return this.model.find({ orgId: orgId });
+  getAllModels(id: string): Promise<ModelDTO[]> {
+    return this.model.find({ orgId: id });
   }
 
-  async deleteModel(modelId: string, orgId: string): Promise<void> {
-    const result = await this.model.deleteOne({
-      modelId: modelId,
-      orgId: orgId,
-    });
+  async deleteModel(model: string, id: string): Promise<void> {
+    const result = await Promise.resolve(
+      this.model.deleteOne({
+        modelId: model,
+        orgId: id,
+      }),
+    );
 
     if (result.deletedCount === 0) {
       throw new NotFoundException();
