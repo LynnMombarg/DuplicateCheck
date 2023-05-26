@@ -33,14 +33,16 @@ class RecordLinkageModel:
         print('Trained')
 
     def execute_model(self, json_df):
-        records = pd.read_csv('main/devData/Leads50k2.csv')
-        df = pd.DataFrame(records)
-        df = df.astype(str)
-
-        df_a = df.iloc[0:200]
-        df_b = df.iloc[0:200]
-        features = self.get_features(df_a, df_b)
+        record_a = json_df['record1']
+        del record_a['attributes']
+        record_b = json_df['record2']
+        del record_b['attributes']
+        print(record_a)
+        print(record_b)
+        features = self.get_features(pd.json_normalize(record_a), pd.json_normalize(record_b))
+        print(features)
         predictions = self.logreg.predict(features)
+        print(predictions)
         return self.filter_matches(predictions)
 
     # Returns all pairs possible between recordset 1 and recordset 2
@@ -69,6 +71,7 @@ class RecordLinkageModel:
     
     # Set up compares between columns
     def set_compare_column(self, dataframe):
+        self.compare = recordlinkage.Compare()
         for column in dataframe:
             self.compare.string(column, column, method=self.method, threshold=self.threshold, label=column)
 

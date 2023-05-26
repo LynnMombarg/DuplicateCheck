@@ -54,7 +54,9 @@ class PythonService:
         }
 
     def execute_model_on_records(self, model_id, json : dict):
+        print('test')
         model = self.load_model(model_id)
+        print('test2')
         percentage = model.execute_model(json)
         return {
             percentage

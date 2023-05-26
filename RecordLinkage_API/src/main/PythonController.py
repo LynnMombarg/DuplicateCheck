@@ -68,7 +68,7 @@ async def execute_model(json: dict, model_id: str):
 @app.post('/execute-model-on-records/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
-      #percentage = service.execute_model_on_records(model_id, json)
+      service.execute_model_on_records(model_id, json)
       percentage = 50
       response_data = {
           "percentage": f"{percentage}%",

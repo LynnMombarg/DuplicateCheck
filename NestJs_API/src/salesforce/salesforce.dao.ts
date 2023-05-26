@@ -409,7 +409,7 @@ export class SalesforceDAO {
           } else {
             record1 = result.records[0];
             record2 = result.records[1];
-            resolve([result.records[0], result.records[1]]);
+            resolve([record1, record2]);
           }
         },
       );
