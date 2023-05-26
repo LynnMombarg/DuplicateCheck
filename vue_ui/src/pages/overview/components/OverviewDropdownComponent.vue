@@ -1,7 +1,7 @@
-<!--Author(s): Silke Bertisen, Roward, Diederik-->
-<!--Jira-task: Dashboard realiseren 104, 162 -->
-<!--Sprint: 2,3 -->
-<!--Last modified: 23-05-2023-->
+<!--Author(s): Silke Bertisen, Roward, Diederik, Lynn Mombarg-->
+<!--Jira-task: Dashboard realiseren 104, 162, 172 -->
+<!--Sprint: 2, 3, 4 -->
+<!--Last modified: 25-05-2023-->
 <!--Description: This component is used to display the dropdown menu for the model options. -->
 
 <template>
@@ -26,7 +26,7 @@
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Train model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
-          <a @click="executeModel" style="cursor: pointer;"
+          <a @click="startExecuteModel(modelId, tableName)" style="cursor: pointer;"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Execute model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
@@ -37,12 +37,73 @@
       </MenuItems>
     </transition>
   </Menu>
+
+  <TransitionRoot as="template" :show="dialog" class="fixed inset-0 overflow-y-auto select-none">
+    <Dialog as="div" class="relative z-50 flex justify-center items-center" @close="dialog = false">
+      <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
+        leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+      </TransitionChild>
+
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <TransitionChild as="template" enter="ease-out duration-300"
+            enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
+            leave-from="opacity-100 translate-y-0 sm:scale-100"
+            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+            <DialogPanel class="fixed inset-0 flex items-center justify-center bg-opacity-75 bg-gray-500 z-50">
+              <div class="px-4 py-6 bg-white sm:p-6 rounded-lg">
+                <DialogTitle class="text-lg leading-6 font-medium flex"
+                  style="margin-bottom: 1.5rem; justify-content: space-around;">
+                  <div class="flex flex-col">
+                    <div class="text-lg">Execute model</div>
+                  </div>
+                </DialogTitle>
+                <p v-if="warningVisible">Please fill in all fields.</p>
+
+                <div class="mt-2 flex flex-col">
+                  <label for="recordid1" style="margin-right: 2rem; width: 10rem; cursor: default;"
+                    class="text-medium flex flex-start items-center">Record id 1</label>
+                  <input v-model="recordid1" placeholder="id" id="record1"
+                    class=" rounded-lg p-1 focus-visible:border-sky-400 border" />
+                </div>
+                <div class="mt-2 flex flex-col">
+                  <label for="recordid2" style="margin-right: 2rem; width: 10rem; cursor: default;"
+                    class="text-medium flex flex-start items-center">Record id 2</label>
+                  <input v-model="recordid2" placeholder="id" id="record2"
+                    class="rounded-lg p-1 focus-visible:border-sky-400 border" />
+                </div>
+
+                <button @click="executeModel()" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
+                                      hover:bg-sky-400 hover:text-white mt-2">
+                  Execute
+                </button>
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
 </template>
 
 <script>
 
 export default {
   name: "OverviewDropdownComponent",
+  components: { DialogTitle, DialogPanel, Dialog, TransitionChild, TransitionRoot },
+  data() {
+    return {
+      executeTableName: '',
+      executeModelId: '',
+      recordid1: '',
+      recordid2: '',
+      warningVisible: false,
+      dialog: false,
+      percentage: 0,
+    }
+  },
   methods: {
     confirmDelete(modelId) {
       if (window.confirm("Are you sure you want to delete this model?")) {
@@ -54,23 +115,47 @@ export default {
     },
 
     trainModel(modelId) {
-      this.$router.push({ name: 'TrainingPage', params: {modelId: modelId} });
+      this.$router.push({ name: 'TrainingPage', params: { modelId: modelId } });
+    },
+
+    startExecuteModel(modelId, tableName) {
+      this.dialog = true;
+      this.executeModelId = modelId;
+      this.executeTableName = tableName;
+      resetValues();
     },
 
     executeModel() {
-      console.log("execute model pressed");
+      if (this.recordid1 !== '' && this.recordid2 !== '') {
+        this.percentage = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
+        this.dialog = false;
+      } else {
+        this.warningVisible = true;
+      }
     },
+
+    resetValues() {
+      this.executeTableName = '';
+      this.executeModelId = '';
+      this.recordid1 = '';
+      this.recordid2 = '';
+      this.warningVisible = false;
+      this.percentage = 0;
+    }
   },
 };
 
 </script>
 <script setup>
 
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { Menu, MenuButton, MenuItem, MenuItems, Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
 defineProps({
   modelId: {
+    type: String,
+  },
+  tableName: {
     type: String,
   },
 });
