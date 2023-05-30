@@ -20,7 +20,6 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
-import { jwtConfig } from '../config/jwt.config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({

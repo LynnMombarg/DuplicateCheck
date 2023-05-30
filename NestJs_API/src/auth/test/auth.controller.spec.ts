@@ -10,6 +10,13 @@ describe('AuthController', () => {
   let controller: AuthController;
   let authService: AuthService;
 
+  const mockedAuthDAO = {
+
+  };
+  const mockedAuthGuard = {
+
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
@@ -18,21 +25,17 @@ describe('AuthController', () => {
         JwtService,
         {
           provide: AuthDAO,
-          useValue: jest.fn(),
+          useValue: mockedAuthDAO,
         },
         {
           provide: AuthGuard,
-          useValue: jest.fn(),
+          useValue: mockedAuthGuard,
         },
       ],
     }).compile();
 
     controller = module.get<AuthController>(AuthController);
     authService = module.get<AuthService>(AuthService);
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
   });
 
   describe('logout', () => {
