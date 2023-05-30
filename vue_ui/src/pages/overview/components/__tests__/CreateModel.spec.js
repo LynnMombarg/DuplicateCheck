@@ -13,28 +13,32 @@ describe('Create test', () => {
     });
 
     it('button click triggers create model pop up', () => {
-        const methodMock = jest.spyOn(CreateModelButton.methods, 'createModel'
-        );
-        const wrapper = shallowMount(CreateModelButton, {
-            methods: {
-                methodMock,
-            }
-        });
+        // arrange
+        const wrapper = shallowMount(CreateModelButton);
         wrapper.vm.modelName = "test";
         wrapper.vm.tableName = "test";
         wrapper.vm.description = "test";
+
+        // act
         wrapper.find('button').trigger('click');
         wrapper.vm.$nextTick();
-        expect(methodMock).toBeCalled();
+
+       // assert
+       // test if pressing the button opens a window
+        expect(wrapper.vm.open).toBe(true);
     });
 
     it('renders a button with text "Create Model"', () => {
+        // arrange
         const wrapper = shallowMount(CreateModelButton);
+        // assert
         expect(wrapper.find('button').text()).toBe("+ Add model");
     });
 
     it('check if values are correct when the component is created', () => {
+        // arrange
         const wrapper = shallowMount(CreateModelButton);
+        // assert
         expect(wrapper.vm.open).toBe(false);
         expect(wrapper.vm.warningVisible).toBe(false);
         expect(wrapper.vm.modelName).toBe("");
