@@ -28,7 +28,7 @@
                             <div class="px-4 py-6 bg-white sm:p-6 rounded-lg">
                                 <DialogTitle class="text-lg leading-6 font-medium flex" style="margin-bottom: 1.5rem; justify-content: space-around;">
                                     <div class="flex flex-row">
-                                        <img alt="ML image" src="src/assets/machine-learning-model.svg" class="mr-1">
+                                        <img alt="ML image" src="@/assets/machine-learning-model.svg" class="mr-1">
                                         <div class="text-lg">Create a new model</div>
                                     </div>
                                 </DialogTitle>
