@@ -8,12 +8,14 @@ import { AuthDAO } from '../auth.dao';
 
 describe('AuthController', () => {
   let controller: AuthController;
-  let authService: AuthService;
 
-  const mockedAuthDAO = {
-
+  const mockedAuthService = {
+    login: jest.fn(),
   };
   const mockedAuthGuard = {
+
+  };
+  const mockedJwtService = {
 
   };
 
@@ -21,41 +23,35 @@ describe('AuthController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
       providers: [
-        AuthService,
-        JwtService,
         {
-          provide: AuthDAO,
-          useValue: mockedAuthDAO,
+          provide: AuthService,
+          useValue: mockedAuthService,
         },
         {
           provide: AuthGuard,
           useValue: mockedAuthGuard,
         },
+        {
+          provide: JwtService,
+          useValue: mockedJwtService,
+        }
       ],
     }).compile();
 
     controller = module.get<AuthController>(AuthController);
-    authService = module.get<AuthService>(AuthService);
   });
 
-  describe('logout', () => {
-    it('should call authService.logout()', async () => {
-      // Arrange
-      const userId = 'test-user-id';
-      const accessToken = 'test-access-token';
-      const refreshToken = 'test-refresh-token';
-      const authDTO = new AuthDTO(userId, accessToken, refreshToken);
-      jest.fn();
-      jest.fn().mockImplementation((cb) => cb());
-      jest.spyOn(authService, 'getTokensByOrgId').mockResolvedValue(authDTO);
-      jest.spyOn(authService, 'logout').mockImplementation(() => {});
+  describe('callback', () => {
+    it('should call', () => {
+     // Arrange
+     const code = 'code';
+     const res = {user: {}};
 
-      // Act
-      await controller.logout({ user: { userId } });
+     // Act
+      controller.callback(code, res);
 
-      // Assert
-      expect(authService.getTokensByOrgId).toHaveBeenCalledWith(userId);
-      expect(authService.logout).toHaveBeenCalledWith(userId);
+     // Assert
+      expect(mockedAuthService.login).toHaveBeenCalled();
     });
   });
 });
