@@ -70,11 +70,7 @@ export class AuthDAO {
   }
 
   blackListToken(id: string, jwt: string) {
-    const authBlacklist = new this.authBlacklistModel({
-      orgId: id,
-      jwtToken: jwt,
-    });
-    authBlacklist.save();
+    this.authBlacklistModel.create({ orgId: id, jwtToken: jwt });
   }
 
   isBlacklisted(id: string, jwt: string) {

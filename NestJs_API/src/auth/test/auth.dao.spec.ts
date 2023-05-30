@@ -1,65 +1,24 @@
 // Authors: Marloes
-// Jira-task: 130
-// Sprint: 3
-// Last modified: 16-05-2023
+// Jira-task: 130, 153
+// Sprint: 3, 4
+// Last modified: 30-05-2023
 
 import { Test } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
 import { AuthDAO } from '../auth.dao';
-import { Auth, AuthBlacklist } from '../auth.schema';
-import { before } from 'node:test';
 
 describe('TrainingDAO', () => {
   let authDAO: AuthDAO;
+
   const mockedAuthModel = {
-    model: jest.fn(),
-    save: jest.fn(),
-    findOne: jest.fn(),
-    updateOne: jest.fn(),
-    then: jest.fn(),
-    deleteOne: jest.fn(),
+    deleteOne: jest.fn().mockReturnThis(),
+    exec: jest.fn(),
   };
   const mockedAuthBlacklistModel = {
-    save: jest.fn(),
-    findOne: jest.fn(),
-    updateOne: jest.fn(),
-    then: jest.fn(),
-    deleteOne: jest.fn(),
-  };
-
-
-  const mockedTrainingWithoutMatch = {
-    _id: '6461fddec0437f4f44cbdb53',
-    trainingId: 'trainingId',
-    userId: 'req.user.userId',
-    datasetA: {
-      records: [
-        {
-          data: ['1', 'Hoi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-        },
-        {
-          data: ['2', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e3' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e1' },
-    },
-    datasetB: {
-      records: [
-        {
-          data: ['1', 'Hi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e6' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e4' },
-    },
-    matches: [],
-    __v: 0,
+    create: jest.fn(),
+    findOne: jest.fn().mockReturnThis(),
+    deleteOne: jest.fn().mockReturnThis(),
+    exec: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -67,11 +26,11 @@ describe('TrainingDAO', () => {
       providers: [
         AuthDAO,
         {
-          provide: getModelToken(Auth.name),
+          provide: getModelToken('Auth'),
           useValue: mockedAuthModel,
         },
         {
-          provide: getModelToken(AuthBlacklist.name),
+          provide: getModelToken('AuthBlacklist'),
           useValue: mockedAuthBlacklistModel,
         },
       ],
@@ -80,73 +39,61 @@ describe('TrainingDAO', () => {
     authDAO = moduleRef.get<AuthDAO>(AuthDAO);
   });
 
-  describe('storeToken', () => {
-    it('should find the user by userID', () => {
+  describe('removeTokens', () => {
+    it('should call deleteOne on authModel with the correct arguments', () => {
       // Arrange
-      const userID = 'test123';
-      const accessToken = 'test123';
-      const refresh_token = 'test123';
-      const jwtToken = 'test123';
+      const orgId = 'orgId';
 
       // Act
-      authDAO.storeToken(userID, accessToken, refresh_token, jwtToken);
+      authDAO.removeTokens(orgId);
 
       // Assert
-      expect(mockedAuthModel.findOne).toHaveBeenCalledWith({
-        userID: userID,
-      });
-    });
-    it('should save the tokens', () => {
-      // Arrange
-      const userID = 'test123';
-      const accessToken = 'test123';
-      const refresh_token = 'test123';
-      const jwtToken = 'test123';
-
-      // Act
-      authDAO.storeToken(userID, accessToken, refresh_token, jwtToken);
-
-      // Assert
-      expect(mockedAuthModel.save).toHaveBeenCalled();
+      expect(mockedAuthModel.deleteOne).toHaveBeenCalledWith({ orgId });
     });
   });
 
-  describe('updateToken', () => {
-    it('should find a user by accessToken', () => {
+  describe('blackListToken', () => {
+    it('should call create on authBlacklistModel', () => {
       // Arrange
-      const accessToken = 'test123';
+      const orgId = 'orgId';
+      const jwtToken = 'jwtToken';
 
       // Act
-      authDAO.updateToken(accessToken);
+      authDAO.blackListToken(orgId, jwtToken);
 
       // Assert
-      expect(mockedAuthModel.findOne).toHaveBeenCalledWith({
-        accessToken: accessToken,
-      });
-    });
-    it('should update the token', () => {
-      // Arrange
-      const accessToken = 'test123';
-
-      // Act
-      authDAO.updateToken(accessToken);
-
-      // Assert
-      expect(mockedAuthModel.save).toHaveBeenCalled();
+      expect(mockedAuthBlacklistModel.create).toHaveBeenCalled();
     });
   });
 
-  describe('removeToken', () => {
-    it('delete the token', () => {
+  // describe('isBlacklisted', () => {
+  //   it('should call findOne on authBlacklistModel', () => {
+  //     // Arrange
+  //     const orgId = 'orgId';
+  //     const jwtToken = 'jwtToken';
+  //
+  //     // Act
+  //     authDAO.isBlacklisted(orgId, jwtToken);
+  //
+  //     // Assert
+  //     expect(mockedAuthBlacklistModel.findOne).toHaveBeenCalledWith({
+  //       orgId,
+  //       jwtToken,
+  //     });
+  //   });
+  // });
+
+  describe('removeBlacklistedToken', () => {
+    it('should call deleteOne on authBlacklistModel with the correct arguments', () => {
       // Arrange
-      const userID = 'test123';
+      const orgId = 'orgId';
 
       // Act
-      authDAO.removeTokens(userID);
+      authDAO.removeBlacklistedToken(orgId);
 
       // Assert
-      expect(mockedAuthModel.deleteOne).toHaveBeenCalledWith({
-        userID: userID,
+      expect(mockedAuthBlacklistModel.deleteOne).toHaveBeenCalledWith({
+        orgId,
       });
     });
   });
