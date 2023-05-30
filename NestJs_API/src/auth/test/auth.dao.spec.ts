@@ -66,22 +66,26 @@ describe('TrainingDAO', () => {
     });
   });
 
-  // describe('isBlacklisted', () => {
-  //   it('should call findOne on authBlacklistModel', () => {
-  //     // Arrange
-  //     const orgId = 'orgId';
-  //     const jwtToken = 'jwtToken';
-  //
-  //     // Act
-  //     authDAO.isBlacklisted(orgId, jwtToken);
-  //
-  //     // Assert
-  //     expect(mockedAuthBlacklistModel.findOne).toHaveBeenCalledWith({
-  //       orgId,
-  //       jwtToken,
-  //     });
-  //   });
-  // });
+  describe('isBlacklisted', () => {
+    it('should call findOne on authBlacklistModel', async () => {
+      // Arrange
+      const orgId = 'orgId';
+      const jwtToken = 'jwtToken';
+
+      mockedAuthBlacklistModel.findOne.mockReturnValueOnce({
+        exec: jest.fn().mockResolvedValueOnce({}),
+      });
+
+      // Act
+      await authDAO.isBlacklisted(orgId, jwtToken);
+
+      // Assert
+      expect(mockedAuthBlacklistModel.findOne).toHaveBeenCalledWith({
+        orgId,
+        jwtToken,
+      });
+    });
+  });
 
   describe('removeBlacklistedToken', () => {
     it('should call deleteOne on authBlacklistModel with the correct arguments', () => {
