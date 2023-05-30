@@ -1,3 +1,8 @@
+// Authors:  Diederik
+// Jira-task: 183
+// Sprint: 4
+// Last modified: 30-05-2023
+
 import { Test, TestingModule } from '@nestjs/testing';
 import { AnswerDTO } from '../dto/answer.dto';
 
