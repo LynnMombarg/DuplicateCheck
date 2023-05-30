@@ -12,11 +12,14 @@ export type TrainingDocument = HydratedDocument<Model>;
 
 @Schema()
 export class Training {
+  // @Prop()
+  // modelId: string;
+
   @Prop()
   trainingId: string;
 
   @Prop()
-  userId: string;
+  orgId: string;
 
   @Prop({ type: DatasetSchema, ref: Dataset.name })
   datasetA: Dataset;

@@ -3,7 +3,7 @@ import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '../auth.guard';
-import { AuthDTO } from '../auth.dto';
+import { AuthDTO } from '../dto/auth.dto';
 import { AuthDAO } from '../auth.dao';
 
 describe('AuthController', () => {
@@ -47,14 +47,14 @@ describe('AuthController', () => {
       const authDTO = new AuthDTO(userId, accessToken, refreshToken);
       jest.fn();
       jest.fn().mockImplementation((cb) => cb());
-      jest.spyOn(authService, 'getTokensByUserId').mockResolvedValue(authDTO);
+      jest.spyOn(authService, 'getTokensByOrgId').mockResolvedValue(authDTO);
       jest.spyOn(authService, 'logout').mockImplementation(() => {});
 
       // Act
       await controller.logout({ user: { userId } });
 
       // Assert
-      expect(authService.getTokensByUserId).toHaveBeenCalledWith(userId);
+      expect(authService.getTokensByOrgId).toHaveBeenCalledWith(userId);
       expect(authService.logout).toHaveBeenCalledWith(userId);
     });
   });
