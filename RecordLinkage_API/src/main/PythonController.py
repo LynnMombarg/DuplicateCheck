@@ -54,25 +54,11 @@ async def delete_model(model_id: str):
     except Exception:
       return 'Model could not be deleted'
 
-# Execute model based on a given filename
-@app.post('/execute-model/{model_id}')
-async def execute_model(json: dict, model_id: str):
-    try:
-      # matches = service.execute_model(model_id, get_test_data())
-      percentage = "10%"
-      return JSONResponse(content={"percentage": percentage})
-    except Exception:
-      return 'Model could not be executed'
-
 # Execute model based on given records
 @app.post('/execute-model-on-records/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
-      service.execute_model_on_records(model_id, json)
-      percentage = 50
-      response_data = {
-          "percentage": f"{percentage}%",
-      }
+      response_data = service.execute_model_on_records(model_id, json)
       return JSONResponse(content=response_data)
     except Exception:
       return 'Model could not be executed'

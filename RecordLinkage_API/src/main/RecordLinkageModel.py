@@ -44,11 +44,10 @@ class RecordLinkageModel:
         del record_b['attributes']
         features = self.get_features(pd.json_normalize(record_a), pd.json_normalize(record_b))
         predictions = self.logreg.predict(features)
-        print("th:", self.thresholds)
-        print(predictions)
-        print(self.logreg.prob(features))
-        print(self.logreg.predict(features))
-        return self.filter_matches(predictions)
+        is_match = self.filter_matches(predictions) is None 
+        percentage = self.logreg.prob(features)
+        print(is_match)
+        return is_match, percentage
 
     # Returns all pairs possible between recordset 1 and recordset 2
     def get_pairs(self, df_a, df_b):
@@ -80,15 +79,10 @@ class RecordLinkageModel:
         for column in dataframe:
             thresholds = self.thresholds.get(column)
             weighted_average_threshold = 0.85
-            sum = 0
-            for threshold in thresholds:
-                value = threshold['threshold'] * threshold['weight']
-                sum = sum + value
-            print("total: ", sum / len(thresholds))
 
             if thresholds is not None:
                 weighted_average_threshold = np.average([threshold['threshold'] for threshold in thresholds], weights=[threshold['weight'] for threshold in thresholds])
-            # print(weighted_average_threshold)
+
             self.compare.string(column, column, method=self.method, threshold=weighted_average_threshold, label=column)
 
     # Returns features after the columns are compared
