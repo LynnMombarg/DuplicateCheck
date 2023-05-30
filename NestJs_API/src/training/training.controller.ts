@@ -1,5 +1,5 @@
-// Authors: Silke, Marloes
-// Jira-task: 129, 130
+// Authors: Marloes, Lynn, Silke
+// Jira-task: 130, 137, 129
 // Sprint: 3
 // Last modified: 16-05-2023
 
@@ -29,10 +29,10 @@ export class TrainingController {
     @Body() training: CreateTrainingDTO,
     @Req() req,
   ): Promise<string> {
-    return await this.trainingService.selectJob(
+    return this.trainingService.selectJob(
       training.jobId,
       training.tableName,
-      req.user.userId,
+      req.user.orgId,
     );
   }
 
@@ -49,5 +49,10 @@ export class TrainingController {
   @Get('/check-records')
   checkForRecords(@Query('trainingId') trainingId: string): Promise<boolean> {
     return this.trainingService.checkForRecords(trainingId);
+  }
+
+  @Put('/save')
+  saveTraining(@Body() json) {
+    this.trainingService.saveTraining(json['modelId'], json['trainingId']);
   }
 }

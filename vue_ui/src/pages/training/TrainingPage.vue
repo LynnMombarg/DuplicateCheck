@@ -1,15 +1,11 @@
-<!--Author(s): Marloes, Roward-->
-<!--Jira-task: 131, 132, 133, 134-->
+<!--Author(s): Marloes, Roward, Diederik-->
+<!--Jira-task: 131, 132, 133, 134, 162-->
 <!--Sprint: 3-->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 
 <template>
-	<!-- <div class="flex pl-64 flex-col flex-1">
-		<Navbar :token="token" />
-		<TrainingBannerComponent :jobs="jobs"/>
-	</div> -->
 	<div class="flex pl-64 flex-col flex-1">
-		<Navbar :token="token" />
+		<Navbar />
 		<div class="h-36 2xl:h-48 bg-sky-400" style="background-color: rgb(56 189 248); height: 144px"></div>
 		<div class="py-6 px-6" style="margin-top: -7rem">
 			<div class="max-w-7xl mx-auto -mt-32">
@@ -37,7 +33,7 @@
 							</div>
 						</div>
 						<SelectJobBody v-if="selectJobActive" :jobs="jobs" />
-						<TrainWindow v-if="trainingActive" :token="token" :records="records" />
+						<TrainWindow v-if="trainingActive" :records="records" />
 						<!-- <button v-if="!trainingActive" @click="selectJob">Start training for job</button> -->
 					</div>
 				</div>
@@ -46,7 +42,7 @@
 		<Footer />
 	</div>
 </template>
-  
+
 <script>
 import { getJobs } from './services/GetJobs';
 import SelectJobBody from './components/SelectJobBody.vue';
@@ -65,17 +61,11 @@ export default {
 		TrainWindow,
 		RecordModel,
 	},
-	props: {
-		token: {
-			type: String,
-			required: true,
-		}
-	},
 	data() {
 		return {
 			jobs: [],
-			token: null,
 			model: null,
+			modelId: null,
 			trainingId: null,
 			records: [],
 			trainingActive: false,
@@ -88,38 +78,34 @@ export default {
 		if (!this.model) {
 			this.$router.push({ name: 'OverviewPage' });
 		}
-		this.token = await this.$store.state.token;
-		this.jobs = await getJobs(this.token, this.model.tableName);
+		this.jobs = await getJobs(this.model.tableName);
 	},
 	methods: {
-		async signOut() {
-			await signOut(this.token)
-			this.$store.commit('removeUser');
-			this.$store.commit('removeToken');
-			this.$store.commit('removeModels');
-			this.$router.push({ name: 'SignIn' });
-		},
 		async selectJob(jobId) {
-			const modelId = this.$route.params.modelId;
-			this.model = await this.$store.getters.getModelById(modelId);
-			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1), this.token);
+			this.modelId = await this.$route.params.modelId;
+			this.model = await this.$store.getters.getModelById(this.modelId);
+			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1));
+			if (!this.trainingId) {
+				alert("No training available for this job");
+				this.$router.push({ name: "OverviewPage" });
+			}
+			await this.getRecords();
 			this.selectJobActive = false;
 			this.trainingActive = true;
-			this.getRecords();
 		},
 		getRecords: async function () {
-			this.records = await getMappedRecords(this.trainingId, this.token);
+			this.records = await getMappedRecords(this.trainingId);
 			if (this.records === null) {
 				this.saveTraining();
 			}
 		},
 		giveAnswer(answer) {
-			giveAnswer(answer, this.trainingId, this.token);
+			giveAnswer(answer, this.trainingId);
 			this.getRecords();
 		},
 		saveTraining() {
 			this.trainingActive = false;
-			saveTraining(this.trainingId, this.token);
+			saveTraining(this.modelId, this.trainingId);
 			this.$router.push({ name: "OverviewPage" });
 		},
 	},

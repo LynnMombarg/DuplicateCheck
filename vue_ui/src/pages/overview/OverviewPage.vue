@@ -1,11 +1,11 @@
-<!--Author(s): Silke Bertisen, Roward, Diederik-->
-<!--Jira-task: Dashboard realiseren 104 -->
-<!--Sprint: 2, 3 -->
-<!--Last modified: 16-05-2023-->
+<!--Author(s): Silke Bertisen, Roward, Diederik, Lynn Mombarg-->
+<!--Jira-task: Dashboard realiseren 104, 172 -->
+<!--Sprint: 2, 3, 4 -->
+<!--Last modified: 25-05-2023-->
 
 <template>
     <div class="flex pl-64 flex-col flex-1">
-        <Navbar :token="token"/>
+        <Navbar />
         <OverviewBannerComponent :models="models"/>
         <Footer />
     </div>
@@ -18,6 +18,7 @@ import OverviewModelComponent from "@/pages/overview/components/OverviewModelCom
 import {getModels} from "./services/GetModels";
 import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";
+import { executeModel } from "./services/ExecuteModel";
 import Navbar from "../../components/Navbar.vue";
 import {signOut} from "@/pages/overview/services/SignOut";
 import Footer from "../../components/Footer.vue";
@@ -30,36 +31,24 @@ export default {
     OverviewBannerComponent,
     OverviewModelComponent
   },
-  props: {
-    token: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       models: [],
-      token: null
     }
   },
   async mounted() {
-      this.token = await this.$store.state.token;
-      this.models = await getModels(this.token);
+      this.models = await getModels();
       this.$store.commit('setModels', this.models);
   },
   methods: {
     async deleteModel(modelId) {
-      this.models = await deleteModel(modelId, this.token);
+      this.models = await deleteModel(modelId);
     },
     async createModel(modelName, tableName, description) {
-      this.models = await createModel(modelName, tableName, description, this.token);
+      this.models = await createModel(modelName, tableName, description);
     },
-    async signOut() {
-      await signOut(this.token)
-      this.$store.commit('removeUser');
-      this.$store.commit('removeToken');
-      this.$store.commit('removeModels');
-      this.$router.push({name: 'SignIn'});
+    async executeModel(tableName, modelId, recordId1, recordId2) {
+      return await executeModel(tableName, modelId, recordId1, recordId2);
     }
   },
 };
@@ -81,6 +70,3 @@ export default {
     align-items: center;
 }
 </style>
-
-
-

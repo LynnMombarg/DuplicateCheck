@@ -1,29 +1,25 @@
-// Authors: Marloes
-// Jira-task: 130
+// Authors: Marloes, Lynn
+// Jira-task: 130, 137
 // Sprint: 3
-// Last modified: 16-05-2023
+// Last modified: 22-05-2023
 
 import { Test } from '@nestjs/testing';
 import { TrainingDAO } from '../training.dao';
-import { TrainingDTO } from '../dto/training.dto';
-import { DatasetDTO } from '../dto/dataset.dto';
-import { RecordDTO } from '../dto/record.dto';
 import { Training } from '../schema/training.schema';
 import { getModelToken } from '@nestjs/mongoose';
 
 describe('TrainingDAO', () => {
   let trainingDAO: TrainingDAO;
   const mockedTrainingModel = {
-    model: jest.fn(),
-    save: jest.fn(),
     findOne: jest.fn(),
     updateOne: jest.fn(),
+    create: jest.fn(),
   };
 
   const mockedTrainingWithoutMatch = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
-    userId: 'req.user.userId',
+    orgId: 'req.user.userId',
     datasetA: {
       records: [
         {
@@ -57,7 +53,7 @@ describe('TrainingDAO', () => {
   const mockTrainingWithOneMatch = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
-    userId: 'req.user.userId',
+    orgId: 'req.user.userId',
     datasetA: {
       records: [
         {
@@ -91,7 +87,7 @@ describe('TrainingDAO', () => {
   const mockTrainingWithAllMatches = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
-    userId: 'req.user.userId',
+    orgId: 'req.user.userId',
     datasetA: {
       records: [
         {
@@ -136,120 +132,15 @@ describe('TrainingDAO', () => {
     trainingDAO = moduleRef.get<TrainingDAO>(TrainingDAO);
   });
 
-  // describe('createModel', () => {
-  //   it('should call save on Mongoose model', () => {
-  //     // Arrange
-  //     const expected = new TrainingDTO(
-  //       'trainingId',
-  //       'userId',
-  //       new DatasetDTO([
-  //         new RecordDTO(['1', 'Hoi']),
-  //         new RecordDTO(['2', 'Doei']),
-  //       ]),
-  //       new DatasetDTO([
-  //         new RecordDTO(['1', 'Hi']),
-  //         new RecordDTO(['3', 'Doei']),
-  //       ]),
-  //       [true, false],
-  //     );
-  //
-  //     // Act
-  //     trainingDAO.createTraining(expected);
-  //
-  //     // Assert
-  //     expect(mockedTrainingModel.save).toHaveBeenCalled();
-  //   });
-  // });
+  describe('createModel', () => {
+    it('should call create on Mongoose model', () => {
+      // Act
+      trainingDAO.createTraining(mockedTrainingWithoutMatch);
 
-  describe('getNextRecords', () => {
-    it('should fetch the first records from the mongoose model', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
+      // Assert
+      expect(mockedTrainingModel.create).toHaveBeenCalledWith(
         mockedTrainingWithoutMatch,
       );
-
-      // Act
-      const result = await trainingDAO.getNextRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual({
-        records: [
-          {
-            _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-            data: ['1', 'Hoi'],
-          },
-          {
-            _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-            data: ['1', 'Hi'],
-          },
-        ],
-      });
-    });
-  });
-
-  describe('getNextRecords', () => {
-    it('should fetch the second records from the mongoose model, because it contains 1 match', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
-        mockTrainingWithOneMatch,
-      );
-
-      // Act
-      const result = await trainingDAO.getNextRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual({
-        records: [
-          { _id: { $oid: '6461fcde17a65a5fbd3809e3' }, data: ['2', 'Doei'] },
-          { _id: { $oid: '6461fcde17a65a5fbd3809e6' }, data: ['3', 'Doei'] },
-        ],
-      });
-    });
-  });
-
-  describe('check for records', () => {
-    it('should return true', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
-        mockedTrainingWithoutMatch,
-      );
-
-      // Act
-      const result = await trainingDAO.checkForRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual(true);
-    });
-  });
-
-  describe('check for records', () => {
-    it('should return false', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
-        mockTrainingWithAllMatches,
-      );
-
-      // Act
-      const result = await trainingDAO.checkForRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual(false);
     });
   });
 
@@ -271,6 +162,19 @@ describe('TrainingDAO', () => {
         { trainingId: 'trainingId' },
         { $push: { matches: { $each: [answer] } } },
       );
+    });
+  });
+
+  describe('getTraining', () => {
+    it('should call findOne on Mongoose model', () => {
+      //Arrange
+      const trainingId = '123';
+
+      //Act
+      trainingDAO.getTraining(trainingId);
+
+      //Assert
+      expect(mockedTrainingModel.findOne).toHaveBeenCalled();
     });
   });
 });

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from '../auth.service';
 import { AuthDAO } from '../auth.dao';
-import { AuthDTO } from '../auth.dto';
+import { AuthDTO } from '../dto/auth.dto';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -72,9 +72,9 @@ describe('AuthService', () => {
   describe('getTokensByUserId', () => {
     it('should call authDAO.getTokensByUserId with the correct argument', async () => {
       const userId = '123';
-      const getTokensByUserIdMock = jest.spyOn(authDAO, 'getTokensByUserId');
+      const getTokensByUserIdMock = jest.spyOn(authDAO, 'getTokensByOrgId');
 
-      await authService.getTokensByUserId(userId);
+      await authService.getTokensByOrgId(userId);
 
       expect(getTokensByUserIdMock).toHaveBeenCalledWith(userId);
     });
@@ -83,10 +83,10 @@ describe('AuthService', () => {
       const userId = '123';
       const authDTO = new AuthDTO(userId, 'access_token', 'refresh_token');
       const getTokensByUserIdMock = jest
-        .spyOn(authDAO, 'getTokensByUserId')
+        .spyOn(authDAO, 'getTokensByOrgId')
         .mockResolvedValueOnce(authDTO);
 
-      const result = await authService.getTokensByUserId(userId);
+      const result = await authService.getTokensByOrgId(userId);
 
       expect(getTokensByUserIdMock).toHaveBeenCalledWith(userId);
       expect(result).toEqual(authDTO);

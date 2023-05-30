@@ -1,7 +1,7 @@
-<!--Author(s): Silke Bertisen, Roward Dorrestijn-->
-<!--Jira-task: Dashboard realiseren 104 -->
+<!--Author(s): Silke Bertisen, Roward Dorrestijn, Diederik-->
+<!--Jira-task: Dashboard realiseren 104, 162 -->
 <!--Sprint: 2,3 -->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 
 <template>
   <div class="flex justify-between rounded-md px-3 py-5 text-xl font-medium">
@@ -9,16 +9,19 @@
       <div class="flex items-center w-50 px-2 rounded-md"
         :class="{ bgContacts: isContacts(this.model.tableName), bgLeads: isLeads(this.model.tableName), bgAccounts: isAccounts(this.model.tableName) }">
         <div class="flex flex-row">
-          <svg v-if="isContacts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isContacts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
+          style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#contact"></use>
 
           </svg>
 
-          <svg v-if="isLeads(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isLeads(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
+          style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#lead"></use>
           </svg>
 
-          <svg v-if="isAccounts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white" style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isAccounts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
+          style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#account"></use>
           </svg>
 
@@ -37,8 +40,8 @@
         {{ this.model.modelDescription }}
       </p>
     </div>
-    <div style="margin-left: 1rem;">
-      <OverviewDropdownComponent :modelId="this.model.modelId" :token="token" />
+    <div class="select-none" style="margin-left: 1rem;">
+      <OverviewDropdownComponent :modelId="this.model.modelId" />
     </div>
   </div>
 </template>
@@ -51,14 +54,10 @@ export default {
   components: { OverviewDropdownComponent },
   props: {
     model: Array,
-    token: {
-        type: String,
-        required: true,
-    },
   },
   methods: {
     deleteModel(modelId){
-      this.$parent.deleteModel(modelId, this.token);
+      this.$parent.deleteModel(modelId);
     },
     isContacts(tableName) {
       return tableName === 'contacts';
@@ -69,6 +68,9 @@ export default {
     isAccounts(tableName) {
       return tableName === 'accounts';
     },
+    executeModel(tableName, modelId, recordId1, recordId2) {
+      return this.$parent.executeModel(tableName, modelId, recordId1, recordId2);
+    }
   },
 };
 </script>

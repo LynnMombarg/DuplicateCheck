@@ -7,43 +7,43 @@
 
 import { Injectable } from '@nestjs/common';
 import { AuthDAO } from './auth.dao';
-import { AuthDTO } from './auth.dto';
+import { AuthDTO } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly authDAO: AuthDAO) {}
 
   login(
-    userID: string,
+    orgId: string,
     accessToken: string,
-    refresh_token: string,
+    refreshToken: string,
     jwtToken: string,
   ): void {
-    this.authDAO.storeToken(userID, accessToken, refresh_token, jwtToken);
-    this.removeBlacklistedToken(userID);
+    this.authDAO.storeToken(orgId, accessToken, refreshToken, jwtToken);
+    this.removeBlacklistedToken(orgId);
   }
 
   updateToken(accessToken: string): void {
     this.authDAO.updateToken(accessToken);
   }
 
-  logout(userId: string): void {
-    this.authDAO.removeTokens(userId);
+  logout(orgId: string): void {
+    this.authDAO.removeTokens(orgId);
   }
 
-  async getTokensByUserId(userId: string): Promise<AuthDTO> {
-    return await this.authDAO.getTokensByUserId(userId);
+  async getTokensByOrgId(orgId: string): Promise<AuthDTO> {
+    return this.authDAO.getTokensByOrgId(orgId);
   }
 
-  blackListToken(userId: string, jwtToken: string): void {
-    this.authDAO.blackListToken(userId, jwtToken);
+  blackListToken(orgId: string, jwtToken: string): void {
+    this.authDAO.blackListToken(orgId, jwtToken);
   }
 
-  async isBlacklisted(userId: string, jwtToken: string): Promise<boolean> {
-    return await this.authDAO.isBlacklisted(userId, jwtToken);
+  async isBlacklisted(orgId: string, jwtToken: string): Promise<boolean> {
+    return this.authDAO.isBlacklisted(orgId, jwtToken);
   }
 
-  removeBlacklistedToken(userId: string): void {
-    this.authDAO.removeBlacklistedToken(userId);
+  removeBlacklistedToken(orgId: string): void {
+    this.authDAO.removeBlacklistedToken(orgId);
   }
 }
