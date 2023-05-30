@@ -21,4 +21,17 @@ describe('AuthDTO', () => {
       expect(authDTO).toBeDefined();
     });
   });
+
+  describe('constructor with parameters', () => {
+    it('should create an instance of AuthDTO with parameters', () => {
+      const authDTO = new AuthDTO('orgId', 'accessToken', 'refreshToken');
+      expect(authDTO).toBeDefined();
+      expect(authDTO.orgId).toEqual('orgId');
+      expect(authDTO.accessToken).toEqual('accessToken');
+      expect(authDTO.refreshToken).toEqual('refreshToken');
+      expect(authDTO.getOrgId()).toEqual('orgId');
+      expect(authDTO.getAccessToken()).toEqual('accessToken');
+      expect(authDTO.getRefreshToken()).toEqual('refreshToken');
+    });
+  }
 });
