@@ -11,6 +11,8 @@ describe('TrainingDAO', () => {
   let authDAO: AuthDAO;
 
   const mockedAuthModel = {
+    create: jest.fn(),
+    findOne: jest.fn().mockReturnThis(),
     deleteOne: jest.fn().mockReturnThis(),
     exec: jest.fn(),
   };
@@ -39,6 +41,76 @@ describe('TrainingDAO', () => {
     authDAO = moduleRef.get<AuthDAO>(AuthDAO);
   });
 
+  describe('storeToken', () => {
+    it('should call findOne on authModel', () => {
+      // Arrange
+      const orgId = 'orgId';
+      const accessToken = 'accessToken';
+      const refreshToken = 'refreshToken';
+      const jwtToken = 'jwtToken';
+
+      mockedAuthModel.findOne.mockReturnValueOnce({
+        exec: jest.fn().mockResolvedValueOnce({}),
+      });
+
+      // Act
+      authDAO.storeToken(orgId, accessToken, refreshToken, jwtToken);
+
+      // Assert
+      expect(mockedAuthModel.findOne).toHaveBeenCalledWith({ orgId });
+    });
+
+    it('should call create on authModel', () => {
+      // Arrange
+      const orgId = 'orgId';
+      const accessToken = 'accessToken';
+      const refreshToken = 'refreshToken';
+      const jwtToken = 'jwtToken';
+
+      mockedAuthModel.findOne.mockReturnValueOnce({
+        exec: jest.fn().mockResolvedValueOnce({}),
+      });
+
+      // Act
+      authDAO.storeToken(orgId, accessToken, refreshToken, jwtToken);
+
+      // Assert
+      expect(mockedAuthModel.create).toHaveBeenCalled();
+    });
+  });
+
+  describe('updateToken', () => {
+    it('should call findOne on authModel', () => {
+      // Arrange
+      const accessToken = 'accessToken';
+
+      mockedAuthModel.findOne.mockReturnValueOnce({
+        exec: jest.fn().mockResolvedValueOnce({}),
+      });
+
+      // Act
+      authDAO.updateToken(accessToken);
+
+      // Assert
+      expect(mockedAuthModel.findOne).toHaveBeenCalledWith({ accessToken });
+    });
+
+    it('should call create on authModel', () => {
+      // Arrange
+      const accessToken = 'accessToken';
+
+      mockedAuthModel.findOne.mockReturnValueOnce({
+        exec: jest.fn().mockResolvedValueOnce({}),
+      });
+
+      // Act
+      authDAO.updateToken(accessToken);
+
+      // Assert
+      expect(mockedAuthModel.create).toHaveBeenCalled();
+    });
+  });
+
   describe('removeTokens', () => {
     it('should call deleteOne on authModel with the correct arguments', () => {
       // Arrange
@@ -49,6 +121,23 @@ describe('TrainingDAO', () => {
 
       // Assert
       expect(mockedAuthModel.deleteOne).toHaveBeenCalledWith({ orgId });
+    });
+  });
+
+  describe('getTokensByOrgId', () => {
+    it('should call findOne on authModel', () => {
+      // Arrange
+      const orgId = 'orgId';
+
+      mockedAuthModel.findOne.mockReturnValueOnce({
+        exec: jest.fn().mockResolvedValueOnce({}),
+      });
+
+      // Act
+      authDAO.getTokensByOrgId(orgId);
+
+      // Assert
+      expect(mockedAuthModel.findOne).toHaveBeenCalledWith({ orgId });
     });
   });
 
