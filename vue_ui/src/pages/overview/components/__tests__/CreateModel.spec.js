@@ -4,14 +4,10 @@
 // Last modified: 30-05-2023
 
 import { shallowMount } from '@vue/test-utils';
-import CreateModelButton from "../CreateModelButton.vue";
+import CreateModelButton from "../CreateModelButton.vue"
 
 describe('Create test', () => {
-
-    beforeEach(() => {
-        window.open = jest.fn();
-    });
-
+    
     it('button click triggers create model pop up', () => {
         // arrange
         const wrapper = shallowMount(CreateModelButton);
