@@ -33,5 +33,5 @@ describe('AuthDTO', () => {
       expect(authDTO.getAccessToken()).toEqual('accessToken');
       expect(authDTO.getRefreshToken()).toEqual('refreshToken');
     });
-  }
+  });
 });
