@@ -25,7 +25,7 @@
 						<div class="flex justify-between" style="margin: 8px">
 							<div class="text-3xl font-medium flex items-center mt-2">
 								<div class="margin-logo">
-									<img src="@/assets/logo_duplicatecheck.png">
+									<img src="../../assets/logo_duplicatecheck.png">
 								</div>
 								<div>
 									{{ model && model.modelName }}

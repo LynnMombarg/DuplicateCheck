@@ -13,14 +13,13 @@
 
 <script>
 
-import OverviewBannerComponent from "@/pages/overview/components/OverviewBannerComponent.vue";
-import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
+import OverviewBannerComponent from "../../pages/overview/components/OverviewBannerComponent.vue";
+import OverviewModelComponent from "../../pages/overview/components/OverviewModelComponent.vue";
 import {getModels} from "./services/GetModels";
 import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";
 import { executeModel } from "./services/ExecuteModel";
 import Navbar from "../../components/Navbar.vue";
-import {signOut} from "@/pages/overview/services/SignOut";
 import Footer from "../../components/Footer.vue";
 
 export default {

@@ -11,18 +11,18 @@
         <div class="flex flex-row">
           <svg v-if="isContacts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
           style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
-            <use xlink:href="@/assets/symbols.svg#contact"></use>
+            <use xlink:href="../../assets/symbols.svg#contact"></use>
 
           </svg>
 
           <svg v-if="isLeads(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
           style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
-            <use xlink:href="@/assets/symbols.svg#lead"></use>
+            <use xlink:href="../../assets/symbols.svg#lead"></use>
           </svg>
 
           <svg v-if="isAccounts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
           style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
-            <use xlink:href="@/assets/symbols.svg#account"></use>
+            <use xlink:href="../../assets/symbols.svg#account"></use>
           </svg>
 
         </div>
@@ -47,7 +47,8 @@
 </template>
 
 <script>
-import OverviewDropdownComponent from "@/pages/overview/components/OverviewDropdownComponent.vue";
+
+import OverviewDropdownComponent from "../../overview/components/OverviewDropdownComponent.vue";
 
 export default {
   name: "OverviewModelComponent",

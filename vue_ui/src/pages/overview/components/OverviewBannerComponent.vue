@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto -mt-32">
             <div class="flex overflow-hidden ml-2 select-none">
                 <div class="flex-none w-10 pr-1">
-                    <img alt="Plauti Logo" src="@assets/plauti-white.svg">
+                    <img alt="Plauti Logo" src="../../assets/plauti-white.svg">
                 </div>
                 <div class="flex-initial w-64 text-left leading-9 text-lg font-semibold text-white">
                     <div class="animated">Duplicate Check ML <span
@@ -21,7 +21,7 @@
                 <div class="flex justify-between">
                     <div class="text-3xl font-medium flex items-center" style="margin: 0.75rem;">
                         <div class="margin-logo">
-                            <img src="@assets/logo_duplicatecheck.png">
+                            <img src="vue_ui/src/assets/logo_duplicatecheck.png">
                         </div>
                         <div>
                             Overview
@@ -41,9 +41,9 @@
 
 <script>
 
-import CreateModelButton from "@/pages/overview/components/CreateModelButton.vue";
+import CreateModelButton from "../.././overview/components/CreateModelButton.vue";
 import Footer from "../../../components/Footer.vue";
-import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
+import OverviewModelComponent from "../../overview/components/OverviewModelComponent.vue";
 
 export default {
     name: "OverviewBannerComponent",

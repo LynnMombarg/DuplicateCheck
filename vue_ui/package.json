@@ -19,10 +19,10 @@
     "coverage": "^0.4.1",
     "happy-dom": "^9.19.2",
     "jest-environment-jsdom": "^29.5.0",
+    "ts-jest": "^29.0.5",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vuex": "^4.1.0",
-    "ts-jest": "29.0.5"
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
