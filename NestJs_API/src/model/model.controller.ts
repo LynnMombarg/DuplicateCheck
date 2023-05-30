@@ -27,7 +27,7 @@ export class ModelController {
   @Post('/create')
   async createModel(@Body() model: CreateModelDTO, @Req() req) {
     await this.modelService.createModel(model, req.user.orgId);
-    return await this.modelService.getAllModels(req.user.orgId);
+    return this.modelService.getAllModels(req.user.orgId);
   }
 
   @Get('/models')
@@ -41,7 +41,7 @@ export class ModelController {
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
     await this.modelService.deleteModel(req.user.orgId, modelId);
-    return await this.modelService.getAllModels(req.user.orgId);
+    return this.modelService.getAllModels(req.user.orgId);
   }
 
   @Get('/jobs')

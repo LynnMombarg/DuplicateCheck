@@ -17,11 +17,11 @@ from main.PythonService import PythonService
 
 # Methods will most likely change so tests need to be adapted in the future
 # PythonController cannot be imported because it's in a sibling folder
-class test_PythonController(TestCase):
+class test_PythonRequests(TestCase):
     
     def setUp(self) -> None:
         service = PythonService()
-        service.createModel('test')
+        service.create_model('test')
     
     
     @patch('requests.post')
