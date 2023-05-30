@@ -46,6 +46,21 @@ describe('Create test', () => {
         expect(wrapper.vm.description).toBe("");
     });
 
+    it('reset should reset the values of the variables to their initial state', () => {
+        // arrange
+        const wrapper = shallowMount(CreateModelButton);
+        wrapper.vm.modelName = "test";
+        wrapper.vm.tableName = "test";
+        wrapper.vm.description = "test";
+        // act
+        wrapper.vm.resetValues();
+        // assert
+        expect(wrapper.vm.modelName).toBe("");
+        expect(wrapper.vm.tableName).toBe("");
+        expect(wrapper.vm.description).toBe("");
+    }
+    );
+
 });
 
 
