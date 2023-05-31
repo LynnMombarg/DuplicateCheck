@@ -1,7 +1,7 @@
 // Authors: Silke
 // Jira-task: 145
 // Sprint: 3
-// Last modified: 30-05-2023
+// Last modified: 31-05-2023
 
 import { shallowMount } from '@vue/test-utils';
 
@@ -9,8 +9,7 @@ import SelectJobBody from "../../components/SelectJobBody.vue";
 
 describe('SelectJob', () => {
 
-
-        it('button click triggers select job pop up', () => {
+        it('button click triggers call with jobId on parent component', () => {
 
             // Arrange
             const parentComponentMock = {
@@ -33,18 +32,13 @@ describe('SelectJob', () => {
             wrapper.vm.$parent.selectJob = jest.fn();
             wrapper.vm.jobId = "test job id";
 
-
             // Act
             const button = wrapper.find('button');
             button.trigger('click');
             wrapper.vm.$nextTick();
 
-
             // Assert
            expect(wrapper.vm.$parent.selectJob).toHaveBeenCalledWith(wrapper.vm.jobId);
-           // does not work yet
-           //expect(parentComponentMock.methods.selectJob).toHaveBeenCalled();
-           //expect(parentComponentMock.jobId).toBe("test job id");
         });
 
     it('button click sets open to true', () => {
