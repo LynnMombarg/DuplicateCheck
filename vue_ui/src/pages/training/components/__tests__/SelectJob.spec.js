@@ -9,65 +9,48 @@ import SelectJobBody from "../../components/SelectJobBody.vue";
 
 
 
-describe('Create test', () => {
+describe('SelectJob', () => {
 
-    describe('Create test', () => {
-        // it('button click triggers select job pop up', () => {
-        //
-        //     const wrapper = shallowMount(SelectJobBody);
-        //
-        //     const button = wrapper.find('button');
-        //     button.trigger('click');
-        //
-        //     expect(wrapper.vm.open).toBe(true);
-        //     //expect(wrapper.vm.$parent.selectJob).toHaveBeenCalled();
-        // });
+    it('button click triggers select job pop up', () => {
 
-        // describe('Create test', () => {
-        //     it('button click triggers select job pop up', () => {
-        //
-        //         const mockParentComponent = {
-        //             methods: {
-        //                 selectJob: jest.fn(),
-        //             },
-        //         };
-        //
-        //         const wrapper = shallowMount(SelectJobBody
-        //             , {
-        //               mocks: {
-        //                   $parent: mockParentComponent,
-        //               }
-        //           });
-        //
-        //         const button = wrapper.find('button');
-        //         button.trigger('click');
-        //
-        //         expect(wrapper.vm.open).toBe(true);
-        //         // You can remove the expect statement for selectJobMock since it is not being used in this case
-        //     });
-        // });
+        // arrange
+        const parentComponentMock = {
+            methods: {
+                selectJob: jest.fn(),
+            },
+            data() {
+                return {
+                    jobId: "test job id",
+                };
+            },
+        };
 
-        it('button click triggers select job pop up', () => {
-            const selectJobMock = jest.fn();
 
-            const wrapper = shallowMount({
-                components: {
-                    SelectJobBody,
-                },
-                template: '<div><SelectJobBody @select-job="selectJob"/></div>',
-                methods: {
-                    selectJob: selectJobMock,
-                },
-            });
-
-            const selectJobBodyComponent = wrapper.findComponent(SelectJobBody);
-
-            selectJobBodyComponent.find('button').trigger('click');
-
-            expect(selectJobBodyComponent.vm.open).toBe(true);
-            expect(selectJobMock).toHaveBeenCalled();
+        const wrapper = shallowMount(SelectJobBody, {
+            parentComponent: {
+                $parent: parentComponentMock,
+            },
         });
-});
+
+        // act
+        const button = wrapper.find('button');
+        button.trigger('click');
+        wrapper.vm.$nextTick();
+        wrapper.vm.$nextTick();
+
+        // assert
+        expect(wrapper.vm.open).toBe(true);
+        //expect(wrapper.vm.jobId).toBe("test job id");
+    });
+
+    it('is initialised with the right values', () => {
+
+        const wrapper = shallowMount(SelectJobBody);
+
+        expect(wrapper.vm.open).toBe(false);
+        expect(wrapper.vm.job).toBe(undefined);
+    });
+
 });
 
 
