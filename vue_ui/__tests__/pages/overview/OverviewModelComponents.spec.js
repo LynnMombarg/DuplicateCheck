@@ -92,6 +92,4 @@ describe('ModelComponent', () => {
     // Assert
     expect(result).toBe(false);
   });
-
 });
-
