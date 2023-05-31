@@ -28,7 +28,7 @@ export class AuthDAO {
           doc.accessToken = access;
           doc.refreshToken = refresh;
           doc.jwtToken = jwt;
-          doc.save();
+          this.authModel.create(doc);
         } else {
           const auth = new this.authModel({
             orgId: id,
@@ -36,7 +36,7 @@ export class AuthDAO {
             refreshToken: refresh,
             jwtToken: jwt,
           });
-          auth.save();
+          this.authModel.create(doc);
         }
       });
   }
@@ -48,7 +48,7 @@ export class AuthDAO {
       .then((doc) => {
         if (doc) {
           doc.accessToken = access;
-          doc.save();
+          this.authModel.create(doc);
         }
       });
   }
@@ -70,11 +70,7 @@ export class AuthDAO {
   }
 
   blackListToken(id: string, jwt: string) {
-    const authBlacklist = new this.authBlacklistModel({
-      orgId: id,
-      jwtToken: jwt,
-    });
-    authBlacklist.save();
+    this.authBlacklistModel.create({ orgId: id, jwtToken: jwt });
   }
 
   isBlacklisted(id: string, jwt: string) {
