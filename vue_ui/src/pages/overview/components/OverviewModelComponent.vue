@@ -11,7 +11,7 @@
         <div class="flex flex-row">
           <svg v-if="isContacts(this.model.tableName)" fill="white" view-box="0 0 24 24" stroke-width="1.5" stroke="white"
           style="posistion: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
-            <use xlink:href="@/assets/symbols.svg#contact"></use>
+            <use xlink:href="../../../assets/symbols.svg#contact"></use>
 
           </svg>
 
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import OverviewDropdownComponent from "@/pages/overview/components/OverviewDropdownComponent.vue";
+import OverviewDropdownComponent from "./OverviewDropdownComponent.vue";
 
 export default {
   name: "OverviewModelComponent",
