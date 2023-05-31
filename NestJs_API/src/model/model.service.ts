@@ -21,6 +21,7 @@ export class ModelService {
     private readonly pythonDAO: PythonDAO,
     private readonly salesforceDAO: SalesforceDAO,
     private readonly authDAO: AuthDAO,
+    private readonly trainingDAO: TrainingDAO,
   ) {}
 
   getAllModels(orgId: string): Promise<ModelDTO[]> {
@@ -44,6 +45,7 @@ export class ModelService {
   async deleteModel(orgId: string, modelId: string): Promise<void> {
     await this.modelDAO.deleteModel(modelId, orgId);
     await this.pythonDAO.deleteModel(modelId);
+    await this.trainingDAO.deleteTrainings(modelId);
   }
 
   async getJobs(tableName: string, orgId: string): Promise<JobDTO[]> {

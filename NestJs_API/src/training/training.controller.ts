@@ -32,6 +32,7 @@ export class TrainingController {
     return this.trainingService.selectJob(
       training.jobId,
       training.tableName,
+      training.modelId,
       req.user.orgId,
     );
   }
