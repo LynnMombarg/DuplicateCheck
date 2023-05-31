@@ -5,7 +5,7 @@
 
 import { shallowMount } from '@vue/test-utils';
 
-import SelectJobBody from "../../components/SelectJobBody.vue";
+import SelectJobBody from "../../../src/pages/training/components/SelectJobBody.vue";
 
 describe('SelectJob', () => {
 
