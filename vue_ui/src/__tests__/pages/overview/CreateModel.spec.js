@@ -4,7 +4,7 @@
 // Last modified: 30-05-2023
 
 import { shallowMount } from '@vue/test-utils';
-import CreateModelButton from "../CreateModelButton.vue"
+import CreateModelButton from "../../../pages/overview/components/CreateModelButton.vue"
 
 describe('Create test', () => {
     
