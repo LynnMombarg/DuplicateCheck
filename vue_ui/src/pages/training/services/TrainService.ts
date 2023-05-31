@@ -3,7 +3,7 @@
 // Sprint: 3
 // Last modified: 23-05-2023
 
-export async function selectJob(jobId, tableName, modelId) {
+export async function selectJob(jobId: string, tableName: string, modelId: string) {
   const response = await fetch("training", {
     method: "POST",
     headers: {
@@ -21,7 +21,7 @@ export async function selectJob(jobId, tableName, modelId) {
   return await response.text();
 }
 
-async function checkForRecords(trainingId) {
+async function checkForRecords(trainingId: string) {
   console.log(trainingId);
   const response = await fetch(
     "training/check-records/?trainingId=" + trainingId,
@@ -38,7 +38,7 @@ async function checkForRecords(trainingId) {
   return await response.text();
 }
 
-async function getRecords(trainingId) {
+async function getRecords(trainingId: string) {
   if (await checkForRecords(trainingId)) {
     const response = await fetch(
       "training/records?trainingId=" + trainingId,
@@ -55,7 +55,7 @@ async function getRecords(trainingId) {
   }
 }
 
-export async function getMappedRecords(trainingId) {
+export async function getMappedRecords(trainingId: string) {
   const records = await getRecords(trainingId);
   if (records.records[0] === null) {
     return null;
@@ -76,7 +76,7 @@ export async function getMappedRecords(trainingId) {
   return mappedRecords;
 }
 
-export async function giveAnswer(answer, trainingId) {
+export async function giveAnswer(answer: string, trainingId: string) {
   const response = await fetch("training/give-answer", {
     method: "PUT",
     headers: {
@@ -90,7 +90,7 @@ export async function giveAnswer(answer, trainingId) {
   return await response.json();
 }
 
-export async function saveTraining(modelId, trainingId) {
+export async function saveTraining(modelId: string, trainingId: string) {
   const response = await fetch("training/save", {
       method: "PUT",
       headers: {
