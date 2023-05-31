@@ -3,7 +3,7 @@ Authors: Lynn, Roward, Diederik, Silke
 Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in python, 116 - Model trainen in Python
 176 - Python endpoint execute model
 Sprint: 1, 2, 3, 4
-Last modified: 26-05-2023
+Last modified: 31-05-2023
 '''
 
 from fastapi import FastAPI

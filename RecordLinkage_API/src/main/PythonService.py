@@ -2,7 +2,7 @@
 Authors: Lynn, Roward, Diederik
 Jira-task: 4 - Model aanmaken in Python, 116 - Model trainen in Python
 Sprint: 2, 3
-Last modified: 16-05-2023
+Last modified: 31-05-2023
 '''
 
 import os

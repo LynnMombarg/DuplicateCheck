@@ -2,7 +2,7 @@
 Authors: Lynn, Roward, Diederik
 Jira-task: 30 - RecordLinkage installeren in Python, 116 - Model trainen in Python
 Sprint: 1, 3
-Last modified: 23-05-2023
+Last modified: 31-05-2023
 '''
 
 import pandas as pd
