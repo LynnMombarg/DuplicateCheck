@@ -7,6 +7,28 @@ import { AuthDTO } from '../../auth/dto/auth.dto';
 describe('SalesforceDAO', () => {
   let salesforcedao: SalesforceDAO;
 
+  const jsforceMock = {
+    Connection: jest.fn().mockImplementation(() => ({
+      oauth2: {
+        loginUrl: 'https://login.salesforce.com',
+        clientId: 'mockClientId',
+        clientSecret: 'mockClientSecret',
+        redirectUri: 'mockRedirectUri',
+      },
+      on: jest.fn(),
+      apex: {
+        post: jest.fn(),
+      },
+      query: jest.fn(),
+    })),
+    OAuth2: jest.fn().mockImplementation(() => ({
+      loginUrl: 'https://login.salesforce.com',
+      clientId: 'mockClientId',
+      clientSecret: 'mockClientSecret',
+      redirectUri: 'mockRedirectUri',
+    })),
+  };
+
   const mockedAuthDAO = {
     getTokensByOrgId: jest.fn(),
   };
@@ -62,12 +84,16 @@ describe('SalesforceDAO', () => {
       const matchIndexes = 'match indexes';
       const tokens = authDTO;
 
+      // make sure the js force mock is used
+      jest.mock('jsforce', () => jsforceMock);
+
       await salesforcedao.getMatchRecords(
         columns,
         tableName,
         matchIndexes,
         tokens,
       );
+
       expect(mockedAuthDAO.getTokensByOrgId).toHaveBeenCalled();
       expect(mockedAuthService.updateToken).toHaveBeenCalled();
     });
