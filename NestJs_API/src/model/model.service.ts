@@ -69,7 +69,7 @@ export class ModelService {
   async executeModel(
     executeModel: ExecuteModelDTO,
     orgId: string,
-  ): Promise<string> {
+  ): Promise<[string, string]> {
     const authDTO = await this.authDAO.getTokensByOrgId(orgId);
     const fields = await this.salesforceDAO.getFields(
       executeModel.tableName,

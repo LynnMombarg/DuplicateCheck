@@ -40,7 +40,7 @@ export class PythonDAO {
     recordA: string,
     recordB: string,
     modelId: string,
-  ): Promise<string> {
+  ): Promise<[string, string]> {
     const response = await axios
       .post(
         `http://duplicatecheck-python-backend-1:8000/execute-model-on-records/${modelId}`,
@@ -50,6 +50,6 @@ export class PythonDAO {
         },
       )
       .catch();
-    return response.data['percentage'];
+    return [String(response.data['is_match']), String(response.data['percentage'])];
   }
 }

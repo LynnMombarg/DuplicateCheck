@@ -54,7 +54,7 @@ export class ModelController {
   executeModel(
     @Body() executeModel: ExecuteModelDTO,
     @Req() req,
-  ): Promise<string> {
+  ): Promise<[string, string]> {
     return this.modelService.executeModel(executeModel, req.user.orgId);
   }
 }
