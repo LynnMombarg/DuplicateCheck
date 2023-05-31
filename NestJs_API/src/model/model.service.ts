@@ -1,4 +1,4 @@
-// Authors: Marloes, Roward
+// Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110, 175
 // Sprint: 2, 3, 4
 // Last modified: 26-05-2023
@@ -13,6 +13,7 @@ import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { JobDTO } from './dto/job-model.dto';
 import { AuthDAO } from '../auth/auth.dao';
 import { ExecuteModelDTO } from './dto/execute-model.dto';
+import { TrainingDAO } from '../training/training.dao';
 
 @Injectable()
 export class ModelService {
