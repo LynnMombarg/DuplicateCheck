@@ -13,7 +13,7 @@ describe('TrainingDTO', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TrainingDTO],
+      providers: [TrainingDTO, DatasetDTO],
     }).compile();
 
     trainingDTO = module.get<TrainingDTO>(TrainingDTO);
@@ -35,6 +35,7 @@ describe('TrainingDTO', () => {
       const trainingDTO = new TrainingDTO(
         'trainingId',
         'jobId',
+        'modelId',
         datasetDTO,
         datasetDTO,
         [true],
@@ -42,6 +43,7 @@ describe('TrainingDTO', () => {
       expect(trainingDTO).toBeDefined();
       expect(trainingDTO.trainingId).toEqual('trainingId');
       expect(trainingDTO.orgId).toEqual('jobId');
+      expect(trainingDTO.modelId).toEqual('modelId');
       expect(trainingDTO.datasetA).toEqual(datasetDTO);
       expect(trainingDTO.datasetB).toEqual(datasetDTO);
       expect(trainingDTO.matches).toEqual([true]);
