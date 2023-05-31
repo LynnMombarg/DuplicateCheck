@@ -3,7 +3,7 @@
 // Sprint: 3
 // Last modified: 23-05-2023
 
-export async function getJobs(tableName: string) {
+export async function getJobs(tableName) {
   const response = await fetch("model/jobs?tableName=" + tableName, {
     method: "GET",
     headers: {

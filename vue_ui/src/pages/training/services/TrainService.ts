@@ -21,7 +21,7 @@ export async function selectJob(jobId: string, tableName: string, modelId: strin
   return await response.text();
 }
 
-async function checkForRecords(trainingId: string) {
+async function checkForRecords(trainingId) {
   console.log(trainingId);
   const response = await fetch(
     "training/check-records/?trainingId=" + trainingId,
@@ -38,7 +38,7 @@ async function checkForRecords(trainingId: string) {
   return await response.text();
 }
 
-async function getRecords(trainingId: string) {
+async function getRecords(trainingId) {
   if (await checkForRecords(trainingId)) {
     const response = await fetch(
       "training/records?trainingId=" + trainingId,
@@ -55,7 +55,7 @@ async function getRecords(trainingId: string) {
   }
 }
 
-export async function getMappedRecords(trainingId: string) {
+export async function getMappedRecords(trainingId) {
   const records = await getRecords(trainingId);
   if (records.records[0] === null) {
     return null;
@@ -76,7 +76,7 @@ export async function getMappedRecords(trainingId: string) {
   return mappedRecords;
 }
 
-export async function giveAnswer(answer: string, trainingId: string) {
+export async function giveAnswer(answer, trainingId) {
   const response = await fetch("training/give-answer", {
     method: "PUT",
     headers: {
@@ -90,7 +90,7 @@ export async function giveAnswer(answer: string, trainingId: string) {
   return await response.json();
 }
 
-export async function saveTraining(modelId: string, trainingId: string) {
+export async function saveTraining(modelId, trainingId) {
   const response = await fetch("training/save", {
       method: "PUT",
       headers: {
