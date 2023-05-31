@@ -1,9 +1,9 @@
-// Authors: Marloes, Diederik
-// Jira-task: 132, 133, 134, 162
+// Authors: Marloes, Diederik, Silke
+// Jira-task: 132, 133, 134, 162, 166
 // Sprint: 3
 // Last modified: 23-05-2023
 
-export async function selectJob(jobId: string, tableName: string) {
+export async function selectJob(jobId: string, tableName: string, modelId: string) {
   const response = await fetch("training", {
     method: "POST",
     headers: {
@@ -12,6 +12,7 @@ export async function selectJob(jobId: string, tableName: string) {
     body: JSON.stringify({
       jobId: jobId,
       tableName: tableName,
+      modelId: modelId,
     }),
   });
   if (response.status === 404) {

@@ -54,6 +54,7 @@ describe('ModelController', () => {
         'modelName',
         'tableName',
         'modelDescription',
+        'modelId',
       );
 
       // Act
