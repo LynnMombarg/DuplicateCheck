@@ -42,8 +42,8 @@ describe("TrainWindow.vue", () => {
     wrapper.vm.saveTraining = jest.fn();
     wrapper.vm.answerCounter = 2;
     wrapper.vm.$nextTick().then(() => {
-        const buttonSave = wrapper.find('#button-save');
-      buttonSave.trigger('click');
+      const buttonSave = wrapper.find("#button-save");
+      buttonSave.trigger("click");
     });
   });
 });
