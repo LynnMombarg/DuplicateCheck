@@ -1,7 +1,7 @@
-// Authors: Marloes, Roward
-// Jira-task: 107, 110, 175
-// Sprint: 2, 3, 4
-// Last modified: 26-05-2023
+// Authors: Marloes, Roward, Silke
+// Jira-task: 107, 110, 166
+// Sprint: 2, 3
+// Last modified: 15-05-2023
 
 import { Injectable } from '@nestjs/common';
 import { ModelDTO } from './dto/model.dto';
@@ -12,6 +12,7 @@ import { v4 as uuid } from 'uuid';
 import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { JobDTO } from './dto/job-model.dto';
 import { AuthDAO } from '../auth/auth.dao';
+import { TrainingDAO } from '../training/training.dao';
 import { ExecuteModelDTO } from './dto/execute-model.dto';
 
 @Injectable()
@@ -21,6 +22,7 @@ export class ModelService {
     private readonly pythonDAO: PythonDAO,
     private readonly salesforceDAO: SalesforceDAO,
     private readonly authDAO: AuthDAO,
+    private readonly trainingDAO: TrainingDAO,
   ) {}
 
   getAllModels(orgId: string): Promise<ModelDTO[]> {
@@ -44,6 +46,7 @@ export class ModelService {
   async deleteModel(orgId: string, modelId: string): Promise<void> {
     await this.modelDAO.deleteModel(modelId, orgId);
     await this.pythonDAO.deleteModel(modelId);
+    await this.trainingDAO.deleteTrainings(modelId);
   }
 
   async getJobs(tableName: string, orgId: string): Promise<JobDTO[]> {
