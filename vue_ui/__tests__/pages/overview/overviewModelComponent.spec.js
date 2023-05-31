@@ -11,7 +11,7 @@ describe('ModelComponent', () => {
   const wrapper = shallowMount(OverviewModelComponent, {
     propsData: {
       model: {
-        modelId: 1,
+        modelId: "1",
         tableName: "testTable",
         modelName: "test Model",
         modelDescription: "test Model Description",
