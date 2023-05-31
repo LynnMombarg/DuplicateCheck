@@ -11,7 +11,6 @@
         <div class="flex flex-row">
           <svg v-if="isContacts(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="position: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#contact"></use>
-
           </svg>
 
           <svg v-if="isLeads(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="position: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
@@ -37,7 +36,7 @@
         {{ this.model.modelDescription }}
       </p>
     </div>
-    <div style="margin-left: 1rem;">
+    <div class="select-none" style="margin-left: 1rem;">
       <OverviewDropdownComponent :modelId="this.model.modelId" />
     </div>
   </div>
@@ -65,6 +64,9 @@ export default {
     isAccounts(tableName) {
       return tableName === 'accounts';
     },
+    executeModel(tableName, modelId, recordId1, recordId2) {
+      return this.$parent.executeModel(tableName, modelId, recordId1, recordId2);
+    }
   },
 };
 </script>

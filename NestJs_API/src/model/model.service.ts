@@ -22,7 +22,7 @@ export class ModelService {
     private readonly authDAO: AuthDAO,
   ) {}
 
-  async getAllModels(orgId: string): Promise<ModelDTO[]> {
+  getAllModels(orgId: string): Promise<ModelDTO[]> {
     return this.modelDAO.getAllModels(orgId);
   }
 

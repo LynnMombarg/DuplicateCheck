@@ -15,7 +15,7 @@ import { validationSchema } from './config/validation';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: 'src/config/env/' + process.env.NODE_ENV + '.env',
+      envFilePath: `src/config/env/${process.env.NODE_ENV}.env`,
       validationSchema,
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI),

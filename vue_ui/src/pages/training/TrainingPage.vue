@@ -42,7 +42,7 @@
 		<Footer />
 	</div>
 </template>
-  
+
 <script>
 import { getJobs } from './services/GetJobs';
 import SelectJobBody from './components/SelectJobBody.vue';
@@ -81,17 +81,14 @@ export default {
 		this.jobs = await getJobs(this.model.tableName);
 	},
 	methods: {
-		async signOut() {
-			await signOut()
-			this.$store.commit('removeUser');
-			this.$store.commit('removeToken');
-			this.$store.commit('removeModels');
-			this.$router.push({ name: 'SignIn' });
-		},
 		async selectJob(jobId) {
 			this.modelId = await this.$route.params.modelId;
 			this.model = await this.$store.getters.getModelById(this.modelId);
 			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1));
+			if (!this.trainingId) {
+				alert("No training available for this job");
+				this.$router.push({ name: "OverviewPage" });
+			}
 			await this.getRecords();
 			this.selectJobActive = false;
 			this.trainingActive = true;

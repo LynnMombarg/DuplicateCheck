@@ -60,89 +60,91 @@ describe('TrainingController', () => {
       .useValue(mockedAuthGuard)
       .compile();
 
+    trainingController = moduleRef.get<TrainingController>(TrainingController);
+  });
+
+  describe('Controller defined', () => {
     it('should be defined', () => {
       expect(trainingController).toBeDefined();
     });
-    describe('saveTraining', () => {
-      it('should call saveTraining on TrainingService', () => {
-        // Arrange
-        const json = { modelId: 'modelId', trainingId: 'trainingId' };
-        const req = { user: { userId: '123' } };
+  });
 
-        // Act
-        trainingController.saveTraining(json, req);
+  describe('saveTraining', () => {
+    it('should call saveTraining on TrainingService', () => {
+      // Arrange
+      const json = { modelId: 'modelId', trainingId: 'trainingId' };
 
-        // Assert
-        expect(mockedTrainingService.saveTraining).toHaveBeenCalledWith(
-          'modelId',
-          'trainingId',
-          '123',
-        );
-      });
+      // Act
+      trainingController.saveTraining(json);
+
+      // Assert
+      expect(mockedTrainingService.saveTraining).toHaveBeenCalledWith(
+        'modelId',
+        'trainingId',
+      );
     });
-    describe('getRecords', () => {
-      it('should call getRecords on TrainingService', () => {
-        // Arrange
-        const trainingID = '123';
+  });
 
-        // Act
-        trainingController.getRecords(trainingID);
+  describe('getRecords', () => {
+    it('should call getRecords on TrainingService', () => {
+      // Arrange
+      const trainingID = '123';
 
-        // Assert
-        expect(mockedTrainingService.getRecords).toHaveBeenCalledWith(
-          trainingID,
-        );
-      });
+      // Act
+      trainingController.getRecords(trainingID);
+
+      // Assert
+      expect(mockedTrainingService.getRecords).toHaveBeenCalledWith(trainingID);
     });
+  });
 
-    describe('giveAnswer', () => {
-      it('should call giveAnswer on TrainingService', () => {
-        // Arrange
-        const answer = new AnswerDTO('123', true);
+  describe('giveAnswer', () => {
+    it('should call giveAnswer on TrainingService', () => {
+      // Arrange
+      const answer = new AnswerDTO('123', true);
 
-        // Act
-        trainingController.giveAnswer(answer);
+      // Act
+      trainingController.giveAnswer(answer);
 
-        // Assert
-        expect(mockedTrainingService.giveAnswer).toHaveBeenCalledWith(
-          answer.answer,
-          answer.trainingId,
-        );
-      });
+      // Assert
+      expect(mockedTrainingService.giveAnswer).toHaveBeenCalledWith(
+        answer.answer,
+        answer.trainingId,
+      );
     });
+  });
 
-    describe('checkForRecords', () => {
-      it('should call checkForRecords on TrainingService', () => {
-        // Arrange
-        const trainingID = '123';
+  describe('checkForRecords', () => {
+    it('should call checkForRecords on TrainingService', () => {
+      // Arrange
+      const trainingID = '123';
 
-        // Act
-        trainingController.checkForRecords(trainingID);
+      // Act
+      trainingController.checkForRecords(trainingID);
 
-        // Assert
-        expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
-          trainingID,
-        );
-      });
+      // Assert
+      expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
+        trainingID,
+      );
     });
+  });
 
-    describe('selectJob', () => {
-      it('should call selectJob on TrainingService', () => {
-        // Arrange
-        const CreateTraining = new CreateTrainingDTO('jobId', 'tableName');
+  describe('selectJob', () => {
+    it('should call selectJob on TrainingService', () => {
+      // Arrange
+      const CreateTraining = new CreateTrainingDTO('jobId', 'tableName');
 
-        const req = { user: { userId: 'userId' } };
+      const req = { user: { orgId: 'userId' } };
 
-        // Act
-        trainingController.selectJob(CreateTraining, req);
+      // Act
+      trainingController.selectJob(CreateTraining, req);
 
-        // Assert
-        expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
-          CreateTraining.jobId,
-          CreateTraining.tableName,
-          req.user.userId,
-        );
-      });
+      // Assert
+      expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
+        CreateTraining.jobId,
+        CreateTraining.tableName,
+        'userId',
+      );
     });
   });
 });

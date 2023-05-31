@@ -7,9 +7,9 @@
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Auth, AuthBlacklist } from './auth.schema';
+import { Auth, AuthBlacklist } from './schema/auth.schema';
 import mongoose from 'mongoose';
-import { AuthDTO } from './auth.dto';
+import { AuthDTO } from './dto/auth.dto';
 
 @Injectable()
 export class AuthDAO {
@@ -19,54 +19,47 @@ export class AuthDAO {
     private authBlacklistModel: mongoose.Model<AuthBlacklist>,
   ) {}
 
-  storeToken(
-    orgId: string,
-    accessToken: string,
-    refresh_token: string,
-    jwtToken: string,
-  ): void {
-    console.log('Storing token');
-    console.log(orgId);
+  storeToken(id: string, access: string, refresh: string, jwt: string): void {
     this.authModel
-      .findOne({ orgId: orgId })
+      .findOne({ orgId: id })
       .exec()
       .then((doc) => {
         if (doc) {
-          doc.accessToken = accessToken;
-          doc.refreshToken = refresh_token;
-          doc.jwtToken = jwtToken;
-          doc.save();
+          doc.accessToken = access;
+          doc.refreshToken = refresh;
+          doc.jwtToken = jwt;
+          this.authModel.create(doc);
         } else {
           const auth = new this.authModel({
-            orgId: orgId,
-            accessToken: accessToken,
-            refreshToken: refresh_token,
-            jwtToken: jwtToken,
+            orgId: id,
+            accessToken: access,
+            refreshToken: refresh,
+            jwtToken: jwt,
           });
-          auth.save();
+          this.authModel.create(doc);
         }
       });
   }
 
-  updateToken(accessToken: string): void {
+  updateToken(access: string): void {
     this.authModel
-      .findOne({ accessToken: accessToken })
+      .findOne({ accessToken: access })
       .exec()
       .then((doc) => {
         if (doc) {
-          doc.accessToken = accessToken;
-          doc.save();
+          doc.accessToken = access;
+          this.authModel.create(doc);
         }
       });
   }
 
-  removeTokens(orgId: string): void {
-    this.authModel.deleteOne({ orgId: orgId }).exec();
+  removeTokens(id: string): void {
+    this.authModel.deleteOne({ orgId: id }).exec();
   }
 
-  async getTokensByOrgId(orgId: string): Promise<AuthDTO> {
-    return await this.authModel
-      .findOne({ orgId: orgId })
+  getTokensByOrgId(id: string): Promise<AuthDTO> {
+    return this.authModel
+      .findOne({ orgId: id })
       .exec()
       .then((doc) => {
         return new AuthDTO(doc.orgId, doc.accessToken, doc.refreshToken);
@@ -76,24 +69,20 @@ export class AuthDAO {
       });
   }
 
-  blackListToken(orgId: string, jwtToken: string) {
-    const authBlacklist = new this.authBlacklistModel({
-      orgId: orgId,
-      jwtToken: jwtToken,
-    });
-    authBlacklist.save();
+  blackListToken(id: string, jwt: string) {
+    this.authBlacklistModel.create({ orgId: id, jwtToken: jwt });
   }
 
-  isBlacklisted(orgId: string, jwtToken: string) {
+  isBlacklisted(id: string, jwt: string) {
     return this.authBlacklistModel
-      .findOne({ orgId: orgId, jwtToken: jwtToken })
+      .findOne({ orgId: id, jwtToken: jwt })
       .exec()
       .then((doc) => {
         return !!doc;
       });
   }
 
-  removeBlacklistedToken(orgId: string) {
-    this.authBlacklistModel.deleteOne({ orgId: orgId }).exec();
+  removeBlacklistedToken(id: string) {
+    this.authBlacklistModel.deleteOne({ orgId: id }).exec();
   }
 }

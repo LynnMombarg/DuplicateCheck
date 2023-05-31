@@ -14,6 +14,9 @@ export async function selectJob(jobId: string, tableName: string) {
       tableName: tableName,
     }),
   });
+  if (response.status === 404) {
+    return null;
+  }
   return await response.text();
 }
 
@@ -28,6 +31,9 @@ async function checkForRecords(trainingId: string) {
       },
     }
   );
+  if (response.status === 404) {
+    return false;
+  }
   return await response.text();
 }
 
@@ -44,7 +50,6 @@ async function getRecords(trainingId: string) {
     );
     return await response.json();
   } else {
-    console.log('Ik ben null');
     return null;
   }
 }
