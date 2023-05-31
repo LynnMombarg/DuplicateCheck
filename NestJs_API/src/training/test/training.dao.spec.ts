@@ -20,6 +20,7 @@ describe('TrainingDAO', () => {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
     orgId: 'req.user.userId',
+    modelId: 'modelId',
     datasetA: {
       records: [
         {
@@ -47,74 +48,6 @@ describe('TrainingDAO', () => {
       _id: { $oid: '6461fcde17a65a5fbd3809e4' },
     },
     matches: [],
-    __v: 0,
-  };
-
-  const mockTrainingWithOneMatch = {
-    _id: '6461fddec0437f4f44cbdb53',
-    trainingId: 'trainingId',
-    orgId: 'req.user.userId',
-    datasetA: {
-      records: [
-        {
-          data: ['1', 'Hoi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-        },
-        {
-          data: ['2', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e3' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e1' },
-    },
-    datasetB: {
-      records: [
-        {
-          data: ['1', 'Hi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e6' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e4' },
-    },
-    matches: [true],
-    __v: 0,
-  };
-
-  const mockTrainingWithAllMatches = {
-    _id: '6461fddec0437f4f44cbdb53',
-    trainingId: 'trainingId',
-    orgId: 'req.user.userId',
-    datasetA: {
-      records: [
-        {
-          data: ['1', 'Hoi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-        },
-        {
-          data: ['2', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e3' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e1' },
-    },
-    datasetB: {
-      records: [
-        {
-          data: ['1', 'Hi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e6' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e4' },
-    },
-    matches: [true, true],
     __v: 0,
   };
 

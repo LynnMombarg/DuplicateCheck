@@ -132,7 +132,11 @@ describe('TrainingController', () => {
   describe('selectJob', () => {
     it('should call selectJob on TrainingService', () => {
       // Arrange
-      const CreateTraining = new CreateTrainingDTO('jobId', 'tableName');
+      const CreateTraining = new CreateTrainingDTO(
+        'jobId',
+        'tableName',
+        'modelId',
+      );
 
       const req = { user: { orgId: 'userId' } };
 
@@ -143,6 +147,7 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
         CreateTraining.jobId,
         CreateTraining.tableName,
+        'modelId',
         'userId',
       );
     });
