@@ -3,7 +3,7 @@ import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '../auth.guard';
-import { AuthDTO } from '../auth.dto';
+import { AuthDTO } from '../dto/auth.dto';
 import { AuthDAO } from '../auth.dao';
 
 describe('AuthController', () => {

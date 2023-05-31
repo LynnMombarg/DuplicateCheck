@@ -9,7 +9,9 @@
             <div class="flex items-center w-full px-2 rounded-md">
                     <table class="w-full">
                         <tbody class="flex flex-col w-full">
-                            <tr v-for="column in this.record1.columns" style="border-top-width: 1px; border-bottom-width: 1px; border-color: white;" class="flex justify-between w-full rounded-md" :class="getRowColor(column)">
+                            <tr v-for="column in this.record1.columns"
+                            style="border-top-width: 1px; border-bottom-width: 1px; border-color: white;"
+                            class="flex justify-between w-full rounded-md" :class="getRowColor(column)">
                                 <td class="column-cell">
                                     {{ column }}
                                 </td>
@@ -45,10 +47,10 @@ export default {
     },
     methods: {
         getRowColor(column) {
-            if (this.record1.values[this.record1.columns.indexOf(column)] != this.record2.values[this.record2.columns.indexOf(column)]) {
+            if (this.record1.values[this.record1.columns.indexOf(column)] !== this.record2.values[this.record2.columns.indexOf(column)]) {
                 return "record-different";
             } else {
-                return "record-same";
+                return "bg-gray-100";
             }
         }
     },
@@ -61,9 +63,9 @@ export default {
     margin: 0.25rem;
 }
 .record-different {
-    background-color: rgba(255, 165, 0, 0.5); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
+    background-color: rgb(249, 105, 0); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
 }
 .record-same {
-    background-color: rgba(0, 255, 0, 0.3); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
+    background-color: rgb(137, 147, 124); /* Replace 0.2 with your desired opacity value (range: 0 to 1) */
 }
 </style>

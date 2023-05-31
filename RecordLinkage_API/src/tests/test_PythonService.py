@@ -21,11 +21,11 @@ class test_PythonService(TestCase):
     def setUp(self) -> None:
         self.sut = PythonService()
         self.service = PythonService()
-        self.service.createModel('test')
+        self.service.create_model('test')
     
     def test_createModel(self):
         try:
-            self.sut.createModel('test')
+            self.sut.create_model('test')
         except:
             self.fail()
         
@@ -35,14 +35,14 @@ class test_PythonService(TestCase):
         jsonObject = json.loads(jsonString)
         
         with self.assertRaises(FileNotFoundError):
-            self.sut.trainModel('notExisting', jsonObject)
+            self.sut.train_model('notExisting', jsonObject)
             
 
     def test_trainExistingModel(self):
         try:
             jsonString = '{"recordset1": [{"name": "Piet", "lastname": "Janssen", "age": "18", "country": "NL"}, {"name": "Jan", "lastname": "Pietersen", "age": "19", "country": "BE"}], "recordset2": [{"name": "Henk", "lastname": "van Dijk", "age": "20", "country": "DE"}, {"name": "Piet", "lastname": "Jansen", "age": "18", "country": "NL"}], "golden_matches_index": [{"index1": 0, "index2": 1}]}'
             jsonObject = json.loads(jsonString)
-            self.sut.trainModel('test', jsonObject)
+            self.sut.train_model('test', jsonObject)
         except:
             self.fail()
         

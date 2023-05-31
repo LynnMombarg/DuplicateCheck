@@ -12,15 +12,23 @@ import { Model, ModelSchema } from './schema/model.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
 import { SalesforceModule } from '../salesforce/salesforce.module';
+import { TrainingModule } from '../training/training.module';
+import { TrainingDAO } from '../training/training.dao';
+import { Training, TrainingSchema } from '../training/schema/training.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Model.name, schema: ModelSchema }]),
+    MongooseModule.forFeature([
+      { name: Model.name, schema: ModelSchema },
+      { name: Training.name, schema: TrainingSchema },
+    ]),
+
     PythonModule,
     AuthModule,
     SalesforceModule,
+    TrainingModule,
   ],
   controllers: [ModelController],
-  providers: [ModelService, ModelDAO],
+  providers: [ModelService, ModelDAO, TrainingDAO],
 })
 export class ModelModule {}
