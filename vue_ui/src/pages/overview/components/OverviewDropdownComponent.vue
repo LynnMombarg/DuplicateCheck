@@ -77,12 +77,15 @@
 
                 <!--this is supposed to look like : https://flowbite.com/docs/components/progress/, With label outside-->
                 <div v-if="showResult" class="mt-2 flex flex-col">
+                  <div class="flex flex-col" style="margin-top: 1rem;">
+                    <div class="text-lg"> Results: </div>
+                  </div>
                 <div class="flex justify-between mb-1">
                   <span class="text-base font-medium text-blue-700 dark:text-white"> Percentage </span>
                   <span class="text-sm font-medium text-blue-700 dark:text-white"> {{this.percentage}}</span>
                 </div>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                  <div class="bg-sky-400 h-2.5 rounded-full" :style="{ width: `${percentage}%` }"></div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="margin-bottom: 1rem">
+                  <div class="bg-sky-400 h-2.5 rounded-full "  :style="{ width: `${percentage}%` }"></div>
                 </div>
                 </div>
 
@@ -142,7 +145,7 @@ export default {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
         this.percentage = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
         this.showResult = true;
-        //this.percentage=70; -- for testing
+        // this.percentage=70; // for testing
       } else {
         this.warningVisible = true;
       }
