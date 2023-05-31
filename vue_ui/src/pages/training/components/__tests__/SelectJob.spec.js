@@ -7,46 +7,64 @@ import { shallowMount } from '@vue/test-utils';
 
 import SelectJobBody from "../../components/SelectJobBody.vue";
 
-
-
 describe('SelectJob', () => {
 
-    it('button click triggers select job pop up', () => {
 
-        // arrange
-        const parentComponentMock = {
-            methods: {
-                selectJob: jest.fn(),
-            },
-            data() {
-                return {
-                    jobId: "test job id",
-                };
-            },
-        };
+        it('button click triggers select job pop up', () => {
+
+            // Arrange
+            const parentComponentMock = {
+                methods: {
+                    selectJob: jest.fn(),
+                },
+                data() {
+                    return {
+                        jobId: null,
+                    };
+                },
+            };
+
+            const wrapper = shallowMount(SelectJobBody, {
+                parentComponent: {
+                    parentComponentMock,
+                },
+            });
+
+            wrapper.vm.$parent.selectJob = jest.fn();
+            wrapper.vm.jobId = "test job id";
 
 
-        const wrapper = shallowMount(SelectJobBody, {
-            parentComponent: {
-                $parent: parentComponentMock,
-            },
+            // Act
+            const button = wrapper.find('button');
+            button.trigger('click');
+            wrapper.vm.$nextTick();
+
+
+            // Assert
+           expect(wrapper.vm.$parent.selectJob).toHaveBeenCalledWith(wrapper.vm.jobId);
+           // does not work yet
+           //expect(parentComponentMock.methods.selectJob).toHaveBeenCalled();
+           //expect(parentComponentMock.jobId).toBe("test job id");
         });
 
-        // act
+    it('button click sets open to true', () => {
+        // Arrange
+        const wrapper = shallowMount(SelectJobBody);
+        wrapper.vm.$parent.selectJob = jest.fn();
+
+        // Act
         const button = wrapper.find('button');
         button.trigger('click');
         wrapper.vm.$nextTick();
-        wrapper.vm.$nextTick();
 
-        // assert
+        // Assert
         expect(wrapper.vm.open).toBe(true);
-        //expect(wrapper.vm.jobId).toBe("test job id");
     });
 
-    it('is initialised with the right values', () => {
-
+    it('select job body is initialised with the right values', () => {
+        // Arrange / Act
         const wrapper = shallowMount(SelectJobBody);
-
+        // Assert
         expect(wrapper.vm.open).toBe(false);
         expect(wrapper.vm.job).toBe(undefined);
     });
