@@ -43,6 +43,7 @@ class PythonService:
         model = self.load_model(model_id)
         model.train_unsupervised_model(copy.deepcopy(json_dataframe))  # Train the unsupervised model
         model.train_model(json_dataframe)
+        print('Trained')
         self.save_model(model_id, model)
 
     def delete_model(self, model_id):
@@ -51,6 +52,7 @@ class PythonService:
     def execute_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)
         matches = model.execute_model(json_dataframe)
+        print('Executed')
         return {
             'matches': [{'index1': match[0], 'index2': match[1]} for match in matches],
         }

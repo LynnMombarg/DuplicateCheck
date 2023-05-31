@@ -35,7 +35,6 @@ class RecordLinkageModel:
         self.set_compare_column(df_a)
         self.nr_of_trainings = self.nr_of_trainings + 1
         self.logreg.fit(self.get_features(df_a, df_b), golden_matches_index)
-        print('Trained')
 
     def execute_model(self, json_df):
         record_a = json_df['record1']
@@ -44,9 +43,8 @@ class RecordLinkageModel:
         del record_b['attributes']
         features = self.get_features(pd.json_normalize(record_a), pd.json_normalize(record_b))
         predictions = self.logreg.predict(features)
-        is_match = self.filter_matches(predictions) is None 
-        percentage = self.logreg.prob(features)
-        print(is_match)
+        is_match = (predictions.empty is False) 
+        percentage = self.logreg.prob(features).iloc[0]
         return is_match, percentage
 
     # Returns all pairs possible between recordset 1 and recordset 2
