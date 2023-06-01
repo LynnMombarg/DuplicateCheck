@@ -12,16 +12,11 @@ import { TrainingDAO } from '../training.dao';
 import { TrainingService } from '../training.service';
 import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 import { PythonDAO } from '../../python/python.dao';
+import { DatasetDTO } from '../dto/dataset.dto';
+import { RecordDTO } from '../dto/record.dto';
 
 describe('TrainingService', () => {
   let trainingservice: TrainingService;
-  const training = {
-    trainingId: 'training1',
-    userId: '123',
-    datasetA: {},
-    datasetB: {},
-    matches: {},
-  };
 
   const mockedTrainingDAO = {
     createTraining: jest.fn(),
@@ -29,7 +24,7 @@ describe('TrainingService', () => {
     saveAnswer: jest.fn(),
     checkForRecords: jest.fn(),
     getTraining: jest.fn(() => {
-      return training;
+      return mockedTrainingWithoutMatch;
     }),
   };
   const mockedAuthDAO = {
@@ -81,9 +76,13 @@ describe('TrainingService', () => {
   };
 
   const mockedSalesforceDAO = {
-    getDatasets: jest.fn(() => {
-      return mockedTrainingWithoutMatch;
-    }),
+    getDatasets: jest
+      .fn()
+      .mockResolvedValue([
+        new DatasetDTO([new RecordDTO(['hi']), new RecordDTO(['hi'])]),
+        new DatasetDTO([new RecordDTO(['hi']), new RecordDTO(['hi'])]),
+      ]),
+    getFields: jest.fn(),
   };
 
   const mockedPythonDAO = {
@@ -158,9 +157,10 @@ describe('TrainingService', () => {
         const jobId = 'test123';
         const userId = 'token';
         const tableName = 'test';
+        const modelId = 'test';
 
         // Act
-        trainingservice.selectJob(jobId, tableName, userId);
+        trainingservice.selectJob(jobId, tableName, userId, modelId);
 
         // Assert
         expect(mockedAuthDAO.getTokensByOrgId).toHaveBeenCalled();
@@ -171,9 +171,10 @@ describe('TrainingService', () => {
         const jobId = 'test123';
         const orgId = 'token';
         const tableName = 'test';
+        const modelId = 'test';
 
         // Act
-        await trainingservice.selectJob(jobId, tableName, orgId);
+        await trainingservice.selectJob(jobId, tableName, orgId, modelId);
 
         // Assert
         expect(mockedSalesforceDAO.getDatasets).toHaveBeenCalled();
@@ -187,7 +188,7 @@ describe('TrainingService', () => {
 
         mockedTrainingDAO.createTraining.mockReturnValueOnce({ _id: '123' });
         // Act
-        await trainingservice.selectJob(jobId, tableName, orgId);
+        await trainingservice.selectJob(jobId, tableName, orgId, 'modelId');
 
         // Assert
         expect(mockedTrainingDAO.createTraining).toHaveBeenCalled();
@@ -214,7 +215,7 @@ describe('TrainingService', () => {
       // Assert
       expect(mockedPythonDAO.saveTraining).toHaveBeenCalledWith(
         modelId,
-        training,
+        mockedTrainingWithoutMatch,
       );
     });
 
