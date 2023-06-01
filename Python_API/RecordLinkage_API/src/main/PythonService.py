@@ -23,7 +23,7 @@ class PythonService:
         model = RecordLinkageModel()
         filehandler = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..' , 'pickles', modelId + '.pkl'), 'wb')
         pickle.dump(model, filehandler)
-        BlobStorageDAO.upload_blob(modelId + '.pkl', filehandler.read())
+        self.blobStorageDAO.upload_blob_test()
         
     def loadModel(self, modelId):
         model: RecordLinkageModel
