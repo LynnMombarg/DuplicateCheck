@@ -26,11 +26,14 @@ describe('ModelService', () => {
   const mockedPythonDAO = {
     createModel: jest.fn(),
     deleteModel: jest.fn(),
+    executeModel: jest.fn(),
   };
   const mockedSalesforceDAO = {
     getJobs: jest.fn(),
     getFields: jest.fn(),
-    getRecords: jest.fn(),
+    getRecords: jest.fn(() => {
+      return [{ data: 'test' }, { data: 'test' }];
+    }),
   };
 
   const mockedTrainingDAO = {
@@ -173,6 +176,56 @@ describe('ModelService', () => {
 
       // Assert
       expect(mockedAuthDAO.getTokensByOrgId).toHaveBeenCalled();
+    });
+
+    it('should call getFields on salesforceDAO', () => {
+      // Arrange
+      const executeModel = new ExecuteModelDTO(
+        'tableName',
+        'id1',
+        'id2',
+        'modelId',
+      );
+      const orgId = 'orgId';
+
+      // Act
+      modelService.executeModel(executeModel, orgId);
+
+      // Assert
+      expect(mockedSalesforceDAO.getFields).toHaveBeenCalled();
+    });
+
+    it('should call getRecords on salesforceDAO', () => {
+      // Arrange
+      const executeModel = new ExecuteModelDTO(
+        'tableName',
+        'id1',
+        'id2',
+        'modelId',
+      );
+      const orgId = 'orgId';
+
+      // Act
+      modelService.executeModel(executeModel, orgId);
+
+      // Assert
+      expect(mockedSalesforceDAO.getRecords).toHaveBeenCalled();
+    });
+    it('should call executeModel on pythonDAO', () => {
+      // Arrange
+      const executeModel = new ExecuteModelDTO(
+        'tableName',
+        'id1',
+        'id2',
+        'modelId',
+      );
+      const orgId = 'orgId';
+
+      // Act
+      modelService.executeModel(executeModel, orgId);
+
+      // Assert
+      expect(mockedPythonDAO.executeModel).toHaveBeenCalled();
     });
   });
 });
