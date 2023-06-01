@@ -33,6 +33,7 @@ describe('CreateModelDTO', () => {
         'modelName',
         'tableName',
         'modelDescription',
+        'modelId',
       );
       expect(createModelDTO).toBeDefined();
       expect(createModelDTO.modelName).toEqual('modelName');

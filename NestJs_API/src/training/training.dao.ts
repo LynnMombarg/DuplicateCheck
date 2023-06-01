@@ -1,5 +1,5 @@
 // Authors: Marloes, Lynn, Silke
-// Jira-task: 130, 137, 129
+// Jira-task: 130, 137, 129, 166
 // Sprint: 3
 // Last modified: 22-05-2023
 
@@ -51,5 +51,9 @@ export class TrainingDAO {
 
   async getTraining(trainingId: string): Promise<TrainingDTO> {
     return await this.model.findOne({ trainingId: trainingId });
+  }
+
+  async deleteTrainings(modelId: string) {
+    await this.model.deleteMany({ modelId: modelId });
   }
 }
