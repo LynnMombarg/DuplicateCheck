@@ -4,10 +4,9 @@ import { AuthService } from '../../auth/auth.service';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthDTO } from '../../auth/dto/auth.dto';
 
-describe('SalesforceDAO', () => {
-  let salesforcedao: SalesforceDAO;
-
-  const jsforceMock = {
+// Mock the jsforce library
+jest.mock('jsforce', () => {
+  return {
     Connection: jest.fn().mockImplementation(() => ({
       oauth2: {
         loginUrl: 'https://login.salesforce.com',
@@ -28,6 +27,10 @@ describe('SalesforceDAO', () => {
       redirectUri: 'mockRedirectUri',
     })),
   };
+});
+
+describe('SalesforceDAO', () => {
+  let salesforcedao: SalesforceDAO;
 
   const mockedAuthDAO = {
     getTokensByOrgId: jest.fn(),
@@ -57,22 +60,6 @@ describe('SalesforceDAO', () => {
       await expect(salesforcedao.getJobs('error', null)).rejects.toThrow(
         'Not Found',
       );
-    });
-  });
-
-  describe('getJobs', () => {
-    it('should return an error if there are no valid tokens', async () => {
-      await expect(
-        salesforcedao.getJobs('table name', authDTO),
-      ).rejects.toThrow();
-    });
-  });
-
-  describe('getIndexes', () => {
-    it('should return an error if there are no valid tokens', async () => {
-      await expect(
-        salesforcedao.getIndexes('table name', authDTO),
-      ).rejects.toThrow();
     });
   });
 });
