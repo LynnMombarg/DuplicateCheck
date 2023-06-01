@@ -145,4 +145,64 @@ describe('SalesforceDAO', () => {
       );
     });
   });
+
+  // doesn't work yet
+  // describe('getFields', () => {
+  //   it('should call the correct methods and return the fields', async () => {
+  //     // Mock the necessary data and dependencies
+  //     const tableName = 'Account';
+  //     const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
+  //     salesforcedao.oauth2 = {
+  //       // Mock the necessary oauth2 properties
+  //       clientId: 'mockClientId',
+  //       clientSecret: 'mockClientSecret',
+  //       redirectUri: 'mockRedirectUri',
+  //     };
+  //     process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
+  //
+  //     // Mock the Connection class
+  //     const mockConnection = {
+  //       on: jest.fn(),
+  //       apex: {
+  //         post: jest.fn((url, data, callback) => {
+  //           const res = JSON.stringify({
+  //             objects: [
+  //               {
+  //                 crossObjects: [
+  //                   [
+  //                     {
+  //                       objectFrom: 'hi',
+  //                     },
+  //                   ],
+  //                 ],
+  //                 resultFields: [
+  //                   {
+  //                     field: 'Field1',
+  //                   },
+  //                   {
+  //                     field: 'Field2',
+  //                   },
+  //                 ],
+  //               },
+  //               // ...
+  //             ],
+  //           });
+  //           callback(null, res);
+  //         }),
+  //       },
+  //     };
+  //     // Mock the Connection constructor
+  //     jest
+  //       .spyOn(salesforcedao.jsforce, 'Connection')
+  //       .mockReturnValue(mockConnection);
+  //     // Mock the getJobId method
+  //     jest.spyOn(salesforcedao, 'getJobId').mockResolvedValue('mockJobId');
+  //
+  //     // Call the method being tested
+  //     expect(await salesforcedao.getFields(tableName, tokens)).toEqual([
+  //       'field1',
+  //       'field2',
+  //     ]);
+  //   });
+  // });
 });
