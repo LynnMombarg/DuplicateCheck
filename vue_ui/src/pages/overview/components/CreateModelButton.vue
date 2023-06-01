@@ -4,12 +4,12 @@
 <!--Last modified: 15-05-2023-->
 
 <template>
-    <button @click="startCreateModel" class="rounded-md bg-white px-3 py-2 text-xl">
+    <button @click="startCreateModel" class="rounded-md bg-white px-3 py-2 text-xl transition duration-300 ease-in-out hover:bg-sky-400 hover:text-white select-none" style="margin: 0.75rem;">
         + Add model
     </button>
 
 
-    <TransitionRoot as="template" :show="open" class="fixed inset-0 overflow-y-auto">
+    <TransitionRoot as="template" :show="open" class="fixed inset-0 overflow-y-auto select-none">
         <Dialog as="div" class="relative z-50 flex justify-center items-center" @close="open = false">
             <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                              leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
@@ -26,18 +26,20 @@
                         <DialogPanel
                                 class="fixed inset-0 flex items-center justify-center bg-opacity-75 bg-gray-500 z-50">
                             <div class="px-4 py-6 bg-white sm:p-6 rounded-lg">
-                                <DialogTitle class="text-lg leading-6 font-medium text-gray-900">
-                                    Create a new model
+                                <DialogTitle class="text-lg leading-6 font-medium flex" style="margin-bottom: 1.5rem; justify-content: space-around;">
+                                    <div class="flex flex-row">
+                                        <img alt="ML image" src="src/assets/machine-learning-model.svg" class="mr-1">
+                                        <div class="text-lg">Create a new model</div>
+                                    </div>
                                 </DialogTitle>
                                 <p v-if="warningVisible">Please fill in all fields.</p>
                                 <div class="mt-2 flex flex-row">
-                                    <label for="model" style="margin-right: 2rem;">Model name: </label>
-                                    <input v-model="modelName" placeholder="Model name" id="model"/> <br>
+                                    <label for="model" style="margin-right: 2rem; width: 6rem;" class="text-medium flex flex-start items-center">Model name: </label>
+                                    <input v-model="modelName" placeholder="Model name" id="model" class="p-1 focus-visible:border-sky-400"/>
                                 </div>
-
                                 <div class="mt-2 flex flex-row">
-                                    <label for="table" style="margin-right: 2rem;">Table name: </label>
-                                    <select v-model="tableName" name="table" id="table">
+                                    <label for="table" style="margin-right: 2rem; width: 6rem;" class="text-medium flex flex-start items-center">Table name: </label>
+                                    <select v-model="tableName" name="table" id="table" class="focus-visible:border-sky-400">
                                         <option value="accounts">Accounts</option>
                                         <option value="contacts">Contacts</option>
                                         <option value="leads">Leads</option>
@@ -45,12 +47,13 @@
                                 </div>
                                 <div class="mt-2 flex flex-row">
 
-                                    <label for="description" style="margin-right: 2rem;">Description: </label>
-                                    <textarea v-model="description" id="description" name="description"
-                                              placeholder="Model description"></textarea>
+                                    <label for="description" style="margin-right: 2rem; width: 6rem;" class="text-medium flex flex-start">Description: </label>
+                                    <textarea v-model="description" id="description" name="description" class="p-1 focus-visible:border-sky-400"
+                                              placeholder="Model description" style="max-height: 10rem; min-height: 2rem;"></textarea>
                                 </div>
 
-                                <button @click="createModel" class="rounded-md bg-blue-100 px-3 py-2 text-xl">
+                                <button @click="createModel" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
+                                    hover:bg-sky-400 hover:text-white mt-2">
                                     Submit
                                 </button>
                             </div>

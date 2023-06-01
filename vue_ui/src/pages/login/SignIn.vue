@@ -17,6 +17,3 @@ export default {
     components: { SignInFooter, SignInBody, SignInHeader, SignInButton },
 };
 </script>
-
-<style></style>
-

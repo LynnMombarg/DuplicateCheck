@@ -9,11 +9,12 @@ import {
   UnauthorizedException,
   BadRequestException,
 } from '@nestjs/common';
-import { AuthDTO } from 'src/auth/auth.dto';
+import { AuthDTO } from 'src/auth/dto/auth.dto';
 import { AuthService } from '../auth/auth.service';
 import { JobDTO } from '../model/dto/job-model.dto';
 import { RecordDTO } from '../training/dto/record.dto';
 import { DatasetDTO } from '../training/dto/dataset.dto';
+import { response } from 'express';
 
 @Injectable()
 export class SalesforceDAO {
@@ -26,6 +27,126 @@ export class SalesforceDAO {
     clientSecret: process.env.SF_CLIENT_SECRET,
     redirectUri: process.env.BASE_URL + '/auth/callback',
   });
+
+  async getFields(tableName: string, tokens: AuthDTO): Promise<string[]> {
+    try {
+      const resultSet: string[] = [];
+      const jobId = await this.getJobId(tokens);
+      await new Promise(async (resolve, reject) => {
+        const interval = setInterval(async () => {
+          if (await this.getStatusOfDownload(jobId, tokens)) {
+            clearInterval(interval);
+            const conn = new this.jsforce.Connection({
+              oauth2: this.oauth2,
+              instanceUrl: process.env.SF_INSTANCE_URL,
+              accessToken: tokens.getAccessToken(),
+              refreshToken: tokens.getRefreshToken(),
+            });
+            conn.on(
+              'refresh',
+              function (accessToken, res) {
+                console.log('refreshed token: ' + accessToken);
+                this.authService.updateToken(accessToken);
+              }.bind(this),
+            );
+            await conn.apex.post(
+              '/services/apexrest/dupcheck/dc3Api/admin/export-config-download',
+              { jobId: jobId },
+              (err, res) => {
+                if (err) {
+                  console.error(err);
+                }
+                const jsonConfig = JSON.parse(res);
+                for (let i = 0; i < 3; i++) {
+                  const tableObject = jsonConfig['objects'][i];
+                  if (
+                    tableObject['crossObjects'][0][
+                      'objectFrom'
+                    ].toLowerCase() == tableName
+                  ) {
+                    for (
+                      let j = 0;
+                      j < tableObject['resultFields'].length;
+                      j++
+                    ) {
+                      resultSet.push(tableObject['resultFields'][j]['field']);
+                    }
+                  }
+                }
+                resolve(resultSet);
+              },
+            );
+            return resultSet;
+          }
+        }, 200);
+      });
+      return resultSet;
+    } catch (err) {
+      console.error('An error occurred:', err);
+    }
+  }
+
+  async getStatusOfDownload(jobId: String, tokens: AuthDTO): Promise<boolean> {
+    let status = false;
+    await new Promise((resolve, reject) => {
+      const conn = new this.jsforce.Connection({
+        oauth2: this.oauth2,
+        instanceUrl: process.env.SF_INSTANCE_URL,
+        accessToken: tokens.getAccessToken(),
+        refreshToken: tokens.getRefreshToken(),
+      });
+      conn.on(
+        'refresh',
+        function (accessToken, res) {
+          console.log('refreshed token: ' + accessToken);
+          this.authService.updateToken(accessToken);
+        }.bind(this),
+      );
+      conn.apex.post(
+        '/services/apexrest/dupcheck/dc3Api/admin/export-config-download',
+        { jobId: jobId },
+        (err, res) => {
+          if (err) {
+            console.error(err);
+          }
+          status = res['ok'] == null;
+          resolve(status);
+        },
+      );
+    });
+    return status;
+  }
+
+  async getJobId(tokens: AuthDTO): Promise<string> {
+    let jobId = '';
+    await new Promise((resolve, reject) => {
+      const conn = new this.jsforce.Connection({
+        oauth2: this.oauth2,
+        instanceUrl: process.env.SF_INSTANCE_URL,
+        accessToken: tokens.getAccessToken(),
+        refreshToken: tokens.getRefreshToken(),
+      });
+      conn.on(
+        'refresh',
+        function (accessToken, res) {
+          console.log('refreshed token: ' + accessToken);
+          this.authService.updateToken(accessToken);
+        }.bind(this),
+      );
+      conn.apex.post(
+        '/services/apexrest/dupcheck/dc3Api/admin/export-config',
+        {},
+        (err, res) => {
+          if (err) {
+            console.error(err);
+          }
+          jobId = res['jobId'];
+          resolve(jobId);
+        },
+      );
+    });
+    return jobId;
+  }
 
   async getJobs(tableId: string, tokens: AuthDTO): Promise<JobDTO[]> {
     if (tableId == 'error') {
@@ -72,29 +193,21 @@ export class SalesforceDAO {
   async getDatasets(
     tokens: AuthDTO,
     jobId: string,
+    fields: string[],
     tableName: string,
   ): Promise<DatasetDTO[]> {
     let columns = '';
-    try {
-      switch (tableName.toLowerCase()) {
-        case 'lead':
-          columns = 'Name, Title, Company, Phone, MobilePhone, Email, Status';
-          break;
-        case 'contact':
-          columns = 'Name, Account.Name, Account.Site, Phone, Email';
-          break;
-        case 'account':
-          columns = 'Name, Site, Phone';
-          break;
-        default:
-          throw new BadRequestException();
-      }
-    } catch (err) {
-      console.error(err.message);
+    for (let i = 0; i < fields.length; i++) {
+      columns += fields[i] + ',';
     }
+    columns = columns.slice(0, -1);
+    console.log(columns);
     const resultSet: DatasetDTO[] = [];
 
     const [sourceIndexes, matchIndexes] = await this.getIndexes(jobId, tokens);
+    if (sourceIndexes == '' || matchIndexes == '') {
+      throw new NotFoundException();
+    }
     const datasetA = new DatasetDTO(
       await this.getSourceRecords(columns, tableName, sourceIndexes, tokens),
     );
