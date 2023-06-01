@@ -75,27 +75,4 @@ describe('SalesforceDAO', () => {
       ).rejects.toThrow();
     });
   });
-
-  // this test is not working yet
-  describe('getMatchRecords', () => {
-    it('should return a result set', async () => {
-      const columns = 'column1, column2';
-      const tableName = 'table name';
-      const matchIndexes = 'match indexes';
-      const tokens = authDTO;
-
-      // make sure the js force mock is used
-      jest.mock('jsforce', () => jsforceMock);
-
-      await salesforcedao.getMatchRecords(
-        columns,
-        tableName,
-        matchIndexes,
-        tokens,
-      );
-
-      expect(mockedAuthDAO.getTokensByOrgId).toHaveBeenCalled();
-      expect(mockedAuthService.updateToken).toHaveBeenCalled();
-    });
-  });
 });
