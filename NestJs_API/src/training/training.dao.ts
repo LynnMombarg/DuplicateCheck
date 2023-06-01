@@ -1,5 +1,5 @@
 // Authors: Marloes, Lynn, Silke
-// Jira-task: 130, 137, 129
+// Jira-task: 130, 137, 129, 166
 // Sprint: 3
 // Last modified: 22-05-2023
 
@@ -7,16 +7,17 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { TrainingDTO } from './dto/training.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Training } from './schema/training.schema';
-import { Model } from 'mongoose';
+import mongoose from 'mongoose';
 import { DatasetDTO } from './dto/dataset.dto';
+mongoose.Promise = Promise;
 
 @Injectable()
 export class TrainingDAO {
-  constructor(@InjectModel(Training.name) private model: Model<Training>) {}
+  constructor(
+    @InjectModel(Training.name) private model: mongoose.Model<Training>,
+  ) {}
 
   async createTraining(training: TrainingDTO) {
-    //const createdTraining = new this.model(training);
-    //await createdTraining.save();
     this.model.create(training);
   }
 
@@ -50,5 +51,9 @@ export class TrainingDAO {
 
   async getTraining(trainingId: string): Promise<TrainingDTO> {
     return await this.model.findOne({ trainingId: trainingId });
+  }
+
+  async deleteTrainings(modelId: string) {
+    await this.model.deleteMany({ modelId: modelId });
   }
 }

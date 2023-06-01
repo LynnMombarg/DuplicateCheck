@@ -8,7 +8,6 @@ import { ModelDAO } from '../model.dao';
 import { ModelDTO } from '../dto/model.dto';
 import { getModelToken } from '@nestjs/mongoose';
 import { NotFoundException } from '@nestjs/common';
-import { Model } from 'mongoose';
 
 describe('ModelDAO', () => {
   let modelDAO: ModelDAO;

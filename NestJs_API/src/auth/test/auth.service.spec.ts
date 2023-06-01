@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from '../auth.service';
 import { AuthDAO } from '../auth.dao';
-import { AuthDTO } from '../auth.dto';
+import { AuthDTO } from '../dto/auth.dto';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -17,7 +17,10 @@ describe('AuthService', () => {
             storeToken: jest.fn(),
             updateToken: jest.fn(),
             removeTokens: jest.fn(),
-            getTokensByUserId: jest.fn(),
+            getTokensByOrgId: jest.fn(),
+            removeBlacklistedToken: jest.fn(),
+            blackListToken: jest.fn(),
+            isBlacklisted: jest.fn(),
           },
         },
       ],
@@ -32,64 +35,150 @@ describe('AuthService', () => {
   });
 
   describe('login', () => {
-    it('should call authDAO.storeToken with the correct arguments', () => {
-      const userID = '123';
+    it('should call storeToken on AuthDAO with the correct arguments', () => {
+      // Arrange
+      const orgId = '123';
       const accessToken = 'access_token';
       const refreshToken = 'refresh_token';
       const jwtToken = 'jwt_token';
 
-      authService.login(userID, accessToken, refreshToken, jwtToken);
+      // Act
+      authService.login(orgId, accessToken, refreshToken, jwtToken);
 
+      // Assert
       expect(authDAO.storeToken).toHaveBeenCalledWith(
-        userID,
+        orgId,
         accessToken,
         refreshToken,
         jwtToken,
       );
     });
+
+    it('should call removeBlacklistedToken on AuthDAO with the correct arguments', () => {
+      // Arrange
+      const orgId = '123';
+      const accessToken = 'access_token';
+      const refreshToken = 'refresh_token';
+      const jwtToken = 'jwt_token';
+
+      // Act
+      authService.login(orgId, accessToken, refreshToken, jwtToken);
+
+      // Assert
+      expect(authDAO.removeBlacklistedToken).toHaveBeenCalledWith(orgId);
+    });
   });
 
   describe('updateToken', () => {
-    it('should call authDAO.updateToken with the correct argument', () => {
+    it('should call updateToken on AuthDAO with the correct arguments', () => {
+      // Arrange
       const accessToken = 'new_access_token';
 
+      // Act
       authService.updateToken(accessToken);
 
+      // Assert
       expect(authDAO.updateToken).toHaveBeenCalledWith(accessToken);
     });
   });
 
   describe('logout', () => {
-    it('should call authDAO.removeTokens with the correct argument', () => {
-      const userId = '123';
+    it('should call removeTokens on AuthDAO with the correct arguments', () => {
+      // Arrange
+      const orgId = '123';
 
-      authService.logout(userId);
+      // Act
+      authService.logout(orgId);
 
-      expect(authDAO.removeTokens).toHaveBeenCalledWith(userId);
+      // Assert
+      expect(authDAO.removeTokens).toHaveBeenCalledWith(orgId);
     });
   });
 
-  describe('getTokensByUserId', () => {
-    it('should call authDAO.getTokensByUserId with the correct argument', async () => {
-      const userId = '123';
-      const getTokensByUserIdMock = jest.spyOn(authDAO, 'getTokensByOrgId');
+  describe('getTokensByOrgId', () => {
+    it('should call getTokensByOrgId on AuthDAO with the correct arguments', async () => {
+      // Arrange
+      const orgId = '123';
 
-      await authService.getTokensByOrgId(userId);
+      // Act
+      await authService.getTokensByOrgId(orgId);
 
-      expect(getTokensByUserIdMock).toHaveBeenCalledWith(userId);
+      // Assert
+      expect(authDAO.getTokensByOrgId).toHaveBeenCalledWith(orgId);
     });
 
-    it('should return the result of authDAO.getTokensByUserId', async () => {
-      const userId = '123';
-      const authDTO = new AuthDTO(userId, 'access_token', 'refresh_token');
-      const getTokensByUserIdMock = jest
+    it('should return the result of getTokensByOrgId', async () => {
+      // Arrange
+      const orgId = '123';
+      const expected = new AuthDTO(orgId, 'access_token', 'refresh_token');
+      const getTokensByOrgIdMock = jest
         .spyOn(authDAO, 'getTokensByOrgId')
-        .mockResolvedValueOnce(authDTO);
+        .mockResolvedValueOnce(expected);
 
-      const result = await authService.getTokensByOrgId(userId);
+      // Act
+      const actual = await authService.getTokensByOrgId(orgId);
 
-      expect(getTokensByUserIdMock).toHaveBeenCalledWith(userId);
-      expect(result).toEqual(authDTO);
+      // Assert
+      expect(getTokensByOrgIdMock).toHaveBeenCalledWith(orgId);
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('blackListToken', () => {
+    it('should call blackListToken on AuthDAO with the correct arguments', () => {
+      // Arrange
+      const orgId = 'orgId';
+      const jwtToken = 'jwtToken';
+
+      // Act
+      authService.blackListToken(orgId, jwtToken);
+
+      // Assert
+      expect(authDAO.blackListToken).toHaveBeenCalledWith(orgId, jwtToken);
+    });
+  });
+
+  describe('isBlacklisted', () => {
+    it('should call isBlacklisted on AuthDAO with the correct arguments', () => {
+      // Arrange
+      const orgId = 'orgId';
+      const jwtToken = 'jwtToken';
+
+      // Act
+      authService.isBlacklisted(orgId, jwtToken);
+
+      // Assert
+      expect(authDAO.isBlacklisted).toHaveBeenCalledWith(orgId, jwtToken);
+    });
+
+    it('should return the result of isBlacklisted', async () => {
+      // Arrange
+      const orgId = '123';
+      const jwtToken = 'jwtToken';
+      const expected = true;
+      const isBlacklistedMock = jest
+        .spyOn(authDAO, 'isBlacklisted')
+        .mockResolvedValueOnce(expected);
+
+      // Act
+      const actual = await authService.isBlacklisted(orgId, jwtToken);
+
+      // Assert
+      expect(isBlacklistedMock).toHaveBeenCalledWith(orgId, jwtToken);
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('removeBlacklistedToken', () => {
+    it('should call removeBlacklistedToken on AuthDAO with the correct arguments', () => {
+      // Arrange
+      const orgId = 'orgId';
+
+      // Act
+      authService.removeBlacklistedToken(orgId);
+
+      // Assert
+      expect(authDAO.removeBlacklistedToken).toHaveBeenCalledWith(orgId);
     });
   });
 });

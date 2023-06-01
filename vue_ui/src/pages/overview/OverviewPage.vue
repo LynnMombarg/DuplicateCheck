@@ -1,7 +1,7 @@
-<!--Author(s): Silke Bertisen, Roward, Diederik-->
-<!--Jira-task: Dashboard realiseren 104 -->
-<!--Sprint: 2, 3 -->
-<!--Last modified: 23-05-2023-->
+<!--Author(s): Silke Bertisen, Roward, Diederik, Lynn Mombarg-->
+<!--Jira-task: Dashboard realiseren 104, 172 -->
+<!--Sprint: 2, 3, 4 -->
+<!--Last modified: 25-05-2023-->
 
 <template>
     <div class="flex pl-64 flex-col flex-1">
@@ -18,6 +18,7 @@ import OverviewModelComponent from "@/pages/overview/components/OverviewModelCom
 import {getModels} from "./services/GetModels";
 import {createModel} from "./services/CreateModel";
 import {deleteModel} from "./services/DeleteModel";
+import { executeModel } from "./services/ExecuteModel";
 import Navbar from "../../components/Navbar.vue";
 import {signOut} from "@/pages/overview/services/SignOut";
 import Footer from "../../components/Footer.vue";
@@ -45,6 +46,9 @@ export default {
     },
     async createModel(modelName, tableName, description) {
       this.models = await createModel(modelName, tableName, description);
+    },
+    async executeModel(tableName, modelId, recordId1, recordId2) {
+      return await executeModel(tableName, modelId, recordId1, recordId2);
     }
   },
 };
@@ -66,6 +70,3 @@ export default {
     align-items: center;
 }
 </style>
-
-
-

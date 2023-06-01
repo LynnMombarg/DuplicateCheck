@@ -11,3 +11,4 @@ azure-mgmt-resource
 azure-keyvault-secrets
 azure-identity
 azure-storage-queue 
+httpx

@@ -42,7 +42,7 @@
 		<Footer />
 	</div>
 </template>
-  
+
 <script>
 import { getJobs } from './services/GetJobs';
 import SelectJobBody from './components/SelectJobBody.vue';
@@ -84,7 +84,7 @@ export default {
 		async selectJob(jobId) {
 			this.modelId = await this.$route.params.modelId;
 			this.model = await this.$store.getters.getModelById(this.modelId);
-			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1));
+			this.trainingId = await selectJob(jobId, this.model.tableName.slice(0, -1), this.modelId);
 			if (!this.trainingId) {
 				alert("No training available for this job");
 				this.$router.push({ name: "OverviewPage" });

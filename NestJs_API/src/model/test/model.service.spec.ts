@@ -10,6 +10,7 @@ import { PythonDAO } from '../../python/python.dao';
 import { ModelDAO } from '../model.dao';
 import { CreateModelDTO } from '../dto/create-model.dto';
 import { SalesforceDAO } from '../../salesforce/salesforce.dao';
+import { TrainingDAO } from '../../training/training.dao';
 
 describe('ModelService', () => {
   let modelService: ModelService;
@@ -29,9 +30,21 @@ describe('ModelService', () => {
     getJobs: jest.fn(),
   };
 
+  const mockedTrainingDAO = {
+    getTraining: jest.fn(),
+    deleteTrainings: jest.fn(),
+  };
+
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [ModelService, ModelDAO, AuthDAO, PythonDAO, SalesforceDAO],
+      providers: [
+        ModelService,
+        ModelDAO,
+        AuthDAO,
+        PythonDAO,
+        SalesforceDAO,
+        TrainingDAO,
+      ],
     })
       .overrideProvider(ModelDAO)
       .useValue(mockedModelDAO)
@@ -43,6 +56,8 @@ describe('ModelService', () => {
       .useValue(mockedPythonDAO)
       .overrideProvider(SalesforceDAO)
       .useValue(mockedSalesforceDAO)
+      .overrideProvider(TrainingDAO)
+      .useValue(mockedTrainingDAO)
       .compile();
 
     modelService = moduleRef.get<ModelService>(ModelService);
@@ -53,6 +68,7 @@ describe('ModelService', () => {
       'modelName',
       'tableName',
       'modelDescription',
+      'modelid',
     );
 
     it('should call createModel on ModelDao', () => {
@@ -122,6 +138,19 @@ describe('ModelService', () => {
 
       // Assert
       expect(mockedSalesforceDAO.getJobs).toHaveBeenCalled();
+    });
+  });
+
+  describe('getAllModels', () => {
+    it('should call getAllModels on ModelDAO', () => {
+      // Arrange
+      const orgId = 'orgId';
+
+      // Act
+      modelService.getAllModels(orgId);
+
+      // Assert
+      expect(mockedModelDAO.getAllModels).toHaveBeenCalled();
     });
   });
 });
