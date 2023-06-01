@@ -7,8 +7,7 @@
 <template>
   <Menu as="div" class="relative inline-block text-left">
     <div>
-      <MenuButton
-        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm
+      <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm
         font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
         Options
         <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -26,7 +25,7 @@
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Train model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
-          <a @click="startExecuteModel(modelId, tableName)" style="cursor: pointer;"
+          <a @click="startExecuteModel()" style="cursor: pointer;"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Execute model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
@@ -75,7 +74,7 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
-                <button @click="executeModel()" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
+                <button @click="executeModel(tableName, modelId)" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
                                       hover:bg-sky-400 hover:text-white mt-2">
                   Execute
                 </button>
@@ -95,8 +94,6 @@ export default {
   components: { DialogTitle, DialogPanel, Dialog, TransitionChild, TransitionRoot },
   data() {
     return {
-      executeTableName: '',
-      executeModelId: '',
       recordid1: '',
       recordid2: '',
       warningVisible: false,
@@ -118,16 +115,15 @@ export default {
       this.$router.push({ name: 'TrainingPage', params: { modelId: modelId } });
     },
 
-    startExecuteModel(modelId, tableName) {
+    startExecuteModel() {
       this.dialog = true;
-      this.executeModelId = modelId;
-      this.executeTableName = tableName;
-      resetValues();
+      this.resetValues();
     },
 
-    executeModel() {
+    executeModel(tableName, modelId) {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
-        this.percentage = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
+        tableName = tableName.slice(0, -1);
+        this.percentage = this.$parent.executeModel(tableName, modelId, this.recordid1, this.recordid2);
         this.dialog = false;
       } else {
         this.warningVisible = true;
@@ -135,8 +131,6 @@ export default {
     },
 
     resetValues() {
-      this.executeTableName = '';
-      this.executeModelId = '';
       this.recordid1 = '';
       this.recordid2 = '';
       this.warningVisible = false;

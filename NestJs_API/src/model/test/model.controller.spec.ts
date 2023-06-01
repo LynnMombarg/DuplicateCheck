@@ -11,6 +11,7 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDAO } from '../../auth/auth.dao';
+import { ExecuteModelDTO } from '../dto/execute-model.dto';
 
 describe('ModelController', () => {
   let modelController: ModelController;
@@ -20,6 +21,7 @@ describe('ModelController', () => {
     deleteModel: jest.fn(),
     getAllModels: jest.fn(),
     getJobs: jest.fn(),
+    executeModel: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -116,6 +118,19 @@ describe('ModelController', () => {
 
       // Assert
       expect(mockedModelService.getJobs).toHaveBeenCalled();
+    });
+  });
+  describe('executeModel', () => {
+    it('should call executeModel on ModelService', () => {
+      // Arrange
+      const req = { user: { userId: 'test' } };
+      const executeModel = new ExecuteModelDTO("tableName", "id1", "id2", "modelId");
+
+      // Act
+      modelController.executeModel(executeModel, req);
+
+      // Assert
+      expect(mockedModelService.executeModel).toHaveBeenCalled();
     });
   });
 });
