@@ -27,7 +27,7 @@ class PythonService:
             filehandler.close()
             print('Created')
         except Exception:
-            raise Exception('Could not create model')
+            raise FileExistsError('Could not create model')
 
     def load_model(self, model_id):
         model: RecordLinkageModel

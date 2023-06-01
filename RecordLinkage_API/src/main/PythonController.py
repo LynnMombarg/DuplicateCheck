@@ -11,7 +11,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from .PythonService import PythonService
 from fastapi import HTTPException
-# from .devData.JsonTestData import get_test_data
 
 app = FastAPI()
 app.add_middleware(
@@ -69,7 +68,6 @@ async def execute_model(json: dict, model_id: str):
 async def execute_model(json: dict, model_id: str):
     try:
       percentage = service.execute_model_on_records(model_id, json)
-      # percentage = 50
       response_data = {
           "percentage": f"{percentage}%",
       }
