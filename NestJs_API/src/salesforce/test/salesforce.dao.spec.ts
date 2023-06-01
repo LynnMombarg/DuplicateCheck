@@ -4,28 +4,30 @@ import { AuthService } from '../../auth/auth.service';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthDTO } from '../../auth/dto/auth.dto';
 
-// Mock the jsforce library
+// Manual mock for jsforce library
 jest.mock('jsforce', () => {
-  return {
-    Connection: jest.fn().mockImplementation(() => ({
-      oauth2: {
-        loginUrl: 'https://login.salesforce.com',
-        clientId: 'mockClientId',
-        clientSecret: 'mockClientSecret',
-        redirectUri: 'mockRedirectUri',
-      },
-      on: jest.fn(),
-      apex: {
-        post: jest.fn(),
-      },
-      query: jest.fn(),
-    })),
-    OAuth2: jest.fn().mockImplementation(() => ({
+  const mockConnection = {
+    oauth2: {
       loginUrl: 'https://login.salesforce.com',
       clientId: 'mockClientId',
       clientSecret: 'mockClientSecret',
       redirectUri: 'mockRedirectUri',
-    })),
+    },
+    on: jest.fn(),
+    apex: {
+      post: jest.fn((url, data, callback) => {
+        const res = {
+          jobId: 'mockJobId',
+        };
+        callback(null, res);
+      }),
+    },
+    query: jest.fn(),
+  };
+
+  return {
+    Connection: jest.fn().mockImplementation(() => mockConnection),
+    OAuth2: jest.fn().mockImplementation(() => mockConnection.oauth2),
   };
 });
 
@@ -62,4 +64,27 @@ describe('SalesforceDAO', () => {
       );
     });
   });
+
+  describe('getJobid', () => {
+    it('should return a jobid', async () => {
+      // Mock the necessary data and dependencies
+      const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
+      salesforcedao.oauth2 = {
+        // Mock the necessary oauth2 properties
+        clientId: 'mockClientId',
+        clientSecret: 'mockClientSecret',
+        redirectUri: 'mockRedirectUri',
+      };
+      process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
+
+      const result = await salesforcedao.getJobId(tokens);
+      expect(result).toEqual('mockJobId');
+    });
+  });
+
+  describe('getJobStatus', () => {
+    it ('should return a job status', async () => {
+
+    }
+  }
 });
