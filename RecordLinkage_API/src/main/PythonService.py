@@ -14,19 +14,25 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from .RecordLinkageModel import RecordLinkageModel
 import pickle
 
+file_path = os.path.join(os.path.dirname(__file__), 'pickles')
 
 class PythonService:
 
+
     def create_model(self, model_id):
         model = RecordLinkageModel()
-        filehandler = open('main/pickles/' + model_id + '.pkl', 'wb')
-        pickle.dump(model, filehandler)
-        print('Created')
+        try:
+            filehandler = open(file_path + '/' + model_id + '.pkl', 'wb')
+            pickle.dump(model, filehandler)
+            filehandler.close()
+            print('Created')
+        except Exception:
+            raise Exception('Could not create model')
 
     def load_model(self, model_id):
         model: RecordLinkageModel
         try:
-            with open('main/pickles/' + model_id + '.pkl', 'rb') as file:
+            with open(file_path + '/' + model_id + '.pkl', 'rb') as file:
                 model = pickle.load(file)
                 print('Loaded')
                 return model
@@ -34,7 +40,7 @@ class PythonService:
             raise FileNotFoundError('Model not found')
 
     def save_model(self, model_id, model):
-        filehandler = open('main/pickles/' + model_id + '.pkl', 'wb')
+        filehandler = open(file_path + '/'  + model_id + '.pkl', 'wb')
         pickle.dump(model, filehandler)
         print('Saved')
 
@@ -44,7 +50,7 @@ class PythonService:
         self.save_model(model_id, model)
 
     def delete_model(self, model_id):
-        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickles', model_id + '.pkl'))
+        os.remove(file_path + '/' + model_id + '.pkl')
 
     def execute_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)
