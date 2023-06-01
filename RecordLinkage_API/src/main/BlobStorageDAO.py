@@ -22,11 +22,23 @@ class BlobStorageDAO:
             print(container.name)
             
     def upload_blob(self, modelId):
-        blob_client = self.blob_service_client.get_blob_client(container=self.container_name, blob=modelId)
+        blob_client = self.get_blob_client(modelId)
         with open(self.local_file_path + modelId + '.pkl', "rb") as data:
             blob_client.upload_blob(data)
             
     def download_blob(self, modelId):
-        blob_client = self.blob_service_client.get_blob_client(container=self.container_name, blob=modelId)
+        blob_client = self.get_blob_client(modelId)
         with open(self.local_file_path + modelId + '.pkl', "wb") as download_file:
             download_file.write(blob_client.download_blob().readall())
+        
+    def delete_blob(self, modelId):
+        blob_client = self.get_blob_client(modelId)
+        blob_client.delete_blob()
+            
+    def overwrite_blob(self, modelId):
+        self.delete_blob(modelId)
+        self.upload_blob(modelId)
+        
+    def get_blob_client(self, modelId):
+        return self.blob_service_client.get_blob_client(container=self.container_name, blob=modelId)
+        
