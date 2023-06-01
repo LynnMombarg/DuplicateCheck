@@ -29,7 +29,7 @@ export class TrainingService {
     }
   }
 
-  async selectJob(jobId, tableName, orgId): Promise<string> {
+  async selectJob(jobId, tableName, modelId, orgId): Promise<string> {
     const tokens: AuthDTO = await this.authDAO.getTokensByOrgId(orgId);
     const fields = await this.salesforceDAO.getFields(tableName, tokens);
     let records: DatasetDTO[];
@@ -49,6 +49,7 @@ export class TrainingService {
       const training: TrainingDTO = new TrainingDTO(
         trainingId,
         orgId,
+        modelId,
         records[0],
         records[1],
         [],
