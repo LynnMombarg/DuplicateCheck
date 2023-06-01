@@ -3,7 +3,16 @@ import { Test } from '@nestjs/testing';
 import { AuthService } from '../../auth/auth.service';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthDTO } from '../../auth/dto/auth.dto';
+import { RecordDTO } from '../../training/dto/record.dto';
 
+// Manual mock for jsforce library
+
+const mockResult = {
+  records: [
+    { Id: 'mockId1', Name: 'Record 1' },
+    { Id: 'mockId2', Name: 'Record 2' },
+  ],
+};
 // Manual mock for jsforce library
 jest.mock('jsforce', () => {
   const mockConnection = {
@@ -14,6 +23,9 @@ jest.mock('jsforce', () => {
       redirectUri: 'mockRedirectUri',
     },
     on: jest.fn(),
+    query: jest.fn(() => {
+      return mockResult;
+    }),
     apex: {
       post: jest.fn((url, data, callback) => {
         const res = {
@@ -22,7 +34,6 @@ jest.mock('jsforce', () => {
         callback(null, res);
       }),
     },
-    query: jest.fn(),
   };
 
   return {
@@ -82,9 +93,56 @@ describe('SalesforceDAO', () => {
     });
   });
 
-  describe('getJobStatus', () => {
-    it ('should return a job status', async () => {
+  describe('getIndexes', () => {
+    it('should call the correct methods and return the indexes', async () => {
+      // Mock the necessary data and dependencies
+      const jobId = 'mockJobId';
+      const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
+      salesforcedao.oauth2 = {
+        // Mock the necessary oauth2 properties
+        clientId: 'mockClientId',
+        clientSecret: 'mockClientSecret',
+        redirectUri: 'mockRedirectUri',
+      };
+      process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
 
-    }
-  }
+      // Mock the Connection class
+      const mockConnection = {
+        on: jest.fn(),
+        query: jest.fn().mockImplementation((query, callback) => {
+          const mockResult = {
+            records: [
+              {
+                dupcheck__SourceObject__c: 'sourceIndex1',
+                dupcheck__MatchObject__c: 'matchIndex1',
+              },
+              {
+                dupcheck__SourceObject__c: 'sourceIndex2',
+                dupcheck__MatchObject__c: 'matchIndex2',
+              },
+            ],
+          };
+          callback(null, mockResult);
+        }),
+      };
+
+      // Mock the Connection constructor
+      jest
+        .spyOn(salesforcedao.jsforce, 'Connection')
+        .mockReturnValue(mockConnection);
+
+      // Call the method being tested
+      const resultPromise = salesforcedao.getIndexes(jobId, tokens);
+
+      // Assertions
+      await expect(resultPromise).resolves.toEqual([
+        "'sourceIndex1','sourceIndex2'",
+        "'matchIndex1','matchIndex2'",
+      ]);
+      expect(mockConnection.query).toHaveBeenCalledWith(
+        "SELECT dupcheck__SourceObject__c, dupcheck__MatchObject__c FROM dupcheck__dc3Duplicate__c D WHERE dupcheck__dcGroup__c IN (SELECT Id FROM dupcheck__dcGroup__c G WHERE dupcheck__dcJob__c = 'mockJobId')",
+        expect.any(Function),
+      );
+    });
+  });
 });
