@@ -32,7 +32,7 @@ describe('ModelService', () => {
 
   const mockedTrainingDAO = {
     getTraining: jest.fn(),
-    deleteTrainingen: jest.fn(),
+    deleteTrainings: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -138,6 +138,19 @@ describe('ModelService', () => {
 
       // Assert
       expect(mockedSalesforceDAO.getJobs).toHaveBeenCalled();
+    });
+  });
+
+  describe('getAllModels', () => {
+    it('should call getAllModels on ModelDAO', () => {
+      // Arrange
+      const orgId = 'orgId';
+
+      // Act
+      modelService.getAllModels(orgId);
+
+      // Assert
+      expect(mockedModelDAO.getAllModels).toHaveBeenCalled();
     });
   });
 });
