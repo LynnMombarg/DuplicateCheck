@@ -5,45 +5,41 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { AuthDTO } from '../../auth/dto/auth.dto';
 import { RecordDTO } from '../../training/dto/record.dto';
 
-// Manual mock for jsforce library
-
-const mockResult = {
-  records: [
-    { Id: 'mockId1', Name: 'Record 1' },
-    { Id: 'mockId2', Name: 'Record 2' },
-  ],
-};
-// Manual mock for jsforce library
-jest.mock('jsforce', () => {
-  const mockConnection = {
-    oauth2: {
-      loginUrl: 'https://login.salesforce.com',
-      clientId: 'mockClientId',
-      clientSecret: 'mockClientSecret',
-      redirectUri: 'mockRedirectUri',
-    },
-    on: jest.fn(),
-    query: jest.fn(() => {
-      return mockResult;
-    }),
-    apex: {
-      post: jest.fn((url, data, callback) => {
-        const res = {
-          jobId: 'mockJobId',
-        };
-        callback(null, res);
-      }),
-    },
-  };
-
-  return {
-    Connection: jest.fn().mockImplementation(() => mockConnection),
-    OAuth2: jest.fn().mockImplementation(() => mockConnection.oauth2),
-  };
-});
-
 describe('SalesforceDAO', () => {
-  let salesforcedao: SalesforceDAO;
+  const mockResult = {
+    records: [
+      { Id: 'mockId1', Name: 'Record 1' },
+      { Id: 'mockId2', Name: 'Record 2' },
+    ],
+  };
+
+  jest.mock('jsforce', () => {
+    const mockConnection = {
+      oauth2: {
+        loginUrl: 'https://login.salesforce.com',
+        clientId: 'mockClientId',
+        clientSecret: 'mockClientSecret',
+        redirectUri: 'mockRedirectUri',
+      },
+      on: jest.fn(),
+      query: jest.fn(() => {
+        return mockResult;
+      }),
+      apex: {
+        post: jest.fn((url, data, callback) => {
+          const res = {
+            jobId: 'mockJobId',
+          };
+          callback(null, res);
+        }),
+      },
+    };
+
+    return {
+      Connection: jest.fn().mockImplementation(() => mockConnection),
+      OAuth2: jest.fn().mockImplementation(() => mockConnection.oauth2),
+    };
+  });
 
   const mockedAuthDAO = {
     getTokensByOrgId: jest.fn(),
@@ -53,7 +49,7 @@ describe('SalesforceDAO', () => {
     updateToken: jest.fn(),
   };
 
-  const authDTO = new AuthDTO(null, null, null);
+  let salesforcedao: SalesforceDAO;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -70,6 +66,7 @@ describe('SalesforceDAO', () => {
 
   describe('getJobs', () => {
     it('should throw an error if the tableId is error', async () => {
+      // act/assert
       await expect(salesforcedao.getJobs('error', null)).rejects.toThrow(
         'Not Found',
       );
@@ -78,35 +75,32 @@ describe('SalesforceDAO', () => {
 
   describe('getJobid', () => {
     it('should return a jobid', async () => {
-      // Mock the necessary data and dependencies
+      // arrange
       const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
       salesforcedao.oauth2 = {
-        // Mock the necessary oauth2 properties
         clientId: 'mockClientId',
         clientSecret: 'mockClientSecret',
         redirectUri: 'mockRedirectUri',
       };
       process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
-
+      // act
       const result = await salesforcedao.getJobId(tokens);
+      //assert
       expect(result).toEqual('mockJobId');
     });
   });
 
   describe('getIndexes', () => {
     it('should call the correct methods and return the indexes', async () => {
-      // Mock the necessary data and dependencies
+      // arrange
       const jobId = 'mockJobId';
       const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
       salesforcedao.oauth2 = {
-        // Mock the necessary oauth2 properties
         clientId: 'mockClientId',
         clientSecret: 'mockClientSecret',
         redirectUri: 'mockRedirectUri',
       };
       process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
-
-      // Mock the Connection class
       const mockConnection = {
         on: jest.fn(),
         query: jest.fn().mockImplementation((query, callback) => {
@@ -126,15 +120,14 @@ describe('SalesforceDAO', () => {
         }),
       };
 
-      // Mock the Connection constructor
       jest
         .spyOn(salesforcedao.jsforce, 'Connection')
         .mockReturnValue(mockConnection);
 
-      // Call the method being tested
+      // act
       const resultPromise = salesforcedao.getIndexes(jobId, tokens);
 
-      // Assertions
+      // assert
       await expect(resultPromise).resolves.toEqual([
         "'sourceIndex1','sourceIndex2'",
         "'matchIndex1','matchIndex2'",
@@ -146,63 +139,45 @@ describe('SalesforceDAO', () => {
     });
   });
 
-  // doesn't work yet
-  // describe('getFields', () => {
-  //   it('should call the correct methods and return the fields', async () => {
-  //     // Mock the necessary data and dependencies
-  //     const tableName = 'Account';
-  //     const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
-  //     salesforcedao.oauth2 = {
-  //       // Mock the necessary oauth2 properties
-  //       clientId: 'mockClientId',
-  //       clientSecret: 'mockClientSecret',
-  //       redirectUri: 'mockRedirectUri',
-  //     };
-  //     process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
-  //
-  //     // Mock the Connection class
-  //     const mockConnection = {
-  //       on: jest.fn(),
-  //       apex: {
-  //         post: jest.fn((url, data, callback) => {
-  //           const res = JSON.stringify({
-  //             objects: [
-  //               {
-  //                 crossObjects: [
-  //                   [
-  //                     {
-  //                       objectFrom: 'hi',
-  //                     },
-  //                   ],
-  //                 ],
-  //                 resultFields: [
-  //                   {
-  //                     field: 'Field1',
-  //                   },
-  //                   {
-  //                     field: 'Field2',
-  //                   },
-  //                 ],
-  //               },
-  //               // ...
-  //             ],
-  //           });
-  //           callback(null, res);
-  //         }),
-  //       },
-  //     };
-  //     // Mock the Connection constructor
-  //     jest
-  //       .spyOn(salesforcedao.jsforce, 'Connection')
-  //       .mockReturnValue(mockConnection);
-  //     // Mock the getJobId method
-  //     jest.spyOn(salesforcedao, 'getJobId').mockResolvedValue('mockJobId');
-  //
-  //     // Call the method being tested
-  //     expect(await salesforcedao.getFields(tableName, tokens)).toEqual([
-  //       'field1',
-  //       'field2',
-  //     ]);
-  //   });
-  // });
+  describe('getMatchRecords', () => {
+    it('should return match records', async () => {
+      // arrange
+      const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
+      salesforcedao.oauth2 = {
+        clientId: 'mockClientId',
+        clientSecret: 'mockClientSecret',
+        redirectUri: 'mockRedirectUri',
+      };
+      process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
+
+      const mockQuery = jest.fn().mockImplementation((query, callback) => {
+        const mockResult = {
+          records: [['data', 'data']],
+        };
+        callback(null, mockResult);
+      });
+      salesforcedao.jsforce.Connection.mockImplementation(() => ({
+        query: mockQuery,
+        on: jest.fn(),
+      }));
+
+      // act
+      const columns = 'Name';
+      const tableName = 'Account';
+      const matchIndexes = 'mockId1,mockId2';
+      const result = await salesforcedao.getMatchRecords(
+        columns,
+        tableName,
+        matchIndexes,
+        tokens,
+      );
+
+      // assert
+      expect(mockQuery).toHaveBeenCalledWith(
+        `SELECT ${columns} FROM ${tableName} WHERE Id IN (${matchIndexes})`,
+        expect.any(Function),
+      );
+      expect(result).toEqual([new RecordDTO(['data', 'data'])]);
+    });
+  });
 });
