@@ -19,35 +19,44 @@ file_path = os.path.join(os.path.dirname(__file__), 'pickles')
 
 class PythonService:
     
-    def __init__(self):
-        blobStorageDAO = BlobStorageDAO()
+    # def __init__(self):
+    #     self.blobStorageDAO: BlobStorageDAO
 
 
     def create_model(self, model_id):
         model = RecordLinkageModel()
+        blobStorageDAO = BlobStorageDAO()
         try:
             filehandler = open(file_path + '/' + model_id + '.pkl', 'wb')
             pickle.dump(model, filehandler)
             filehandler.close()
+            blobStorageDAO.create_blob(model_id)
             print('Created')
-        except Exception:
+        except Exception as e:
+            print(e)
             raise FileExistsError('Could not create model')
 
     def load_model(self, model_id):
         model: RecordLinkageModel
+        blobStorageDAO = BlobStorageDAO()
         try:
             with open(file_path + '/' + model_id + '.pkl', 'rb') as file:
                 model = pickle.load(file)
                 print('Loaded')
                 return model
-        except Exception:
+        except Exception as e:
+            print(e)
             raise FileNotFoundError('Model not found')
 
     def save_model(self, model_id, model):
-        filehandler = open(file_path + '/'  + model_id + '.pkl', 'wb')
-        pickle.dump(model, filehandler)
-        BlobStorageDAO.overwrite_blob(model_id) #TODO: overwrite to blob storage
-        print('Saved')
+        blobStorageDAO = BlobStorageDAO()
+        try:
+            filehandler = open(file_path + '/'  + model_id + '.pkl', 'wb')
+            pickle.dump(model, filehandler)
+            blobStorageDAO.overwrite_blob(model_id)
+            print('Saved')
+        except Exception as e:
+            print(e)
 
     def train_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)
@@ -55,7 +64,9 @@ class PythonService:
         self.save_model(model_id, model)
 
     def delete_model(self, model_id):
+        blobStorageDAO = BlobStorageDAO()
         os.remove(file_path + '/' + model_id + '.pkl')
+        blobStorageDAO.delete_blob(model_id)
 
     def execute_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)

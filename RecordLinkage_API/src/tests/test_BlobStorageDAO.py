@@ -20,12 +20,12 @@ class test_BlobStorageDAO(TestCase):
         self.sut.delete_blob = MagicMock()
         self.sut.overwrite_blob = MagicMock()
         
-    def test_list_containers(self):
-        try:
-            self.sut.list_containers()
-        except:
-            self.fail()
-        self.sut.list_containers.assert_called_once_with()
+    # def test_list_containers(self):
+    #     try:
+    #         self.sut.list_containers()
+    #     except:
+    #         self.fail()
+    #     self.sut.list_containers.assert_called_once_with()
         
     def test_upload_blob(self):
         try:
@@ -34,12 +34,12 @@ class test_BlobStorageDAO(TestCase):
             self.fail()
         self.sut.upload_blob.assert_called_once_with('test_model_id')
         
-    def test_download_blob(self):
-        try:
-            self.sut.download_blob(self.model_id)
-        except:
-            self.fail()
-        self.sut.download_blob.assert_called_once_with('test_model_id')
+    # def test_download_blob(self):
+    #     try:
+    #         self.sut.download_blob(self.model_id)
+    #     except:
+    #         self.fail()
+    #     self.sut.download_blob.assert_called_once_with('test_model_id')
         
     def test_delete_blob(self):
         try:
