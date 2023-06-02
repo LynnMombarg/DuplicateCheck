@@ -1,80 +1,131 @@
 '''
-Authors: Lynn, Roward 
-Jira-task: 4 - Model aanmaken in python
-Sprint: 2
-Last modified: 25-04-2023
+Authors: Lynn, Roward, Diederik
+Jira-task: 4 - Model aanmaken in python, 159
+Sprint: 2, 4
+Last modified: 01-06-2023
 '''
 import os
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..')))
 
-import unittest
-from unittest import TestCase
-from unittest.mock import patch, MagicMock
-from fastapi.testclient import TestClient
-import json
-import requests
-from main.PythonService import PythonService
 from main.PythonController import app
+from main.PythonService import PythonService
+import requests
+import json
+from fastapi.testclient import TestClient
+from unittest.mock import MagicMock
+from unittest import TestCase
+import unittest
 
-# Methods will most likely change so tests need to be adapted in the future
-# PythonController cannot be imported because it's in a sibling folder
-class test_PythonController(TestCase):
-    
-    @patch('main.PythonService.PythonService')
-    def setUp(self, mock_python_service):
-        self.mock_service_instance = mock_python_service.return_value
+
+class TestPythonController(TestCase):
+    def setUp(self):
+        self.mock_service_instance = MagicMock(spec=PythonService)
+        PythonService.create_model = self.mock_service_instance.create_model
+        PythonService.train_model = self.mock_service_instance.train_model
+        PythonService.delete_model = self.mock_service_instance.delete_model
+        PythonService.execute_model_on_records = self.mock_service_instance.execute_model_on_records
         self.client = TestClient(app)
 
-    def test_create_model(self):
-        # Mock the create_model method of the PythonService
+    def test_create_model_success(self):
         self.mock_service_instance.create_model.return_value = None
+        json_data = {'modelId': 'test'}
 
-        # Send the request to the API endpoint
-        response = self.client.post('/create-model/test')
+        response = self.client.post('/create-model', json=json_data)
 
-        # Assert the response status code and content
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, 'Model created!')
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.text, '"Model created!"')
+        self.mock_service_instance.create_model.assert_called_once_with('test')
 
-        # Assert that the create_model method was called with the correct arguments
-        self.mock_service_instance.create_model.assert_called_with('test')
-    
+    def test_create_model_failure(self):
+        self.mock_service_instance.create_model.side_effect = Exception()
+        json_data = {'modelId': 'test'}
 
-    def test_train_model(self):
-        # Mock the train_model method of the PythonService
+        response = self.client.post('/create-model', json=json_data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(
+            response.json()['detail'], 'Model could not be created')
+        self.mock_service_instance.create_model.assert_called_once_with('test')
+
+    def test_train_model_success(self):
         self.mock_service_instance.train_model.return_value = None
-
-        # Prepare the request payload
         data = {
             "recordset1": [{"columns": "value1"}, {"columns": "value2"}],
             "recordset2": [{"columns": "value3"}, {"columns": "value4"}],
             "golden_matches_index": [{"index1": 1, "index2": 2}]
         }
 
-        # Send the request to the API endpoint
         response = self.client.put('/train-model/test', json=data)
 
-        # Assert the response status code and content
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, 'Model trained!')
+        self.assertEqual(response.text, '"Model trained!"')
+        self.mock_service_instance.train_model.assert_called_once_with(
+            'test', data)
+        
+    def test_train_model_failure(self):
+        self.mock_service_instance.train_model.side_effect = Exception()
+        data = {
+            "recordset1": [{"columns": "value1"}, {"columns": "value2"}],
+            "recordset2": [{"columns": "value3"}, {"columns": "value4"}],
+            "golden_matches_index": [{"index1": 1, "index2": 2}]
+        }
 
-        # Assert that the train_model method was called with the correct arguments
-        self.mock_service_instance.train_model.assert_called_with('test', data)
-    
-    def test_delete_model(self):
-        # Mock the delete_model method of the PythonService
+        response = self.client.put('/train-model/test', json=data)
+
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(
+            response.json()['detail'], 'Model could not be trained')
+        self.mock_service_instance.train_model.assert_called_once_with(
+            'test', data)
+
+    def test_delete_model_success(self):
         self.mock_service_instance.delete_model.return_value = None
-
-        # Send the request to the API endpoint
         response = self.client.delete('/delete-model/test')
 
-        # Assert the response status code and content
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, 'Model deleted!')
+        self.assertEqual(response.text, '"Model deleted!"')
+        self.mock_service_instance.delete_model.assert_called_once_with('test')
 
-        # Assert that the delete_model method was called with the correct arguments
-        self.mock_service_instance.delete_model.assert_called_with('test')
+    def test_delete_model_failure(self):
+        self.mock_service_instance.delete_model.side_effect = Exception()
+
+        response = self.client.delete('/delete-model/test')
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.json()['detail'], 'Model could not be deleted')
+        self.mock_service_instance.delete_model.assert_called_once_with('test')
+
+    def test_execute_model_on_records_success(self):
+        self.mock_service_instance.execute_model_on_records.return_value = None
+        data = {
+            "recordset1": [{"columns": "value1"}, {"columns": "value2"}],
+            "recordset2": [{"columns": "value3"}, {"columns": "value4"}]
+        }
+
+        response = self.client.post('/execute-model-on-records/test', json=data)
+
+        self.assertEqual(response.status_code, 200)
+        self.mock_service_instance.execute_model_on_records.assert_called_once_with(
+            'test', data)
+        
+    def test_execute_model_on_records_failure(self):
+        self.mock_service_instance.execute_model_on_records.side_effect = Exception()
+        data = {
+            "recordset1": [{"columns": "value1"}, {"columns": "value2"}],
+            "recordset2": [{"columns": "value3"}, {"columns": "value4"}]
+        }
+
+        response = self.client.post('/execute-model-on-records/test', json=data)
+
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(
+            response.json()['detail'], 'Model could not be executed')
+        self.mock_service_instance.execute_model_on_records.assert_called_once_with(
+            'test', data)
+
 
 if __name__ == '__main__':
     unittest.main()
