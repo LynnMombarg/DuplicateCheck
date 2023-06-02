@@ -50,6 +50,7 @@ describe('SalesforceDAO', () => {
   };
 
   let salesforcedao: SalesforceDAO;
+  let tokens;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -62,6 +63,14 @@ describe('SalesforceDAO', () => {
       .compile();
 
     salesforcedao = moduleRef.get<SalesforceDAO>(SalesforceDAO);
+
+    tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
+    salesforcedao.oauth2 = {
+      clientId: 'mockClientId',
+      clientSecret: 'mockClientSecret',
+      redirectUri: 'mockRedirectUri',
+    };
+    process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
   });
 
   describe('getJobs', () => {
@@ -75,14 +84,7 @@ describe('SalesforceDAO', () => {
 
   describe('getJobid', () => {
     it('should return a jobid', async () => {
-      // arrange
-      const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
-      salesforcedao.oauth2 = {
-        clientId: 'mockClientId',
-        clientSecret: 'mockClientSecret',
-        redirectUri: 'mockRedirectUri',
-      };
-      process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
+      // arrange is in the mockConnection at the top
       // act
       const result = await salesforcedao.getJobId(tokens);
       //assert
@@ -94,13 +96,6 @@ describe('SalesforceDAO', () => {
     it('should call the correct methods and return the indexes', async () => {
       // arrange
       const jobId = 'mockJobId';
-      const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
-      salesforcedao.oauth2 = {
-        clientId: 'mockClientId',
-        clientSecret: 'mockClientSecret',
-        redirectUri: 'mockRedirectUri',
-      };
-      process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
       const mockConnection = {
         on: jest.fn(),
         query: jest.fn().mockImplementation((query, callback) => {
@@ -142,14 +137,6 @@ describe('SalesforceDAO', () => {
   describe('getMatchRecords', () => {
     it('should return match records', async () => {
       // arrange
-      const tokens = new AuthDTO('mockAccessToken', 'mockRefreshToken', null);
-      salesforcedao.oauth2 = {
-        clientId: 'mockClientId',
-        clientSecret: 'mockClientSecret',
-        redirectUri: 'mockRedirectUri',
-      };
-      process.env.SF_INSTANCE_URL = 'mockInstanceUrl';
-
       const mockQuery = jest.fn().mockImplementation((query, callback) => {
         const mockResult = {
           records: [['data', 'data']],
