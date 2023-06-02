@@ -29,10 +29,10 @@ class test_BlobStorageDAO(TestCase):
         
     def test_upload_blob(self):
         try:
-            self.sut.upload_blob(self.model_id)
+            self.sut.create_blob(self.model_id)
         except:
             self.fail()
-        self.sut.upload_blob.assert_called_once_with('test_model_id')
+        self.sut.create_blob.assert_called_once_with('test_model_id')
         
     # def test_download_blob(self):
     #     try:
