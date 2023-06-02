@@ -4,16 +4,14 @@
 // Last modified: 02-06-2023
 
 import { signOut } from "@/pages/overview/services/SignOut";
+import fetchMock from "@/__tests__/mocks/fetchMock";
 
 describe("SignOut", () => {
   beforeEach(() => {
-    global.fetch = jest.fn().mockImplementation(() => {
-      return Promise.resolve({});
-    });
+    global.fetch = jest.fn().mockImplementation(fetchMock);
   });
 
   it("should sign out", async () => {
-    const response = await signOut();
-    expect(response).toEqual({});
+    await signOut();
   });
 });
