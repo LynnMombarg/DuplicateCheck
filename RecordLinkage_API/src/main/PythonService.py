@@ -13,7 +13,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from .RecordLinkageModel import RecordLinkageModel
 import pickle
-
 from main.BlobStorageDAO import BlobStorageDAO
 
 class PythonService:
