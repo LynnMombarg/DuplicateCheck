@@ -19,6 +19,8 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConfig } from '../config/jwt.config';
+import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
+import { SalesforceModule } from 'src/salesforce/salesforce.module';
 
 @Module({
   imports: [
@@ -27,6 +29,7 @@ import { jwtConfig } from '../config/jwt.config';
       { name: AuthBlacklist.name, schema: AuthBlacklistSchema },
     ]),
     JwtModule.register(jwtConfig),
+    SalesforceModule,
   ],
   controllers: [AuthController],
   providers: [AuthDAO, AuthGuard, AuthService],
