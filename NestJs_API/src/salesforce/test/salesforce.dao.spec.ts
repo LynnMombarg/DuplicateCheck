@@ -4,6 +4,7 @@ import { AuthService } from '../../auth/auth.service';
 import { AuthDAO } from '../../auth/auth.dao';
 import { AuthDTO } from '../../auth/dto/auth.dto';
 import { RecordDTO } from '../../training/dto/record.dto';
+import { UnauthorizedException } from '@nestjs/common';
 
 describe('SalesforceDAO', () => {
   const mockResult = {
@@ -168,6 +169,34 @@ describe('SalesforceDAO', () => {
     });
   });
 
+  describe('getMatchRecords', () => {
+    it('should return an unauthorized exception', async () => {
+      // arrange
+      const mockQuery = jest.fn().mockImplementation((query, callback) => {
+        const mockResult = {
+          records: [['data', 'data']],
+        };
+        callback({ errorCode: 'INVALID_SESSION_ID' }, mockResult);
+      });
+      salesforcedao.jsforce.Connection.mockImplementation(() => ({
+        query: mockQuery,
+        on: jest.fn(),
+      }));
+      // act
+      const columns = 'Name';
+      const tableName = 'Account';
+      const matchIndexes = 'mockId1,mockId2';
+      const resultPromise = salesforcedao.getMatchRecords(
+        columns,
+        tableName,
+        matchIndexes,
+        tokens,
+      );
+      // assert
+      await expect(resultPromise).rejects.toThrow(UnauthorizedException);
+    });
+  });
+
   describe('getSourceRecords', () => {
     it('should return source records', async () => {
       // arrange
@@ -199,6 +228,36 @@ describe('SalesforceDAO', () => {
         expect.any(Function),
       );
       expect(result).toEqual([new RecordDTO(['data', 'data', 'data'])]);
+    });
+  });
+
+  describe('getSourceRecords', () => {
+    it('should return a Bad Request exception', async () => {
+      // arrange
+      const mockQuery = jest.fn().mockImplementation((query, callback) => {
+        const mockResult = {
+          records: [['data', 'data', 'data']],
+        };
+        callback({ message: 'Unauthorized' }, mockResult);
+      });
+      salesforcedao.jsforce.Connection.mockImplementation(() => ({
+        query: mockQuery,
+        on: jest.fn(),
+      }));
+
+      // act
+      const columns = 'Name';
+      const tableName = 'Leads';
+      const sourceIndexes = 'mockId1,mockId2';
+      const resultPromise = salesforcedao.getSourceRecords(
+        columns,
+        tableName,
+        sourceIndexes,
+        tokens,
+      );
+
+      // assert
+      await expect(resultPromise).rejects.toThrow('Bad Request');
     });
   });
 });
