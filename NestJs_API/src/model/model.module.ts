@@ -13,7 +13,6 @@ import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
 import { SalesforceModule } from '../salesforce/salesforce.module';
 import { TrainingModule } from '../training/training.module';
-import { TrainingDAO } from '../training/training.dao';
 import { Training, TrainingSchema } from '../training/schema/training.schema';
 
 @Module({
@@ -29,6 +28,6 @@ import { Training, TrainingSchema } from '../training/schema/training.schema';
     TrainingModule,
   ],
   controllers: [ModelController],
-  providers: [ModelService, ModelDAO, TrainingDAO],
+  providers: [ModelService, ModelDAO],
 })
 export class ModelModule {}
