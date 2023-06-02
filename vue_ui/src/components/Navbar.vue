@@ -5,7 +5,7 @@
 <template>
     <div class="sticky top-0 z-10 flex-shrink-0 flex bg-white shadow">
         <div class="flex-1 pl-4 flex justify-between">
-            <div class="flex items-center flex-shrink-0 px-4 cursor-pointer select-none hover:bg-gray-50 active:bg-sky-400" @click="navigateToOverview">
+            <div id="logo" class="flex items-center flex-shrink-0 px-4 cursor-pointer select-none hover:bg-gray-50 active:bg-sky-400" @click="navigateToOverview">
                 <div class="flex overflow-hidden">
                     <div class="flex-none w-10 pr-1"><img alt="Plauti Logo" src="@/assets/plauti.svg">
                     </div>
