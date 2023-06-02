@@ -167,4 +167,38 @@ describe('SalesforceDAO', () => {
       expect(result).toEqual([new RecordDTO(['data', 'data'])]);
     });
   });
+
+  describe('getSourceRecords', () => {
+    it('should return source records', async () => {
+      // arrange
+      const mockQuery = jest.fn().mockImplementation((query, callback) => {
+        const mockResult = {
+          records: [['data', 'data', 'data']],
+        };
+        callback(null, mockResult);
+      });
+      salesforcedao.jsforce.Connection.mockImplementation(() => ({
+        query: mockQuery,
+        on: jest.fn(),
+      }));
+
+      // act
+      const columns = 'Name';
+      const tableName = 'Leads';
+      const sourceIndexes = 'mockId1,mockId2';
+      const result = await salesforcedao.getSourceRecords(
+        columns,
+        tableName,
+        sourceIndexes,
+        tokens,
+      );
+
+      // assert
+      expect(mockQuery).toHaveBeenCalledWith(
+        `SELECT ${columns} FROM ${tableName} WHERE Id IN (${sourceIndexes})`,
+        expect.any(Function),
+      );
+      expect(result).toEqual([new RecordDTO(['data', 'data', 'data'])]);
+    });
+  });
 });
