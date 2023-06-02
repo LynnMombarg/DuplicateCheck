@@ -33,8 +33,6 @@ describe('TrainingService', () => {
     }),
   };
 
-
-
   const mockedTrainingWithoutMatch = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
