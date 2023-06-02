@@ -11,6 +11,9 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDAO } from '../../auth/auth.dao';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
+import { getModelToken } from '@nestjs/mongoose';
+import { Fields } from '../../salesforce/schema/salesforce.schema';
 
 describe('ModelController', () => {
   let modelController: ModelController;
@@ -22,6 +25,10 @@ describe('ModelController', () => {
     getJobs: jest.fn(),
   };
 
+  const mockedFieldsModel = {
+    findOne: jest.fn(),
+  };
+
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [ModelController],
@@ -29,6 +36,11 @@ describe('ModelController', () => {
         AuthService,
         JwtService,
         ModelService,
+        SalesforceDAO,
+        {
+          provide: getModelToken(Fields.name),
+          useValue: mockedFieldsModel,
+        },
         {
           provide: AuthDAO,
           useValue: jest.fn(),
