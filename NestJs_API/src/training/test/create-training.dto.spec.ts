@@ -29,10 +29,15 @@ describe('CreateTrainingDTO', () => {
 
   describe('constructor with parameters', () => {
     it('should create an instance of CreateTrainingDTO with parameters', () => {
-      const createTrainingDTO = new CreateTrainingDTO('jobId', 'tableName');
+      const createTrainingDTO = new CreateTrainingDTO(
+        'jobId',
+        'tableName',
+        'modelId',
+      );
       expect(createTrainingDTO).toBeDefined();
       expect(createTrainingDTO.jobId).toEqual('jobId');
       expect(createTrainingDTO.tableName).toEqual('tableName');
+      expect(createTrainingDTO.modelId).toEqual('modelId');
     });
   });
 });

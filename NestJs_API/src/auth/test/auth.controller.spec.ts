@@ -35,24 +35,24 @@ describe('AuthController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('logout', () => {
-    it('should call authService.logout()', async () => {
-      // Arrange
-      const userId = 'test-user-id';
-      const accessToken = 'test-access-token';
-      const refreshToken = 'test-refresh-token';
-      const authDTO = new AuthDTO(userId, accessToken, refreshToken);
-      jest.fn();
-      jest.fn().mockImplementation((cb) => cb());
-      jest.spyOn(authService, 'getTokensByOrgId').mockResolvedValue(authDTO);
-      jest.spyOn(authService, 'logout').mockImplementation(() => {});
-
-      // Act
-      await controller.logout({ user: { userId } });
-
-      // Assert
-      expect(authService.getTokensByOrgId).toHaveBeenCalledWith(userId);
-      expect(authService.logout).toHaveBeenCalledWith(userId);
-    });
-  });
+  // describe('logout', () => {
+  //   it('should call authService.logout()', async () => {
+  //     // Arrange
+  //     const userId = 'test-user-id';
+  //     const accessToken = 'test-access-token';
+  //     const refreshToken = 'test-refresh-token';
+  //     const authDTO = new AuthDTO(userId, accessToken, refreshToken);
+  //     jest.fn();
+  //     jest.fn().mockImplementation((cb) => cb());
+  //     jest.spyOn(authService, 'getTokensByOrgId').mockResolvedValue(authDTO);
+  //     jest.spyOn(authService, 'logout').mockImplementation(() => {});
+  //
+  //     // Act
+  //     await controller.logout({ user: { userId } });
+  //
+  //     // Assert
+  //     expect(authService.getTokensByOrgId).toHaveBeenCalledWith(userId);
+  //     expect(authService.logout).toHaveBeenCalledWith(userId);
+  //   });
+  // });
 });

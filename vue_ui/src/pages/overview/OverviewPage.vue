@@ -4,30 +4,30 @@
 <!--Last modified: 25-05-2023-->
 
 <template>
-    <div class="flex pl-64 flex-col flex-1">
-        <Navbar />
-        <OverviewBannerComponent :models="models"/>
-        <Footer />
-    </div>
+  <div class="flex pl-64 flex-col flex-1">
+    <Navbar />
+    <OverviewBannerComponent :models="models" />
+    <Footer />
+  </div>
 </template>
 
 <script>
 
-import OverviewBannerComponent from "./components/OverviewBannerComponent.vue";
-import OverviewModelComponent from "./components/OverviewModelComponent.vue";
-import {getModels} from "./services/GetModels";
-import {createModel} from "./services/CreateModel";
-import {deleteModel} from "./services/DeleteModel";
+import OverviewBannerComponent from "@/pages/overview/components/OverviewBannerComponent.vue";
+import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
+import { getModels } from "./services/GetModels";
+import { createModel } from "./services/CreateModel";
+import { deleteModel } from "./services/DeleteModel";
 import { executeModel } from "./services/ExecuteModel";
 import Navbar from "../../components/Navbar.vue";
-import {signOut} from "@/pages/overview/services/SignOut";
+import { signOut } from "@/pages/overview/services/SignOut";
 import Footer from "../../components/Footer.vue";
 
 export default {
   name: 'OverviewPage',
   components: {
-      Footer,
-      Navbar,
+    Footer,
+    Navbar,
     OverviewBannerComponent,
     OverviewModelComponent
   },
@@ -37,8 +37,8 @@ export default {
     }
   },
   async mounted() {
-      this.models = await getModels();
-      this.$store.commit('setModels', this.models);
+    this.models = await getModels();
+    this.$store.commit('setModels', this.models);
   },
   methods: {
     async deleteModel(modelId) {
@@ -61,12 +61,12 @@ export default {
 /*  background-size: 50% 30%;*/
 /*}*/
 #headlessui-portal-root {
-    position: fixed;
-    z-index: 9999;
-    inset: 0px;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  z-index: 9999;
+  inset: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

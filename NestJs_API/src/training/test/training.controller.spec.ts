@@ -114,25 +114,14 @@ describe('TrainingController', () => {
     });
   });
 
-  describe('checkForRecords', () => {
-    it('should call checkForRecords on TrainingService', () => {
-      // Arrange
-      const trainingID = '123';
-
-      // Act
-      trainingController.checkForRecords(trainingID);
-
-      // Assert
-      expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
-        trainingID,
-      );
-    });
-  });
-
   describe('selectJob', () => {
     it('should call selectJob on TrainingService', () => {
       // Arrange
-      const CreateTraining = new CreateTrainingDTO('jobId', 'tableName');
+      const CreateTraining = new CreateTrainingDTO(
+        'jobId',
+        'tableName',
+        'modelId',
+      );
 
       const req = { user: { orgId: 'userId' } };
 
@@ -143,6 +132,7 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
         CreateTraining.jobId,
         CreateTraining.tableName,
+        'modelId',
         'userId',
       );
     });

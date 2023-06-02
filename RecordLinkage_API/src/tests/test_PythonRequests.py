@@ -15,8 +15,6 @@ import json
 import requests
 from main.PythonService import PythonService
 
-# Methods will most likely change so tests need to be adapted in the future
-# PythonController cannot be imported because it's in a sibling folder
 class test_PythonRequests(TestCase):
     
     def setUp(self) -> None:
@@ -44,8 +42,8 @@ class test_PythonRequests(TestCase):
         mock_post.assert_called_with('http://localhost:8000/delete-model', headers={'Content-type': 'application/json'})
         
     
-    def tearDown(self):
-        os.remove('Python_API/RecordLinkage_API/src/pickles/test.pkl')
+    # def tearDown(self):
+    #     os.remove('Python_API/RecordLinkage_API/src/pickles/test.pkl')
         
 
 if __name__ == '__main__':
