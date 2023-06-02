@@ -24,9 +24,9 @@ class BlobStorageDAO:
             
     def create_blob(self, model_id):
         try:
-            blob_client = self.get_blob_client(model_id)
+            container_client = self.get_container_client()
             with open(self.local_file_path + model_id + '.pkl', "rb") as data:
-                blob_client.upload_blob(data)
+                container_client.upload_blob(name=model_id, data=data)
         except Exception as e:
             print(e)
             
@@ -49,6 +49,9 @@ class BlobStorageDAO:
         
     def get_blob_client(self, model_id):
         return self.blob_service_client.get_blob_client(container=self.container_name, blob=model_id)
+    
+    def get_container_client(self):
+        return self.blob_service_client.get_container_client(self.container_name)
     
 test = BlobStorageDAO()
 test.download_blob_to_pickle('978c7c2a-0bbf-4c0b-99e1-574d59eb72fd')
