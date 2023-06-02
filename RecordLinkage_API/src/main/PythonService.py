@@ -1,8 +1,8 @@
 '''
 Authors: Lynn, Roward, Diederik
-Jira-task: 4 - Model aanmaken in Python, 116 - Model trainen in Python
-Sprint: 2, 3
-Last modified: 16-05-2023
+Jira-task: 4 - Model aanmaken in Python, 116 - Model trainen in Python, 159
+Sprint: 2, 3, 4
+Last modified: 01-06-2023
 '''
 
 import os
@@ -15,30 +15,36 @@ from .RecordLinkageModel import RecordLinkageModel
 import pickle
 from main.BlobStorageDAO import BlobStorageDAO
 
+file_path = os.path.join(os.path.dirname(__file__), 'pickles')
+
 class PythonService:
     
     def __init__(self):
         blobStorageDAO = BlobStorageDAO()
 
+
     def create_model(self, model_id):
         model = RecordLinkageModel()
-        filehandler = open('main/pickles/' + model_id + '.pkl', 'wb')
-        pickle.dump(model, filehandler)
-        BlobStorageDAO.upload_blob(model_id)
-        print('Created')
+        try:
+            filehandler = open(file_path + '/' + model_id + '.pkl', 'wb')
+            pickle.dump(model, filehandler)
+            filehandler.close()
+            print('Created')
+        except Exception:
+            raise FileExistsError('Could not create model')
 
     def load_model(self, model_id):
         model: RecordLinkageModel
-        with open('main/pickles/' + model_id + '.pkl', 'rb') as file:
-            model = pickle.load(file)
-            if not model:
-                raise FileNotFoundError('Model not found')
-            else:
+        try:
+            with open(file_path + '/' + model_id + '.pkl', 'rb') as file:
+                model = pickle.load(file)
                 print('Loaded')
                 return model
+        except Exception:
+            raise FileNotFoundError('Model not found')
 
     def save_model(self, model_id, model):
-        filehandler = open('main/pickles/' + model_id + '.pkl', 'wb')
+        filehandler = open(file_path + '/'  + model_id + '.pkl', 'wb')
         pickle.dump(model, filehandler)
         BlobStorageDAO.overwrite_blob(model_id) #TODO: overwrite to blob storage
         print('Saved')
@@ -49,8 +55,7 @@ class PythonService:
         self.save_model(model_id, model)
 
     def delete_model(self, model_id):
-        os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickles', model_id + '.pkl'))
-        BlobStorageDAO.delete_blob(model_id) #TODO: delete from blob storage
+        os.remove(file_path + '/' + model_id + '.pkl')
 
     def execute_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)
