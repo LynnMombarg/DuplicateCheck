@@ -309,4 +309,39 @@ describe('SalesforceDAO', () => {
       await expect(resultPromise).rejects.toThrow('Bad Request');
     });
   });
+
+  describe('getStatusOfDownload', () => {
+    it('should return false', async () => {
+      // arrange
+      const mockPost = jest
+        .fn()
+        .mockImplementation((url, payload, callback) => {
+          const mockResponse = {
+            ok: false,
+          };
+          callback(null, mockResponse);
+        });
+
+      const mockConnection = {
+        on: jest.fn(),
+        apex: {
+          post: mockPost,
+        },
+      };
+
+      salesforcedao.jsforce.Connection.mockImplementation(() => mockConnection);
+
+      // act
+      const jobId = 'mockJobId';
+      const result = await salesforcedao.getStatusOfDownload(jobId, tokens);
+
+      // assert
+      expect(result).toEqual(false);
+      expect(mockPost).toHaveBeenCalledWith(
+        '/services/apexrest/dupcheck/dc3Api/admin/export-config-download',
+        { jobId: 'mockJobId' },
+        expect.any(Function),
+      );
+    });
+  });
 });
