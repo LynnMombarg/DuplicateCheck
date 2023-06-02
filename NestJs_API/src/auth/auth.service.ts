@@ -8,7 +8,7 @@
 import { Injectable } from '@nestjs/common';
 import { AuthDAO } from './auth.dao';
 import { AuthDTO } from './dto/auth.dto';
-import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
+import { SalesforceDAO } from '../salesforce/salesforce.dao';
 
 @Injectable()
 export class AuthService {
