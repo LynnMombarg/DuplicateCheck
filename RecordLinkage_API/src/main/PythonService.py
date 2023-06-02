@@ -31,6 +31,7 @@ class PythonService:
             pickle.dump(model, filehandler)
             filehandler.close()
             blobStorageDAO.create_blob(model_id)
+            self.delete_pickle(model_id)
             print('Created')
         except Exception as e:
             print(e)
@@ -58,14 +59,17 @@ class PythonService:
         except Exception as e:
             print(e)
 
+    # Model is downloaded from blobStorageDAO but it is never overwritten in azure blob storage (pickle still exists)
     def train_model(self, model_id, json_dataframe):
+        blobStorageDAO = BlobStorageDAO()
+        blobStorageDAO.download_blob_to_pickle(model_id)
         model = self.load_model(model_id)
         model.train_model(json_dataframe)
         self.save_model(model_id, model)
+        self.delete_pickle(model_id)
 
     def delete_model(self, model_id):
         blobStorageDAO = BlobStorageDAO()
-        os.remove(file_path + '/' + model_id + '.pkl')
         blobStorageDAO.delete_blob(model_id)
 
     def execute_model(self, model_id, json_dataframe):
@@ -81,5 +85,8 @@ class PythonService:
         return {
             percentage
         }
+        
+    def delete_pickle(self, model_id):
+        os.remove(file_path + '/' + model_id + '.pkl')
 
 

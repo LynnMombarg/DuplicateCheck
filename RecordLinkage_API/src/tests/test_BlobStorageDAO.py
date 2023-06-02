@@ -16,7 +16,7 @@ class test_BlobStorageDAO(TestCase):
         self.model_id = 'test_model_id'
         # self.sut.list_containers = MagicMock()
         self.sut.create_blob = MagicMock()
-        # self.sut.download_blob = MagicMock()
+        # self.sut.download_blob_to_pickle = MagicMock()
         self.sut.delete_blob = MagicMock()
         self.sut.overwrite_blob = MagicMock()
         
@@ -34,12 +34,12 @@ class test_BlobStorageDAO(TestCase):
             self.fail()
         self.sut.create_blob.assert_called_once_with('test_model_id')
         
-    # def test_download_blob(self):
+    # def test_download_blob_to_pickle(self):
     #     try:
-    #         self.sut.download_blob(self.model_id)
+    #         self.sut.download_blob_to_pickle(self.model_id)
     #     except:
     #         self.fail()
-    #     self.sut.download_blob.assert_called_once_with('test_model_id')
+    #     self.sut.download_blob_to_pickle.assert_called_once_with('test_model_id')
         
     def test_delete_blob(self):
         try:
