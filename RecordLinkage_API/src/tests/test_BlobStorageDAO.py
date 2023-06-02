@@ -14,9 +14,9 @@ class test_BlobStorageDAO(TestCase):
     def setUp(self):
         self.sut = BlobStorageDAO()
         self.model_id = 'test_model_id'
-        self.sut.list_containers = MagicMock()
-        self.sut.upload_blob = MagicMock()
-        self.sut.download_blob = MagicMock()
+        # self.sut.list_containers = MagicMock()
+        self.sut.create_blob = MagicMock()
+        # self.sut.download_blob = MagicMock()
         self.sut.delete_blob = MagicMock()
         self.sut.overwrite_blob = MagicMock()
         
