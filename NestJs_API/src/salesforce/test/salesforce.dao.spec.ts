@@ -135,6 +135,41 @@ describe('SalesforceDAO', () => {
     });
   });
 
+  describe('getIndexes', () => {
+    it('should return an unauthorized exception', async () => {
+      // arrange
+      const jobId = 'mockJobId';
+      const mockConnection = {
+        on: jest.fn(),
+        query: jest.fn().mockImplementation((query, callback) => {
+          const mockResult = {
+            records: [
+              {
+                dupcheck__SourceObject__c: 'sourceIndex1',
+                dupcheck__MatchObject__c: 'matchIndex1',
+              },
+              {
+                dupcheck__SourceObject__c: 'sourceIndex2',
+                dupcheck__MatchObject__c: 'matchIndex2',
+              },
+            ],
+          };
+          callback({ errorCode: 'INVALID_SESSION_ID' }, mockResult);
+        }),
+      };
+
+      jest
+        .spyOn(salesforcedao.jsforce, 'Connection')
+        .mockReturnValue(mockConnection);
+
+      // act
+      const resultPromise = salesforcedao.getIndexes(jobId, tokens);
+
+      // assert
+      await expect(resultPromise).rejects.toThrow(UnauthorizedException);
+    });
+  });
+
   describe('getMatchRecords', () => {
     it('should return match records', async () => {
       // arrange
