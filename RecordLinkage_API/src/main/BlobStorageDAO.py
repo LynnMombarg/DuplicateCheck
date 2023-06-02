@@ -21,24 +21,24 @@ class BlobStorageDAO:
         for container in containers:
             print(container.name)
             
-    def upload_blob(self, modelId):
-        blob_client = self.get_blob_client(modelId)
-        with open(self.local_file_path + modelId + '.pkl', "rb") as data:
+    def upload_blob(self, model_id):
+        blob_client = self.get_blob_client(model_id)
+        with open(self.local_file_path + model_id + '.pkl', "rb") as data:
             blob_client.upload_blob(data)
             
-    def download_blob(self, modelId):
-        blob_client = self.get_blob_client(modelId)
-        with open(self.local_file_path + modelId + '.pkl', "wb") as download_file:
+    def download_blob(self, model_id):
+        blob_client = self.get_blob_client(model_id)
+        with open(self.local_file_path + model_id + '.pkl', "wb") as download_file:
             download_file.write(blob_client.download_blob().readall())
         
-    def delete_blob(self, modelId):
-        blob_client = self.get_blob_client(modelId)
+    def delete_blob(self, model_id):
+        blob_client = self.get_blob_client(model_id)
         blob_client.delete_blob()
             
-    def overwrite_blob(self, modelId):
-        self.delete_blob(modelId)
-        self.upload_blob(modelId)
+    def overwrite_blob(self, model_id):
+        self.delete_blob(model_id)
+        self.upload_blob(model_id)
         
-    def get_blob_client(self, modelId):
-        return self.blob_service_client.get_blob_client(container=self.container_name, blob=modelId)
+    def get_blob_client(self, model_id):
+        return self.blob_service_client.get_blob_client(container=self.container_name, blob=model_id)
         
