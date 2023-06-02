@@ -8,7 +8,7 @@
         <RecordModel :record1="records[0]" :record2="records[1]" />
     </ul>
     <div>
-        <button class="bg-green-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(true)">
+        <button id="button-true" class="bg-green-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(true)">
             <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -22,7 +22,7 @@
                 />
             </svg>
         </button>
-        <button class="bg-red-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(false)">
+        <button id="button-false" class="bg-red-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(false)">
             <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -35,7 +35,7 @@
                 />
             </svg>
         </button>
-        <button v-if="answerCounter > 1" class="bg-red-400 text-black font-bold py-2 px-4 rounded"
+        <button v-if="answerCounter > 1" id="button-save" class="bg-red-400 text-black font-bold py-2 px-4 rounded"
                 @click="saveTraining">
             Finish early
         </button>
@@ -44,12 +44,10 @@
 
 <script>
 import RecordModel from "@/pages/training/components/RecordModel.vue";
-import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
 
 export default {
     name: "TrainWindow",
     components: {
-        OverviewModelComponent,
         RecordModel,
     },
     props: {

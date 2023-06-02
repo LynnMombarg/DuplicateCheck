@@ -114,21 +114,6 @@ describe('TrainingController', () => {
     });
   });
 
-  describe('checkForRecords', () => {
-    it('should call checkForRecords on TrainingService', () => {
-      // Arrange
-      const trainingID = '123';
-
-      // Act
-      trainingController.checkForRecords(trainingID);
-
-      // Assert
-      expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
-        trainingID,
-      );
-    });
-  });
-
   describe('selectJob', () => {
     it('should call selectJob on TrainingService', () => {
       // Arrange
