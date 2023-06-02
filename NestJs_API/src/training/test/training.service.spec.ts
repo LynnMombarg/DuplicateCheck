@@ -33,9 +33,7 @@ describe('TrainingService', () => {
     }),
   };
 
-  const mockedRecord = new RecordDTO(['1', 'Hoi', 'Hi', '(:']);
-  const mockedRecordArray = [mockedRecord, mockedRecord];
-  const mockedTraining2 = new DatasetDTO(mockedRecordArray);
+
 
   const mockedTrainingWithoutMatch = {
     _id: '6461fddec0437f4f44cbdb53',
