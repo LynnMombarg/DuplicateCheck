@@ -10,15 +10,19 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/dto/auth.dto';
-import { AuthService } from '../auth/auth.service';
 import { JobDTO } from '../model/dto/job-model.dto';
 import { RecordDTO } from '../training/dto/record.dto';
 import { DatasetDTO } from '../training/dto/dataset.dto';
-import { response } from 'express';
+import { FieldsDTO } from './dto/fields.dto';
+import { Fields } from './schema/salesforce.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 
 @Injectable()
 export class SalesforceDAO {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    @InjectModel(Fields.name) private model: mongoose.Model<FieldsDTO>,
+  ) {}
 
   jsforce = require('jsforce');
   oauth2 = new this.jsforce.OAuth2({
@@ -28,12 +32,61 @@ export class SalesforceDAO {
     redirectUri: process.env.BASE_URL + '/auth/callback',
   });
 
-  async getFields(tableName: string, tokens: AuthDTO): Promise<string[]> {
+  async insertFields(tokens: AuthDTO): Promise<void> {
     try {
-      const resultSet: string[] = [];
+      const fieldsDTO = await this.getFieldsFromSalesforce(tokens);
+      const existingDocument = await this.model.findOne({
+        orgId: fieldsDTO.orgId,
+      });
+
+      if (existingDocument) {
+        await this.model.updateOne({ orgId: fieldsDTO.orgId }, fieldsDTO);
+      } else {
+        await this.model.create(fieldsDTO);
+      }
+    } catch (err) {
+      console.error('An error occurred:', err);
+
+      throw new BadRequestException('Something bad happened', {
+        cause: new Error(),
+        description: 'An error occurred:' + err,
+      });
+    }
+  }
+
+  getFields(orgId: string): Promise<string[]> {
+    return this.model.findOne({ orgId: orgId });
+  }
+
+  async getFieldsFromSalesforce(tokens: AuthDTO): Promise<FieldsDTO> {
+    try {
+      const lead: string[] = [];
+      const contact: string[] = [];
+      const account: string[] = [];
       const jobId = await this.getJobId(tokens);
       await new Promise(async (resolve, reject) => {
+        let counter = 0;
         const interval = setInterval(async () => {
+          if (counter > 2) {
+            lead.push('Name', 'Company', 'Email', 'Phone', 'City');
+            contact.push(
+              'FirstName',
+              'LastName',
+              'AccountId',
+              'Email',
+              'Phone',
+            );
+            account.push(
+              'Name',
+              'Site',
+              'BillingState',
+              'Phone',
+              'Type',
+              'Owner.Alias',
+            );
+            clearInterval(interval);
+            resolve([lead, contact, account]);
+          }
           if (await this.getStatusOfDownload(jobId, tokens)) {
             clearInterval(interval);
             const conn = new this.jsforce.Connection({
@@ -57,32 +110,57 @@ export class SalesforceDAO {
                   console.error(err);
                 }
                 const jsonConfig = JSON.parse(res);
+                const tableNames = ['lead', 'contact', 'account'];
                 for (let i = 0; i < 3; i++) {
                   const tableObject = jsonConfig['objects'][i];
                   if (
                     tableObject['crossObjects'][0][
                       'objectFrom'
-                    ].toLowerCase() == tableName
+                    ].toLowerCase() == tableNames[i]
                   ) {
                     for (
                       let j = 0;
                       j < tableObject['resultFields'].length;
                       j++
                     ) {
-                      resultSet.push(tableObject['resultFields'][j]['field']);
+                      if (tableNames[i] == 'lead') {
+                        lead.push(tableObject['resultFields'][j]['field']);
+                      } else if (tableNames[i] == 'contact') {
+                        contact.push(tableObject['resultFields'][j]['field']);
+                      } else if (tableNames[i] == 'account') {
+                        account.push(tableObject['resultFields'][j]['field']);
+                      }
                     }
                   }
                 }
-                resolve(resultSet);
+                resolve([lead, contact, account]);
               },
             );
-            return resultSet;
+            const fieldsDTO = new FieldsDTO(
+              tokens.getOrgId(),
+              lead,
+              contact,
+              account,
+            );
+            return fieldsDTO;
           }
-        }, 200);
+          counter++;
+        }, 1000);
       });
-      return resultSet;
+      const fieldsDTO = new FieldsDTO(
+        tokens.getOrgId(),
+        lead,
+        contact,
+        account,
+      );
+      return fieldsDTO;
     } catch (err) {
       console.error('An error occurred:', err);
+
+      throw new BadRequestException('Something bad happened', {
+        cause: new Error(),
+        description: 'An error occurred:' + err,
+      });
     }
   }
 
@@ -197,11 +275,10 @@ export class SalesforceDAO {
     tableName: string,
   ): Promise<DatasetDTO[]> {
     let columns = '';
-    for (let i = 0; i < fields.length; i++) {
-      columns += fields[i] + ',';
+    for (let i = 0; i < fields[tableName].length; i++) {
+      columns += fields[tableName][i] + ',';
     }
     columns = columns.slice(0, -1);
-    console.log(columns);
     const resultSet: DatasetDTO[] = [];
 
     const [sourceIndexes, matchIndexes] = await this.getIndexes(jobId, tokens);

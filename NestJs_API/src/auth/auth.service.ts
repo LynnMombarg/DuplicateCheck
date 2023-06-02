@@ -8,10 +8,11 @@
 import { Injectable } from '@nestjs/common';
 import { AuthDAO } from './auth.dao';
 import { AuthDTO } from './dto/auth.dto';
+import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly authDAO: AuthDAO) {}
+  constructor(private readonly authDAO: AuthDAO, private readonly salesforceDAO: SalesforceDAO) {}
 
   login(
     orgId: string,
@@ -20,6 +21,7 @@ export class AuthService {
     jwtToken: string,
   ): void {
     this.authDAO.storeToken(orgId, accessToken, refreshToken, jwtToken);
+    this.salesforceDAO.insertFields(new AuthDTO(orgId, accessToken, refreshToken));
     this.removeBlacklistedToken(orgId);
   }
 
