@@ -40,7 +40,7 @@ export class SalesforceDAO {
       });
 
       if (existingDocument) {
-        await this.model.updateOne({ orgId: fieldsDTO.orgId }, fieldsDTO);
+        await this.model.replaceOne({ orgId: fieldsDTO.orgId }, fieldsDTO);
       } else {
         await this.model.create(fieldsDTO);
       }
@@ -252,7 +252,7 @@ export class SalesforceDAO {
           "'",
         (err, result) => {
           if (err) {
-            console.log(err);
+            console.error(err);
             reject(new UnauthorizedException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
@@ -372,7 +372,7 @@ export class SalesforceDAO {
             ')',
           (err, result) => {
             if (err) {
-              console.log(err.message);
+              console.error(err);
               throw new BadRequestException();
             } else {
               for (let i = 0; i < result.records.length; i++) {
@@ -423,7 +423,7 @@ export class SalesforceDAO {
           ')',
         (err, result) => {
           if (err) {
-            console.log(err);
+            console.error(err);
             reject(new UnauthorizedException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
