@@ -5,6 +5,8 @@ import { AuthDAO } from '../../auth/auth.dao';
 import { AuthDTO } from '../../auth/dto/auth.dto';
 import { RecordDTO } from '../../training/dto/record.dto';
 import { UnauthorizedException } from '@nestjs/common';
+import { Fields, FieldsSchema } from '../schema/salesforce.schema';
+import { getModelToken } from '@nestjs/mongoose';
 
 describe('SalesforceDAO', () => {
   const mockResult = {
@@ -50,12 +52,24 @@ describe('SalesforceDAO', () => {
     updateToken: jest.fn(),
   };
 
+  const mockedFieldsModel = {
+    findOne: jest.fn(),
+  };
+
   let salesforcedao: SalesforceDAO;
   let tokens;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [SalesforceDAO, AuthService, AuthDAO],
+      providers: [
+        SalesforceDAO,
+        {
+          provide: getModelToken(Fields.name),
+          useValue: mockedFieldsModel,
+        },
+        AuthService,
+        AuthDAO,
+      ],
     })
       .overrideProvider(AuthDAO)
       .useValue(mockedAuthDAO)
