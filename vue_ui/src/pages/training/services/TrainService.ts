@@ -76,7 +76,7 @@ export async function getMappedRecords(trainingId: string) {
   return mappedRecords;
 }
 
-export async function giveAnswer(answer: string, trainingId: string) {
+export async function giveAnswer(answer: boolean, trainingId: string) {
   const response = await fetch("training/give-answer", {
     method: "PUT",
     headers: {

@@ -14,4 +14,6 @@ export class TrainingDTO {
     public datasetB: DatasetDTO,
     public matches: boolean[],
   ) {}
+
+
 }

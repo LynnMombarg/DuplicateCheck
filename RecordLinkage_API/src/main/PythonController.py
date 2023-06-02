@@ -1,16 +1,16 @@
 '''
 Authors: Lynn, Roward, Diederik, Silke
-Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in python, 116 - Model trainen in Python
+Jira-task: 30 - RecordLinkage installeren in Python, 4 - Model aanmaken in python, 116 - Model trainen in Python, 159
 176 - Python endpoint execute model
 Sprint: 1, 2, 3, 4
-Last modified: 31-05-2023
+Last modified: 01-06-2023
 '''
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from .PythonService import PythonService
-from .devData.JsonTestData import get_test_data
+from fastapi import HTTPException
 
 app = FastAPI()
 app.add_middleware(
@@ -32,7 +32,7 @@ async def train_model(json : dict, model_id: str):
       service.train_model(model_id, json)
       return 'Model trained!'
     except Exception:
-      return 'Model could not be trained'
+      raise HTTPException(status_code=500, detail='Model could not be trained')
 
 
 # Create model based on a given filename
@@ -42,7 +42,7 @@ async def create_model(json: dict):
       service.create_model(json['modelId'])
       return 'Model created!'
     except Exception:
-      return 'Model could not be created'
+      raise HTTPException(status_code=400, detail='Model could not be created')
 
 
 # Delete model based on filename
@@ -52,7 +52,16 @@ async def delete_model(model_id: str):
       service.delete_model(model_id)
       return 'Model deleted!'
     except Exception:
-      return 'Model could not be deleted'
+      raise HTTPException(status_code=404, detail='Model could not be deleted')
+
+# Execute model based on a given filename
+@app.post('/execute-model/{model_id}')
+async def execute_model(json: dict, model_id: str):
+    try:
+      matches = service.execute_model(model_id, json)
+      return JSONResponse(content=matches)
+    except Exception:
+      raise HTTPException(status_code=500, detail='Model could not be executed')
 
 # Execute model based on given records
 @app.post('/execute-model-on-records/{model_id}')
@@ -60,7 +69,11 @@ async def execute_model(json: dict, model_id: str):
     try:
       response_data = service.execute_model_on_records(model_id, json)
       print(response_data)
+      percentage = service.execute_model_on_records(model_id, json)
+      response_data = {
+          "percentage": f"{percentage}%",
+      }
       return JSONResponse(content=response_data)
     except Exception:
-      return 'Model could not be executed'
+      raise HTTPException(status_code=500, detail='Model could not be executed')
 
