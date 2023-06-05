@@ -149,12 +149,9 @@ export default {
     executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
         let result = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
-        // get percentage from the json result
         this.percentage = result.percentage;
         this.is_match = result.is_match;
         this.showResult = true;
-         this.percentage=70; // for testing
-         this.is_match=false; // for testing
       } else {
         this.warningVisible = true;
       }

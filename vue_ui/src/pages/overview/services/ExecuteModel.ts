@@ -5,7 +5,7 @@
 
 export async function executeModel(tableName: string, modelId: string, recordId1: string, recordId2: string) {
     const response = await fetch("model/execute", {
-      method: "GET",
+      method: "POST",
       headers: {
           "Content-Type": "application/json"
       },
@@ -18,3 +18,4 @@ export async function executeModel(tableName: string, modelId: string, recordId1
     });
     return await response.json();
 }
+
