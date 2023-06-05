@@ -11,7 +11,6 @@ import { TrainingDAO } from './training.dao';
 import { Training, TrainingSchema } from './schema/training.schema';
 import { PythonModule } from '../python/python.module';
 import { AuthModule } from '../auth/auth.module';
-import { PythonDAO } from '../python/python.dao';
 import { SalesforceModule } from '../salesforce/salesforce.module';
 import { Record, RecordSchema } from './schema/record.schema';
 import { Dataset, DatasetSchema } from './schema/dataset.schema';
@@ -28,8 +27,7 @@ import { Dataset, DatasetSchema } from './schema/dataset.schema';
     PythonModule,
   ],
   controllers: [TrainingController],
-  providers: [TrainingService, TrainingDAO, PythonDAO],
+  providers: [TrainingService, TrainingDAO],
+  exports: [TrainingDAO],
 })
-
 export class TrainingModule {}
-
