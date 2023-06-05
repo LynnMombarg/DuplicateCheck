@@ -2,7 +2,7 @@
 Authors: Lynn
 Jira-task: 179
 Sprint: 4
-Last modified: 01-06-2023
+Last modified: 05-06-2023
 '''
 
 import os
@@ -26,7 +26,8 @@ class BlobStorageDAO:
         try:
             container_client = self.get_container_client()
             with open(self.local_file_path + model_id + '.pkl', "rb") as data:
-                container_client.upload_blob(name=model_id, data=data)
+                pickle_data = data.read()
+                container_client.upload_blob(name=model_id, data=pickle_data)
         except Exception as e:
             print(e)
             
@@ -34,8 +35,8 @@ class BlobStorageDAO:
         try:
             blob_client = self.get_blob_client(model_id)
             blob_data = blob_client.download_blob().readall()
-            with open(self.local_file_path + model_id + '.pkl', "wb") as download_file:
-                pickle.dump(blob_data, download_file)
+            with open(self.local_file_path + model_id + '.pkl', "wb") as pickle_file:
+                pickle.dump(blob_data, pickle_file)
         except Exception as e:
             print(e)
         
@@ -53,5 +54,3 @@ class BlobStorageDAO:
     def get_container_client(self):
         return self.blob_service_client.get_container_client(self.container_name)
     
-test = BlobStorageDAO()
-test.download_blob_to_pickle('978c7c2a-0bbf-4c0b-99e1-574d59eb72fd')

@@ -2,12 +2,11 @@
 Authors: Lynn, Roward, Diederik
 Jira-task: 4 - Model aanmaken in Python, 116 - Model trainen in Python, 159
 Sprint: 2, 3, 4
-Last modified: 01-06-2023
+Last modified: 05-06-2023
 '''
 
 import os
 import sys
-import json
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -31,20 +30,19 @@ class PythonService:
             pickle.dump(model, filehandler)
             filehandler.close()
             blobStorageDAO.create_blob(model_id)
-            self.delete_pickle(model_id)
             print('Created')
         except Exception as e:
             print(e)
             raise FileExistsError('Could not create model')
+        # self.delete_pickle(model_id)
 
     def load_model(self, model_id):
         model: RecordLinkageModel
-        blobStorageDAO = BlobStorageDAO()
         try:
             with open(file_path + '/' + model_id + '.pkl', 'rb') as file:
                 model = pickle.load(file)
-                print('Loaded')
-                return model
+            print('Loaded')
+            return model
         except Exception as e:
             print(e)
             raise FileNotFoundError('Model not found')
@@ -54,6 +52,7 @@ class PythonService:
         try:
             filehandler = open(file_path + '/'  + model_id + '.pkl', 'wb')
             pickle.dump(model, filehandler)
+            filehandler.close()
             blobStorageDAO.overwrite_blob(model_id)
             print('Saved')
         except Exception as e:
@@ -61,16 +60,18 @@ class PythonService:
 
     # Model is downloaded from blobStorageDAO but it is never overwritten in azure blob storage (pickle still exists)
     def train_model(self, model_id, json_dataframe):
-        blobStorageDAO = BlobStorageDAO()
-        blobStorageDAO.download_blob_to_pickle(model_id)
-        model = self.load_model(model_id)
-        model.train_model(json_dataframe)
-        self.save_model(model_id, model)
-        self.delete_pickle(model_id)
+        try:
+            model = self.load_model(model_id)
+            model.train_model(json_dataframe)
+            self.save_model(model_id, model)
+            # self.delete_pickle(model_id)
+        except Exception as e:
+            print(e)
 
     def delete_model(self, model_id):
         blobStorageDAO = BlobStorageDAO()
         blobStorageDAO.delete_blob(model_id)
+        self.delete_pickle(model_id)
 
     def execute_model(self, model_id, json_dataframe):
         model = self.load_model(model_id)
