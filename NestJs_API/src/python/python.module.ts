@@ -3,10 +3,7 @@ import { PythonDAO } from './python.dao';
 
 @Module({
   imports: [],
-  providers: [
-    PythonDAO,
-    // { provide: APP_GUARD, useClass: AuthGuard },
-  ],
+  providers: [PythonDAO],
   exports: [PythonDAO],
 })
 export class PythonModule {}

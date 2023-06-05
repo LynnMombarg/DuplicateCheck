@@ -19,8 +19,7 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConfig } from '../config/jwt.config';
-import { SalesforceDAO } from 'src/salesforce/salesforce.dao';
-import { SalesforceModule } from 'src/salesforce/salesforce.module';
+import { SalesforceModule } from '../salesforce/salesforce.module';
 
 @Module({
   imports: [
@@ -32,7 +31,7 @@ import { SalesforceModule } from 'src/salesforce/salesforce.module';
     SalesforceModule,
   ],
   controllers: [AuthController],
-  providers: [AuthDAO, AuthGuard, AuthService],
-  exports: [AuthGuard, AuthService, AuthDAO],
+  providers: [AuthService, AuthDAO, AuthGuard],
+  exports: [AuthService, AuthDAO, AuthGuard],
 })
 export class AuthModule {}

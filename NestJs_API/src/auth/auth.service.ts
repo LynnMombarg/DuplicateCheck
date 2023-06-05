@@ -12,7 +12,10 @@ import { SalesforceDAO } from '../salesforce/salesforce.dao';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly authDAO: AuthDAO, private readonly salesforceDAO: SalesforceDAO) {}
+  constructor(
+    private readonly authDAO: AuthDAO,
+    private readonly salesforceDAO: SalesforceDAO,
+  ) {}
 
   login(
     orgId: string,
@@ -21,7 +24,9 @@ export class AuthService {
     jwtToken: string,
   ): void {
     this.authDAO.storeToken(orgId, accessToken, refreshToken, jwtToken);
-    this.salesforceDAO.insertFields(new AuthDTO(orgId, accessToken, refreshToken));
+    this.salesforceDAO.insertFields(
+      new AuthDTO(orgId, accessToken, refreshToken),
+    );
     this.removeBlacklistedToken(orgId);
   }
 

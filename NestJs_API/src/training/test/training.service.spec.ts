@@ -14,6 +14,7 @@ import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { DatasetDTO } from '../dto/dataset.dto';
 import { RecordDTO } from '../dto/record.dto';
+import { TrainingDTO } from '../dto/training.dto';
 
 describe('TrainingService', () => {
   let trainingservice: TrainingService;
@@ -24,7 +25,7 @@ describe('TrainingService', () => {
     saveAnswer: jest.fn(),
     checkForRecords: jest.fn(),
     getTraining: jest.fn(() => {
-      return mockedTrainingWithoutMatch;
+      return mockedTraining;
     }),
   };
   const mockedAuthDAO = {
@@ -33,47 +34,14 @@ describe('TrainingService', () => {
     }),
   };
 
-  const mockedTrainingWithoutMatch = {
-    _id: '6461fddec0437f4f44cbdb53',
-    trainingId: 'trainingId',
-    orgId: 'req.user.userId',
-    datasetA: {
-      records: [
-        {
-          data: ['1', 'Hoi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-        },
-        {
-          data: ['2', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e3' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e7' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e1' },
-    },
-    datasetB: {
-      records: [
-        {
-          data: ['1', 'Hi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e6' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e7' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e4' },
-    },
-    matches: [],
-    __v: 0,
-  };
+  const mockedTraining = new TrainingDTO(
+    'trainingId',
+    'req.user.orgId',
+    'modelId',
+    new DatasetDTO([new RecordDTO(['1', 'Hoi']), new RecordDTO(['2', 'Doei'])]),
+    new DatasetDTO([new RecordDTO(['1', 'Hi']), new RecordDTO(['3', 'Doei'])]),
+    [false, true],
+  );
 
   const mockedSalesforceDAO = {
     getDatasets: jest
@@ -124,7 +92,6 @@ describe('TrainingService', () => {
     it('should call getRecords on TrainingDao', () => {
       // Arrange
       const trainingID = '123';
-      const req = '123';
 
       // Act
       trainingservice.getRecords(trainingID);
@@ -139,7 +106,6 @@ describe('TrainingService', () => {
       // Arrange
       const trainingID = '123';
       const answer = false;
-      const req = '123';
 
       // Act
       trainingservice.giveAnswer(false, trainingID);
@@ -201,13 +167,6 @@ describe('TrainingService', () => {
       //Arrange
       const modelId = 'model1';
       const trainingId = 'training1';
-      const training = {
-        trainingId: 'training1',
-        userId: '123',
-        datasetA: {},
-        datasetB: {},
-        matches: {},
-      };
 
       //Act
       await trainingservice.saveTraining(modelId, trainingId);
@@ -215,7 +174,7 @@ describe('TrainingService', () => {
       // Assert
       expect(mockedPythonDAO.saveTraining).toHaveBeenCalledWith(
         modelId,
-        mockedTrainingWithoutMatch,
+        mockedTraining,
       );
     });
 
@@ -228,6 +187,19 @@ describe('TrainingService', () => {
       trainingservice.saveTraining(modelId, trainingId);
 
       //Assert
+      expect(mockedTrainingDAO.getTraining).toHaveBeenCalledWith(trainingId);
+    });
+  });
+
+  describe('checkForRecords', () => {
+    it('should call getTraining on trainingDAO', () => {
+      // Arrange
+      const trainingId = 'trainingId';
+
+      // Act
+      trainingservice.checkForRecords(trainingId);
+
+      // Assert
       expect(mockedTrainingDAO.getTraining).toHaveBeenCalledWith(trainingId);
     });
   });

@@ -62,13 +62,10 @@ export class TrainingService {
   }
 
   async getRecords(trainingId: string): Promise<DatasetDTO> {
-    const training: TrainingDTO = await this.trainingDAO.getTraining(
-      trainingId,
+    const training: TrainingDTO = this.convertToTrainingDTO(
+      await this.trainingDAO.getTraining(trainingId),
     );
-    const lengthMatches = training.matches.length;
-    const recordA = training.datasetA.records[lengthMatches];
-    const recordB = training.datasetB.records[lengthMatches];
-    return new DatasetDTO([recordA, recordB]);
+    return training.getNextRecords();
   }
 
   async giveAnswer(answer: boolean, trainingID: string): Promise<void> {
@@ -76,11 +73,20 @@ export class TrainingService {
   }
 
   async checkForRecords(trainingId: string): Promise<boolean> {
-    const training: TrainingDTO = await this.trainingDAO.getTraining(
-      trainingId,
+    const training: TrainingDTO = this.convertToTrainingDTO(
+      await this.trainingDAO.getTraining(trainingId),
     );
-    const lengthMatches = training.matches.length;
-    const lengthDatasets = training.datasetA.records.length;
-    return lengthDatasets > lengthMatches;
+    return training.checkForRecords();
+  }
+
+  private convertToTrainingDTO(training: TrainingDTO): TrainingDTO {
+    return new TrainingDTO(
+      training.trainingId,
+      training.orgId,
+      training.modelId,
+      training.datasetA,
+      training.datasetB,
+      training.matches,
+    );
   }
 }

@@ -165,7 +165,7 @@ export class SalesforceDAO {
     }
   }
 
-  async getStatusOfDownload(jobId: String, tokens: AuthDTO): Promise<boolean> {
+  async getStatusOfDownload(jobId: string, tokens: AuthDTO): Promise<boolean> {
     let status = false;
     await new Promise((resolve, reject) => {
       const conn = new this.jsforce.Connection({
