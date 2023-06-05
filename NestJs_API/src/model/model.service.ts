@@ -74,10 +74,7 @@ export class ModelService {
     orgId: string,
   ): Promise<[string, string]> {
     const authDTO = await this.authDAO.getTokensByOrgId(orgId);
-    const fields = await this.salesforceDAO.getFields(
-      executeModel.tableName,
-      authDTO,
-    );
+    const fields = await this.salesforceDAO.getFields(authDTO.getOrgId());
     const [record1, record2] = await this.salesforceDAO.getRecords(
       fields,
       executeModel.tableName,
