@@ -31,14 +31,14 @@ class BlobStorageDAO:
         except Exception as e:
             print(e)
             
-    def download_blob_to_pickle(self, model_id):
-        try:
-            blob_client = self.get_blob_client(model_id)
-            blob_data = blob_client.download_blob().readall()
-            with open(self.local_file_path + model_id + '.pkl', "wb") as pickle_file:
-                pickle.dump(blob_data, pickle_file)
-        except Exception as e:
-            print(e)
+    # def download_blob_to_pickle(self, model_id):
+    #     try:
+    #         blob_client = self.get_blob_client(model_id)
+    #         blob_data = blob_client.download_blob().readall()
+    #         with open(self.local_file_path + model_id + '.pkl', "wb") as pickle_file:
+    #             pickle.dump(blob_data, pickle_file)
+    #     except Exception as e:
+    #         print(e)
         
     def delete_blob(self, model_id):
         blob_client = self.get_blob_client(model_id)
