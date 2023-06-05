@@ -2,7 +2,7 @@
 Authors: Lynn, Roward, Diederik
 Jira-task: 30 - RecordLinkage installeren in Python, 116 - Model trainen in Python
 Sprint: 1, 3
-Last modified: 23-05-2023
+Last modified: 05-06-2023
 '''
 
 import pandas as pd
@@ -24,12 +24,15 @@ class RecordLinkageModel:
     # Train the model with the recordsets
     # Extracts dataframes and the golden matches index from the JSON input
     def train_model(self, json_df):
-        df_a, df_b, golden_matches_index, nr_of_records = self.get_data_frame_structure(json_df)
-        df_a = df_a.iloc[0:nr_of_records]
-        df_b = df_b.iloc[0:nr_of_records]
-        self.set_compare_column(df_a)
-        self.nr_of_trainings = self.nr_of_trainings + 1
-        self.logreg.fit(self.get_features(df_a, df_b), golden_matches_index)
+        try:
+            df_a, df_b, golden_matches_index, nr_of_records = self.get_data_frame_structure(json_df)
+            df_a = df_a.iloc[0:nr_of_records]
+            df_b = df_b.iloc[0:nr_of_records]
+            self.set_compare_column(df_a)
+            self.nr_of_trainings = self.nr_of_trainings + 1
+            self.logreg.fit(self.get_features(df_a, df_b), golden_matches_index)
+        except Exception as e:
+            print(e)
         print('Trained')
 
     def execute_model(self, json_df):
