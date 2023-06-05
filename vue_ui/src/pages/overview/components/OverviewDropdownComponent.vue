@@ -150,7 +150,7 @@ export default {
 
     async executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
-        let result = await this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
+        const result = await this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
         this.is_match = result.is_match;
         this.percentage = result.percentage;
         this.showResult = true;

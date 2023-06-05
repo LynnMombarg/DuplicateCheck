@@ -3,11 +3,13 @@
 // Sprint: 3
 // Last modified: 23-05-2023
 
+const jsonHeaders = "application/json";
+
 export async function selectJob(jobId: string, tableName: string, modelId: string) {
   const response = await fetch("training", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": jsonHeaders,
     },
     body: JSON.stringify({
       jobId: jobId,
@@ -28,7 +30,7 @@ async function checkForRecords(trainingId: string) {
     {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": jsonHeaders,
       },
     }
   );
@@ -45,7 +47,7 @@ async function getRecords(trainingId: string) {
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": jsonHeaders,
         },
       }
     );
@@ -80,7 +82,7 @@ export async function giveAnswer(answer: boolean, trainingId: string) {
   const response = await fetch("training/give-answer", {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": jsonHeaders,
     },
     body: JSON.stringify({
       answer: answer,
@@ -94,7 +96,7 @@ export async function saveTraining(modelId: string, trainingId: string) {
   const response = await fetch("training/save", {
       method: "PUT",
       headers: {
-          "Content-Type": "application/json"
+          "Content-Type": jsonHeaders,
       },
       body: JSON.stringify({
           modelId: modelId,
