@@ -28,7 +28,7 @@ import { Dataset, DatasetSchema } from './schema/dataset.schema';
     PythonModule,
   ],
   controllers: [TrainingController],
-  providers: [TrainingService, TrainingDAO, PythonDAO],
+  providers: [TrainingService, TrainingDAO],
   exports: [TrainingDAO],
 })
 export class TrainingModule {}

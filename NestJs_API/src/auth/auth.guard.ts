@@ -12,7 +12,6 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { jwtConfig } from '../config/jwt.config';
 import { Request } from 'express';
 import * as process from 'process';
 import { AuthService } from './auth.service';

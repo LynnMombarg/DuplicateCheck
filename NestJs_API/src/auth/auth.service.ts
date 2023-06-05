@@ -12,7 +12,10 @@ import { SalesforceDAO } from '../salesforce/salesforce.dao';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly authDAO: AuthDAO, private readonly salesforceDAO: SalesforceDAO) {}
+  constructor(
+    private readonly authDAO: AuthDAO,
+    private readonly salesforceDAO: SalesforceDAO,
+  ) {}
 
   login(
     orgId: string,

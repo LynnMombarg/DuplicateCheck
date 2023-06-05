@@ -31,7 +31,7 @@ import { SalesforceModule } from 'src/salesforce/salesforce.module';
     SalesforceModule,
   ],
   controllers: [AuthController],
-  providers: [AuthDAO, AuthGuard, AuthService],
-  exports: [AuthGuard, AuthService, AuthDAO],
+  providers: [AuthService, AuthDAO, AuthGuard],
+  exports: [AuthService, AuthDAO, AuthGuard],
 })
 export class AuthModule {}

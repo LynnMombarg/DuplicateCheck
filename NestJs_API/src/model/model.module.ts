@@ -21,7 +21,6 @@ import { Training, TrainingSchema } from '../training/schema/training.schema';
       { name: Model.name, schema: ModelSchema },
       { name: Training.name, schema: TrainingSchema },
     ]),
-
     PythonModule,
     AuthModule,
     SalesforceModule,
