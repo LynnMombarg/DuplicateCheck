@@ -75,19 +75,25 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
-                <!--this is supposed to look like : https://flowbite.com/docs/components/progress/, With label outside-->
-                <div v-if="showResult" class="mt-2 flex flex-col">
-                  <div class="flex flex-col" style="margin-top: 1rem;">
-                    <div class="text-lg"> Results: </div>
+                  <div v-if="showResult" class="mt-2">
+
+                    <div  class="text-medium flex flex-start items-center"  v-if="is_match==null"> Something went wrong
+                    </div>
+
+                    <div class="mt-2">
+                      <div class="flex justify-between mb-1">
+                      </div>
+                      <table class="table-auto w-full mt-2">
+                        <tr>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white"> Is a match: {{ is_match }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Probability: {{ percentage }}</td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
-                <div class="flex justify-between mb-1">
-                  <span class="text-base font-medium text-blue-700 dark:text-white"> Percentage </span>
-                  <span class="text-sm font-medium text-blue-700 dark:text-white"> {{this.percentage}}</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="margin-bottom: 1rem">
-                  <div class="bg-sky-400 h-2.5 rounded-full "  :style="{ width: `${percentage}%` }"></div>
-                </div>
-                </div>
 
                 <button @click="executeModel()" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
                                       hover:bg-sky-400 hover:text-white mt-2">
@@ -117,6 +123,7 @@ export default {
       dialog: false,
       showResult: false,
       percentage: 0,
+      is_match : null
     }
   },
   methods: {
@@ -141,11 +148,12 @@ export default {
       resetValues();
     },
 
-    executeModel() {
+    async executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
-        this.percentage = this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
+        let result = await this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
+        this.is_match = result.is_match;
+        this.percentage = result.percentage;
         this.showResult = true;
-        // this.percentage=70; // for testing
       } else {
         this.warningVisible = true;
       }
@@ -158,6 +166,7 @@ export default {
       this.recordid2 = '';
       this.warningVisible = false;
       this.percentage = 0;
+      this.is_match = null;
     }
   },
 };

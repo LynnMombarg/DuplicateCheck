@@ -67,11 +67,8 @@ async def execute_model(json: dict, model_id: str):
 @app.post('/execute-model-on-records/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
-      percentage = service.execute_model_on_records(model_id, json)
-      response_data = {
-          "percentage": f"{percentage}%",
-      }
-      return JSONResponse(content=response_data)
+      response = service.execute_model_on_records(model_id, json)
+      return JSONResponse(content=response)
     except Exception:
       raise HTTPException(status_code=500, detail='Model could not be executed')
 
