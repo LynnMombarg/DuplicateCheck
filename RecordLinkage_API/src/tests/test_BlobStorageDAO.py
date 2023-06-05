@@ -41,12 +41,12 @@ class test_BlobStorageDAO(TestCase):
             self.fail()
         self.sut.create_blob.assert_called_once_with('test_model_id')
         
-    # def test_download_blob_to_pickle(self):
-    #     try:
-    #         self.sut.download_blob_to_pickle(self.model_id)
-    #     except:
-    #         self.fail()
-    #     self.sut.download_blob_to_pickle.assert_called_once_with('test_model_id')
+    def test_download_blob_to_pickle(self):
+        try:
+            self.sut.download_blob_to_pickle(self.model_id)
+        except:
+            self.fail()
+        self.sut.download_blob_to_pickle.assert_called_once_with('test_model_id')
         
     def test_delete_blob(self):
         try:
