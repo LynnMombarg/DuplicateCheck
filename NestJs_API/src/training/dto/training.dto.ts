@@ -15,11 +15,11 @@ export class TrainingDTO {
     public matches: boolean[],
   ) {}
 
-  checkForRecords() {
+  public checkForRecords(): boolean {
     return this.datasetA.records.length > this.matches.length;
   }
 
-  getNextRecords() {
+  public getNextRecords(): DatasetDTO {
     const lengthMatches = this.matches.length;
     return new DatasetDTO([
       this.datasetA.records[lengthMatches],
