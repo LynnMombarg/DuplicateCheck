@@ -76,14 +76,16 @@
                 </div>
 
                   <div v-if="showResult" class="mt-2">
+
+                    <div  class="text-medium flex flex-start items-center"  v-if="is_match===null"> Something went wrong
+                    </div>
+
                     <div class="mt-2">
                       <div class="flex justify-between mb-1">
                       </div>
                       <table class="table-auto w-full mt-2">
                         <tr>
-                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Result:
-                            <span v-if="is_match" class="text-sm font-medium text-blue-700 dark:text-white">MATCH</span>
-                            <span v-else class="text-sm font-medium text-blue-700 dark:text-white">Not a match</span>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white"> Is a match: {{ is_match }}
                           </td>
                         </tr>
                         <tr>
@@ -149,8 +151,8 @@ export default {
     async executeModel() {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
         let result = await this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
-        this.percentage = result.percentage;
         this.is_match = result.is_match;
+        this.percentage = result.percentage;
         this.showResult = true;
       } else {
         this.warningVisible = true;
@@ -164,6 +166,7 @@ export default {
       this.recordid2 = '';
       this.warningVisible = false;
       this.percentage = 0;
+      this.is_match = null;
     }
   },
 };
