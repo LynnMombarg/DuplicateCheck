@@ -74,17 +74,12 @@ class PythonService:
     def delete_model(self, model_id):
         self.blobStorageDAO.delete_blob(model_id)
 
-    def execute_model(self, model_id, json_dataframe):
-        model = self.load_model(model_id)
-        matches = model.execute_model(json_dataframe)
-        print('Executed')
-        return {
-            'matches': [{'index1': match[0], 'index2': match[1]} for match in matches],
-        }
-
-    def execute_model_on_records(self, model_id, json : dict):
+    def execute_model(self, model_id, json : dict):
+        self.blobStorageDAO.download_blob_to_pickle(model_id)
+        time.sleep(2)
         model = self.load_model(model_id)
         is_match, percentage = model.execute_model(json)
+        self.delete_pickle(model_id)
         return {
             'is_match': is_match,
             'percentage': percentage

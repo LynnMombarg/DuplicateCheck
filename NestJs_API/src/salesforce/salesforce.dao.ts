@@ -450,8 +450,8 @@ export class SalesforceDAO {
     let record2 = '';
 
     let columns = '';
-    for (let i = 0; i < fields.length; i++) {
-      columns += fields[i] + ',';
+    for (let i = 0; i < fields[tableName].length; i++) {
+      columns += fields[tableName][i] + ',';
     }
     columns = columns.slice(0, -1);
 
