@@ -1,11 +1,11 @@
-// Authors: Lynn
-// Jira-task: 172
+// Authors: Lynn, Silke
+// Jira-task: 172, 194
 // Sprint: 4
-// Last modified: 25-05-2023
+// Last modified: 5-06-2023
 
 export async function executeModel(tableName: string, modelId: string, recordId1: string, recordId2: string) {
     const response = await fetch("model/execute", {
-      method: "GET",
+      method: "POST",
       headers: {
           "Content-Type": "application/json"
       },
@@ -18,3 +18,13 @@ export async function executeModel(tableName: string, modelId: string, recordId1
     });
     return await response.json();
 }
+
+// for testing purposes (because netjs endpoint is not merged yet)
+// export async function executeModel(tableName: string, modelId: string, recordId1: string, recordId2: string) {
+//   const mockResponse = {
+//     "percentage": "76",
+//     "is_match": "true",
+//   };
+//   return mockResponse;
+// }
+
