@@ -6,6 +6,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { TrainingDTO } from '../training/dto/training.dto';
+import { ExecuteResultDTO } from 'src/model/dto/execute-result.dto';
 
 @Injectable()
 export class PythonDAO {
@@ -40,7 +41,7 @@ export class PythonDAO {
     recordA: string,
     recordB: string,
     modelId: string,
-  ): Promise<[string, string]> {
+  ): Promise<ExecuteResultDTO> {
     const response = await axios
       .post(
         `http://duplicatecheck-python-backend-1:8000/execute-model/${modelId}`,
@@ -50,6 +51,6 @@ export class PythonDAO {
         },
       )
       .catch();
-    return [String(response.data['is_match']), String(response.data['percentage'])];
+    return response.data;
   }
 }

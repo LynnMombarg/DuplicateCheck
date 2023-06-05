@@ -59,7 +59,6 @@ async def delete_model(model_id: str):
 async def execute_model(json: dict, model_id: str):
     try:
       response = service.execute_model(model_id, json)
-      print(response)
       return JSONResponse(content=response)
     except Exception:
       raise HTTPException(status_code=500, detail='Model could not be executed')

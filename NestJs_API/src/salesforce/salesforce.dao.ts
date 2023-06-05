@@ -449,6 +449,7 @@ export class SalesforceDAO {
     let record1 = '';
     let record2 = '';
 
+    console.log(tableName);
     let columns = '';
     for (let i = 0; i < fields[tableName].length; i++) {
       columns += fields[tableName][i] + ',';
@@ -474,11 +475,11 @@ export class SalesforceDAO {
           columns +
           ' FROM ' +
           tableName +
-          ' WHERE Id = \'' +
+          " WHERE Id = '" +
           recordId1 +
-          '\' OR Id = \'' +
+          "' OR Id = '" +
           recordId2 +
-          '\'',
+          "'",
         (err, result) => {
           if (err) {
             console.log(err);

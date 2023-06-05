@@ -19,6 +19,7 @@ import { ModelDTO } from './dto/model.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { JobDTO } from './dto/job-model.dto';
 import { ExecuteModelDTO } from './dto/execute-model.dto';
+import { ExecuteResultDTO } from './dto/execute-result.dto';
 
 @Controller('model')
 @UseGuards(AuthGuard)
@@ -54,7 +55,7 @@ export class ModelController {
   executeModel(
     @Body() executeModel: ExecuteModelDTO,
     @Req() req,
-  ): Promise<[string, string]> {
+  ): Promise<ExecuteResultDTO> {
     return this.modelService.executeModel(executeModel, req.user.orgId);
   }
 }

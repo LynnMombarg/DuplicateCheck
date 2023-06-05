@@ -14,6 +14,7 @@ import { JobDTO } from './dto/job-model.dto';
 import { AuthDAO } from '../auth/auth.dao';
 import { ExecuteModelDTO } from './dto/execute-model.dto';
 import { TrainingDAO } from '../training/training.dao';
+import { ExecuteResultDTO } from './dto/execute-result.dto';
 
 @Injectable()
 export class ModelService {
@@ -72,9 +73,9 @@ export class ModelService {
   async executeModel(
     executeModel: ExecuteModelDTO,
     orgId: string,
-  ): Promise<[string, string]> {
+  ): Promise<ExecuteResultDTO> {
     const authDTO = await this.authDAO.getTokensByOrgId(orgId);
-    const fields = await this.salesforceDAO.getFields(authDTO.getOrgId());
+    const fields = await this.salesforceDAO.getFields(orgId);
     const [record1, record2] = await this.salesforceDAO.getRecords(
       fields,
       executeModel.tableName,
