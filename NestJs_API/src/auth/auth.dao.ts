@@ -36,7 +36,7 @@ export class AuthDAO {
             refreshToken: refresh,
             jwtToken: jwt,
           });
-          this.authModel.create(doc);
+          this.authModel.create(auth);
         }
       });
   }

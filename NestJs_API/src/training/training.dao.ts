@@ -20,20 +20,20 @@ export class TrainingDAO {
     this.model.create(training);
   }
 
-  async saveAnswer(trainingId: string, answer: boolean) {
+  async saveAnswer(id: string, answer: boolean) {
     await Promise.resolve(
       this.model.updateOne(
-        { trainingId: trainingId },
+        { trainingId: id },
         { $push: { matches: { $each: [answer] } } },
       ),
     );
   }
 
-  getTraining(trainingId: string): Promise<TrainingDTO> {
-    return this.model.findOne({ trainingId: trainingId });
+  getTraining(id: string): Promise<TrainingDTO> {
+    return this.model.findOne({ trainingId: id });
   }
 
-  async deleteTrainings(modelId: string) {
-    await Promise.resolve(this.model.deleteMany({ modelId: modelId }));
+  async deleteTrainings(id: string) {
+    await Promise.resolve(this.model.deleteMany({ modelId: id }));
   }
 }
