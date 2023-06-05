@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from '../auth.service';
 import { AuthDAO } from '../auth.dao';
 import { AuthDTO } from '../dto/auth.dto';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -11,6 +12,12 @@ describe('AuthService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AuthService,
+        {
+          provide: SalesforceDAO,
+          useValue: {
+            insertFields: jest.fn(),
+          },
+        },
         {
           provide: AuthDAO,
           useValue: {

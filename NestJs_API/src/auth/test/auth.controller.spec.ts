@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '../auth.guard';
 import { AuthDTO } from '../dto/auth.dto';
 import { AuthDAO } from '../auth.dao';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -16,6 +17,10 @@ describe('AuthController', () => {
       providers: [
         AuthService,
         JwtService,
+        {
+          provide: SalesforceDAO,
+          useValue: jest.fn(),
+        },
         {
           provide: AuthDAO,
           useValue: jest.fn(),

@@ -1,5 +1,5 @@
 <!--Author(s): Silke Bertisen, Roward, Diederik, Lynn Mombarg-->
-<!--Jira-task: Dashboard realiseren 104, 162, 172 -->
+<!--Jira-task: Dashboard realiseren 104, 162, 172, 174 -->
 <!--Sprint: 2, 3, 4 -->
 <!--Last modified: 25-05-2023-->
 <!--Description: This component is used to display the dropdown menu for the model options. -->
@@ -74,6 +74,26 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
+                  <div v-if="showResult" class="mt-2">
+
+                    <div  class="text-medium flex flex-start items-center"  v-if="is_match==null"> Something went wrong
+                    </div>
+
+                    <div class="mt-2">
+                      <div class="flex justify-between mb-1">
+                      </div>
+                      <table class="table-auto w-full mt-2">
+                        <tr>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white"> Is a match: {{ is_match }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Probability: {{ percentage }}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+
                 <button @click="executeModel(tableName, modelId)" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
                                       hover:bg-sky-400 hover:text-white mt-2">
                   Execute
@@ -98,7 +118,9 @@ export default {
       recordid2: '',
       warningVisible: false,
       dialog: false,
+      showResult: false,
       percentage: 0,
+      is_match : null
     }
   },
   methods: {
@@ -135,6 +157,7 @@ export default {
       this.recordid2 = '';
       this.warningVisible = false;
       this.percentage = 0;
+      this.is_match = null;
     }
   },
 };

@@ -13,6 +13,7 @@ import { TrainingDAO } from '../training.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { AnswerDTO } from '../dto/answer.dto';
 import { CreateTrainingDTO } from '../dto/create-training.dto';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('TrainingController', () => {
   let trainingController: TrainingController;
@@ -34,6 +35,10 @@ describe('TrainingController', () => {
         JwtService,
         AuthGuard,
         TrainingService,
+        {
+          provide: SalesforceDAO,
+          useValue: jest.fn(),
+        },
         {
           provide: AuthDAO,
           useValue: jest.fn(),
@@ -110,21 +115,6 @@ describe('TrainingController', () => {
       expect(mockedTrainingService.giveAnswer).toHaveBeenCalledWith(
         answer.answer,
         answer.trainingId,
-      );
-    });
-  });
-
-  describe('checkForRecords', () => {
-    it('should call checkForRecords on TrainingService', () => {
-      // Arrange
-      const trainingID = '123';
-
-      // Act
-      trainingController.checkForRecords(trainingID);
-
-      // Assert
-      expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
-        trainingID,
       );
     });
   });
