@@ -36,14 +36,15 @@ class PythonService:
         except Exception as e:
             print(e)
             raise FileExistsError('Could not create model')
+        # self.delete_pickle(model_id)
 
     def load_model(self, model_id):
         model: RecordLinkageModel
         try:
             with open(file_path + model_id + '.pkl', 'rb') as file:
                 model = pickle.load(file)
-                print('Loaded')
-                return model
+            print('Loaded')
+            return model
         except Exception as e:
             print(e)
             raise FileNotFoundError('Model not found')

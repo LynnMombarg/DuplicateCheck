@@ -46,9 +46,9 @@
 <script>
 import { getJobs } from './services/GetJobs';
 import SelectJobBody from './components/SelectJobBody.vue';
-import RecordModel from "@/pages/training/components/RecordModel.vue";
-import TrainWindow from "@/pages/training/components/TrainWindow.vue";
-import { getMappedRecords, giveAnswer, saveTraining, selectJob } from "@/pages/training/services/TrainService";
+import RecordModel from "./components/RecordModel.vue";
+import TrainWindow from "./components/TrainWindow.vue";
+import { getMappedRecords, giveAnswer, saveTraining, selectJob } from "./services/TrainService";
 import Navbar from '../../components/Navbar.vue';
 import Footer from '../../components/Footer.vue';
 
