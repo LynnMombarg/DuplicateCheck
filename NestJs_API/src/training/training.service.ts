@@ -65,10 +65,7 @@ export class TrainingService {
     const training: TrainingDTO = await this.trainingDAO.getTraining(
       trainingId,
     );
-    const lengthMatches = training.matches.length;
-    const recordA = training.datasetA.records[lengthMatches];
-    const recordB = training.datasetB.records[lengthMatches];
-    return new DatasetDTO([recordA, recordB]);
+    return training.getNextRecords();
   }
 
   async giveAnswer(answer: boolean, trainingID: string): Promise<void> {
@@ -79,8 +76,6 @@ export class TrainingService {
     const training: TrainingDTO = await this.trainingDAO.getTraining(
       trainingId,
     );
-    const lengthMatches = training.matches.length;
-    const lengthDatasets = training.datasetA.records.length;
-    return lengthDatasets > lengthMatches;
+    return training.checkForRecords();
   }
 }
