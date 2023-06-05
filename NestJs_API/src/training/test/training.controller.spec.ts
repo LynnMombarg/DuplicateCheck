@@ -13,6 +13,7 @@ import { TrainingDAO } from '../training.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { AnswerDTO } from '../dto/answer.dto';
 import { CreateTrainingDTO } from '../dto/create-training.dto';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('TrainingController', () => {
   let trainingController: TrainingController;
@@ -34,6 +35,10 @@ describe('TrainingController', () => {
         JwtService,
         AuthGuard,
         TrainingService,
+        {
+          provide: SalesforceDAO,
+          useValue: jest.fn(),
+        },
         {
           provide: AuthDAO,
           useValue: jest.fn(),
