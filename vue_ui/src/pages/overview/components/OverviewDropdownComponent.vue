@@ -75,28 +75,25 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
-                <div v-if="showResult" class="mt-2 flex flex-col">
-                  <div class="flex flex-col" style="margin-top: 1rem;">
-                <div class="flex justify-between mb-1">
-                  <span class="text-base font-medium text-blue-700 dark:text-white"> Result </span>
-                  <div>
-                    <div v-if="is_match" class="flex justify-between mb-1">
-                      <span class="text-sm font-medium text-blue-700 dark:text-white">Match</span>
+                  <div v-if="showResult" class="mt-2">
+                    <div class="mt-4">
+                      <div class="flex justify-between mb-1">
+                      </div>
+                      <table class="table-auto w-full">
+                        <tr>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Result:</td>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">
+                            <span v-if="is_match" class="text-sm font-medium text-blue-700 dark:text-white">Match</span>
+                            <span v-else class="text-sm font-medium text-blue-700 dark:text-white">Not a match</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Probability:</td>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">{{ percentage }}</td>
+                        </tr>
+                      </table>
                     </div>
-                    <div v-else class="flex justify-between mb-1">
-                      <span class="text-sm font-medium text-blue-700 dark:text-white">Not a match</span>
-                    </div>
                   </div>
-                </div>
-                  </div>
-                  <div class="flex flex-col" style="margin-top: 1rem;">
-                  <div class="flex justify-between mb-1">
-                    <span class="text-base font-medium text-blue-700 dark:text-white"> Probability: </span>
-                    <span class="text-sm font-medium text-blue-700 dark:text-white"> {{this.percentage}}</span>
-                  </div>
-                  </div>
-                </div>
-
 
                 <button @click="executeModel()" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
                                       hover:bg-sky-400 hover:text-white mt-2">
