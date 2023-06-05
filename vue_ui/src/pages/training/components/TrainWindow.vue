@@ -8,12 +8,16 @@
         <RecordModel :record1="records[0]" :record2="records[1]" />
     </ul>
     <div>
-        <button class="bg-green-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(true)">
+        <p class="text-center text-2xl font-bold">Is this a duplicate?</p>
+    </div>
+    <div class="flex justify-center py-2 px-4">
+        <button id="button-true" class="w-full bg-green-400 text-black font-bold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-green-500 hover:text-white select-none rounded-md" 
+        @click="giveAnswer(true)">
             <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="w-5 h-5"
+                    class="w-full h-5"
             >
                 <path
                         fill-rule="evenodd"
@@ -22,19 +26,23 @@
                 />
             </svg>
         </button>
-        <button class="bg-red-400 text-black font-bold py-2 px-4 rounded" @click="giveAnswer(false)">
+        <button id="button-false" class="w-full bg-red-400 text-black font-bold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-red-500 hover:text-white select-none rounded-md" 
+        @click="giveAnswer(false)">
             <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="w-5 h-5"
+                    class="w-full h-5"
             >
                 <path
                         d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
                 />
             </svg>
         </button>
-        <button v-if="answerCounter > 1" class="bg-red-400 text-black font-bold py-2 px-4 rounded"
+    </div>
+    <div class="flex justify-end py-2 px-4">
+        <button v-if="answerCounter > 1" id="button-save" class="bg-red-400 text-black font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out hover:bg-sky-400 hover:text-white select-none"
+            style="margin-bottom: 0.75rem;"
                 @click="saveTraining">
             Finish early
         </button>
