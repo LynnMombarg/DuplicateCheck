@@ -47,7 +47,8 @@
     "istanbul-lib-coverage": "^3.0.0",
     "istanbul-lib-instrument": "^5.0.0",
     "istanbul-lib-source-maps": "^4.0.0",
-    "istanbul-reports": "^3.0.0"
+    "istanbul-reports": "^3.0.0",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

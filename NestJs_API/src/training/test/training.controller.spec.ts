@@ -13,6 +13,7 @@ import { TrainingDAO } from '../training.dao';
 import { PythonDAO } from '../../python/python.dao';
 import { AnswerDTO } from '../dto/answer.dto';
 import { CreateTrainingDTO } from '../dto/create-training.dto';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
 
 describe('TrainingController', () => {
   let trainingController: TrainingController;
@@ -34,6 +35,10 @@ describe('TrainingController', () => {
         JwtService,
         AuthGuard,
         TrainingService,
+        {
+          provide: SalesforceDAO,
+          useValue: jest.fn(),
+        },
         {
           provide: AuthDAO,
           useValue: jest.fn(),
@@ -60,89 +65,81 @@ describe('TrainingController', () => {
       .useValue(mockedAuthGuard)
       .compile();
 
+    trainingController = moduleRef.get<TrainingController>(TrainingController);
+  });
+
+  describe('Controller defined', () => {
     it('should be defined', () => {
       expect(trainingController).toBeDefined();
     });
-    describe('saveTraining', () => {
-      it('should call saveTraining on TrainingService', () => {
-        // Arrange
-        const json = { modelId: 'modelId', trainingId: 'trainingId' };
-        const req = { user: { userId: '123' } };
+  });
 
-        // Act
-        trainingController.saveTraining(json, req);
+  describe('saveTraining', () => {
+    it('should call saveTraining on TrainingService', () => {
+      // Arrange
+      const json = { modelId: 'modelId', trainingId: 'trainingId' };
 
-        // Assert
-        expect(mockedTrainingService.saveTraining).toHaveBeenCalledWith(
-          'modelId',
-          'trainingId',
-          '123',
-        );
-      });
+      // Act
+      trainingController.saveTraining(json);
+
+      // Assert
+      expect(mockedTrainingService.saveTraining).toHaveBeenCalledWith(
+        'modelId',
+        'trainingId',
+      );
     });
-    describe('getRecords', () => {
-      it('should call getRecords on TrainingService', () => {
-        // Arrange
-        const trainingID = '123';
+  });
 
-        // Act
-        trainingController.getRecords(trainingID);
+  describe('getRecords', () => {
+    it('should call getRecords on TrainingService', () => {
+      // Arrange
+      const trainingID = '123';
 
-        // Assert
-        expect(mockedTrainingService.getRecords).toHaveBeenCalledWith(
-          trainingID,
-        );
-      });
+      // Act
+      trainingController.getRecords(trainingID);
+
+      // Assert
+      expect(mockedTrainingService.getRecords).toHaveBeenCalledWith(trainingID);
     });
+  });
 
-    describe('giveAnswer', () => {
-      it('should call giveAnswer on TrainingService', () => {
-        // Arrange
-        const answer = new AnswerDTO('123', true);
+  describe('giveAnswer', () => {
+    it('should call giveAnswer on TrainingService', () => {
+      // Arrange
+      const answer = new AnswerDTO('123', true);
 
-        // Act
-        trainingController.giveAnswer(answer);
+      // Act
+      trainingController.giveAnswer(answer);
 
-        // Assert
-        expect(mockedTrainingService.giveAnswer).toHaveBeenCalledWith(
-          answer.answer,
-          answer.trainingId,
-        );
-      });
+      // Assert
+      expect(mockedTrainingService.giveAnswer).toHaveBeenCalledWith(
+        answer.answer,
+        answer.trainingId,
+      );
     });
+  });
 
-    describe('checkForRecords', () => {
-      it('should call checkForRecords on TrainingService', () => {
-        // Arrange
-        const trainingID = '123';
+  describe('selectJob', () => {
+    it('should call selectJob on TrainingService', () => {
+      // Arrange
+      const CreateTraining = new CreateTrainingDTO(
+        'jobId',
+        'tableName',
+        'modelId',
+      );
 
-        // Act
-        trainingController.checkForRecords(trainingID);
+      const req = { user: { orgId: 'userId' } };
 
-        // Assert
-        expect(mockedTrainingService.checkForRecords).toHaveBeenCalledWith(
-          trainingID,
-        );
-      });
-    });
+      // Act
+      trainingController.selectJob(CreateTraining, req);
 
-    describe('selectJob', () => {
-      it('should call selectJob on TrainingService', () => {
-        // Arrange
-        const CreateTraining = new CreateTrainingDTO('jobId', 'tableName');
-
-        const req = { user: { userId: 'userId' } };
-
-        // Act
-        trainingController.selectJob(CreateTraining, req);
-
-        // Assert
-        expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
-          CreateTraining.jobId,
-          CreateTraining.tableName,
-          req.user.userId,
-        );
-      });
+      // Assert
+      expect(mockedTrainingService.selectJob).toHaveBeenCalledWith(
+        CreateTraining.jobId,
+        CreateTraining.tableName,
+        'modelId',
+        'userId',
+      );
     });
   });
 });

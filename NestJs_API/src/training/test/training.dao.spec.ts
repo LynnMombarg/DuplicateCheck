@@ -19,7 +19,8 @@ describe('TrainingDAO', () => {
   const mockedTrainingWithoutMatch = {
     _id: '6461fddec0437f4f44cbdb53',
     trainingId: 'trainingId',
-    userId: 'req.user.userId',
+    orgId: 'req.user.userId',
+    modelId: 'modelId',
     datasetA: {
       records: [
         {
@@ -50,74 +51,6 @@ describe('TrainingDAO', () => {
     __v: 0,
   };
 
-  const mockTrainingWithOneMatch = {
-    _id: '6461fddec0437f4f44cbdb53',
-    trainingId: 'trainingId',
-    userId: 'req.user.userId',
-    datasetA: {
-      records: [
-        {
-          data: ['1', 'Hoi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-        },
-        {
-          data: ['2', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e3' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e1' },
-    },
-    datasetB: {
-      records: [
-        {
-          data: ['1', 'Hi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e6' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e4' },
-    },
-    matches: [true],
-    __v: 0,
-  };
-
-  const mockTrainingWithAllMatches = {
-    _id: '6461fddec0437f4f44cbdb53',
-    trainingId: 'trainingId',
-    userId: 'req.user.userId',
-    datasetA: {
-      records: [
-        {
-          data: ['1', 'Hoi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-        },
-        {
-          data: ['2', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e3' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e1' },
-    },
-    datasetB: {
-      records: [
-        {
-          data: ['1', 'Hi'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-        },
-        {
-          data: ['3', 'Doei'],
-          _id: { $oid: '6461fcde17a65a5fbd3809e6' },
-        },
-      ],
-      _id: { $oid: '6461fcde17a65a5fbd3809e4' },
-    },
-    matches: [true, true],
-    __v: 0,
-  };
-
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
@@ -141,98 +74,6 @@ describe('TrainingDAO', () => {
       expect(mockedTrainingModel.create).toHaveBeenCalledWith(
         mockedTrainingWithoutMatch,
       );
-    });
-  });
-
-  describe('getNextRecords', () => {
-    it('should fetch the first records from the mongoose model', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
-        mockedTrainingWithoutMatch,
-      );
-
-      // Act
-      const result = await trainingDAO.getNextRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual({
-        records: [
-          {
-            _id: { $oid: '6461fcde17a65a5fbd3809e2' },
-            data: ['1', 'Hoi'],
-          },
-          {
-            _id: { $oid: '6461fcde17a65a5fbd3809e5' },
-            data: ['1', 'Hi'],
-          },
-        ],
-      });
-    });
-  });
-
-  describe('getNextRecords', () => {
-    it('should fetch the second records from the mongoose model, because it contains 1 match', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
-        mockTrainingWithOneMatch,
-      );
-
-      // Act
-      const result = await trainingDAO.getNextRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual({
-        records: [
-          { _id: { $oid: '6461fcde17a65a5fbd3809e3' }, data: ['2', 'Doei'] },
-          { _id: { $oid: '6461fcde17a65a5fbd3809e6' }, data: ['3', 'Doei'] },
-        ],
-      });
-    });
-  });
-
-  describe('check for records', () => {
-    it('should return true', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
-        mockedTrainingWithoutMatch,
-      );
-
-      // Act
-      const result = await trainingDAO.checkForRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual(true);
-    });
-  });
-
-  describe('check for records', () => {
-    it('should return false', async () => {
-      // Arrange
-      const trainingsid = 'trainingId';
-      mockedTrainingModel.findOne.mockResolvedValueOnce(
-        mockTrainingWithAllMatches,
-      );
-
-      // Act
-      const result = await trainingDAO.checkForRecords(trainingsid);
-
-      // Assert
-      expect(mockedTrainingModel.findOne).toHaveBeenCalledWith({
-        trainingId: trainingsid,
-      });
-      expect(result).toEqual(false);
     });
   });
 
@@ -267,7 +108,6 @@ describe('TrainingDAO', () => {
 
       //Assert
       expect(mockedTrainingModel.findOne).toHaveBeenCalled();
-    })
-  })
-
+    });
+  });
 });

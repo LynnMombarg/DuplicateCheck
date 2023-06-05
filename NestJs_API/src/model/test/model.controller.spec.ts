@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 15-05-2023
+// Last modified: 23-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
@@ -11,6 +11,9 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDAO } from '../../auth/auth.dao';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
+import { getModelToken } from '@nestjs/mongoose';
+import { Fields } from '../../salesforce/schema/salesforce.schema';
 
 describe('ModelController', () => {
   let modelController: ModelController;
@@ -22,6 +25,10 @@ describe('ModelController', () => {
     getJobs: jest.fn(),
   };
 
+  const mockedFieldsModel = {
+    findOne: jest.fn(),
+  };
+
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [ModelController],
@@ -29,6 +36,15 @@ describe('ModelController', () => {
         AuthService,
         JwtService,
         ModelService,
+        SalesforceDAO,
+        {
+          provide: getModelToken(Fields.name),
+          useValue: mockedFieldsModel,
+        },
+        {
+          provide: SalesforceDAO,
+          useValue: jest.fn(),
+        },
         {
           provide: AuthDAO,
           useValue: jest.fn(),
@@ -49,11 +65,12 @@ describe('ModelController', () => {
   describe('createModel', () => {
     it('should call createModel on ModelService', () => {
       // Arrange
-      const req = { user: { userId: 'test' } };
+      const req = { user: { orgId: 'test' } };
       const model = new CreateModelDTO(
         'modelName',
         'tableName',
         'modelDescription',
+        'modelId',
       );
 
       // Act
@@ -69,7 +86,7 @@ describe('ModelController', () => {
   describe('getAllModels', () => {
     it('should call getAllModels on ModelService', () => {
       // Arrange
-      const req = { user: { userId: 'test' } };
+      const req = { user: { orgId: 'test' } };
 
       // Act
       modelController.getAllModels(req);

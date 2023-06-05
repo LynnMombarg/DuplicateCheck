@@ -1,7 +1,7 @@
-<!--Author(s): Marloes-->
-<!--Jira-task: 132, 133, 134-->
+<!--Author(s): Marloes, Diederik-->
+<!--Jira-task: 132, 133, 134, 162-->
 <!--Sprint: 3-->
-<!--Last modified: 16-05-2023-->
+<!--Last modified: 23-05-2023-->
 
 <template>
     <ul role="list" class="divide-y divide-gray-100">
@@ -35,7 +35,8 @@
                     class="w-full h-5"
             >
                 <path
-                        d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
+                        d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0
+                        101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
                 />
             </svg>
         </button>
@@ -51,19 +52,13 @@
 
 <script>
 import RecordModel from "@/pages/training/components/RecordModel.vue";
-import OverviewModelComponent from "@/pages/overview/components/OverviewModelComponent.vue";
 
 export default {
     name: "TrainWindow",
     components: {
-        OverviewModelComponent,
         RecordModel,
     },
     props: {
-        token: {
-            type: String,
-            required: true,
-        },
         records: Array,
     },
     data() {
