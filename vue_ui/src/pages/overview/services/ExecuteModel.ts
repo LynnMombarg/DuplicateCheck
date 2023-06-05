@@ -19,3 +19,14 @@ export async function executeModel(tableName: string, modelId: string, recordId1
     return await response.json();
 }
 
+// for testing purposes
+// export async function executeModel(tableName: string, modelId: string, recordId1: string, recordId2: string) {
+//   // Create a mock response object
+//   const mockResponse = {
+//     "percentage": "76",
+//     "is_match": "true",
+//   };
+//   // Return the mock response
+//   return mockResponse;
+// }
+
