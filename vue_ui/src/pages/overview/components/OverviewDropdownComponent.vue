@@ -76,20 +76,18 @@
                 </div>
 
                   <div v-if="showResult" class="mt-2">
-                    <div class="mt-4">
+                    <div class="mt-2">
                       <div class="flex justify-between mb-1">
                       </div>
-                      <table class="table-auto w-full">
+                      <table class="table-auto w-full mt-2">
                         <tr>
-                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Result:</td>
-                          <td class="py-2 px-4 border border-blue-700 dark:border-white">
-                            <span v-if="is_match" class="text-sm font-medium text-blue-700 dark:text-white">Match</span>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Result:
+                            <span v-if="is_match" class="text-sm font-medium text-blue-700 dark:text-white">MATCH</span>
                             <span v-else class="text-sm font-medium text-blue-700 dark:text-white">Not a match</span>
                           </td>
                         </tr>
                         <tr>
-                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Probability:</td>
-                          <td class="py-2 px-4 border border-blue-700 dark:border-white">{{ percentage }}</td>
+                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Probability: {{ percentage }}</td>
                         </tr>
                       </table>
                     </div>
