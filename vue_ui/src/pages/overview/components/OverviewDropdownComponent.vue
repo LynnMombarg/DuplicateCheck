@@ -77,7 +77,7 @@
 
                   <div v-if="showResult" class="mt-2">
 
-                    <div  class="text-medium flex flex-start items-center"  v-if="is_match===null"> Something went wrong
+                    <div  class="text-medium flex flex-start items-center"  v-if="is_match==null"> Something went wrong
                     </div>
 
                     <div class="mt-2">
