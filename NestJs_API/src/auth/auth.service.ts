@@ -24,7 +24,9 @@ export class AuthService {
     jwtToken: string,
   ): void {
     this.authDAO.storeToken(orgId, accessToken, refreshToken, jwtToken);
-    this.salesforceDAO.insertFields(new AuthDTO(orgId, accessToken, refreshToken));
+    this.salesforceDAO.insertFields(
+      new AuthDTO(orgId, accessToken, refreshToken),
+    );
     this.removeBlacklistedToken(orgId);
   }
 

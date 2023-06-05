@@ -19,7 +19,7 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConfig } from '../config/jwt.config';
-import { SalesforceModule } from 'src/salesforce/salesforce.module';
+import { SalesforceModule } from '../salesforce/salesforce.module';
 
 @Module({
   imports: [
