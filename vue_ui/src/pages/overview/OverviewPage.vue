@@ -20,7 +20,6 @@ import { createModel } from "./services/CreateModel";
 import { deleteModel } from "./services/DeleteModel";
 import { executeModel } from "./services/ExecuteModel";
 import Navbar from "../../components/Navbar.vue";
-import { signOut } from "@/pages/overview/services/SignOut";
 import Footer from "../../components/Footer.vue";
 
 export default {

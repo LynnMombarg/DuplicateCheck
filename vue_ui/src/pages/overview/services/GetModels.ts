@@ -4,11 +4,11 @@
 // Last modified: 23-05-2023
 
 export async function getModels() {
-  const response = await fetch("model/models", {
-    method: "GET",
+  const response = await fetch('model/models', {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
-  return await response.json();
+  return response.json();
 }

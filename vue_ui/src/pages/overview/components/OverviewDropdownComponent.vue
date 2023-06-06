@@ -153,7 +153,7 @@ export default {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
         this.open = true;
         this.showResult = false;
-        let result = await this.$parent.executeModel(tableName.slice(0, -1), modelId, this.recordid1, this.recordid2);
+        const result = await this.$parent.executeModel(tableName.slice(0, -1), modelId, this.recordid1, this.recordid2);
         this.open = false;
         this.is_match = result.is_match;
         this.percentage = parseFloat(result.percentage).toFixed(2);
