@@ -75,7 +75,7 @@ class PythonService:
         self.blob_storage_dao.delete_blob(model_id)
 
     def execute_model(self, model_id, json : dict):
-        self.blobStorageDAO.download_blob_to_pickle(model_id)
+        self.blob_storage_dao.download_blob_to_pickle(model_id)
         time.sleep(2)
         model = self.load_model(model_id)
         is_match, percentage = model.execute_model(json)
