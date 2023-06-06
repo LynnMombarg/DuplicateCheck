@@ -7,7 +7,7 @@ const jsonHeaders = 'application/json';
 const notFoundCode = 404;
 
 export async function selectJob(job: string, table: string, model: string) {
-  const response = await fetch("training", {
+  const response = await fetch('training', {
     method: 'POST',
     headers: {
       'Content-Type': jsonHeaders,
@@ -25,7 +25,6 @@ export async function selectJob(job: string, table: string, model: string) {
 }
 
 async function checkForRecords(trainingId: string) {
-  console.log(trainingId);
   const response = await fetch(
     `training/check-records/?trainingId=${trainingId}`,
     {
@@ -90,7 +89,7 @@ export async function giveAnswer(answerInput: boolean, id: string) {
       trainingId: id,
     }),
   });
-  return await response.json();
+  return response.json();
 }
 
 export async function saveTraining(model: string, training: string) {

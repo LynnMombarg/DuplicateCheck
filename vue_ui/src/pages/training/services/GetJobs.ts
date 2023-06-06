@@ -10,5 +10,5 @@ export async function getJobs(tableName: string) {
       'Content-Type': 'application/json',
     },
   });
-  return await response.json();
+  return response.json();
 }
