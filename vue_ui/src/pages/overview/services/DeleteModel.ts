@@ -5,13 +5,13 @@
 
 export async function deleteModel(modelId: string) {
     const response = await fetch(
-    'model?modelId=' + modelId,
-    {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-	return response.json();
-  }
+        `model?modelId=${modelId}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    );
+    return response.json();
+}

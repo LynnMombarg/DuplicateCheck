@@ -48,18 +48,13 @@ export default {
       this.$store.commit('setModels', this.models);
     },
     async executeModel(tableName, modelId, recordId1, recordId2) {
-      return await executeModel(tableName, modelId, recordId1, recordId2);
+      return executeModel(tableName, modelId, recordId1, recordId2);
     }
   },
 };
 </script>
 
 <style>
-/*body {*/
-/*  background-image: url("../../assets/lightning_blue_background.png");*/
-/*  background-repeat: repeat-x;*/
-/*  background-size: 50% 30%;*/
-/*}*/
 #headlessui-portal-root {
   position: fixed;
   z-index: 9999;

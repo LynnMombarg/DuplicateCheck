@@ -3,55 +3,56 @@
 // Sprint: 3
 // Last modified: 23-05-2023
 
-const jsonHeaders = "application/json";
+const jsonHeaders = 'application/json';
+const notFoundCode = 404;
 
-export async function selectJob(jobId: string, tableName: string, modelId: string) {
+export async function selectJob(job: string, table: string, model: string) {
   const response = await fetch("training", {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": jsonHeaders,
+      'Content-Type': jsonHeaders,
     },
     body: JSON.stringify({
-      jobId: jobId,
-      tableName: tableName,
-      modelId: modelId,
+      jobId: job,
+      tableName: table,
+      modelId: model,
     }),
   });
-  if (response.status === 404) {
+  if (response.status === notFoundCode) {
     return null;
   }
-  return await response.text();
+  return response.text();
 }
 
 async function checkForRecords(trainingId: string) {
   console.log(trainingId);
   const response = await fetch(
-    "training/check-records/?trainingId=" + trainingId,
+    `training/check-records/?trainingId=${trainingId}`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": jsonHeaders,
+        'Content-Type': jsonHeaders,
       },
     }
   );
-  if (response.status === 404) {
+  if (response.status === notFoundCode) {
     return false;
   }
-  return await response.text();
+  return response.text();
 }
 
 async function getRecords(trainingId: string) {
   if (await checkForRecords(trainingId)) {
     const response = await fetch(
-      "training/records?trainingId=" + trainingId,
+      `training/records?trainingId=${trainingId}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": jsonHeaders,
+          'Content-Type': jsonHeaders,
         },
       }
     );
-    return await response.json();
+    return response.json();
   } else {
     return null;
   }
@@ -64,13 +65,13 @@ export async function getMappedRecords(trainingId: string) {
   }
 
   let mappedRecords = [];
-  for (let i = 0; i < records.records.length; i++) {
+  for (let record of records.records) {
     let columns = [];
     let values = [];
-    for (let key in records.records[i].data[0]) {
-      if (key !== "attributes") {
+    for (let key in record.data[0]) {
+      if (key !== 'attributes') {
         columns.push(key);
-        values.push(records.records[i].data[0][key]);
+        values.push(record.data[0][key]);
       }
     }
     mappedRecords.push({ columns, values });
@@ -78,30 +79,30 @@ export async function getMappedRecords(trainingId: string) {
   return mappedRecords;
 }
 
-export async function giveAnswer(answer: boolean, trainingId: string) {
-  const response = await fetch("training/give-answer", {
-    method: "PUT",
+export async function giveAnswer(answerInput: boolean, id: string) {
+  const response = await fetch('training/give-answer', {
+    method: 'PUT',
     headers: {
-      "Content-Type": jsonHeaders,
+      'Content-Type': jsonHeaders,
     },
     body: JSON.stringify({
-      answer: answer,
-      trainingId: trainingId,
+      answer: answerInput,
+      trainingId: id,
     }),
   });
   return await response.json();
 }
 
-export async function saveTraining(modelId: string, trainingId: string) {
-  const response = await fetch("training/save", {
-      method: "PUT",
+export async function saveTraining(model: string, training: string) {
+  const response = await fetch('training/save', {
+      method: 'PUT',
       headers: {
-          "Content-Type": jsonHeaders,
+          'Content-Type': jsonHeaders,
       },
       body: JSON.stringify({
-          modelId: modelId,
-          trainingId: trainingId,
+          modelId: model,
+          trainingId: training,
       }),
   });
-  return await response.json();
+  return response.json();
 }
