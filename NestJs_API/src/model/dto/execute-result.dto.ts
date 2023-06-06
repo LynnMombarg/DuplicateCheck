@@ -4,11 +4,11 @@
 // Last modified: 05-06-2023
 
 export class ExecuteResultDTO {
-  is_match: boolean;
+  isMatch: boolean;
   percentage: string;
 
   constructor(is_match: boolean, percentage: string) {
-    this.is_match = is_match;
+    this.isMatch = is_match;
     this.percentage = percentage;
   }
 }

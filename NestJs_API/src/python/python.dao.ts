@@ -6,7 +6,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { TrainingDTO } from '../training/dto/training.dto';
-import { ExecuteResultDTO } from 'src/model/dto/execute-result.dto';
+import { ExecuteResultDTO } from '../model/dto/execute-result.dto';
 
 @Injectable()
 export class PythonDAO {
