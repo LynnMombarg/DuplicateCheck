@@ -12,6 +12,8 @@ import {
   Delete,
   Query,
   UseGuards,
+  BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 import { ModelService } from './model.service';
 import { CreateModelDTO } from './dto/create-model.dto';
@@ -26,13 +28,21 @@ export class ModelController {
 
   @Post('/create')
   async createModel(@Body() model: CreateModelDTO, @Req() req) {
-    await this.modelService.createModel(model, req.user.orgId);
-    return this.modelService.getAllModels(req.user.orgId);
+    try {
+      await this.modelService.createModel(model, req.user.orgId);
+      return this.modelService.getAllModels(req.user.orgId);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/models')
   getAllModels(@Req() req): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels(req.user.orgId);
+    try {
+      return this.modelService.getAllModels(req.user.orgId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   @Delete()
@@ -40,12 +50,20 @@ export class ModelController {
     @Req() req,
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
-    await this.modelService.deleteModel(req.user.orgId, modelId);
-    return this.modelService.getAllModels(req.user.orgId);
+    try {
+      await this.modelService.deleteModel(req.user.orgId, modelId);
+      return this.modelService.getAllModels(req.user.orgId);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/jobs')
   getJobs(@Req() req, @Query('tableName') tableName): Promise<JobDTO[]> {
-    return this.modelService.getJobs(tableName, req.user.orgId);
+    try {
+      return this.modelService.getJobs(tableName, req.user.orgId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 }
