@@ -27,13 +27,6 @@ class test_BlobStorageDAO(TestCase):
         self.sut.delete_blob = MagicMock()
         self.sut.overwrite_blob = MagicMock()
         
-    # def test_list_containers(self):
-    #     try:
-    #         self.sut.list_containers()
-    #     except:
-    #         self.fail()
-    #     self.sut.list_containers.assert_called_once_with()
-        
     def test_upload_blob(self):
         try:
             self.sut.create_blob(self.model_id)

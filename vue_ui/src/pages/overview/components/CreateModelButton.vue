@@ -4,7 +4,8 @@
 <!--Last modified: 15-05-2023-->
 
 <template>
-    <button @click="startCreateModel" class="rounded-md bg-white px-3 py-2 text-xl transition duration-300 ease-in-out hover:bg-sky-400 hover:text-white select-none" style="margin: 0.75rem;">
+    <button @click="startCreateModel" class="rounded-md bg-white px-3 py-2 text-xl transition
+    duration-300 ease-in-out hover:bg-sky-400 hover:text-white select-none" style="margin: 0.75rem;">
         + Add model
     </button>
 
