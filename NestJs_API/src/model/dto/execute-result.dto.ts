@@ -7,8 +7,8 @@ export class ExecuteResultDTO {
   isMatch: boolean;
   percentage: string;
 
-  constructor(is_match: boolean, percentage: string) {
-    this.isMatch = is_match;
+  constructor(isMatch: boolean, percentage: string) {
+    this.isMatch = isMatch;
     this.percentage = percentage;
   }
 }
