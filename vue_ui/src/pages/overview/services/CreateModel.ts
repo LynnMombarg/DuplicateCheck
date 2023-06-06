@@ -1,13 +1,12 @@
-// Authors: Marloes
-// Jira-task: 106 - Front-end maken
-// Sprint: 2
-// Last modified: 11-05-2023
+// Authors: Marloes, Diederik
+// Jira-task: 106 - Front-end maken, 162
+// Sprint: 2, 3
+// Last modified: 23-05-2023
 
-export async function createModel(modelName: string, tableName: string, description: string, token: string) {
-    const response = await fetch("http://localhost:8001/model/create", {
+export async function createModel(modelName: string, tableName: string, description: string) {
+    const response = await fetch("model/create", {
       method: "POST",
       headers: {
-          Authorization: "Bearer " + token,
           "Content-Type": "application/json"
       },
       body: JSON.stringify({

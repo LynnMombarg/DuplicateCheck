@@ -3,16 +3,15 @@
 // Sprint: 3
 // Last modified: 16-05-2023
 
-import { Injectable, NotFoundException, Req } from '@nestjs/common';
-import { RecordDTO } from './dto/record.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { TrainingDAO } from './training.dao';
 import { AuthDAO } from '../auth/auth.dao';
 import { SalesforceDAO } from '../salesforce/salesforce.dao';
 import { DatasetDTO } from './dto/dataset.dto';
-import { AuthDTO } from '../auth/auth.dto';
-import { PythonDAO } from 'src/python/python.dao';
+import { AuthDTO } from '../auth/dto/auth.dto';
 import { TrainingDTO } from './dto/training.dto';
 import { v4 as uuid } from 'uuid';
+import { PythonDAO } from '../python/python.dao';
 
 @Injectable()
 export class TrainingService {
@@ -24,25 +23,37 @@ export class TrainingService {
   ) {}
 
   async saveTraining(modelId: string, trainingId: string) {
-    const training = await this.trainingDAO.getTraining(trainingId);
-    if (training !== null) {
-      await this.pythonDAO.saveTraining(modelId, training);
+    try {
+      const training = await this.trainingDAO.getTraining(trainingId);
+      if (training !== null) {
+        await this.pythonDAO.saveTraining(modelId, training);
+      }
+    } catch (e) {
+      throw new NotFoundException(e.message);
     }
   }
 
-  async selectJob(jobId, tableName, orgId): Promise<string> {
+  async selectJob(jobId, tableName, modelId, orgId): Promise<string> {
     const tokens: AuthDTO = await this.authDAO.getTokensByOrgId(orgId);
-    const records: DatasetDTO[] = await this.salesforceDAO.getDatasets(
-      tokens,
-      jobId,
-      tableName,
-    );
+    const fields = await this.salesforceDAO.getFields(orgId);
+    let records: DatasetDTO[];
+    try {
+      records = await this.salesforceDAO.getDatasets(
+        tokens,
+        jobId,
+        fields,
+        tableName,
+      );
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
     const trainingId = uuid();
 
     if (records.length > 1) {
       const training: TrainingDTO = new TrainingDTO(
         trainingId,
         orgId,
+        modelId,
         records[0],
         records[1],
         [],
@@ -54,15 +65,40 @@ export class TrainingService {
     return trainingId;
   }
 
-  async getRecords(trainingID: string): Promise<DatasetDTO> {
-    return this.trainingDAO.getNextRecords(trainingID);
+  async getRecords(trainingId: string): Promise<DatasetDTO> {
+    try {
+      const training: TrainingDTO = this.convertToTrainingDTO(
+        await this.trainingDAO.getTraining(trainingId),
+      );
+      return training.getNextRecords();
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   async giveAnswer(answer: boolean, trainingID: string): Promise<void> {
     await this.trainingDAO.saveAnswer(trainingID, answer);
   }
 
-  checkForRecords(trainingId: string): Promise<boolean> {
-    return this.trainingDAO.checkForRecords(trainingId);
+  async checkForRecords(trainingId: string): Promise<boolean> {
+    try {
+      const training: TrainingDTO = this.convertToTrainingDTO(
+        await this.trainingDAO.getTraining(trainingId),
+      );
+      return training.checkForRecords();
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
+  }
+
+  private convertToTrainingDTO(training: TrainingDTO): TrainingDTO {
+    return new TrainingDTO(
+      training.trainingId,
+      training.orgId,
+      training.modelId,
+      training.datasetA,
+      training.datasetB,
+      training.matches,
+    );
   }
 }

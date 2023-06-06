@@ -1,14 +1,13 @@
 // Authors:  Silke
 // Jira-task: 142
 // Sprint: 3
-// Last modified: 22-05-2023
+// Last modified: 23-05-2023
 
 import { Test } from '@nestjs/testing';
 import { ModelDAO } from '../model.dao';
 import { ModelDTO } from '../dto/model.dto';
 import { getModelToken } from '@nestjs/mongoose';
 import { NotFoundException } from '@nestjs/common';
-import { Model } from 'mongoose';
 
 describe('ModelDAO', () => {
   let modelDAO: ModelDAO;
@@ -18,7 +17,7 @@ describe('ModelDAO', () => {
     modelId: 'test-model-id',
     tableName: 'test-table',
     modelDescription: 'Test model description',
-    userId: 'test-user-id',
+    orgId: 'test-user-id',
   };
 
   const mockedMongooseModel = {
@@ -62,7 +61,7 @@ describe('ModelDAO', () => {
 
       // Assert
       expect(mockedMongooseModel.find).toHaveBeenCalledWith({
-        userId: 'test-user-id',
+        orgId: 'test-user-id',
       });
       expect(result).toEqual(modelDTO);
     });
@@ -80,7 +79,7 @@ describe('ModelDAO', () => {
       expect(mockedMongooseModel.deleteOne).not.toThrow();
       expect(mockedMongooseModel.deleteOne).toHaveBeenCalledWith({
         modelId: 'test-model-id',
-        userId: 'test-user-id',
+        orgId: 'test-user-id',
       });
     });
   });

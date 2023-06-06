@@ -6,5 +6,5 @@
 import { DatasetDTO } from './dataset.dto';
 
 export class CreateTrainingDTO {
-  constructor(public jobId: string, public tableName: string) {}
+  constructor(public jobId: string, public tableName: string, public modelId) {}
 }

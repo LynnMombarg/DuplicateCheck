@@ -21,6 +21,9 @@ export class Training {
   @Prop()
   orgId: string;
 
+  @Prop()
+  modelId: string;
+
   @Prop({ type: DatasetSchema, ref: Dataset.name })
   datasetA: Dataset;
 

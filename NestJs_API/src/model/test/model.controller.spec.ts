@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
 // Jira-task: 107, 110
 // Sprint: 2
-// Last modified: 15-05-2023
+// Last modified: 23-05-2023
 
 import { ModelController } from '../model.controller';
 import { Test } from '@nestjs/testing';
@@ -11,6 +11,10 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { AuthService } from '../../auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDAO } from '../../auth/auth.dao';
+import { ExecuteModelDTO } from '../dto/execute-model.dto';
+import { SalesforceDAO } from '../../salesforce/salesforce.dao';
+import { getModelToken } from '@nestjs/mongoose';
+import { Fields } from '../../salesforce/schema/salesforce.schema';
 
 describe('ModelController', () => {
   let modelController: ModelController;
@@ -20,6 +24,11 @@ describe('ModelController', () => {
     deleteModel: jest.fn(),
     getAllModels: jest.fn(),
     getJobs: jest.fn(),
+    executeModel: jest.fn(),
+  };
+
+  const mockedFieldsModel = {
+    findOne: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -29,6 +38,15 @@ describe('ModelController', () => {
         AuthService,
         JwtService,
         ModelService,
+        SalesforceDAO,
+        {
+          provide: getModelToken(Fields.name),
+          useValue: mockedFieldsModel,
+        },
+        {
+          provide: SalesforceDAO,
+          useValue: jest.fn(),
+        },
         {
           provide: AuthDAO,
           useValue: jest.fn(),
@@ -49,11 +67,12 @@ describe('ModelController', () => {
   describe('createModel', () => {
     it('should call createModel on ModelService', () => {
       // Arrange
-      const req = { user: { userId: 'test' } };
+      const req = { user: { orgId: 'test' } };
       const model = new CreateModelDTO(
         'modelName',
         'tableName',
         'modelDescription',
+        'modelId',
       );
 
       // Act
@@ -69,7 +88,7 @@ describe('ModelController', () => {
   describe('getAllModels', () => {
     it('should call getAllModels on ModelService', () => {
       // Arrange
-      const req = { user: { userId: 'test' } };
+      const req = { user: { orgId: 'test' } };
 
       // Act
       modelController.getAllModels(req);
@@ -115,6 +134,19 @@ describe('ModelController', () => {
 
       // Assert
       expect(mockedModelService.getJobs).toHaveBeenCalled();
+    });
+  });
+  describe('executeModel', () => {
+    it('should call executeModel on ModelService', () => {
+      // Arrange
+      const req = { user: { userId: 'test' } };
+      const executeModel = new ExecuteModelDTO("tableName", "id1", "id2", "modelId");
+
+      // Act
+      modelController.executeModel(executeModel, req);
+
+      // Assert
+      expect(mockedModelService.executeModel).toHaveBeenCalled();
     });
   });
 });

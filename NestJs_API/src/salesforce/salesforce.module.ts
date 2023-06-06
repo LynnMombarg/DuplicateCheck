@@ -5,12 +5,14 @@
 
 import { Module } from '@nestjs/common';
 import { SalesforceDAO } from './salesforce.dao';
-import { AuthService } from '../auth/auth.service';
-import { AuthModule } from '../auth/auth.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Fields, FieldsSchema } from './schema/salesforce.schema';
 
 @Module({
-  imports: [AuthModule],
-  providers: [SalesforceDAO, AuthService],
+  imports: [
+    MongooseModule.forFeature([{ name: Fields.name, schema: FieldsSchema }]),
+  ],
+  providers: [SalesforceDAO],
   exports: [SalesforceDAO],
 })
 export class SalesforceModule {}

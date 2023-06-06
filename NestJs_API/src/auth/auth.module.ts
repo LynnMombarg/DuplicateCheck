@@ -13,12 +13,13 @@ import {
   AuthBlacklist,
   AuthBlacklistSchema,
   AuthSchema,
-} from './auth.schema';
+} from './schema/auth.schema';
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConfig } from '../config/jwt.config';
+import { SalesforceModule } from '../salesforce/salesforce.module';
 
 @Module({
   imports: [
@@ -27,9 +28,10 @@ import { jwtConfig } from '../config/jwt.config';
       { name: AuthBlacklist.name, schema: AuthBlacklistSchema },
     ]),
     JwtModule.register(jwtConfig),
+    SalesforceModule,
   ],
   controllers: [AuthController],
-  providers: [AuthDAO, AuthGuard, AuthService],
-  exports: [AuthGuard, AuthService, AuthDAO],
+  providers: [AuthService, AuthDAO, AuthGuard],
+  exports: [AuthService, AuthDAO, AuthGuard],
 })
 export class AuthModule {}

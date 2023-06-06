@@ -4,9 +4,11 @@
 // Last modified: 16-05-2023
 
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
+  NotFoundException,
   Post,
   Put,
   Query,
@@ -22,37 +24,58 @@ import { AnswerDTO } from './dto/answer.dto';
 @Controller('training')
 @UseGuards(AuthGuard)
 export class TrainingController {
-  constructor(private readonly trainingService: TrainingService) { }
+  constructor(private readonly trainingService: TrainingService) {}
 
   @Post()
   async selectJob(
     @Body() training: CreateTrainingDTO,
     @Req() req,
   ): Promise<string> {
-    return await this.trainingService.selectJob(
-      training.jobId,
-      training.tableName,
-      req.user.orgId,
-    );
+    try {
+      return this.trainingService.selectJob(
+        training.jobId,
+        training.tableName,
+        training.modelId,
+        req.user.orgId,
+      );
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/records')
   getRecords(@Query('trainingId') trainingId: string): Promise<DatasetDTO> {
-    return this.trainingService.getRecords(trainingId);
+    try {
+      return this.trainingService.getRecords(trainingId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   @Put('/give-answer')
   giveAnswer(@Body() answer: AnswerDTO) {
-    this.trainingService.giveAnswer(answer.answer, answer.trainingId);
+    try {
+      this.trainingService.giveAnswer(answer.answer, answer.trainingId);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/check-records')
   checkForRecords(@Query('trainingId') trainingId: string): Promise<boolean> {
-    return this.trainingService.checkForRecords(trainingId);
+    try {
+      return this.trainingService.checkForRecords(trainingId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   @Put('/save')
-  saveTraining(@Body() json, @Req() req) {
-    this.trainingService.saveTraining(json['modelId'], json['trainingId']);
+  saveTraining(@Body() json) {
+    try {
+      this.trainingService.saveTraining(json['modelId'], json['trainingId']);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 }

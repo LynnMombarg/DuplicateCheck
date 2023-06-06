@@ -1,7 +1,7 @@
 // Authors: Marloes, Roward, Silke
-// Jira-task: 107, 110, 115
-// Sprint: 2, 3
-// Last modified: 12-05-2023
+// Jira-task: 107, 110, 115, 175
+// Sprint: 2, 3, 4
+// Last modified: 26-05-2023
 
 import {
   Body,
@@ -12,12 +12,16 @@ import {
   Delete,
   Query,
   UseGuards,
+  BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 import { ModelService } from './model.service';
 import { CreateModelDTO } from './dto/create-model.dto';
 import { ModelDTO } from './dto/model.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { JobDTO } from './dto/job-model.dto';
+import { ExecuteModelDTO } from './dto/execute-model.dto';
+import { ExecuteResultDTO } from './dto/execute-result.dto';
 
 @Controller('model')
 @UseGuards(AuthGuard)
@@ -26,13 +30,21 @@ export class ModelController {
 
   @Post('/create')
   async createModel(@Body() model: CreateModelDTO, @Req() req) {
-    await this.modelService.createModel(model, req.user.orgId);
-    return await this.modelService.getAllModels(req.user.orgId);
+    try {
+      await this.modelService.createModel(model, req.user.orgId);
+      return this.modelService.getAllModels(req.user.orgId);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/models')
   getAllModels(@Req() req): Promise<ModelDTO[]> {
-    return this.modelService.getAllModels(req.user.orgId);
+    try {
+      return this.modelService.getAllModels(req.user.orgId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   @Delete()
@@ -40,12 +52,28 @@ export class ModelController {
     @Req() req,
     @Query('modelId') modelId,
   ): Promise<ModelDTO[]> {
-    await this.modelService.deleteModel(req.user.orgId, modelId);
-    return await this.modelService.getAllModels(req.user.orgId);
+    try {
+      await this.modelService.deleteModel(req.user.orgId, modelId);
+      return this.modelService.getAllModels(req.user.orgId);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/jobs')
   getJobs(@Req() req, @Query('tableName') tableName): Promise<JobDTO[]> {
-    return this.modelService.getJobs(tableName, req.user.orgId);
+    try {
+      return this.modelService.getJobs(tableName, req.user.orgId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
+  }
+
+  @Post('/execute')
+  executeModel(
+    @Body() executeModel: ExecuteModelDTO,
+    @Req() req,
+  ): Promise<ExecuteResultDTO> {
+    return this.modelService.executeModel(executeModel, req.user.orgId);
   }
 }

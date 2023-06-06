@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+recordlinkage
+pandas
+numpy
+requests
+azure-storage-blob
+azure-mgmt-compute
+azure-mgmt-storage
+azure-mgmt-resource
+azure-keyvault-secrets
+azure-identity
+azure-storage-queue 
+httpx

@@ -11,7 +11,10 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { TrainingDAO } from '../training.dao';
 import { TrainingService } from '../training.service';
 import { SalesforceDAO } from '../../salesforce/salesforce.dao';
-import { PythonDAO } from 'src/python/python.dao';
+import { PythonDAO } from '../../python/python.dao';
+import { DatasetDTO } from '../dto/dataset.dto';
+import { RecordDTO } from '../dto/record.dto';
+import { TrainingDTO } from '../dto/training.dto';
 
 describe('TrainingService', () => {
   let trainingservice: TrainingService;
@@ -21,19 +24,38 @@ describe('TrainingService', () => {
     getNextRecords: jest.fn(),
     saveAnswer: jest.fn(),
     checkForRecords: jest.fn(),
-    getTraining: jest.fn();
-  };
-  const mockedAuthDAO = {
-    getTokensByUserId: jest.fn(),
-  };
-  const mockedSalesforceDAO = {
-    getDatasets: jest.fn(() => {
-      return ['test', 'test'];
+    getTraining: jest.fn(() => {
+      return mockedTraining;
     }),
   };
+  const mockedAuthDAO = {
+    getTokensByOrgId: jest.fn(() => {
+      return { oegid: 'orgid' };
+    }),
+  };
+
+  const mockedTraining = new TrainingDTO(
+    'trainingId',
+    'req.user.orgId',
+    'modelId',
+    new DatasetDTO([new RecordDTO(['1', 'Hoi']), new RecordDTO(['2', 'Doei'])]),
+    new DatasetDTO([new RecordDTO(['1', 'Hi']), new RecordDTO(['3', 'Doei'])]),
+    [false, true],
+  );
+
+  const mockedSalesforceDAO = {
+    getDatasets: jest
+      .fn()
+      .mockResolvedValue([
+        new DatasetDTO([new RecordDTO(['hi']), new RecordDTO(['hi'])]),
+        new DatasetDTO([new RecordDTO(['hi']), new RecordDTO(['hi'])]),
+      ]),
+    getFields: jest.fn(),
+  };
+
   const mockedPythonDAO = {
     saveTraining: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -70,13 +92,12 @@ describe('TrainingService', () => {
     it('should call getRecords on TrainingDao', () => {
       // Arrange
       const trainingID = '123';
-      const req = '123';
 
       // Act
       trainingservice.getRecords(trainingID);
 
       // Assert
-      expect(mockedTrainingDAO.getNextRecords).toHaveBeenCalledWith(trainingID);
+      expect(mockedTrainingDAO.getTraining).toHaveBeenCalledWith(trainingID);
     });
   });
 
@@ -85,7 +106,6 @@ describe('TrainingService', () => {
       // Arrange
       const trainingID = '123';
       const answer = false;
-      const req = '123';
 
       // Act
       trainingservice.giveAnswer(false, trainingID);
@@ -103,35 +123,38 @@ describe('TrainingService', () => {
         const jobId = 'test123';
         const userId = 'token';
         const tableName = 'test';
+        const modelId = 'test';
 
         // Act
-        trainingservice.selectJob(jobId, tableName, userId);
+        trainingservice.selectJob(jobId, tableName, userId, modelId);
 
         // Assert
-        expect(mockedAuthDAO.getTokensByUserId).toHaveBeenCalled();
+        expect(mockedAuthDAO.getTokensByOrgId).toHaveBeenCalled();
       });
 
-      it('should call getDatasets on SalesforceDAO', () => {
+      it('should call getDatasets on SalesforceDAO', async () => {
         // Arrange
         const jobId = 'test123';
-        const userId = 'token';
+        const orgId = 'token';
         const tableName = 'test';
+        const modelId = 'test';
 
         // Act
-        trainingservice.selectJob(jobId, tableName, userId);
+        await trainingservice.selectJob(jobId, tableName, orgId, modelId);
 
         // Assert
         expect(mockedSalesforceDAO.getDatasets).toHaveBeenCalled();
       });
 
-      it('should call createTraining on TrainingDAO', () => {
+      it('should call createTraining on TrainingDAO', async () => {
         // Arrange
         const jobId = 'test123';
-        const userId = 'token';
+        const orgId = 'token';
         const tableName = 'test';
 
+        mockedTrainingDAO.createTraining.mockReturnValueOnce({ _id: '123' });
         // Act
-        trainingservice.selectJob(jobId, tableName, userId);
+        await trainingservice.selectJob(jobId, tableName, orgId, 'modelId');
 
         // Assert
         expect(mockedTrainingDAO.createTraining).toHaveBeenCalled();
@@ -139,34 +162,45 @@ describe('TrainingService', () => {
     });
   });
 
-
   describe('saveTraining', () => {
-    it('should call saveTraining on PythonDAO', () => {
+    it('should call saveTraining on PythonDAO', async () => {
       //Arrange
       const modelId = 'model1';
       const trainingId = 'training1';
-      const userId = '123';
-      const training = { 'trainingId': trainingId, 'userId': userId, 'datasetA': { }, 'datasetB': { }, 'matches': { } };
 
       //Act
-      trainingservice.saveTraining(modelId, trainingId, userId);
+      await trainingservice.saveTraining(modelId, trainingId);
 
       // Assert
-      expect(mockedPythonDAO.saveTraining).toHaveBeenCalledWith(modelId, training)
+      expect(mockedPythonDAO.saveTraining).toHaveBeenCalledWith(
+        modelId,
+        mockedTraining,
+      );
     });
 
     it('should call getTraining on trainingDAO', () => {
       //Arrange
       const modelId = 'model1';
       const trainingId = 'training1';
-      const userId = '123';
 
       //Act
-      trainingservice.saveTraining(modelId, trainingId, userId);
+      trainingservice.saveTraining(modelId, trainingId);
 
       //Assert
       expect(mockedTrainingDAO.getTraining).toHaveBeenCalledWith(trainingId);
-    })
-  })
-  
+    });
+  });
+
+  describe('checkForRecords', () => {
+    it('should call getTraining on trainingDAO', () => {
+      // Arrange
+      const trainingId = 'trainingId';
+
+      // Act
+      trainingservice.checkForRecords(trainingId);
+
+      // Assert
+      expect(mockedTrainingDAO.getTraining).toHaveBeenCalledWith(trainingId);
+    });
+  });
 });
