@@ -4,9 +4,11 @@
 // Last modified: 16-05-2023
 
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
+  NotFoundException,
   Post,
   Put,
   Query,
@@ -29,31 +31,51 @@ export class TrainingController {
     @Body() training: CreateTrainingDTO,
     @Req() req,
   ): Promise<string> {
-    return this.trainingService.selectJob(
-      training.jobId,
-      training.tableName,
-      training.modelId,
-      req.user.orgId,
-    );
+    try {
+      return this.trainingService.selectJob(
+        training.jobId,
+        training.tableName,
+        training.modelId,
+        req.user.orgId,
+      );
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/records')
   getRecords(@Query('trainingId') trainingId: string): Promise<DatasetDTO> {
-    return this.trainingService.getRecords(trainingId);
+    try {
+      return this.trainingService.getRecords(trainingId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   @Put('/give-answer')
   giveAnswer(@Body() answer: AnswerDTO) {
-    this.trainingService.giveAnswer(answer.answer, answer.trainingId);
+    try {
+      this.trainingService.giveAnswer(answer.answer, answer.trainingId);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   @Get('/check-records')
   checkForRecords(@Query('trainingId') trainingId: string): Promise<boolean> {
-    return this.trainingService.checkForRecords(trainingId);
+    try {
+      return this.trainingService.checkForRecords(trainingId);
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   @Put('/save')
   saveTraining(@Body() json) {
-    this.trainingService.saveTraining(json['modelId'], json['trainingId']);
+    try {
+      this.trainingService.saveTraining(json['modelId'], json['trainingId']);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 }
