@@ -9,15 +9,18 @@
       <div class="flex items-center w-50 px-2 rounded-md"
         :class="{ bgContacts: isContacts(this.model.tableName), bgLeads: isLeads(this.model.tableName), bgAccounts: isAccounts(this.model.tableName) }">
         <div class="flex flex-row">
-          <svg v-if="isContacts(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isContacts(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+            style="position: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#contact"></use>
           </svg>
 
-          <svg v-if="isLeads(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isLeads(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+            style="position: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#lead"></use>
           </svg>
 
-          <svg v-if="isAccounts(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="top: 0; left: 0; width: 2rem; height: 2rem;">
+          <svg v-if="isAccounts(this.model.tableName)" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+            style="position: absolute; top: 0; left: 0; width: 2rem; height: 2rem;">
             <use xlink:href="@/assets/symbols.svg#account"></use>
           </svg>
 
@@ -37,7 +40,7 @@
       </p>
     </div>
     <div class="select-none" style="margin-left: 1rem;">
-      <OverviewDropdownComponent :modelId="this.model.modelId" />
+      <OverviewDropdownComponent :modelId="this.model.modelId" :tableName="this.model.tableName" />
     </div>
   </div>
 </template>
@@ -52,7 +55,7 @@ export default {
     model: Array,
   },
   methods: {
-    deleteModel(modelId){
+    deleteModel(modelId) {
       this.$parent.deleteModel(modelId);
     },
     isContacts(tableName) {
@@ -84,11 +87,25 @@ export default {
 .bgAccounts {
   background-color: rgb(127 141 225);
 }
+
 .capitalize-first::first-letter {
   text-transform: uppercase;
 }
-::-webkit-scrollbar {width: 5px; height: 5px;}
-::-webkit-scrollbar-track {background: #f1f1f1;}
-::-webkit-scrollbar-thumb {background: #888; border-radius: 5px;}
-::-webkit-scrollbar-thumb:hover {background: #555;}
-</style>
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}</style>

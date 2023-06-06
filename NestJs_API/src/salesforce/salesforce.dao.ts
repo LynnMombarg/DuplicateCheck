@@ -1,12 +1,11 @@
 // Authors: Roward, Marloes
-// Jira-task: 115, 130, 141
-// Sprint: 3
-// Last modified: 17-05-2023
+// Jira-task: 115, 130, 141, 175
+// Sprint: 3, 4
+// Last modified: 26-05-2023
 
 import {
   Injectable,
   NotFoundException,
-  UnauthorizedException,
   BadRequestException,
 } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/dto/auth.dto';
@@ -64,6 +63,7 @@ export class SalesforceDAO {
       const contact: string[] = [];
       const account: string[] = [];
       const jobId = await this.getJobId(tokens);
+      console.log(jobId);
       await new Promise(async (resolve, reject) => {
         let counter = 0;
         const interval = setInterval(async () => {
@@ -253,7 +253,7 @@ export class SalesforceDAO {
         (err, result) => {
           if (err) {
             console.error(err);
-            reject(new UnauthorizedException());
+            reject(new BadRequestException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
               const jobName = result.records[i]['Name'];
@@ -320,7 +320,7 @@ export class SalesforceDAO {
         (err, result) => {
           if (err) {
             console.log(err);
-            reject(new UnauthorizedException());
+            reject(new BadRequestException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
               const matchIndex = result.records[i]['dupcheck__MatchObject__c'];
@@ -424,7 +424,7 @@ export class SalesforceDAO {
         (err, result) => {
           if (err) {
             console.error(err);
-            reject(new UnauthorizedException());
+            reject(new BadRequestException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
               const record = result.records[i];
@@ -436,5 +436,61 @@ export class SalesforceDAO {
       );
     });
     return resultSet;
+  }
+
+  async getRecords(
+    fields: string[],
+    tableName: string,
+    recordId1: string,
+    recordId2: string,
+    tokens: AuthDTO,
+  ): Promise<[string, string]> {
+    let record1 = '';
+    let record2 = '';
+
+    console.log(tableName);
+    let columns = '';
+    for (let i = 0; i < fields[tableName].length; i++) {
+      columns += fields[tableName][i] + ',';
+    }
+    columns = columns.slice(0, -1);
+
+    await new Promise((resolve, reject) => {
+      const conn = new this.jsforce.Connection({
+        oauth2: this.oauth2,
+        instanceUrl: process.env.SF_INSTANCE_URL,
+        accessToken: tokens.getAccessToken(),
+        refreshToken: tokens.getRefreshToken(),
+      });
+      conn.on(
+        'refresh',
+        function (accessToken, res) {
+          console.log('refreshed token: ' + accessToken);
+          this.authService.updateToken(accessToken);
+        }.bind(this),
+      );
+      conn.query(
+        'SELECT ' +
+          columns +
+          ' FROM ' +
+          tableName +
+          " WHERE Id = '" +
+          recordId1 +
+          "' OR Id = '" +
+          recordId2 +
+          "'",
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            reject(new BadRequestException());
+          } else {
+            record1 = result.records[0];
+            record2 = result.records[1];
+            resolve([record1, record2]);
+          }
+        },
+      );
+    });
+    return [record1, record2];
   }
 }
