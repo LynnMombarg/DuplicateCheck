@@ -23,9 +23,13 @@ export class TrainingService {
   ) {}
 
   async saveTraining(modelId: string, trainingId: string) {
-    const training = await this.trainingDAO.getTraining(trainingId);
-    if (training !== null) {
-      await this.pythonDAO.saveTraining(modelId, training);
+    try {
+      const training = await this.trainingDAO.getTraining(trainingId);
+      if (training !== null) {
+        await this.pythonDAO.saveTraining(modelId, training);
+      }
+    } catch (e) {
+      throw new NotFoundException(e.message);
     }
   }
 
@@ -41,7 +45,7 @@ export class TrainingService {
         tableName,
       );
     } catch (e) {
-      throw new NotFoundException();
+      throw new NotFoundException(e.message);
     }
     const trainingId = uuid();
 
@@ -62,10 +66,14 @@ export class TrainingService {
   }
 
   async getRecords(trainingId: string): Promise<DatasetDTO> {
-    const training: TrainingDTO = this.convertToTrainingDTO(
-      await this.trainingDAO.getTraining(trainingId),
-    );
-    return training.getNextRecords();
+    try {
+      const training: TrainingDTO = this.convertToTrainingDTO(
+        await this.trainingDAO.getTraining(trainingId),
+      );
+      return training.getNextRecords();
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   async giveAnswer(answer: boolean, trainingID: string): Promise<void> {
@@ -73,10 +81,14 @@ export class TrainingService {
   }
 
   async checkForRecords(trainingId: string): Promise<boolean> {
-    const training: TrainingDTO = this.convertToTrainingDTO(
-      await this.trainingDAO.getTraining(trainingId),
-    );
-    return training.checkForRecords();
+    try {
+      const training: TrainingDTO = this.convertToTrainingDTO(
+        await this.trainingDAO.getTraining(trainingId),
+      );
+      return training.checkForRecords();
+    } catch (e) {
+      throw new NotFoundException(e.message);
+    }
   }
 
   private convertToTrainingDTO(training: TrainingDTO): TrainingDTO {

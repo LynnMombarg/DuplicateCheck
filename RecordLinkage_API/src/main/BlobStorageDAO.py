@@ -27,7 +27,7 @@ class BlobStorageDAO:
         try:
             blob_client = self.get_blob_client(model_id)
             with open(self.local_file_path + model_id + '.pkl', "rb") as data:
-                blob_client.upload_blob(data, overwrite=True)
+                blob_client.upload_blob(data, overwrite=True, connection_timeout=10)
         except Exception as e:
             print(e)
             

@@ -54,20 +54,11 @@ async def delete_model(model_id: str):
     except Exception:
       raise HTTPException(status_code=404, detail='Model could not be deleted')
 
-# Execute model based on a given filename
+# Execute model based on given records
 @app.post('/execute-model/{model_id}')
 async def execute_model(json: dict, model_id: str):
     try:
-      matches = service.execute_model(model_id, json)
-      return JSONResponse(content=matches)
-    except Exception:
-      raise HTTPException(status_code=500, detail='Model could not be executed')
-
-# Execute model based on given records
-@app.post('/execute-model-on-records/{model_id}')
-async def execute_model(json: dict, model_id: str):
-    try:
-      response = service.execute_model_on_records(model_id, json)
+      response = service.execute_model(model_id, json)
       return JSONResponse(content=response)
     except Exception:
       raise HTTPException(status_code=500, detail='Model could not be executed')

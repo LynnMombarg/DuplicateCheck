@@ -7,8 +7,7 @@
 <template>
   <Menu as="div" class="relative inline-block text-left">
     <div>
-      <MenuButton
-        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm
+      <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm
         font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
         Options
         <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -26,7 +25,7 @@
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Train model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
-          <a @click="startExecuteModel(modelId, tableName)" style="cursor: pointer;"
+          <a @click="startExecuteModel()" style="cursor: pointer;"
             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Execute model</a>
           </MenuItem>
           <MenuItem v-slot="{ active }">
@@ -75,30 +74,38 @@
                     class="rounded-lg p-1 focus-visible:border-sky-400 border" />
                 </div>
 
-                  <div v-if="showResult" class="mt-2">
+                <div v-if="showResult" class="mt-2">
 
-                    <div  class="text-medium flex flex-start items-center"  v-if="is_match==null"> Something went wrong
-                    </div>
-
-                    <div class="mt-2">
-                      <div class="flex justify-between mb-1">
-                      </div>
-                      <table class="table-auto w-full mt-2">
-                        <tr>
-                          <td class="py-2 px-4 border border-blue-700 dark:border-white"> Is a match: {{ is_match }}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-2 px-4 border border-blue-700 dark:border-white">Probability: {{ percentage }}</td>
-                        </tr>
-                      </table>
-                    </div>
+                  <div class="text-medium flex flex-start items-center" v-if="is_match == null"> Something went wrong
                   </div>
 
-                <button @click="executeModel()" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
-                                      hover:bg-sky-400 hover:text-white mt-2">
+                  <div class="mt-2" v-if="is_match != null">
+                    <div class="flex justify-between mb-1">
+                    </div>
+                    <table class="table-auto w-full mt-2">
+                      <tr>
+                        <td class="py-2 px-4 border border-blue-700 dark:border-white"> Is a match: {{ is_match }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-4 border border-blue-700 dark:border-white">Probability: {{ percentage }}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <button @click="executeModel(modelId, tableName)" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
+                                      hover:bg-sky-400 hover:text-white mt-2" v-if="!open">
                   Execute
                 </button>
+                <div class="flex justify-center px-3 py-2 mt-2" v-if="open">
+                  <svg class="animate-spin -ml-1 mr-3 w-12 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="rgb(56 189 248)" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="rgb(255 255 255)"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                  </svg>
+                </div>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -115,23 +122,19 @@ export default {
   components: { DialogTitle, DialogPanel, Dialog, TransitionChild, TransitionRoot },
   data() {
     return {
-      executeTableName: '',
-      executeModelId: '',
       recordid1: '',
       recordid2: '',
       warningVisible: false,
       dialog: false,
       showResult: false,
       percentage: 0,
-      is_match : null
+      is_match: null,
+      open: false,
     }
   },
   methods: {
     confirmDelete(modelId) {
       if (window.confirm("Are you sure you want to delete this model?")) {
-        // code delete model from backend
-        // deleteModel(modelId);
-        // code to refresh page
         this.$parent.deleteModel(modelId);
       }
     },
@@ -140,19 +143,20 @@ export default {
       this.$router.push({ name: 'TrainingPage', params: { modelId: modelId } });
     },
 
-    startExecuteModel(modelId, tableName) {
+    startExecuteModel() {
       this.dialog = true;
-      this.executeModelId = modelId;
-      this.executeTableName = tableName;
       this.showResult = false;
-      resetValues();
+      this.resetValues();
     },
 
-    async executeModel() {
+    async executeModel(modelId, tableName) {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
-        const result = await this.$parent.executeModel(this.executeTableName, this.executeModelId, this.recordid1, this.recordid2);
+        this.open = true;
+        this.showResult = false;
+        let result = await this.$parent.executeModel(tableName.slice(0, -1), modelId, this.recordid1, this.recordid2);
+        this.open = false;
         this.is_match = result.is_match;
-        this.percentage = result.percentage;
+        this.percentage = parseFloat(result.percentage).toFixed(2);
         this.showResult = true;
       } else {
         this.warningVisible = true;
@@ -160,8 +164,6 @@ export default {
     },
 
     resetValues() {
-      this.executeTableName = '';
-      this.executeModelId = '';
       this.recordid1 = '';
       this.recordid2 = '';
       this.warningVisible = false;

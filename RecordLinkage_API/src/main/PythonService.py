@@ -9,6 +9,7 @@ import os
 import sys
 import json
 import time
+import copy
 
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -64,25 +65,24 @@ class PythonService:
         self.blob_storage_dao.download_blob_to_pickle(model_id)
         time.sleep(2)
         model = self.load_model(model_id)
+        model.train_unsupervised_model(copy.deepcopy(json_dataframe))  # Train the unsupervised model
         model.train_model(json_dataframe)
+        print('Trained')
         self.save_model(model_id, model)
         self.delete_pickle(model_id)
 
     def delete_model(self, model_id):
         self.blob_storage_dao.delete_blob(model_id)
 
-    def execute_model(self, model_id, json_dataframe):
+    def execute_model(self, model_id, json : dict):
+        self.blobStorageDAO.download_blob_to_pickle(model_id)
+        time.sleep(2)
         model = self.load_model(model_id)
-        matches = model.execute_model(json_dataframe)
+        is_match, percentage = model.execute_model(json)
+        self.delete_pickle(model_id)
         return {
-            'matches': [{'index1': match[0], 'index2': match[1]} for match in matches],
-        }
-
-    def execute_model_on_records(self, model_id, json : dict):
-        model = self.load_model(model_id)
-        percentage = model.execute_model(json)
-        return {
-            percentage
+            'is_match': is_match,
+            'percentage': percentage
         }
         
     def delete_pickle(self, model_id):
