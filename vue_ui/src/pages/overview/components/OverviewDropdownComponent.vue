@@ -79,7 +79,7 @@
                   <div class="text-medium flex flex-start items-center" v-if="is_match == null"> Something went wrong
                   </div>
 
-                  <div class="mt-2">
+                  <div class="mt-2" v-if="is_match != null">
                     <div class="flex justify-between mb-1">
                     </div>
                     <table class="table-auto w-full mt-2">
@@ -93,12 +93,11 @@
                     </table>
                   </div>
                 </div>
-
                 <button @click="executeModel(modelId, tableName)" class="rounded-md px-3 py-2 text-xl transition duration-300 ease-in-out
-                                      hover:bg-sky-400 hover:text-white mt-2">
+                                      hover:bg-sky-400 hover:text-white mt-2" v-if="!open">
                   Execute
                 </button>
-                <div class="flex flex-row items-center" v-if="open">
+                <div class="flex justify-center px-3 py-2 mt-2" v-if="open">
                   <svg class="animate-spin -ml-1 mr-3 w-12 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="rgb(56 189 248)" stroke-width="4"></circle>
@@ -152,9 +151,10 @@ export default {
 
     async executeModel(modelId, tableName) {
       if (this.recordid1 !== '' && this.recordid2 !== '') {
-        // this.open = true;
+        this.open = true;
+        this.showResult = false;
         let result = await this.$parent.executeModel(tableName.slice(0, -1), modelId, this.recordid1, this.recordid2);
-        // this.open = false;
+        this.open = false;
         this.is_match = result.is_match;
         this.percentage = parseFloat(result.percentage).toFixed(2);
         this.showResult = true;

@@ -6,7 +6,6 @@
 import {
   Injectable,
   NotFoundException,
-  UnauthorizedException,
   BadRequestException,
 } from '@nestjs/common';
 import { AuthDTO } from 'src/auth/dto/auth.dto';
@@ -254,7 +253,7 @@ export class SalesforceDAO {
         (err, result) => {
           if (err) {
             console.error(err);
-            reject(new UnauthorizedException());
+            reject(new BadRequestException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
               const jobName = result.records[i]['Name'];
@@ -321,7 +320,7 @@ export class SalesforceDAO {
         (err, result) => {
           if (err) {
             console.log(err);
-            reject(new UnauthorizedException());
+            reject(new BadRequestException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
               const matchIndex = result.records[i]['dupcheck__MatchObject__c'];
@@ -425,7 +424,7 @@ export class SalesforceDAO {
         (err, result) => {
           if (err) {
             console.error(err);
-            reject(new UnauthorizedException());
+            reject(new BadRequestException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
               const record = result.records[i];
@@ -483,7 +482,7 @@ export class SalesforceDAO {
         (err, result) => {
           if (err) {
             console.log(err);
-            reject(new UnauthorizedException());
+            reject(new BadRequestException());
           } else {
             record1 = result.records[0];
             record2 = result.records[1];
