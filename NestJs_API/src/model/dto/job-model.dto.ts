@@ -6,8 +6,10 @@
 export class JobDTO {
   jobName: string;
   jobId: string;
-  constructor(jobName: string, jobId: string) {
+  jobNameId: string;
+  constructor(jobName: string, jobId: string, jobNameId: string) {
     this.jobName = jobName;
     this.jobId = jobId;
+    this.jobNameId = jobNameId;
   }
 }
