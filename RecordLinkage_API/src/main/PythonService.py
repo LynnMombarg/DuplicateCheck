@@ -22,7 +22,7 @@ file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickles/')
 class PythonService:
     
     def __init__(self):
-        self.blobStorageDAO = BlobStorageDAO()
+        self.blob_storage_dao = BlobStorageDAO()
 
 
     def create_model(self, model_id):
@@ -31,7 +31,7 @@ class PythonService:
             filehandler = open(file_path + '/' + model_id + '.pkl', 'wb')
             pickle.dump(model, filehandler)
             filehandler.close()
-            self.blobStorageDAO.create_blob(model_id)
+            self.blob_storage_dao.create_blob(model_id)
             self.delete_pickle(model_id)
             print('Created')
         except Exception as e:
@@ -55,14 +55,14 @@ class PythonService:
             filehandler = open(file_path + '/'  + model_id + '.pkl', 'wb')
             pickle.dump(model, filehandler)
             filehandler.close()
-            self.blobStorageDAO.create_blob(model_id)
+            self.blob_storage_dao.create_blob(model_id)
             print('Saved')
         except Exception as e:
             print(e)
 
     # Model is downloaded from blobStorageDAO but it is never overwritten in azure blob storage (pickle still exists)
     def train_model(self, model_id, json_dataframe):
-        self.blobStorageDAO.download_blob_to_pickle(model_id)
+        self.blob_storage_dao.download_blob_to_pickle(model_id)
         time.sleep(2)
         model = self.load_model(model_id)
         model.train_unsupervised_model(copy.deepcopy(json_dataframe))  # Train the unsupervised model
@@ -72,10 +72,10 @@ class PythonService:
         self.delete_pickle(model_id)
 
     def delete_model(self, model_id):
-        self.blobStorageDAO.delete_blob(model_id)
+        self.blob_storage_dao.delete_blob(model_id)
 
     def execute_model(self, model_id, json : dict):
-        self.blobStorageDAO.download_blob_to_pickle(model_id)
+        self.blob_storage_dao.download_blob_to_pickle(model_id)
         time.sleep(2)
         model = self.load_model(model_id)
         is_match, percentage = model.execute_model(json)

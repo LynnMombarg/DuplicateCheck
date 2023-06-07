@@ -4,7 +4,7 @@
 // Last modified: 23-05-2023
 
 export async function signOut() {
-    await fetch("auth/logout", {
-        method: "POST",
+    await fetch('auth/logout', {
+        method: 'POST',
     });
 }

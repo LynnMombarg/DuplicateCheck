@@ -247,18 +247,19 @@ export class SalesforceDAO {
         }.bind(this),
       );
       conn.query(
-        "SELECT id, name FROM dupcheck__dcJob__c WHERE dupcheck__SourceObject__c = '" +
+        "SELECT id, dupcheck__name__c, name FROM dupcheck__dcJob__c WHERE dupcheck__SourceObject__c = '" +
           tableId +
-          "'",
+          "' AND dupcheck__type__c IN ('search', 'search-ext')",
         (err, result) => {
           if (err) {
             console.error(err);
             reject(new BadRequestException());
           } else {
             for (let i = 0; i < result.records.length; i++) {
-              const jobName = result.records[i]['Name'];
+              const jobName = result.records[i]['dupcheck__name__c'];
               const jobId = result.records[i]['Id'];
-              resultSet.push(new JobDTO(jobName, jobId));
+              const jobNameId = result.records[i]['Name'];
+              resultSet.push(new JobDTO(jobName, jobId, jobNameId));
             }
             resolve(resultSet);
           }

@@ -4,19 +4,14 @@
 // Last modified: 23-05-2023
 
 export async function deleteModel(modelId: string) {
-	const response = await fetch(
-    "model?modelId=" + modelId,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-	return await response.json();
-  }
-  
-  
-  // To retrieve models for example:
-  // let models = await getData();
-  // console.log(models[0]["modelName"]);
+    const response = await fetch(
+        `model?modelId=${modelId}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    );
+    return response.json();
+}

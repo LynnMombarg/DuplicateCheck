@@ -25,7 +25,7 @@ class TestPythonController(TestCase):
         PythonService.create_model = self.mock_service_instance.create_model
         PythonService.train_model = self.mock_service_instance.train_model
         PythonService.delete_model = self.mock_service_instance.delete_model
-        PythonService.execute_model_on_records = self.mock_service_instance.execute_model_on_records
+        PythonService.execute_model = self.mock_service_instance.execute_model
         self.client = TestClient(app)
 
     def test_create_model_success(self):
@@ -99,31 +99,31 @@ class TestPythonController(TestCase):
         self.mock_service_instance.delete_model.assert_called_once_with('test')
 
     def test_execute_model_on_records_success(self):
-        self.mock_service_instance.execute_model_on_records.return_value = None
+        self.mock_service_instance.execute_model.return_value = None
         data = {
             "recordset1": [{"columns": "value1"}, {"columns": "value2"}],
             "recordset2": [{"columns": "value3"}, {"columns": "value4"}]
         }
 
-        response = self.client.post('/execute-model-on-records/test', json=data)
+        response = self.client.post('/execute-model/test', json=data)
 
         self.assertEqual(response.status_code, 200)
-        self.mock_service_instance.execute_model_on_records.assert_called_once_with(
+        self.mock_service_instance.execute_model.assert_called_once_with(
             'test', data)
         
     def test_execute_model_on_records_failure(self):
-        self.mock_service_instance.execute_model_on_records.side_effect = Exception()
+        self.mock_service_instance.execute_model.side_effect = Exception()
         data = {
             "recordset1": [{"columns": "value1"}, {"columns": "value2"}],
             "recordset2": [{"columns": "value3"}, {"columns": "value4"}]
         }
 
-        response = self.client.post('/execute-model-on-records/test', json=data)
+        response = self.client.post('/execute-model/test', json=data)
 
         self.assertEqual(response.status_code, 500)
         self.assertEqual(
             response.json()['detail'], 'Model could not be executed')
-        self.mock_service_instance.execute_model_on_records.assert_called_once_with(
+        self.mock_service_instance.execute_model.assert_called_once_with(
             'test', data)
 
 

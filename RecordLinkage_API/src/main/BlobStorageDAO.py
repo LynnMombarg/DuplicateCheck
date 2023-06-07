@@ -17,11 +17,6 @@ class BlobStorageDAO:
         self.container_name = 'models'
         self.local_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickles/')
         self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
-
-    # def list_containers(self):
-    #     containers = self.blob_service_client.list_containers()
-    #     for container in containers:
-    #         print(container.name)
             
     def create_blob(self, model_id):
         try:
