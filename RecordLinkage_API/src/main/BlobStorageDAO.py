@@ -13,8 +13,8 @@ from .RecordLinkageModel import RecordLinkageModel
 class BlobStorageDAO:
     
     def __init__(self):
-        connection_string = "DefaultEndpointsProtocol=https;AccountName=csb10032001328ea840;AccountKey=lgPINUg/d9dFI93FUOnUwM4BCRXHvIJN8a5HTUaVQyl7SjgKzww0SbBd8Uxl5gFiMTmsqaH0ZPiz+AStxas+ow==;EndpointSuffix=core.windows.net"
-        self.container_name = 'models'
+        connection_string = ""
+        self.container_name = ""
         self.local_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickles/')
         self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
             
